@@ -16,6 +16,9 @@ public class TabTendersTest extends BaseTest{
         Selenide.open(url);
     }
 
+    /**
+     * Ввод логина/пароля и вход на сайт
+     */
     @Before
     public void beforeMethod(){
         openURL(BASE_URL);
@@ -26,12 +29,35 @@ public class TabTendersTest extends BaseTest{
         tabTendersPage.clickConfirmLogInButton();
     }
 
+    /**
+     * Проверка результатов поиска для автопоиска 'Проверка поиска по реестровому номеру и региону'
+     */
     @Test
     public void checkRegistryNumber(){
         tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch);
         tabTendersPage.clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion);
         tabTendersPage.waitFor(2000);
-        Assert.assertEquals(java.util.Optional.ofNullable(tabTendersPage.getNumberOfRowResultSearch()),1);
+        Assert.assertEquals(tabTendersPage.getNumberOfRowResultSearch(),1);
         Assert.assertEquals(tabTendersPage.getRegistryNumber(), "200741742119000018");
+    }
+
+    /**
+     * Проверка увеличения количества результатов поиска при добавлении значения региона
+     */
+    @Test
+    public void checkNumberResultSearchAfterAddingRegionValue(){
+
+        tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch);
+        tabTendersPage.waitFor(500);
+        tabTendersPage.clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion);
+        tabTendersPage.clickButton(tabTendersPage.filterRegionRoot);
+        tabTendersPage.waitFor(2000);
+        tabTendersPage.typeSearch("Москва");
+        tabTendersPage.waitFor(2000);
+        tabTendersPage.clickButton(tabTendersPage.getCheckboxInFilterRegion(3));
+        tabTendersPage.clickButton(tabTendersPage.buttonApply);
+        tabTendersPage.clickButton(tabTendersPage.buttonSearch);
+        tabTendersPage.waitFor(4000);
+        Assert.assertFalse(tabTendersPage.isEqualNumberOfRowResultSearch(1));
     }
 }

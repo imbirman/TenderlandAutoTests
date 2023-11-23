@@ -2,7 +2,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.$$x;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -24,7 +25,15 @@ public class TabTendersPage{
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /** Вкладка "Автопоиски" */
     /** Кнопка автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
-
+    /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
+    protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
+    /** Поле поиска внутри фильтра */
+    protected SelenideElement fieldSearchInFilterEditor = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
+    /** Список чекбоксов в результате поиска */
+    protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
+    /** Кнопка "Применить" */
+    protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
+    protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
 
     public void waitFor(long number){
         sleep(number);
@@ -66,7 +75,7 @@ public class TabTendersPage{
     /**
      * Получение количества строк в таблице результата поиска
      */
-    public Integer getNumberOfRowResultSearch(){
+    public int getNumberOfRowResultSearch(){
         return rowResultSearch.size();
     }
 
@@ -75,5 +84,26 @@ public class TabTendersPage{
      */
     public String getRegistryNumber(){
         return tableCellToCheck.getText();
+    }
+
+    /**
+     * Ввести значение в поле поиска внутри фильтра
+     */
+    public void typeSearch(String search){
+        fieldSearchInFilterEditor.sendKeys(search);
+    }
+
+    /**
+     * Получить чекбокс по его порядковому номеру
+     */
+    public SelenideElement getCheckboxInFilterRegion(int numberCheckbox){
+        return checkboxCollection.get(numberCheckbox);
+    }
+
+    /**
+     * Проверка, соответствует ли количество строк в таблице результата поиска заданному
+     */
+    public boolean isEqualNumberOfRowResultSearch(int number){
+        return getNumberOfRowResultSearch()==number;
     }
 }
