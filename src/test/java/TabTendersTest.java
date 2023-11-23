@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Selenide;
+import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,11 +23,11 @@ public class TabTendersTest extends BaseTest{
     @Before
     public void beforeMethod(){
         openURL(BASE_URL);
-        tabTendersPage.clickLogInButton();
-        tabTendersPage.typeLogin(BASE_LOGIN);
-        tabTendersPage.waitFor(200);
-        tabTendersPage.typePassword(BASE_PASSWORD);
-        tabTendersPage.clickConfirmLogInButton();
+        tabTendersPage.clickLogInButton()
+                    .typeLogin(BASE_LOGIN)
+                    .waitFor(200)
+                    .typePassword(BASE_PASSWORD)
+                    .clickConfirmLogInButton();
     }
 
     /**
@@ -47,17 +48,27 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkNumberResultSearchAfterAddingRegionValue(){
 
-        tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch);
-        tabTendersPage.waitFor(500);
-        tabTendersPage.clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion);
-        tabTendersPage.clickButton(tabTendersPage.filterRegionRoot);
-        tabTendersPage.waitFor(2000);
-        tabTendersPage.typeSearch("Москва");
-        tabTendersPage.waitFor(2000);
-        tabTendersPage.clickButton(tabTendersPage.getCheckboxInFilterRegion(3));
-        tabTendersPage.clickButton(tabTendersPage.buttonApply);
-        tabTendersPage.clickButton(tabTendersPage.buttonSearch);
-        tabTendersPage.waitFor(4000);
-        Assert.assertFalse(tabTendersPage.isEqualNumberOfRowResultSearch(1));
+        Assert.assertFalse(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                                        .waitFor(500)
+                                        .clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion)
+                                        .clickButton(tabTendersPage.filterRegionRoot)
+                                        .waitFor(2000)
+                                        .typeSearch("Москва")
+                                        .waitFor(2000)
+                                        .clickButton(tabTendersPage.getCheckboxInFilterRegion(3))
+                                        .clickButton(tabTendersPage.buttonApply)
+                                        .clickButton(tabTendersPage.buttonSearch)
+                                        .waitFor(4000)
+                                        .isEqualNumberOfRowResultSearch(1));
+    }
+
+    @Test
+    @Title("Проверка названия тендера на включение в него ключевого слова")
+    public void checkNameTenderToIncludeKeyword(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonCheckTenderNameAndNameDeletion)
+                .waitFor(2000)
+                .isContainNameTender());
     }
 }

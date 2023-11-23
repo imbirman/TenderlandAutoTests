@@ -19,12 +19,16 @@ public class TabTendersPage{
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /** Кнопка "Войти в систему" */
     /** Строка таблицы поиска */
     private final ElementsCollection rowResultSearch = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
-
+    /** Список вторых ячеек таблицы результата поиска */
+    private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
+
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /** Вкладка "Автопоиски" */
     /** Кнопка автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
+    /** Кнопка автопоиска "Проверка по названию тендера и исключению из названия" */
+    protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
     /** Поле поиска внутри фильтра */
@@ -33,29 +37,38 @@ public class TabTendersPage{
     protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
     /** Кнопка "Применить" */
     protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
+    /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
 
-    public void waitFor(long number){
+
+
+
+
+    /** Ожидание */
+    public TabTendersPage waitFor(long number){
         sleep(number);
-    } // Ожидание
+        return new TabTendersPage();
+    }
 
     /**
      * Ввести логин для входа
      */
-    public void typeLogin(String login){loginField.sendKeys(login);}
+    public TabTendersPage typeLogin(String login){loginField.sendKeys(login); return new TabTendersPage();}
 
     /**
      * Ввести пароль для входа
      */
-    public void typePassword(String password){
+    public TabTendersPage typePassword(String password){
         passwordField.sendKeys(password);
+        return new TabTendersPage();
     }
 
     /**
      * Кликнуть на кнопку "Войти"
      */
-    public void clickLogInButton(){
+    public TabTendersPage clickLogInButton(){
         logInButton.click();
+        return new TabTendersPage();
     }
 
     /**
@@ -68,8 +81,9 @@ public class TabTendersPage{
     /**
      * Кликнуть по кнопке / выбрать radiobutton или checkbox
      */
-    public void clickButton(SelenideElement button){
+    public TabTendersPage clickButton(SelenideElement button){
         button.click();
+        return new TabTendersPage();
     }
 
     /**
@@ -89,8 +103,9 @@ public class TabTendersPage{
     /**
      * Ввести значение в поле поиска внутри фильтра
      */
-    public void typeSearch(String search){
+    public TabTendersPage typeSearch(String search){
         fieldSearchInFilterEditor.sendKeys(search);
+        return new TabTendersPage();
     }
 
     /**
@@ -105,5 +120,21 @@ public class TabTendersPage{
      */
     public boolean isEqualNumberOfRowResultSearch(int number){
         return getNumberOfRowResultSearch()==number;
+    }
+
+    /**
+     * Проверка включения в название тендеров ключевого слова
+     */
+    public boolean isContainNameTender(){
+        secondTableCellsCollection.remove("");
+        boolean check = false;
+        for(SelenideElement name : secondTableCellsCollection){
+            if(name.getText().contains("мусор")||name.getText().contains("МУСОР")||name.getText().contains("муcор")||name.getText().contains("МУCОР")){
+//                System.out.println(name.getText());
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
 }
