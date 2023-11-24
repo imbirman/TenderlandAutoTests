@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Selenide;
+import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class TabTendersTest extends BaseTest{
 
         Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckTenderNameAndNameDeletion)
-                .waitFor(2000)
+                .waitFor(5000)
                 .isContainNameTender());
     }
 
@@ -87,5 +88,24 @@ public class TabTendersTest extends BaseTest{
                 .clickButton(tabTendersPage.buttonSearch)
                 .waitFor(2000)
                 .isContainDeletionNameTender());
+    }
+
+    /**
+     * Проверка транслитерации при поиске по названию тендера
+     */
+    @Test
+    public void checkTransliterationNameTender(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonCheckTenderNameAndNameDeletion)
+                .waitFor(5000)
+                .scrollToElement(tabTendersPage.filterNameTender)
+                .clickButton(tabTendersPage.filterNameTender)
+                .clearField(tabTendersPage.fieldNameTender)
+                .typeNameTender("Муcор")
+                .clickButton(tabTendersPage.checkBoxTransliteration)
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(2000)
+                .isContainNameTender());
     }
 }

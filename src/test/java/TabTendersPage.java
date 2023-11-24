@@ -35,14 +35,19 @@ public class TabTendersPage{
     protected SelenideElement filterNameTender = $x("//div[@id='tl-filter-root']//div[text()='Название тендера']/following::div[@class='search-filters-filter-content']");
     /** Список чекбоксов в результате поиска */
     protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
+    /** Чекбокс "Транслитерация" */
+    protected SelenideElement checkBoxTransliteration = $x("//div[@id='filter-editor-compact-1-transliteration']"); //
     /** Кнопка "Применить" */
     protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
     /** Поле для ввода параметра, исключаемого из поиска */
     protected SelenideElement fieldNameTenderDeletion = $x("//div[@id='filter-editor-compact-1-exclude']//textarea");
+    /** Поле для ввода названия тендера для поиска */
+    protected SelenideElement fieldNameTender = $x("//div[@id='filter-editor-compact-1-include']//textarea"); //
     /** Поле поиска внутри фильтра */
     protected SelenideElement fieldSearchInFilterEditor = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
+
 
 
 
@@ -98,20 +103,6 @@ public class TabTendersPage{
     }
 
     /**
-     * Получение количества строк в таблице результата поиска
-     */
-    public int getNumberOfRowResultSearch(){
-        return rowResultSearch.size();
-    }
-
-    /**
-     * Получение реестрового номера
-     */
-    public String getRegistryNumber(){
-        return tableCellToCheck.getText();
-    }
-
-    /**
      * Ввести значение в поле поиска внутри фильтра
      */
     public TabTendersPage typeSearch(String search){
@@ -123,8 +114,35 @@ public class TabTendersPage{
      * Ввести значение, исключаемое из поиска
      */
     public TabTendersPage typeDeletion(String name){
-       fieldNameTenderDeletion.sendKeys(name);
-       return new TabTendersPage();
+        fieldNameTenderDeletion.sendKeys(name);
+        return new TabTendersPage();
+    }
+
+    /**
+     * Ввести ключевое слово для поиска по названию тендера
+     */
+    public TabTendersPage typeNameTender(String name){
+        fieldNameTender.sendKeys(name);
+        return new TabTendersPage();
+    } //
+
+    /**
+     * Очистить поле
+     */
+    public TabTendersPage clearField(SelenideElement field){field.clear(); return new TabTendersPage();} //
+
+    /**
+     * Получение количества строк в таблице результата поиска
+     */
+    public int getNumberOfRowResultSearch(){
+        return rowResultSearch.size();
+    }
+
+    /**
+     * Получение реестрового номера
+     */
+    public String getRegistryNumber(){
+        return tableCellToCheck.getText();
     }
 
     /**
@@ -157,7 +175,7 @@ public class TabTendersPage{
     }
 
     /**
-     *  Проверка включения в название тендеров ключевого слова
+     *  Проверка исключения из поиска ключевого слова
      */
     public boolean isContainDeletionNameTender(){
         secondTableCellsCollection.remove("");
