@@ -16,30 +16,33 @@ public class TabTendersPage{
     private final SelenideElement logInButton = $x("//div[@class='landind-header-block']//span[text()='Войти']"); /** Кнопка входа в систему */
     private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
-    private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /** Кнопка "Войти в систему" */
+    private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
     /** Строка таблицы поиска */
     private final ElementsCollection rowResultSearch = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
     /** Список вторых ячеек таблицы результата поиска */
     private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
+    protected final SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
-
-    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
     /** Кнопка автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
     /** Кнопка автопоиска "Проверка по названию тендера и исключению из названия" */
     protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
-    /** Поле поиска внутри фильтра */
-    protected SelenideElement fieldSearchInFilterEditor = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
+    /** Фильтр "Название тендера" в поле построения дерева фильтров для автопоиска "Проверка поиска по названию тендера и исключению из названия" */
+    protected SelenideElement filterNameTender = $x("//div[@id='tl-filter-root']//div[text()='Название тендера']/following::div[@class='search-filters-filter-content']");
     /** Список чекбоксов в результате поиска */
     protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
     /** Кнопка "Применить" */
     protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
-
+    /** Поле для ввода параметра, исключаемого из поиска */
+    protected SelenideElement fieldNameTenderDeletion = $x("//div[@id='filter-editor-compact-1-exclude']//textarea");
+    /** Поле поиска внутри фильтра */
+    protected SelenideElement fieldSearchInFilterEditor = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
 
 
 
@@ -87,6 +90,14 @@ public class TabTendersPage{
     }
 
     /**
+     * Скролл до элемента
+     */
+    public TabTendersPage scrollToElement(SelenideElement element){
+        element.scrollIntoView(false);
+        return new TabTendersPage();
+    }
+
+    /**
      * Получение количества строк в таблице результата поиска
      */
     public int getNumberOfRowResultSearch(){
@@ -106,6 +117,14 @@ public class TabTendersPage{
     public TabTendersPage typeSearch(String search){
         fieldSearchInFilterEditor.sendKeys(search);
         return new TabTendersPage();
+    }
+
+    /**
+     * Ввести значение, исключаемое из поиска
+     */
+    public TabTendersPage typeDeletion(String name){
+       fieldNameTenderDeletion.sendKeys(name);
+       return new TabTendersPage();
     }
 
     /**
@@ -130,7 +149,21 @@ public class TabTendersPage{
         boolean check = false;
         for(SelenideElement name : secondTableCellsCollection){
             if(name.getText().contains("мусор")||name.getText().contains("МУСОР")||name.getText().contains("муcор")||name.getText().contains("МУCОР")){
-//                System.out.println(name.getText());
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     *  Проверка включения в название тендеров ключевого слова
+     */
+    public boolean isContainDeletionNameTender(){
+        secondTableCellsCollection.remove("");
+        boolean check = false;
+        for(SelenideElement name : secondTableCellsCollection){
+            if(!(name.getText().contains("мусоровоз")||name.getText().contains("МУСОРОВОЗ"))){
                 check = true;
                 break;
             }
