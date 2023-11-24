@@ -4,6 +4,10 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.$$x;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -21,6 +25,8 @@ public class TabTendersPage{
     private final ElementsCollection rowResultSearch = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
     /** Список вторых ячеек таблицы результата поиска */
     private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
+    /** Список дат публикации тендеров для автопоиска "Проверка поиска по дате публикации" */
+    private final ElementsCollection datePublicationTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
     protected final SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
@@ -29,6 +35,8 @@ public class TabTendersPage{
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
     /** Кнопка автопоиска "Проверка по названию тендера и исключению из названия" */
     protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
+    /** Кнопка автопоиска "Проверка поиска по дате публикации" */
+    protected SelenideElement buttonCheckPublicationDate = $x("//div[text()='Проверка поиска по дате публикации']");
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
     /** Фильтр "Название тендера" в поле построения дерева фильтров для автопоиска "Проверка поиска по названию тендера и исключению из названия" */
@@ -185,6 +193,29 @@ public class TabTendersPage{
                 check = true;
                 break;
             }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка, что дата находится в заданном диапазоне
+     */
+    public boolean checkDate(String startDate, String endDate) throws ParseException {
+        boolean check = false;
+        datePublicationTableCellsCollection.remove("");
+        for(SelenideElement date : datePublicationTableCellsCollection) {
+            String dateStr = date.getText();
+            dateStr = dateStr.replace("\n" + "(UTC+03:00)", "");
+            dateStr = dateStr.replace("\n", " ");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date currentDate = dateFormat.parse(dateStr);
+            Date leftDate = dateFormat.parse(startDate);
+            Date rightDate = dateFormat.parse(endDate);
+            if(currentDate.getTime() >= leftDate.getTime() && currentDate.getTime() <= rightDate.getTime()){
+                check = true;
+                break;
+            }
+//            System.out.println(date.getText());
         }
         return check;
     }

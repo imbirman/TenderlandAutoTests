@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
+
 public class TabTendersTest extends BaseTest{
 
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
@@ -107,5 +109,18 @@ public class TabTendersTest extends BaseTest{
                 .clickButton(tabTendersPage.buttonSearch)
                 .waitFor(2000)
                 .isContainNameTender());
+    }
+
+    /**
+     *
+     */
+    @Test
+    @Title("Проверка поиска по дате публикации тендера")
+    public void checkPublicationDateOfTender() throws ParseException {
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonCheckPublicationDate)
+                .waitFor(2000)
+                .checkDate("09.01.2021 00:00","09.01.2021 23:59"));
     }
 }
