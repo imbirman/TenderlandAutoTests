@@ -120,7 +120,7 @@ public class TabTendersTest extends BaseTest{
         Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckPublicationDate)
                 .waitFor(2000)
-                .checkDate("09.01.2021 00:00","09.01.2021 23:59"));
+                .checkDate("09.01.2021 00:00","09.01.2021 23:59", 1));
     }
 
     /**
@@ -155,9 +155,21 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkDateStartSubmissionOfApplication() throws ParseException {
 
-        tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
-        .clickButton(tabTendersPage.buttonCheckStartSubmissionOfApplicationDate)
-        .waitFor(2000)
-        .checkDate("04.01.2021 00:00","04.01.2021 23:59");
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonCheckStartSubmissionOfApplicationDate)
+                .waitFor(2000)
+                .checkDate("04.01.2021 00:00","04.01.2021 23:59", 2));
+    }
+
+    /**
+     * Проверка поиска по дате окончания подачи заявок
+     */
+    @Test
+    public void checkDateEndSubmissionOfApplication() throws ParseException {
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonCheckEndSubmissionOfApplicationDate)
+                .waitFor(2000)
+                .checkDate("03.01.2021 00:00","03.01.2021 23:59", 2));
     }
 }

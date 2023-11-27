@@ -28,7 +28,10 @@ public class TabTendersPage{
     private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
     /** Список дат публикации тендеров для автопоиска "Проверка поиска по дате публикации" */
     private final ElementsCollection datePublicationTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
-    protected final SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
+    /** Список дат начала подачи заявок*/
+    private final ElementsCollection startOrEndDateRequestCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
+
+    protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
@@ -45,6 +48,9 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckPublicationDateWithOnlyEndDate = $x("//div[text()='Проверка поиска по дате (только конец)']");
     /** Кнопка автопоиска "Проверка поиска по дате начала подачи заявок" */
     protected SelenideElement buttonCheckStartSubmissionOfApplicationDate = $x("//div[text()='Проверка поиска по дате начала подачи заявок']");
+    /** Кнопка автопоиска "Проверка поиска по дате окончания подачи заявок" */
+    protected SelenideElement buttonCheckEndSubmissionOfApplicationDate = $x("//div[text()='Проверка поиска по дате окончания подачи заявок']");
+
 
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
@@ -212,11 +218,19 @@ public class TabTendersPage{
 
     /**
      * Проверка, что дата находится в заданном диапазоне
+     * @param caseTypeDate 1 - дата публикации, 2 - дата начала подачи заявок
      */
-    public boolean checkDate(String startDate, String endDate) throws ParseException {
+    public boolean checkDate(String startDate, String endDate, int caseTypeDate) throws ParseException {
         boolean check = true;
         List<String> array;
-        array = datePublicationTableCellsCollection.texts();
+        switch (caseTypeDate){
+            case 1: array = datePublicationTableCellsCollection.texts();
+                break;
+            case 2: array = startOrEndDateRequestCollection.texts();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + caseTypeDate);
+        }
         array.remove(array.size()-1);
         for(String date : array) {
             String dateStr = date;
@@ -230,13 +244,12 @@ public class TabTendersPage{
                 check = false;
                 break;
             }
-//            System.out.println(date.getText());
         }
         return check;
     }
 
     /**
-     * Проверка, что дата находится после заданной даты
+     * Проверка, что дата публикации находится после заданной даты
      */
     public boolean checkDateWithOnlyStartDate(String startDate) throws ParseException {
         boolean check = true;
@@ -260,7 +273,7 @@ public class TabTendersPage{
     }
 
     /**
-     * Проверка, что дата находится до заданной даты
+     * Проверка, что дата публикации находится до заданной даты
      */
     public boolean checkDateWithOnlyEndDate(String endDate) throws ParseException {
         boolean check = true;
@@ -281,4 +294,6 @@ public class TabTendersPage{
         }
         return check;
     }
+
+
 }
