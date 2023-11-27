@@ -135,4 +135,17 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .checkDateWithOnlyStartDate("09.01.2021 00:00"));
     }
+
+    /**
+     * Проверка даты публикации тендера только с конечной датой
+     */
+    @Test
+    public void checkPublicationDateOfTenderWithOnlyEndDate() throws ParseException {
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckPublicationDateWithOnlyEndDate)
+                .clickButton(tabTendersPage.buttonCheckPublicationDateWithOnlyEndDate)
+                .waitFor(2000)
+                .checkDateWithOnlyEndDate("10.01.2021 00:00"));
+    }
 }

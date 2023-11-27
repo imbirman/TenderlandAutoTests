@@ -32,6 +32,7 @@ public class TabTendersPage{
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
+
     /** Кнопка автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
     /** Кнопка автопоиска "Проверка по названию тендера и исключению из названия" */
@@ -40,6 +41,9 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckPublicationDate = $x("//div[text()='Проверка поиска по дате публикации']");
     /** Кнопка автопоиска "Проверка поиска по дате (только начало)" */
     protected SelenideElement buttonCheckPublicationDateWithOnlyStartDate = $x("//div[text()='Проверка поиска по дате (только начало)']");
+    /** Кнопка автопоиска "Проверка поиска по дате (только конец)" */
+    protected SelenideElement buttonCheckPublicationDateWithOnlyEndDate = $x("//div[text()='Проверка поиска по дате (только конец)']");
+
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
     /** Фильтр "Название тендера" в поле построения дерева фильтров для автопоиска "Проверка поиска по названию тендера и исключению из названия" */
@@ -250,6 +254,29 @@ public class TabTendersPage{
             }
         }
 
+        return check;
+    }
+
+    /**
+     * Проверка, что дата находится до заданной даты
+     */
+    public boolean checkDateWithOnlyEndDate(String endDate) throws ParseException {
+        boolean check = true;
+        List<String> array;
+        array = datePublicationTableCellsCollection.texts();
+        array.remove(array.size()-1);
+        for(String date : array) {
+            String dateStr = date;
+            dateStr = dateStr.replace("\n" + "(UTC+03:00)", "");
+            dateStr = dateStr.replace("\n", " ");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date currentDate = dateFormat.parse(dateStr);
+            Date rightDate = dateFormat.parse(endDate);
+            if(currentDate.getTime() > rightDate.getTime()){
+                check = false;
+                break;
+            }
+        }
         return check;
     }
 }
