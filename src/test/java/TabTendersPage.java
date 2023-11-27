@@ -43,6 +43,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckPublicationDateWithOnlyStartDate = $x("//div[text()='Проверка поиска по дате (только начало)']");
     /** Кнопка автопоиска "Проверка поиска по дате (только конец)" */
     protected SelenideElement buttonCheckPublicationDateWithOnlyEndDate = $x("//div[text()='Проверка поиска по дате (только конец)']");
+    /** Кнопка автопоиска "Проверка поиска по дате начала подачи заявок" */
+    protected SelenideElement buttonCheckStartSubmissionOfApplicationDate = $x("//div[text()='Проверка поиска по дате начала подачи заявок']");
 
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");

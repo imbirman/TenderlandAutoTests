@@ -148,4 +148,16 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .checkDateWithOnlyEndDate("10.01.2021 00:00"));
     }
+
+    /**
+     * Проверка поиска по дате начала подачи заявок
+     */
+    @Test
+    public void checkDateStartSubmissionOfApplication() throws ParseException {
+
+        tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        .clickButton(tabTendersPage.buttonCheckStartSubmissionOfApplicationDate)
+        .waitFor(2000)
+        .checkDate("04.01.2021 00:00","04.01.2021 23:59");
+    }
 }
