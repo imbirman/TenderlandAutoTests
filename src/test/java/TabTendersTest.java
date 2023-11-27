@@ -112,15 +112,27 @@ public class TabTendersTest extends BaseTest{
     }
 
     /**
-     *
+     * Проверка поиска по дате публикации тендера
      */
     @Test
-    @Title("Проверка поиска по дате публикации тендера")
-    public void checkPublicationDateOfTender() throws ParseException {
+    public void checkSearchPublicationDateOfTender() throws ParseException {
 
         Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckPublicationDate)
                 .waitFor(2000)
                 .checkDate("09.01.2021 00:00","09.01.2021 23:59"));
+    }
+
+    /**
+     * Проверка даты публикации тендера только с начальной датой
+     */
+    @Test
+    public void checkPublicationDateOfTenderWithOnlyStartDate() throws ParseException {
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckPublicationDateWithOnlyStartDate)
+                .clickButton(tabTendersPage.buttonCheckPublicationDateWithOnlyStartDate)
+                .waitFor(3000)
+                .checkDateWithOnlyStartDate("09.01.2021 00:00"));
     }
 }

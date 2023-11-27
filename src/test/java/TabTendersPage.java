@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.$$x;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
     /** Кнопка автопоиска "Проверка поиска по дате публикации" */
     protected SelenideElement buttonCheckPublicationDate = $x("//div[text()='Проверка поиска по дате публикации']");
+    /** Кнопка автопоиска "Проверка поиска по дате (только начало)" */
+    protected SelenideElement buttonCheckPublicationDateWithOnlyStartDate = $x("//div[text()='Проверка поиска по дате (только начало)']");
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
     /** Фильтр "Название тендера" в поле построения дерева фильтров для автопоиска "Проверка поиска по названию тендера и исключению из названия" */
@@ -171,10 +174,12 @@ public class TabTendersPage{
      * Проверка включения в название тендеров ключевого слова
      */
     public boolean isContainNameTender(){
-        secondTableCellsCollection.remove("");
+        List<String> array;
+        array = secondTableCellsCollection.texts();
+        array.remove(array.size()-1);
         boolean check = false;
-        for(SelenideElement name : secondTableCellsCollection){
-            if(name.getText().contains("мусор")||name.getText().contains("МУСОР")||name.getText().contains("муcор")||name.getText().contains("МУCОР")){
+        for(String name : array){
+            if(name.contains("мусор")||name.contains("МУСОР")||name.contains("муcор")||name.contains("МУCОР")){
                 check = true;
                 break;
             }
@@ -186,11 +191,13 @@ public class TabTendersPage{
      *  Проверка исключения из поиска ключевого слова
      */
     public boolean isContainDeletionNameTender(){
-        secondTableCellsCollection.remove("");
-        boolean check = false;
-        for(SelenideElement name : secondTableCellsCollection){
-            if(!(name.getText().contains("мусоровоз")||name.getText().contains("МУСОРОВОЗ"))){
-                check = true;
+        List<String> array;
+        array = secondTableCellsCollection.texts();
+        array.remove(array.size()-1);
+        boolean check = true;
+        for(String name : array){
+            if(name.contains("мусоровоз")||name.contains("МУСОРОВОЗ")){
+                check = false;
                 break;
             }
         }
@@ -201,22 +208,48 @@ public class TabTendersPage{
      * Проверка, что дата находится в заданном диапазоне
      */
     public boolean checkDate(String startDate, String endDate) throws ParseException {
-        boolean check = false;
-        datePublicationTableCellsCollection.remove("");
-        for(SelenideElement date : datePublicationTableCellsCollection) {
-            String dateStr = date.getText();
+        boolean check = true;
+        List<String> array;
+        array = datePublicationTableCellsCollection.texts();
+        array.remove(array.size()-1);
+        for(String date : array) {
+            String dateStr = date;
             dateStr = dateStr.replace("\n" + "(UTC+03:00)", "");
             dateStr = dateStr.replace("\n", " ");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
             Date currentDate = dateFormat.parse(dateStr);
             Date leftDate = dateFormat.parse(startDate);
             Date rightDate = dateFormat.parse(endDate);
-            if(currentDate.getTime() >= leftDate.getTime() && currentDate.getTime() <= rightDate.getTime()){
-                check = true;
+            if(currentDate.getTime() < leftDate.getTime() || currentDate.getTime() > rightDate.getTime()){
+                check = false;
                 break;
             }
 //            System.out.println(date.getText());
         }
+        return check;
+    }
+
+    /**
+     * Проверка, что дата находится после заданной даты
+     */
+    public boolean checkDateWithOnlyStartDate(String startDate) throws ParseException {
+        boolean check = true;
+        List<String> array;
+        array = datePublicationTableCellsCollection.texts();
+        array.remove(array.size()-1);
+        for(String date : array) {
+            String dateStr = date;
+            dateStr = dateStr.replace("\n" + "(UTC+03:00)", "");
+            dateStr = dateStr.replace("\n", " ");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date currentDate = dateFormat.parse(dateStr);
+            Date leftDate = dateFormat.parse(startDate);
+            if(currentDate.getTime() < leftDate.getTime()){
+                check = false;
+                break;
+            }
+        }
+
         return check;
     }
 }
