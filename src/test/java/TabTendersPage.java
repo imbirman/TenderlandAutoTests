@@ -24,17 +24,23 @@ public class TabTendersPage{
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
     /** Строка таблицы поиска */
     private final ElementsCollection rowResultSearch = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
+
+
     /** Список вторых ячеек таблицы результата поиска */
     private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
     /** Список дат публикации тендеров для автопоиска "Проверка поиска по дате публикации" */
     private final ElementsCollection datePublicationTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
     /** Список дат начала подачи заявок*/
     private final ElementsCollection startOrEndDateRequestCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
+    /** Список дат проведения тендера */
+    private final ElementsCollection dateOfTheTender = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
+
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
+
 
     /** Кнопка автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
@@ -50,6 +56,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckStartSubmissionOfApplicationDate = $x("//div[text()='Проверка поиска по дате начала подачи заявок']");
     /** Кнопка автопоиска "Проверка поиска по дате окончания подачи заявок" */
     protected SelenideElement buttonCheckEndSubmissionOfApplicationDate = $x("//div[text()='Проверка поиска по дате окончания подачи заявок']");
+    /** Кнопка автопоиска "Проверка поиска по дате проведения тендера" */
+    protected SelenideElement buttonValidateSearchByTenderDate = $x("//div[text()='Проверка поиска по дате проведения тендера']");
 
 
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
@@ -227,6 +235,8 @@ public class TabTendersPage{
             case 1: array = datePublicationTableCellsCollection.texts();
                 break;
             case 2: array = startOrEndDateRequestCollection.texts();
+                break;
+            case 3: array = dateOfTheTender.texts();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + caseTypeDate);
