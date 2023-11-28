@@ -184,4 +184,16 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .checkDate("12.01.2021 00:00","12.01.2021 23:59", 3));
     }
+
+    /**
+     * Проверка поиска по категории
+     */
+    @Test
+    public void checkSearchByCategoryName(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonValidateSearchByCategory)
+                .waitFor(2000)
+                .isContainCategoryName());
+    }
 }

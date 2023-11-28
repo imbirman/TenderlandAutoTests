@@ -22,10 +22,12 @@ public class TabTendersPage{
     private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
-    /** Строка таблицы поиска */
+
+    /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
+    protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
+
+    /** Список строк таблицы поиска */
     private final ElementsCollection rowResultSearch = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
-
-
     /** Список вторых ячеек таблицы результата поиска */
     private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
     /** Список дат публикации тендеров для автопоиска "Проверка поиска по дате публикации" */
@@ -34,11 +36,11 @@ public class TabTendersPage{
     private final ElementsCollection startOrEndDateRequestCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
     /** Список дат проведения тендера */
     private final ElementsCollection dateOfTheTender = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
+    /** Список ячеек в результатах поиска "Категория лота" */
+    private final ElementsCollection tableCellCategory = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[12]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
-    /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
-    protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
 
 
@@ -58,6 +60,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckEndSubmissionOfApplicationDate = $x("//div[text()='Проверка поиска по дате окончания подачи заявок']");
     /** Кнопка автопоиска "Проверка поиска по дате проведения тендера" */
     protected SelenideElement buttonValidateSearchByTenderDate = $x("//div[text()='Проверка поиска по дате проведения тендера']");
+    /** Кнопка автопоиска "Проверка поиска по категории" */
+    protected SelenideElement buttonValidateSearchByCategory = $x("//div[text()='Проверка поиска по категории']");
 
 
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
@@ -305,5 +309,22 @@ public class TabTendersPage{
         return check;
     }
 
+    /**
+     * Проверка поиска по категории
+     */
+    public boolean isContainCategoryName(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellCategory.texts();
+        array.remove(array.size()-1);
+        for(String name : array){
+            if(!(name.contains("Коммунальные услуги"))){
+//                System.out.println("Услуги: " + name.getText());
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
 
 }
