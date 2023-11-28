@@ -229,4 +229,17 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .isContainTenderType());
     }
+
+    /**
+     * Проверка поиска по площадке
+     */
+    @Test
+    public void checkSearchByTenderStand(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByTenderStand)
+                .clickButton(tabTendersPage.buttonCheckSearchByTenderStand)
+                .waitFor(2000)
+                .isContainTenderStand());
+    }
 }

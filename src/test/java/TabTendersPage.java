@@ -40,7 +40,10 @@ public class TabTendersPage{
     private final ElementsCollection tableCellCategory = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[12]");
     /** Список ячеек в результатах поиска "Начальная цена" */
     private final ElementsCollection tableCellPrice = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
+    /** Список ячеек в результатах поиска "Тип тендера" */
     private final ElementsCollection tableCellTenderType = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[11]");
+    /** Список ячеек в результатах поиска "Площадка" */
+    private final ElementsCollection tableCellArea = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -69,6 +72,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByPrice = $x("//div[text()='Проверка поиска по цене']");
     /** Кнопка автопоиска "Проверка поиска по типу тендера" */
     protected SelenideElement buttonCheckSearchByTenderType = $x("//div[text()='Проверка поиска по типу тендера']");
+    /** Кнопка автопоиска "Проверка поиска по площадке" */
+    protected SelenideElement buttonCheckSearchByTenderStand = $x("//div[text()='Проверка поиска по площадке']");
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
@@ -395,4 +400,21 @@ public class TabTendersPage{
         return check;
     }
 
+    /**
+     * Проверка поиска по площадке
+     */
+    public boolean isContainTenderStand(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellArea.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ «РТС-ТЕНДЕР»"))){
+                check = false;
+                System.out.println(type);
+                break;
+            }
+        }
+        return check;
+    }
 }
