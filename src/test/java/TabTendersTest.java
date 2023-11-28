@@ -196,4 +196,24 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .isContainCategoryName());
     }
+
+    /**
+     * Проверка цены тендера
+     */
+    @Test
+    public void checkPriceTender(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonCheckSearchByPrice)
+                .waitFor(3000)
+                .scrollToElement(tabTendersPage.filterValidateSearchByTenderPrice)
+                .clickButton(tabTendersPage.filterValidateSearchByTenderPrice)
+                .clearField(tabTendersPage.fieldPriceFrom)
+                .typePriceFrom("10000")
+                .clearField(tabTendersPage.fieldPriceTo)
+                .typePriceTo("100000")
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(4000)
+                .checkPrice(10000,100000));
+    }
 }

@@ -38,6 +38,8 @@ public class TabTendersPage{
     private final ElementsCollection dateOfTheTender = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
     /** Список ячеек в результатах поиска "Категория лота" */
     private final ElementsCollection tableCellCategory = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[12]");
+    /** Список ячеек в результатах поиска "Начальная цена" */
+    private final ElementsCollection tableCellPrice = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -62,6 +64,11 @@ public class TabTendersPage{
     protected SelenideElement buttonValidateSearchByTenderDate = $x("//div[text()='Проверка поиска по дате проведения тендера']");
     /** Кнопка автопоиска "Проверка поиска по категории" */
     protected SelenideElement buttonValidateSearchByCategory = $x("//div[text()='Проверка поиска по категории']");
+    /** Кнопка автопоиска "Проверка поиска по цене" */
+    protected SelenideElement buttonCheckSearchByPrice = $x("//div[text()='Проверка поиска по цене']");
+
+    /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
+    protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
 
 
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
@@ -82,6 +89,10 @@ public class TabTendersPage{
     protected SelenideElement fieldNameTender = $x("//div[@id='filter-editor-compact-1-include']//textarea"); //
     /** Поле поиска внутри фильтра */
     protected SelenideElement fieldSearchInFilterEditor = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
+    /** Поле для ввода цены "от" */
+    protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-4-from']//input[@role='spinbutton']");
+    /** Поле для ввода цены "до" */
+    protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
 
 
 
@@ -159,7 +170,23 @@ public class TabTendersPage{
     public TabTendersPage typeNameTender(String name){
         fieldNameTender.sendKeys(name);
         return new TabTendersPage();
-    } //
+    }
+
+    /**
+     * Ввести цену "от"
+     */
+    public TabTendersPage typePriceFrom(String price){
+        fieldPriceFrom.sendKeys(price);
+        return new TabTendersPage();
+    }
+
+    /**
+     * Ввести цену "до"
+     */
+    public TabTendersPage typePriceTo(String price){
+        fieldPriceTo.sendKeys(price);
+        return new TabTendersPage();
+    }
 
     /**
      * Очистить поле
@@ -230,7 +257,7 @@ public class TabTendersPage{
 
     /**
      * Проверка, что дата находится в заданном диапазоне
-     * @param caseTypeDate 1 - дата публикации, 2 - дата начала подачи заявок
+     * @param caseTypeDate 1 - дата публикации, 2 - дата начала подачи заявок, 3 - дата подачи тендера
      */
     public boolean checkDate(String startDate, String endDate, int caseTypeDate) throws ParseException {
         boolean check = true;
@@ -320,6 +347,27 @@ public class TabTendersPage{
         for(String name : array){
             if(!(name.contains("Коммунальные услуги"))){
 //                System.out.println("Услуги: " + name.getText());
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка цены
+     */
+    public boolean checkPrice(float priceFrom, float priceTo){
+        boolean check = true;
+        List<String> array;
+        array = tableCellPrice.texts();
+        array.remove(array.size()-1);
+        for(String price : array){
+            String priceCheck = price;
+            priceCheck = priceCheck.replace(" ₽", "");
+            priceCheck = priceCheck.replace(" ", "");
+            float floatPriceForCheck = Float.parseFloat(priceCheck);
+            if(floatPriceForCheck < priceFrom || floatPriceForCheck > priceTo){
                 check = false;
                 break;
             }
