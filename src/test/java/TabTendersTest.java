@@ -216,4 +216,17 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(4000)
                 .checkPrice(10000,100000));
     }
+
+    /**
+     * Проверка поиска по типу тендера
+     */
+    @Test
+    public void checkSearchByTenderType(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByTenderType)
+                .clickButton(tabTendersPage.buttonCheckSearchByTenderType)
+                .waitFor(3000)
+                .isContainTenderType());
+    }
 }

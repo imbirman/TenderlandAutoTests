@@ -40,6 +40,7 @@ public class TabTendersPage{
     private final ElementsCollection tableCellCategory = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[12]");
     /** Список ячеек в результатах поиска "Начальная цена" */
     private final ElementsCollection tableCellPrice = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
+    private final ElementsCollection tableCellTenderType = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[11]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -66,6 +67,8 @@ public class TabTendersPage{
     protected SelenideElement buttonValidateSearchByCategory = $x("//div[text()='Проверка поиска по категории']");
     /** Кнопка автопоиска "Проверка поиска по цене" */
     protected SelenideElement buttonCheckSearchByPrice = $x("//div[text()='Проверка поиска по цене']");
+    /** Кнопка автопоиска "Проверка поиска по типу тендера" */
+    protected SelenideElement buttonCheckSearchByTenderType = $x("//div[text()='Проверка поиска по типу тендера']");
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
@@ -368,6 +371,23 @@ public class TabTendersPage{
             priceCheck = priceCheck.replace(" ", "");
             float floatPriceForCheck = Float.parseFloat(priceCheck);
             if(floatPriceForCheck < priceFrom || floatPriceForCheck > priceTo){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска по типу тендера
+     */
+    public boolean isContainTenderType(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellTenderType.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("Закупка малого объема"))){
                 check = false;
                 break;
             }
