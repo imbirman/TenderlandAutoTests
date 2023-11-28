@@ -242,4 +242,17 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .isContainTenderStand());
     }
+
+    /**
+     * Проверка поиска по модулю 'Государственные тендеры'
+     */
+    @Test
+    public void checkSearchOnlyGovernmentTenders(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
+                .waitFor(2000)
+                .isContainOnlyGovernmentTenders());
+    }
 }

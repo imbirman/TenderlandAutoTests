@@ -44,6 +44,8 @@ public class TabTendersPage{
     private final ElementsCollection tableCellTenderType = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[11]");
     /** Список ячеек в результатах поиска "Площадка" */
     private final ElementsCollection tableCellArea = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
+    /** Список ячеек в результатах поиска "Модуль" */
+    private final ElementsCollection tableCellModule = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[14]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -74,6 +76,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByTenderType = $x("//div[text()='Проверка поиска по типу тендера']");
     /** Кнопка автопоиска "Проверка поиска по площадке" */
     protected SelenideElement buttonCheckSearchByTenderStand = $x("//div[text()='Проверка поиска по площадке']");
+    /** Кнопка автопоиска "Проверка поиска по модулю" */
+    protected SelenideElement buttonCheckSearchByTenderModule = $x("//div[text()='Проверка поиска по модулю']");
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
@@ -412,6 +416,23 @@ public class TabTendersPage{
             if(!(type.contains("ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ «РТС-ТЕНДЕР»"))){
                 check = false;
                 System.out.println(type);
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска по модулю "Государственные тендеры"
+     */
+    public boolean isContainOnlyGovernmentTenders(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellModule.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("Государственные тендеры"))){
+                check = false;
                 break;
             }
         }
