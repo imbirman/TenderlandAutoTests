@@ -599,4 +599,21 @@ public class TabTendersPage{
         }
         return check;
     }
+
+    /**
+     * Проверка поиска по исполнению контракта фильтра "Мои тендеры"
+     */
+    public boolean isContainExecutionOfContract(){
+        boolean check = false;
+        List<String> array;
+        array = tableCellToCheckCollection.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(type.contains("0306200004521000009")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
 }

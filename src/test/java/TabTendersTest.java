@@ -383,4 +383,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .isContainConclusionOfContract());
     }
+
+    /**
+     * Проверка поиска по моим тендерам - исполнение контракта
+     */
+    @Test
+    public void checkSearchByExecutionContract(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
+                .clickButton(tabTendersPage.getCheckboxInFilter(4))
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(3000)
+                .isContainExecutionOfContract());
+    }
 }
