@@ -255,4 +255,37 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .isContainOnlyGovernmentTenders());
     }
+
+    /**
+     * Проверка поиска по модулям 'Государственные тендеры' и 'Коммерческие тендеры'
+     */
+    @Test
+    public void checkSearchOnlyGovernmentAndCommercialTenders(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.filterSearchByTenderModule)
+                .clickButton(tabTendersPage.notSelectedCheckBoxFilter)
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(2000)
+                .isContainOnlyGovernmentAndCommercialTenders());
+    }
+
+    /**
+     * Проверка поиска по модулям 'Государственные тендеры' и 'Коммерческие тендеры' и 'СНГ'
+     */
+    @Test
+    public void checkSearchOnlyGovernmentAndCommercialAndCISTenders(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.filterSearchByTenderModule)
+                .clickButton(tabTendersPage.notSelectedCheckBoxFilter)
+                .clickButton(tabTendersPage.notSelectedCheckBoxFilter)
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(2000)
+                .isContainOnlyGovernmentAndCommercialAndCISTenders());
+    }
 }

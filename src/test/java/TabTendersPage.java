@@ -81,6 +81,10 @@ public class TabTendersPage{
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
+    /** Фильтр "Модуль" в автопоиске "Проверка поиска по модулю" */
+    protected SelenideElement filterSearchByTenderModule = $x("//div[text()='Государственные тендеры']");
+    /** Чекбокс в фильтре */
+    protected SelenideElement notSelectedCheckBoxFilter = $x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
 
 
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
@@ -432,6 +436,40 @@ public class TabTendersPage{
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("Государственные тендеры"))){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска по модулю "Государственные тендеры" и "Коммерческие тендеры"
+     */
+    public boolean isContainOnlyGovernmentAndCommercialTenders(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellModule.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("Государственные тендеры")) && !(type.contains("Коммерческие тендеры"))){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска по модулю "Государственные тендеры" и "Коммерческие тендеры" и "СНГ"
+     */
+    public boolean isContainOnlyGovernmentAndCommercialAndCISTenders(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellModule.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("Государственные тендеры")) && !(type.contains("Коммерческие тендеры")) && !(type.contains("СНГ"))){
                 check = false;
                 break;
             }
