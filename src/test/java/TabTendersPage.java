@@ -616,4 +616,21 @@ public class TabTendersPage{
         }
         return check;
     }
+
+    /**
+     * Проверка поиска по архиву фильтра "Мои тендеры"
+     */
+    public boolean isContainArchiveTenders(){
+        boolean check = false;
+        List<String> array;
+        array = tableCellToCheckCollection.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(type.contains("0848300064121000009")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
 }

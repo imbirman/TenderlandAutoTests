@@ -399,4 +399,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .isContainExecutionOfContract());
     }
+
+    /**
+     * Проверка поиска по моим тендерам - архив
+     */
+    @Test
+    public void checkSearchByArchiveTenders(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
+                .clickButton(tabTendersPage.getCheckboxInFilter(5))
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(3000)
+                .isContainArchiveTenders());
+    }
 }
