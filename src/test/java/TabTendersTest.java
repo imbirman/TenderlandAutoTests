@@ -288,4 +288,22 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .isContainOnlyGovernmentAndCommercialAndCISTenders());
     }
+
+    /**
+     * Проверка поиска по всем модулям
+     */
+    @Test
+    public void checkSearchAllModulesTender(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
+                .clickButton(tabTendersPage.filterSearchByTenderModule)
+                .clickButton(tabTendersPage.notSelectedCheckBoxFilter)
+                .clickButton(tabTendersPage.notSelectedCheckBoxFilter)
+                .clickButton(tabTendersPage.notSelectedCheckBoxFilter)
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(2000)
+                .isContainAllModulesTenders());
+    }
 }

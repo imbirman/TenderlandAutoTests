@@ -476,4 +476,22 @@ public class TabTendersPage{
         }
         return check;
     }
+
+    /**
+     * Проверка поиска по всем модулям
+     */
+    public boolean isContainAllModulesTenders(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellModule.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("Государственные тендеры")) && !(type.contains("Коммерческие тендеры"))
+                    && !(type.contains("СНГ")) && !(type.contains("Реализация имущества"))){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    } //
 }
