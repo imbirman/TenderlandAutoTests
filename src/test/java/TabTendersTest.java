@@ -319,4 +319,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .isContainParticipant());
     }
+
+    /**
+     * Проверка поиска по моим тендерам - новые тендеры
+     */
+    @Test
+    public void checkSearchByNewTenders(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
+                .clickButton(tabTendersPage.getCheckboxInFilter(0))
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(3000)
+                .isContainNewTenders());
+    }
 }

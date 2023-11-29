@@ -23,11 +23,13 @@ public class TabTendersPage{
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
-    /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
-    protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
 
+    /** Список чекбоксов в результате поиска */
+    protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
+    /** Чекбокс в фильтре */
+    private final ElementsCollection checkBoxFilterCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
     /** Список строк таблицы поиска */
-    private final ElementsCollection rowResultSearch = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
+    private final ElementsCollection rowResultSearchCollection = $$x("//div[@class='dx-datagrid-content']//table[@class='dx-datagrid-table dx-datagrid-table-fixed']//tr[@role='row']");
     /** Список вторых ячеек таблицы результата поиска */
     private final ElementsCollection secondTableCellsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
     /** Список дат публикации тендеров для автопоиска "Проверка поиска по дате публикации" */
@@ -35,19 +37,21 @@ public class TabTendersPage{
     /** Список дат начала подачи заявок*/
     private final ElementsCollection startOrEndDateRequestCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
     /** Список дат проведения тендера */
-    private final ElementsCollection dateOfTheTender = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
+    private final ElementsCollection dateOfTheTenderCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[8]");
     /** Список ячеек в результатах поиска "Категория лота" */
-    private final ElementsCollection tableCellCategory = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[12]");
+    private final ElementsCollection tableCellCategoryCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[12]");
     /** Список ячеек в результатах поиска "Начальная цена" */
-    private final ElementsCollection tableCellPrice = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
+    private final ElementsCollection tableCellPriceCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
     /** Список ячеек в результатах поиска "Тип тендера" */
-    private final ElementsCollection tableCellTenderType = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[11]");
+    private final ElementsCollection tableCellTenderTypeCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[11]");
     /** Список ячеек в результатах поиска "Площадка" */
-    private final ElementsCollection tableCellArea = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
+    private final ElementsCollection tableCellAreaCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
     /** Список ячеек в результатах поиска "Модуль" */
-    private final ElementsCollection tableCellModule = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[14]");
+    private final ElementsCollection tableCellModuleCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[14]");
     /** Список ячеек в результатах поиска "Участник" */
-    private final ElementsCollection tableCellParticipant = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
+    private final ElementsCollection tableCellParticipantCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
+    /** Список ячеек в результатах поиска "Реестровый номер" */
+    private final ElementsCollection tableCellToCheckCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -82,22 +86,26 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByTenderModule = $x("//div[text()='Проверка поиска по модулю']");
     /** Кнопка автопоиска "Проверка поиска по участнику" */
     protected SelenideElement buttonCheckSearchByParticipant = $x("//div[text()='Проверка поиска по участнику']");
+    /** Кнопка автопоиска "Проверка поиска по моим тендерам" */
+    protected SelenideElement buttonCheckSearchByMineTenders = $x("//div[text()='Проверка поиска по моим тендерам']");
 
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
     /** Фильтр "Модуль" в автопоиске "Проверка поиска по модулю" */
     protected SelenideElement filterSearchByTenderModule = $x("//div[text()='Государственные тендеры']");
+    /** Фильтр "Мои Тендеры" в автопоиске "Проверка поиска по моим тендерам" */
+    protected SelenideElement filterSearchByMineTendersOrContractsStatus = $x("//div[@class='search-filters-tagbox-tag-content']");
     /** Чекбокс в фильтре */
     protected SelenideElement notSelectedCheckBoxFilter = $x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
-
-
     /** Фильтр "Регион" в поле построения дерева фильтров для автопоиска "Проверка поиска по реестровому номеру и региону" */
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
     /** Фильтр "Название тендера" в поле построения дерева фильтров для автопоиска "Проверка поиска по названию тендера и исключению из названия" */
     protected SelenideElement filterNameTender = $x("//div[@id='tl-filter-root']//div[text()='Название тендера']/following::div[@class='search-filters-filter-content']");
-    /** Список чекбоксов в результате поиска */
-    protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
+    /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
+    protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
+
+
     /** Чекбокс "Транслитерация" */
     protected SelenideElement checkBoxTransliteration = $x("//div[@id='filter-editor-compact-1-transliteration']"); //
     /** Кнопка "Применить" */
@@ -218,7 +226,7 @@ public class TabTendersPage{
      * Получение количества строк в таблице результата поиска
      */
     public int getNumberOfRowResultSearch(){
-        return rowResultSearch.size();
+        return rowResultSearchCollection.size();
     }
 
     /**
@@ -233,6 +241,13 @@ public class TabTendersPage{
      */
     public SelenideElement getCheckboxInFilterRegion(int numberCheckbox){
         return checkboxCollection.get(numberCheckbox);
+    }
+
+    /**
+     * Получить чекбокс по его порядковому номеру в фильтре "Мои тендеры" у тендера или "Статус" у контракта
+     */
+    public SelenideElement getCheckboxInFilter(int numberCheckbox){
+        return checkBoxFilterCollection.get(numberCheckbox);
     }
 
     /**
@@ -288,7 +303,7 @@ public class TabTendersPage{
                 break;
             case 2: array = startOrEndDateRequestCollection.texts();
                 break;
-            case 3: array = dateOfTheTender.texts();
+            case 3: array = dateOfTheTenderCollection.texts();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + caseTypeDate);
@@ -363,7 +378,7 @@ public class TabTendersPage{
     public boolean isContainCategoryName(){
         boolean check = true;
         List<String> array;
-        array = tableCellCategory.texts();
+        array = tableCellCategoryCollection.texts();
         array.remove(array.size()-1);
         for(String name : array){
             if(!(name.contains("Коммунальные услуги"))){
@@ -381,7 +396,7 @@ public class TabTendersPage{
     public boolean checkPrice(float priceFrom, float priceTo){
         boolean check = true;
         List<String> array;
-        array = tableCellPrice.texts();
+        array = tableCellPriceCollection.texts();
         array.remove(array.size()-1);
         for(String price : array){
             String priceCheck = price;
@@ -402,7 +417,7 @@ public class TabTendersPage{
     public boolean isContainTenderType(){
         boolean check = true;
         List<String> array;
-        array = tableCellTenderType.texts();
+        array = tableCellTenderTypeCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("Закупка малого объема"))){
@@ -419,7 +434,7 @@ public class TabTendersPage{
     public boolean isContainTenderStand(){
         boolean check = true;
         List<String> array;
-        array = tableCellArea.texts();
+        array = tableCellAreaCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ «РТС-ТЕНДЕР»"))){
@@ -437,7 +452,7 @@ public class TabTendersPage{
     public boolean isContainOnlyGovernmentTenders(){
         boolean check = true;
         List<String> array;
-        array = tableCellModule.texts();
+        array = tableCellModuleCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("Государственные тендеры"))){
@@ -454,7 +469,7 @@ public class TabTendersPage{
     public boolean isContainOnlyGovernmentAndCommercialTenders(){
         boolean check = true;
         List<String> array;
-        array = tableCellModule.texts();
+        array = tableCellModuleCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("Государственные тендеры")) && !(type.contains("Коммерческие тендеры"))){
@@ -471,7 +486,7 @@ public class TabTendersPage{
     public boolean isContainOnlyGovernmentAndCommercialAndCISTenders(){
         boolean check = true;
         List<String> array;
-        array = tableCellModule.texts();
+        array = tableCellModuleCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("Государственные тендеры")) && !(type.contains("Коммерческие тендеры")) && !(type.contains("СНГ"))){
@@ -488,7 +503,7 @@ public class TabTendersPage{
     public boolean isContainAllModulesTenders(){
         boolean check = true;
         List<String> array;
-        array = tableCellModule.texts();
+        array = tableCellModuleCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("Государственные тендеры")) && !(type.contains("Коммерческие тендеры"))
@@ -506,11 +521,28 @@ public class TabTendersPage{
     public boolean isContainParticipant(){
         boolean check = true;
         List<String> array;
-        array = tableCellParticipant.texts();
+        array = tableCellParticipantCollection.texts();
         array.remove(array.size()-1);
         for(String type : array){
             if(!(type.contains("ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ТРАНСЭКОСЕРВИС\""))){
                 check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска по новым тендерам фильтра "Мои тендеры"
+     */
+    public boolean isContainNewTenders(){
+        boolean check = false;
+        List<String> array;
+        array = tableCellToCheckCollection.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(type.contains("400022118701")){
+                check = true;
                 break;
             }
         }
