@@ -565,4 +565,21 @@ public class TabTendersPage{
         }
         return check;
     }
+
+    /**
+     * Проверка поиска по определению победителя фильтра "Мои тендеры"
+     */
+    public boolean isContainDeterminationOfWinner(){
+        boolean check = false;
+        List<String> array;
+        array = tableCellToCheckCollection.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(type.contains("8976791")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    } //
 }

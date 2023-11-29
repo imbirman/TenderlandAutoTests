@@ -351,4 +351,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .isContainApplicationPreparation());
     }
+
+    /**
+     * Проверка поиска по моим тендерам - определение победителя
+     */
+    @Test
+    public void checkSearchByDeterminationWinner(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
+                .clickButton(tabTendersPage.getCheckboxInFilter(2))
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(3000)
+                .isContainDeterminationOfWinner());
+    }
 }
