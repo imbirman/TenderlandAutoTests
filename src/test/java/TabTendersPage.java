@@ -46,6 +46,8 @@ public class TabTendersPage{
     private final ElementsCollection tableCellArea = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
     /** Список ячеек в результатах поиска "Модуль" */
     private final ElementsCollection tableCellModule = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[14]");
+    /** Список ячеек в результатах поиска "Участник" */
+    private final ElementsCollection tableCellParticipant = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -78,6 +80,9 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByTenderStand = $x("//div[text()='Проверка поиска по площадке']");
     /** Кнопка автопоиска "Проверка поиска по модулю" */
     protected SelenideElement buttonCheckSearchByTenderModule = $x("//div[text()='Проверка поиска по модулю']");
+    /** Кнопка автопоиска "Проверка поиска по участнику" */
+    protected SelenideElement buttonCheckSearchByParticipant = $x("//div[text()='Проверка поиска по участнику']");
+
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
@@ -493,5 +498,22 @@ public class TabTendersPage{
             }
         }
         return check;
-    } //
+    }
+
+    /**
+     * Проверка поиска по участнику
+     */
+    public boolean isContainParticipant(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellParticipant.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ТРАНСЭКОСЕРВИС\""))){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
 }

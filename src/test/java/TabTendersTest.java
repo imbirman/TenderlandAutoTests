@@ -306,4 +306,17 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(2000)
                 .isContainAllModulesTenders());
     }
+
+    /**
+     * Проверка поиска по участнику
+     */
+    @Test
+    public void checkSearchParticipant(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByParticipant)
+                .clickButton(tabTendersPage.buttonCheckSearchByParticipant)
+                .waitFor(2000)
+                .isContainParticipant());
+    }
 }
