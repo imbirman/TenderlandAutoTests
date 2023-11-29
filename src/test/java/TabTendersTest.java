@@ -367,4 +367,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .isContainDeterminationOfWinner());
     }
+
+    /**
+     * Проверка поиска по моим тендерам - заключение контракта
+     */
+    @Test
+    public void checkSearchByConclusionContract(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
+                .clickButton(tabTendersPage.getCheckboxInFilter(3))
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(3000)
+                .isContainConclusionOfContract());
+    }
 }
