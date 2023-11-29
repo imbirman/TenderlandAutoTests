@@ -548,4 +548,21 @@ public class TabTendersPage{
         }
         return check;
     }
+
+    /**
+     * Проверка поиска по подготовке заявки фильтра "Мои тендеры"
+     */
+    public boolean isContainApplicationPreparation(){
+        boolean check = false;
+        List<String> array;
+        array = tableCellToCheckCollection.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(type.contains("0130300010421000001")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
 }
