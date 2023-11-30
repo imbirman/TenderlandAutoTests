@@ -122,6 +122,8 @@ public class TabTendersPage{
     protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-4-from']//input[@role='spinbutton']");
     /** Поле для ввода цены "до" */
     protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
+    /** Чекбокс "Выбрать всё" в фильтре "Мои тендеры" */
+    protected SelenideElement checkboxSelectAllMyTenders = $x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-all-checkbox']");
 
 
 
@@ -628,6 +630,25 @@ public class TabTendersPage{
         for(String type : array){
             if(type.contains("0848300064121000009")){
                 check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска по всем тендерам из "Мои тендеры"
+     */
+    public boolean isContainAllMineTenders(){
+        boolean check = true;
+        List<String> array;
+        array = tableCellToCheckCollection.texts();
+        array.remove(array.size()-1);
+        for(String type : array){
+            if(!(type.contains("0130300010421000001")) && !(type.contains("0848300064121000009"))
+                    && !(type.contains("0126200000421000268")) && !(type.contains("400022118701"))
+                    && !(type.contains("0306200004521000009")) && !(type.contains("8976791"))){
+                check = false;
                 break;
             }
         }

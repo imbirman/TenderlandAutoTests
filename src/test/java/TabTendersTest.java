@@ -415,4 +415,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(3000)
                 .isContainArchiveTenders());
     }
+
+    /**
+     * Проверка поиска по всем тендерам фильтра 'Мои тендеры'
+     */
+    @Test
+    public void checkSearchByAllMineTenders(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
+                .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
+                .clickButton(tabTendersPage.checkboxSelectAllMyTenders)
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(4000)
+                .isContainAllMineTenders());
+    }
 }
