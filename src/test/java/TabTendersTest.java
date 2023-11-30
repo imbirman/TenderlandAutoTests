@@ -473,4 +473,18 @@ public class TabTendersTest extends BaseTest{
         Assert.assertTrue(tabTendersPage.typeSearchFilters("Название тендера")
                 .isContainFiltersFromSearchField());
     }
+
+    /**
+     * Проверка результата поиска после скрытия фильтра 'Регион'
+     */
+    @Test
+    public void checkSearchWithHideFilter(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion)
+                .clickButton(tabTendersPage.buttonHideFilter)
+                .clickButton(tabTendersPage.buttonSearch)
+                .waitFor(2000)
+                .isContainWithoutHideFilter());
+    }
 }

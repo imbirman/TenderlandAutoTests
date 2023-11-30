@@ -60,9 +60,11 @@ public class TabTendersPage{
     /** Список ячеек в результатах поиска "Реестровый номер" */
     private final ElementsCollection tableCellToCheckCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     /** Список поисковых слов в извещении (выделенные) */
-    private final ElementsCollection searchWordIntoNoticeDocumentation = $$x("//em");
+    private final ElementsCollection searchWordIntoNoticeDocumentationCollection = $$x("//em");
     /** Список результатов поиска в блоке фильтров */
-    private final ElementsCollection resultSearchFilters = $$x("//div[@id='list-tenders']//div[not(@style='display: none;')]"); // Результат поиска в блоке фильтров
+    private final ElementsCollection resultSearchFiltersCollection = $$x("//div[@id='list-tenders']//div[not(@style='display: none;')]");
+    /** Список ячеек таблицы результатов поиска "Регион" */
+    private final ElementsCollection cellTableRegionCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -121,6 +123,8 @@ public class TabTendersPage{
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     /** Ячейка таблицы для открытия документации тендера */
     protected SelenideElement cellTableToOpenDocumentation = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//a");
+    /** Кнопка скрытия фильтра */
+    protected SelenideElement buttonHideFilter = $x("(//i[@class='material-icons-round icon-20px icon-grey icon-grey-hover md-filter_alt_off'])[2]");
 
 
     /** Чекбокс "Транслитерация" */
@@ -697,7 +701,7 @@ public class TabTendersPage{
     public boolean isContainSearchWordIntoNoticeDocumentation(){
         boolean check = false;
         List<String> array;
-        array = searchWordIntoNoticeDocumentation.texts();
+        array = searchWordIntoNoticeDocumentationCollection.texts();
         for(String type : array){
             if(type.contains("мусор") || type.contains("Мусор") || type.contains("МУСОР")){
                 check = true;
@@ -713,9 +717,25 @@ public class TabTendersPage{
     public boolean isContainFiltersFromSearchField(){
         boolean check = false;
         List<String> array;
-        array = resultSearchFilters.texts();
+        array = resultSearchFiltersCollection.texts();
         for(String type : array){
             if(type.contains("Название тендера")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска со скрытым фильтром
+     */
+    public boolean isContainWithoutHideFilter(){
+        boolean check = false;
+        List<String> array;
+        array = cellTableRegionCollection.texts();
+        for(String type : array){
+            if(!type.contains("Санкт-Петербург город")){
                 check = true;
                 break;
             }
