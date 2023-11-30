@@ -23,9 +23,12 @@ public class TabTendersPage{
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+    /** Содержимое документации */
+    private final SelenideElement fieldDocumentation = $x("//div[@class='files-view-page-content']");
+
 
     /** Список чекбоксов в результате поиска */
-    protected ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
+    private final ElementsCollection checkboxCollection = $$x("//tbody[@role='presentation']//div[@role='checkbox']");
     /** Чекбокс в фильтре */
     private final ElementsCollection checkBoxFilterCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
     /** Список строк таблицы поиска */
@@ -88,6 +91,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByParticipant = $x("//div[text()='Проверка поиска по участнику']");
     /** Кнопка автопоиска "Проверка поиска по моим тендерам" */
     protected SelenideElement buttonCheckSearchByMineTenders = $x("//div[text()='Проверка поиска по моим тендерам']");
+    /** Кнопка автопоиска "Проверка поиска по документации" */
+    protected SelenideElement buttonCheckSearchByDocumentation = $x("//div[text()='Проверка поиска по документации']");
 
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
@@ -104,6 +109,8 @@ public class TabTendersPage{
     protected SelenideElement filterNameTender = $x("//div[@id='tl-filter-root']//div[text()='Название тендера']/following::div[@class='search-filters-filter-content']");
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
+    /** Ячейка таблицы для открытия документации тендера */
+    protected SelenideElement cellTableToOpenDocumentation = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//a");
 
 
     /** Чекбокс "Транслитерация" */
@@ -128,7 +135,10 @@ public class TabTendersPage{
 
 
 
-
+    public TabTendersPage switchToTab(int numberTab){
+        switchTo().window(numberTab);
+        return new TabTendersPage();
+    }
     /** Ожидание */
     public TabTendersPage waitFor(long number){
         sleep(number);
@@ -653,5 +663,13 @@ public class TabTendersPage{
             }
         }
         return check;
+    }
+
+    /**
+     * Проверка поиска по документации
+     */
+    public boolean isContainSearchDocumentation(){
+        String textDocumentation = fieldDocumentation.getText();
+        return textDocumentation.contains("мусор") || textDocumentation.contains("Мусор") || textDocumentation.contains("МУСОР");
     }
 }

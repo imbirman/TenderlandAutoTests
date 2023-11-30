@@ -431,4 +431,20 @@ public class TabTendersTest extends BaseTest{
                 .waitFor(4000)
                 .isContainAllMineTenders());
     }
+
+    /**
+     * Проверка поиска по документации
+     */
+    @Test
+    public void checkSearchByTextDocumentation(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByDocumentation)
+                .clickButton(tabTendersPage.buttonCheckSearchByDocumentation)
+                .waitFor(3000)
+                .clickButton(tabTendersPage.cellTableToOpenDocumentation)
+                .waitFor(1000)
+                .switchToTab(1)
+                .isContainSearchDocumentation());
+    }
 }
