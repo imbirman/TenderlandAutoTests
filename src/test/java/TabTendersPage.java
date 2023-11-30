@@ -25,6 +25,8 @@ public class TabTendersPage{
 
     /** Содержимое документации */
     private final SelenideElement fieldDocumentation = $x("//div[@class='files-view-page-content']");
+    /** Ячейка таблицы для открытия документации извещения тендера */
+    protected SelenideElement cellTableToOpenDocumentationNotice = $x("(//td//a)[2]");
 
 
     /** Список чекбоксов в результате поиска */
@@ -55,6 +57,8 @@ public class TabTendersPage{
     private final ElementsCollection tableCellParticipantCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[16]");
     /** Список ячеек в результатах поиска "Реестровый номер" */
     private final ElementsCollection tableCellToCheckCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
+    /** Список поисковых слов в извещении (выделенные) */
+    private final ElementsCollection searchWordIntoNoticeDocumentation = $$x("//em");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -93,6 +97,8 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByMineTenders = $x("//div[text()='Проверка поиска по моим тендерам']");
     /** Кнопка автопоиска "Проверка поиска по документации" */
     protected SelenideElement buttonCheckSearchByDocumentation = $x("//div[text()='Проверка поиска по документации']");
+    /** Кнопка автопоиска "Проверка поиска по извещению" */
+    protected SelenideElement buttonCheckSearchByNotice = $x("//div[text()='Проверка поиска по извещению']");
 
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
@@ -671,5 +677,21 @@ public class TabTendersPage{
     public boolean isContainSearchDocumentation(){
         String textDocumentation = fieldDocumentation.getText();
         return textDocumentation.contains("мусор") || textDocumentation.contains("Мусор") || textDocumentation.contains("МУСОР");
+    }
+
+    /**
+     * Проверка поиска по извещению
+     */
+    public boolean isContainSearchWordIntoNoticeDocumentation(){
+        boolean check = false;
+        List<String> array;
+        array = searchWordIntoNoticeDocumentation.texts();
+        for(String type : array){
+            if(type.contains("мусор") || type.contains("Мусор") || type.contains("МУСОР")){
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
 }

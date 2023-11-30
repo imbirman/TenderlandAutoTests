@@ -447,4 +447,20 @@ public class TabTendersTest extends BaseTest{
                 .switchToTab(1)
                 .isContainSearchDocumentation());
     }
+
+    /**
+     * Проверка поиска по извещению
+     */
+    @Test
+    public void checkSearchByTextNotice(){
+
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.buttonCheckSearchByNotice)
+                .clickButton(tabTendersPage.buttonCheckSearchByNotice)
+                .waitFor(3000)
+                .clickButton(tabTendersPage.cellTableToOpenDocumentationNotice)
+                .waitFor(1000)
+                .switchToTab(1)
+                .isContainSearchWordIntoNoticeDocumentation());
+    }
 }
