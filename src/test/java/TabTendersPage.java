@@ -27,6 +27,8 @@ public class TabTendersPage{
     private final SelenideElement fieldDocumentation = $x("//div[@class='files-view-page-content']");
     /** Ячейка таблицы для открытия документации извещения тендера */
     protected SelenideElement cellTableToOpenDocumentationNotice = $x("(//td//a)[2]");
+    /** Поле поиска фильтров в блоке фильтров */
+    private final SelenideElement fieldSearchFilters = $x("//div[@id='search-filters-search-textbox']//input");
 
 
     /** Список чекбоксов в результате поиска */
@@ -59,6 +61,8 @@ public class TabTendersPage{
     private final ElementsCollection tableCellToCheckCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     /** Список поисковых слов в извещении (выделенные) */
     private final ElementsCollection searchWordIntoNoticeDocumentation = $$x("//em");
+    /** Список результатов поиска в блоке фильтров */
+    private final ElementsCollection resultSearchFilters = $$x("//div[@id='list-tenders']//div[not(@style='display: none;')]"); // Результат поиска в блоке фильтров
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -234,6 +238,14 @@ public class TabTendersPage{
         fieldPriceTo.sendKeys(price);
         return new TabTendersPage();
     }
+
+    /**
+     * Ввести значение в поле поиска
+     */
+    public TabTendersPage typeSearchFilters(String search){
+        fieldSearchFilters.sendKeys(search);
+        return new TabTendersPage();
+    } //
 
     /**
      * Очистить поле
@@ -688,6 +700,22 @@ public class TabTendersPage{
         array = searchWordIntoNoticeDocumentation.texts();
         for(String type : array){
             if(type.contains("мусор") || type.contains("Мусор") || type.contains("МУСОР")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    /**
+     * Проверка поиска в блоке фильтров
+     */
+    public boolean isContainFiltersFromSearchField(){
+        boolean check = false;
+        List<String> array;
+        array = resultSearchFilters.texts();
+        for(String type : array){
+            if(type.contains("Название тендера")){
                 check = true;
                 break;
             }

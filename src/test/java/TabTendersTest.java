@@ -463,4 +463,14 @@ public class TabTendersTest extends BaseTest{
                 .switchToTab(1)
                 .isContainSearchWordIntoNoticeDocumentation());
     }
+
+    /**
+     * Проверка поиска в блоке списка фильтров
+     */
+    @Test
+    public void checkSearchInListTenders(){
+
+        Assert.assertTrue(tabTendersPage.typeSearchFilters("Название тендера")
+                .isContainFiltersFromSearchField());
+    }
 }
