@@ -527,4 +527,15 @@ public class TabTendersTest extends BaseTest{
                 .clickButton(tabTendersPage.buttonOpenTreeList)
                 .getNumberSelectedCategories()), 11);
     }
+
+    /**
+     * Проверка выбранных подкатегорий фильтра 'Категория'
+     */
+    @Test
+    public void checkContainSelectedCategory(){
+        Assert.assertTrue(tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
+                .clickButton(tabTendersPage.checkboxFirstInFilter)
+                .clickButton(tabTendersPage.buttonOpenTreeList)
+                .isContainSelectedCategory());
+    }
 }

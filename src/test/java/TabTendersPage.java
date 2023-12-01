@@ -819,4 +819,28 @@ public class TabTendersPage{
     public int getNumberSelectedCategories(){
         return textCheckboxSelected.size();
     }
+
+    /**
+     * Проверка на соответствие списка выбранных элементов фильтра "Категории"
+     */
+    public boolean isContainSelectedCategory(){
+//        List<String> textCheckbox = findAll(textCheckboxSelected).texts();
+        List<String> array;
+        array = textCheckboxSelected.texts();
+        array.remove(0);
+//        textCheckbox.remove(0);
+        List<String> checkArray = new ArrayList<>();
+        checkArray.add("Банковские услуги");
+        checkArray.add("Бухгалтерский учет, аудит");
+        checkArray.add("Кадровые услуги");
+        checkArray.add("Консультационные услуги");
+        checkArray.add("Медицинское страхование");
+        checkArray.add("Оценка, экспертиза");
+        checkArray.add("Реализация имущества");
+        checkArray.add("Страхование");
+        checkArray.add("Услуги по лицензированию, сертификации и аттестации");
+        checkArray.add("Юридические услуги");
+
+        return checkArray.equals(array);
+    }
 }
