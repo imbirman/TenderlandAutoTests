@@ -26,8 +26,9 @@ public class TabTendersTest extends BaseTest{
     public void beforeMethod(){
         openURL(BASE_URL);
         tabTendersPage.clickLogInButton()
-                    .typeLogin(BASE_LOGIN)
                     .waitFor(200)
+                    .typeLogin(BASE_LOGIN)
+                    .waitFor(400)
                     .typePassword(BASE_PASSWORD)
                     .clickConfirmLogInButton();
     }
@@ -486,5 +487,19 @@ public class TabTendersTest extends BaseTest{
                 .clickButton(tabTendersPage.buttonSearch)
                 .waitFor(2000)
                 .isContainWithoutHideFilter());
+    }
+
+    /**
+     * Проверка на отображение ошибки при начальной дате большей конечной
+     */
+    @Test
+    public void checkEmptyFieldPublicationDateTo(){
+        Assert.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
+                .waitFor(2000)
+                .DragAndDropFilter(tabTendersPage.filterDatePublication)
+                .waitFor(1000)
+                .typeDateFrom("01.01.2021")
+                .typeDateTo("31.12.2020")
+                .isVisibleErrorInvalidEnterDate());
     }
 }

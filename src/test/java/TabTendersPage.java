@@ -2,6 +2,13 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import javax.annotation.Nonnull;
+
+import static com.codeborne.selenide.DragAndDropOptions.usingActions;
+import static com.codeborne.selenide.DragAndDropOptions.usingJavaScript;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.$$x;
 
@@ -29,6 +36,14 @@ public class TabTendersPage{
     protected SelenideElement cellTableToOpenDocumentationNotice = $x("(//td//a)[2]");
     /** Поле поиска фильтров в блоке фильтров */
     private final SelenideElement fieldSearchFilters = $x("//div[@id='search-filters-search-textbox']//input");
+    /** Поле дерева фильтров */
+    private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
+    /** Поле для ввода даты публикации "от" */
+    private final SelenideElement fieldPublicationDateFrom = $x("//div[@id='textbox-filter-editor-compact-5-from']//input[@role='textbox']");
+    /** Поле для ввода даты публикации "до" */
+    private final SelenideElement fieldPublicationDateTo = $x("//div[@id='textbox-filter-editor-compact-5-to']//input[@role='textbox']");
+    /** Сообщение об ошибке при вводе даты */
+    private final SelenideElement errorMessageInvalidDate = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
 
 
     /** Список чекбоксов в результате поиска */
@@ -105,6 +120,10 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByDocumentation = $x("//div[text()='Проверка поиска по документации']");
     /** Кнопка автопоиска "Проверка поиска по извещению" */
     protected SelenideElement buttonCheckSearchByNotice = $x("//div[text()='Проверка поиска по извещению']");
+    /** Фильтр "Дата публикации" в блоке фильтров */
+    protected SelenideElement filterDatePublication = $x("//span[text()='публикации']/parent::div");
+    /** Фильтр "Дата определения победителя" в блоке фильтров */
+    protected SelenideElement filterDateDeterminationWinner = $x("//span[text()='определения победителя']");
 
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
@@ -145,15 +164,26 @@ public class TabTendersPage{
     protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
     /** Чекбокс "Выбрать всё" в фильтре "Мои тендеры" */
     protected SelenideElement checkboxSelectAllMyTenders = $x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-all-checkbox']");
+    private WebDriver driver;
 
 
-
-
+    /**
+     * Переключиться на заданную вкладку
+     */
     public TabTendersPage switchToTab(int numberTab){
         switchTo().window(numberTab);
         return new TabTendersPage();
     }
-    /** Ожидание */
+    /**
+     * Перетащить фильтр в поле построения
+     */
+    public TabTendersPage DragAndDropFilter(@Nonnull SelenideElement element){
+        actions().clickAndHold(element).moveToElement(filterRoot).release().build().perform();
+        return new TabTendersPage();
+    }
+    /**
+     * Ожидание
+     */
     public TabTendersPage waitFor(long number){
         sleep(number);
         return new TabTendersPage();
@@ -741,5 +771,27 @@ public class TabTendersPage{
             }
         }
         return check;
+    }
+
+    /**
+     * Ввести дату публикации "от"
+     */
+    public TabTendersPage typeDateFrom(String date){
+        fieldPublicationDateFrom.click();
+        fieldPublicationDateFrom.sendKeys(date);
+        return new TabTendersPage();
+    }
+
+    /**
+     * Ввести дату публикации "до"
+     */
+    public TabTendersPage typeDateTo(String date){
+        fieldPublicationDateTo.click();
+        fieldPublicationDateTo.sendKeys(date);
+        return new TabTendersPage();
+    }
+
+    public boolean isVisibleErrorInvalidEnterDate(){
+        return errorMessageInvalidDate.isDisplayed();
     }
 }
