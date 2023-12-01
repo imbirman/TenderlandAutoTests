@@ -80,6 +80,8 @@ public class TabTendersPage{
     private final ElementsCollection resultSearchFiltersCollection = $$x("//div[@id='list-tenders']//div[not(@style='display: none;')]");
     /** Список ячеек таблицы результатов поиска "Регион" */
     private final ElementsCollection cellTableRegionCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
+    /** Список текстов выбранных чекбоксов внутри фильтра */
+    private final ElementsCollection textCheckboxSelected = $$x("//div[@class='dx-widget dx-checkbox dx-state-hover dx-checkbox-checked']//following-sibling::div[@style='margin-left: 25px;']");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -138,6 +140,8 @@ public class TabTendersPage{
     protected SelenideElement filterRegionRoot = $x("//div[@id='tl-filter-root']//div[text()='Регион']/following::div[@class='search-filters-filter-content']");
     /** Фильтр "Название тендера" в поле построения дерева фильтров для автопоиска "Проверка поиска по названию тендера и исключению из названия" */
     protected SelenideElement filterNameTender = $x("//div[@id='tl-filter-root']//div[text()='Название тендера']/following::div[@class='search-filters-filter-content']");
+    /** Фильтр "Категория" в блоке фильтров */
+    protected SelenideElement filterCategory = $x("//span[text()='Категория']");
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки */
     protected SelenideElement tableCellToCheck = $x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[4]");
     /** Ячейка таблицы для открытия документации тендера */
@@ -146,8 +150,13 @@ public class TabTendersPage{
     protected SelenideElement buttonHideFilter = $x("(//i[@class='material-icons-round icon-20px icon-grey icon-grey-hover md-filter_alt_off'])[2]");
 
 
+
     /** Чекбокс "Транслитерация" */
-    protected SelenideElement checkBoxTransliteration = $x("//div[@id='filter-editor-compact-1-transliteration']"); //
+    protected SelenideElement checkBoxTransliteration = $x("//div[@id='filter-editor-compact-1-transliteration']");
+    /** Чекбокс первого пункта фильтра */
+    protected SelenideElement checkboxFirstInFilter = $x("(//div[@id='filter-editor-2']//span[@class='dx-checkbox-icon'])[1]");
+    /** Кнопка раскрытия подкатегории */
+    protected SelenideElement buttonOpenTreeList = $x("(//div[@class='dx-treelist-icon-container'])[1]");
     /** Кнопка "Применить" */
     protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
     /** Кнопка "Искать" */
@@ -790,12 +799,24 @@ public class TabTendersPage{
         fieldPublicationDateTo.sendKeys(date);
         return new TabTendersPage();
     }
-
+    /**
+     * Проверка наличия ошибки при некорректном вводе даты в фильтр
+     */
     public boolean isVisibleErrorInvalidEnterDate(){
         return errorMessageInvalidDate.isDisplayed();
     }
 
+    /**
+     * Проверка текста ошибки при некорректном вводе даты в фильтр
+     */
     public boolean isTextErrorInvalidEnterDate(){
         return errorMessageInvalidDate.getText().equals("Неверная дата.");
+    }
+
+    /**
+     * Получить количество выбранных элементов фильтра "Категории"
+     */
+    public int getNumberSelectedCategories(){
+        return textCheckboxSelected.size();
     }
 }

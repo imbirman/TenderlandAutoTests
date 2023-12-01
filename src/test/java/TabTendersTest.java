@@ -516,4 +516,15 @@ public class TabTendersTest extends BaseTest{
                 .typeDateTo("31.12.2020")
                 .isTextErrorInvalidEnterDate());
     }
+
+    /**
+     * Проверка количества выбранных подкатегорий фильтра 'Категория' с закрытой главной категорией
+     */
+    @Test
+    public void checkNumberSelectedCategoriesWithCloseMainCategory(){
+        Assert.assertEquals((tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
+                .clickButton(tabTendersPage.checkboxFirstInFilter)
+                .clickButton(tabTendersPage.buttonOpenTreeList)
+                .getNumberSelectedCategories()), 11);
+    }
 }
