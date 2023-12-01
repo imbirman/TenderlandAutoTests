@@ -493,7 +493,7 @@ public class TabTendersTest extends BaseTest{
      * Проверка на отображение ошибки при начальной дате большей конечной
      */
     @Test
-    public void checkEmptyFieldPublicationDateTo(){
+    public void checkDisplayedErrorMessageWrongEnterDate(){
         Assert.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
                 .waitFor(2000)
                 .DragAndDropFilter(tabTendersPage.filterDatePublication)
@@ -501,5 +501,19 @@ public class TabTendersTest extends BaseTest{
                 .typeDateFrom("01.01.2021")
                 .typeDateTo("31.12.2020")
                 .isVisibleErrorInvalidEnterDate());
+    }
+
+    /**
+     * Проверка текста ошибки при начальной дате большей конечной
+     */
+    @Test
+    public void checkTextErrorMessageWrongEnterDate(){
+        Assert.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
+                .waitFor(2000)
+                .DragAndDropFilter(tabTendersPage.filterDatePublication)
+                .waitFor(1000)
+                .typeDateFrom("01.01.2021")
+                .typeDateTo("31.12.2020")
+                .isTextErrorInvalidEnterDate());
     }
 }

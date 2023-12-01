@@ -794,4 +794,8 @@ public class TabTendersPage{
     public boolean isVisibleErrorInvalidEnterDate(){
         return errorMessageInvalidDate.isDisplayed();
     }
+
+    public boolean isTextErrorInvalidEnterDate(){
+        return errorMessageInvalidDate.getText().equals("Неверная дата.");
+    }
 }
