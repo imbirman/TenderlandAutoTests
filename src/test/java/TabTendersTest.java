@@ -1,5 +1,4 @@
 import com.codeborne.selenide.Selenide;
-import net.thucydides.core.annotations.Title;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
