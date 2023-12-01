@@ -82,6 +82,8 @@ public class TabTendersPage{
     private final ElementsCollection cellTableRegionCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
     /** Список текстов выбранных чекбоксов внутри фильтра */
     private final ElementsCollection textCheckboxSelected = $$x("//div[@class='dx-widget dx-checkbox dx-state-hover dx-checkbox-checked']//following-sibling::div[@style='margin-left: 25px;']");
+    /** Ячейка таблицы результатов поиска для проверки заказчика */
+    private final ElementsCollection cellTableForCheckCustomer = $$x("//div[@class='dx-datagrid-content']/table[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[8]");
 
 
     protected SelenideElement mainWindow = $x("//div[@class='tl-content']"); /* Основное окно сайта */
@@ -122,6 +124,9 @@ public class TabTendersPage{
     protected SelenideElement buttonCheckSearchByDocumentation = $x("//div[text()='Проверка поиска по документации']");
     /** Кнопка автопоиска "Проверка поиска по извещению" */
     protected SelenideElement buttonCheckSearchByNotice = $x("//div[text()='Проверка поиска по извещению']");
+    /** Кнопка автопоиска "Проверка результата поиска на исключенный элемент фильтр Заказчик" */
+    protected SelenideElement excludedElementCustomer = $x("//div[text()='Проверка результата поиска на исключенный элемент фильтр Заказчик']");
+
     /** Фильтр "Дата публикации" в блоке фильтров */
     protected SelenideElement filterDatePublication = $x("//span[text()='публикации']/parent::div");
     /** Фильтр "Дата определения победителя" в блоке фильтров */
@@ -824,11 +829,9 @@ public class TabTendersPage{
      * Проверка на соответствие списка выбранных элементов фильтра "Категории"
      */
     public boolean isContainSelectedCategory(){
-//        List<String> textCheckbox = findAll(textCheckboxSelected).texts();
         List<String> array;
         array = textCheckboxSelected.texts();
         array.remove(0);
-//        textCheckbox.remove(0);
         List<String> checkArray = new ArrayList<>();
         checkArray.add("Банковские услуги");
         checkArray.add("Бухгалтерский учет, аудит");
@@ -842,5 +845,17 @@ public class TabTendersPage{
         checkArray.add("Юридические услуги");
 
         return checkArray.equals(array);
+    }
+
+    /**
+     * Проверка результата поиска на исключенный элемент из фильтра "Заказчик"
+     */
+    public boolean isNotIncludeExcludedElement(){
+        List<String> textCheck = cellTableForCheckCustomer.texts();
+        boolean check = true;
+        for(String type : textCheck) {
+            if(type.contains("КГКУ \"АЛТАЙАВТОДОР\"")){check = false; break;}
+        }
+        return check;
     }
 }

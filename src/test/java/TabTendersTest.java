@@ -538,4 +538,15 @@ public class TabTendersTest extends BaseTest{
                 .clickButton(tabTendersPage.buttonOpenTreeList)
                 .isContainSelectedCategory());
     }
+
+    /**
+     * Проверка исключения из фильтра Заказчик
+     */
+    @Test
+    public void checkExcludedFromFilterCustomer(){
+        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+                .scrollToElement(tabTendersPage.excludedElementCustomer)
+                .clickButton(tabTendersPage.excludedElementCustomer)
+                .isNotIncludeExcludedElement());
+    }
 }
