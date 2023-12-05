@@ -1,7 +1,12 @@
 import com.codeborne.selenide.Selenide;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import dev.failsafe.internal.util.Assert;
+import io.cucumber.java.Before;
+//import org.junit.Assert;
+//import org.junit.Before;
+//import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 
@@ -21,11 +26,11 @@ public class TabTendersTest extends BaseTest{
     /**
      * Ввод логина/пароля и вход на сайт
      */
-    @Before
+    @BeforeEach
     public void beforeMethod(){
         openURL(BASE_URL);
         tabTendersPage.clickLogInButton()
-                    .waitFor(200)
+                    .waitFor(500)
                     .typeLogin(BASE_LOGIN)
                     .waitFor(400)
                     .typePassword(BASE_PASSWORD)
@@ -37,9 +42,10 @@ public class TabTendersTest extends BaseTest{
      */
     @Test
     public void checkRegistryNumber(){
-        Assert.assertEquals(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+
+        Assertions.assertEquals(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion)
-                .waitFor(2000)
+                .waitFor(5000)
                 .getRegistryNumber(), "200741742119000018");
     }
 
@@ -49,7 +55,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkNumberResultSearchAfterAddingRegionValue(){
 
-        Assert.assertFalse(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertFalse(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .waitFor(500)
                 .clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion)
                 .clickButton(tabTendersPage.filterRegionRoot)
@@ -69,7 +75,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkNameTenderToIncludeKeyword(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckTenderNameAndNameDeletion)
                 .waitFor(5000)
                 .isContainNameTender());
@@ -81,7 +87,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkDeletionNameTenderToIncludeKeyword(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckTenderNameAndNameDeletion)
                 .waitFor(5000)
                 .scrollToElement(tabTendersPage.filterNameTender)
@@ -98,7 +104,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkTransliterationNameTender(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckTenderNameAndNameDeletion)
                 .waitFor(5000)
                 .scrollToElement(tabTendersPage.filterNameTender)
@@ -117,7 +123,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchPublicationDateOfTender() throws ParseException {
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckPublicationDate)
                 .waitFor(2000)
                 .checkDate("09.01.2021 00:00","09.01.2021 23:59", 1));
@@ -129,7 +135,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkPublicationDateOfTenderWithOnlyStartDate() throws ParseException {
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckPublicationDateWithOnlyStartDate)
                 .clickButton(tabTendersPage.buttonCheckPublicationDateWithOnlyStartDate)
                 .waitFor(3000)
@@ -142,7 +148,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkPublicationDateOfTenderWithOnlyEndDate() throws ParseException {
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckPublicationDateWithOnlyEndDate)
                 .clickButton(tabTendersPage.buttonCheckPublicationDateWithOnlyEndDate)
                 .waitFor(2000)
@@ -155,7 +161,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkDateStartSubmissionOfApplication() throws ParseException {
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckStartSubmissionOfApplicationDate)
                 .waitFor(2000)
                 .checkDate("04.01.2021 00:00","04.01.2021 23:59", 2));
@@ -167,7 +173,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkDateEndSubmissionOfApplication() throws ParseException {
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckEndSubmissionOfApplicationDate)
                 .waitFor(2000)
                 .checkDate("03.01.2021 00:00","03.01.2021 23:59", 2));
@@ -179,7 +185,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkDateValidateSearchByTenderDate() throws ParseException {
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonValidateSearchByTenderDate)
                 .waitFor(2000)
                 .checkDate("12.01.2021 00:00","12.01.2021 23:59", 3));
@@ -191,7 +197,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByCategoryName(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonValidateSearchByCategory)
                 .waitFor(2000)
                 .isContainCategoryName());
@@ -203,7 +209,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkPriceTender(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckSearchByPrice)
                 .waitFor(3000)
                 .scrollToElement(tabTendersPage.filterValidateSearchByTenderPrice)
@@ -223,7 +229,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByTenderType(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByTenderType)
                 .clickButton(tabTendersPage.buttonCheckSearchByTenderType)
                 .waitFor(3000)
@@ -236,7 +242,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByTenderStand(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByTenderStand)
                 .clickButton(tabTendersPage.buttonCheckSearchByTenderStand)
                 .waitFor(2000)
@@ -249,7 +255,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchOnlyGovernmentTenders(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
                 .waitFor(2000)
@@ -262,7 +268,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchOnlyGovernmentAndCommercialTenders(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.filterSearchByTenderModule)
@@ -278,7 +284,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchOnlyGovernmentAndCommercialAndCISTenders(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.filterSearchByTenderModule)
@@ -295,7 +301,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchAllModulesTender(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.buttonCheckSearchByTenderModule)
                 .clickButton(tabTendersPage.filterSearchByTenderModule)
@@ -313,7 +319,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchParticipant(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByParticipant)
                 .clickButton(tabTendersPage.buttonCheckSearchByParticipant)
                 .waitFor(2000)
@@ -326,7 +332,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByNewTenders(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -342,7 +348,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByApplicationPreparation(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -358,7 +364,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByDeterminationWinner(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -374,7 +380,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByConclusionContract(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -390,7 +396,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByExecutionContract(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -406,7 +412,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByArchiveTenders(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -422,7 +428,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByAllMineTenders(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.buttonCheckSearchByMineTenders)
                 .clickButton(tabTendersPage.filterSearchByMineTendersOrContractsStatus)
@@ -438,7 +444,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByTextDocumentation(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByDocumentation)
                 .clickButton(tabTendersPage.buttonCheckSearchByDocumentation)
                 .waitFor(3000)
@@ -454,7 +460,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchByTextNotice(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.buttonCheckSearchByNotice)
                 .clickButton(tabTendersPage.buttonCheckSearchByNotice)
                 .waitFor(3000)
@@ -470,7 +476,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchInListTenders(){
 
-        Assert.assertTrue(tabTendersPage.typeSearchFilters("Название тендера")
+        Assertions.assertTrue(tabTendersPage.typeSearchFilters("Название тендера")
                 .isContainFiltersFromSearchField());
     }
 
@@ -480,7 +486,7 @@ public class TabTendersTest extends BaseTest{
     @Test
     public void checkSearchWithHideFilter(){
 
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion)
                 .clickButton(tabTendersPage.buttonHideFilter)
                 .clickButton(tabTendersPage.buttonSearch)
@@ -493,7 +499,7 @@ public class TabTendersTest extends BaseTest{
      */
     @Test
     public void checkDisplayedErrorMessageWrongEnterDate(){
-        Assert.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
+        Assertions.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
                 .waitFor(2000)
                 .DragAndDropFilter(tabTendersPage.filterDatePublication)
                 .waitFor(1000)
@@ -507,7 +513,7 @@ public class TabTendersTest extends BaseTest{
      */
     @Test
     public void checkTextErrorMessageWrongEnterDate(){
-        Assert.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
+        Assertions.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
                 .waitFor(2000)
                 .DragAndDropFilter(tabTendersPage.filterDatePublication)
                 .waitFor(1000)
@@ -521,7 +527,7 @@ public class TabTendersTest extends BaseTest{
      */
     @Test
     public void checkNumberSelectedCategoriesWithCloseMainCategory(){
-        Assert.assertEquals((tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
+        Assertions.assertEquals((tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
                 .clickButton(tabTendersPage.checkboxFirstInFilter)
                 .clickButton(tabTendersPage.buttonOpenTreeList)
                 .getNumberSelectedCategories()), 11);
@@ -532,7 +538,7 @@ public class TabTendersTest extends BaseTest{
      */
     @Test
     public void checkContainSelectedCategory(){
-        Assert.assertTrue(tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
+        Assertions.assertTrue(tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
                 .clickButton(tabTendersPage.checkboxFirstInFilter)
                 .clickButton(tabTendersPage.buttonOpenTreeList)
                 .isContainSelectedCategory());
@@ -543,7 +549,7 @@ public class TabTendersTest extends BaseTest{
      */
     @Test
     public void checkExcludedFromFilterCustomer(){
-        Assert.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
+        Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.excludedElementCustomer)
                 .clickButton(tabTendersPage.excludedElementCustomer)
                 .isNotIncludeExcludedElement());

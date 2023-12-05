@@ -7,8 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import javax.annotation.Nonnull;
 
-import static com.codeborne.selenide.DragAndDropOptions.usingActions;
-import static com.codeborne.selenide.DragAndDropOptions.usingJavaScript;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.$$x;
 
@@ -25,7 +23,7 @@ import static com.codeborne.selenide.Selenide.*;
  */
 public class TabTendersPage{
 
-    private final SelenideElement logInButton = $x("//div[@class='landind-header-block']//span[text()='Войти']"); /** Кнопка входа в систему */
+    private final SelenideElement logInButton = $x("//div[@id='login-button']"); /** Кнопка входа в систему */
     private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
@@ -91,7 +89,7 @@ public class TabTendersPage{
 
 
     /** Кнопка автопоиска "Проверка поиска по реестровому номеру и региону" */
-    protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
+    protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("(//div[@class='search-filters-tagbox-tag-content autosearch dx-draggable']/div)[1]");////div[text()='Проверка поиска по реестровому номеру и региону']
     /** Кнопка автопоиска "Проверка по названию тендера и исключению из названия" */
     protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
     /** Кнопка автопоиска "Проверка поиска по дате публикации" */

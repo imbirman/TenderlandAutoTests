@@ -1,9 +1,13 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+//import org.junit.After;
+//import org.junit.Before;
 
 abstract public class BaseTest {
 
@@ -14,15 +18,14 @@ abstract public class BaseTest {
         Configuration.browserSize = "1900x1080";
         Configuration.headless = false;
         System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
-//        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
-    @Before
+    @BeforeEach
     public void init(){
         setUp();
     }
 
-    @After
+    @AfterEach
     public void tearDown(){
         Selenide.closeWebDriver();
     }
