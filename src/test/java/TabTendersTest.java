@@ -4,6 +4,7 @@ import io.cucumber.java.Before;
 //import org.junit.Assert;
 //import org.junit.Before;
 //import org.junit.Test;
+import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,7 @@ public class TabTendersTest extends BaseTest{
      * Проверка результатов поиска для автопоиска 'Проверка поиска по реестровому номеру и региону'
      */
     @Test
+    @Description("Проверка результатов поиска для автопоиска 'Проверка поиска по реестровому номеру и региону'")
     public void checkRegistryNumber(){
 
         Assertions.assertEquals(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)

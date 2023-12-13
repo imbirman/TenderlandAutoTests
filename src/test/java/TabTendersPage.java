@@ -1,6 +1,7 @@
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -179,123 +180,93 @@ public class TabTendersPage{
     private WebDriver driver;
 
 
-    /**
-     * Переключиться на заданную вкладку
-     */
+    @Step("Переключиться на вкладку под номером {numberTab}")
     public TabTendersPage switchToTab(int numberTab){
         switchTo().window(numberTab);
         return new TabTendersPage();
     }
-    /**
-     * Перетащить фильтр в поле построения
-     */
+
+    @Step("Перетаскиваем фильтр в поле построения")
     public TabTendersPage DragAndDropFilter(@Nonnull SelenideElement element){
         actions().clickAndHold(element).moveToElement(filterRoot).release().build().perform();
         return new TabTendersPage();
     }
-    /**
-     * Ожидание
-     */
+
+    @Step("Ожидание {number}")
     public TabTendersPage waitFor(long number){
         sleep(number);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести логин для входа
-     */
+    @Step("Ввести логин для авторизации")
     public TabTendersPage typeLogin(String login){loginField.sendKeys(login); return new TabTendersPage();}
 
-    /**
-     * Ввести пароль для входа
-     */
+    @Step("Ввести пароль для авторизации")
     public TabTendersPage typePassword(String password){
         passwordField.sendKeys(password);
         return new TabTendersPage();
     }
 
-    /**
-     * Кликнуть на кнопку "Войти"
-     */
+    @Step("Нажать кнопку для открытия окна авторизации")
     public TabTendersPage clickLogInButton(){
         logInButton.click();
         return new TabTendersPage();
     }
 
-    /**
-     * Кликнуть на кнопку "Войти в систему"
-     */
+    @Step("Кликнуть на кнопку \"Войти в систему\"")
     public void clickConfirmLogInButton(){
         confirmLogInButton.click();
     }
 
-    /**
-     * Кликнуть по кнопке / выбрать radiobutton или checkbox
-     */
+    @Step("Нажать кнопку{button}")
     public TabTendersPage clickButton(SelenideElement button){
         button.click();
         return new TabTendersPage();
     }
 
-    /**
-     * Скролл до элемента
-     */
+    @Step("Прокрутить до элемента")
     public TabTendersPage scrollToElement(SelenideElement element){
         element.scrollIntoView(false);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести значение в поле поиска внутри фильтра
-     */
+    @Step("Ввести значение в поле поиска внутри фильтра")
     public TabTendersPage typeSearch(String search){
         fieldSearchInFilterEditor.sendKeys(search);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести значение, исключаемое из поиска
-     */
+    @Step("Ввести значение, исключаемое из поиска")
     public TabTendersPage typeDeletion(String name){
         fieldNameTenderDeletion.sendKeys(name);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести ключевое слово для поиска по названию тендера
-     */
+    @Step("Ввести ключевое слово для поиска по названию тендера")
     public TabTendersPage typeNameTender(String name){
         fieldNameTender.sendKeys(name);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести цену "от"
-     */
+    @Step("Ввести цену \"от\"")
     public TabTendersPage typePriceFrom(String price){
         fieldPriceFrom.sendKeys(price);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести цену "до"
-     */
+    @Step("Ввести цену \"до\"")
     public TabTendersPage typePriceTo(String price){
         fieldPriceTo.sendKeys(price);
         return new TabTendersPage();
     }
 
-    /**
-     * Ввести значение в поле поиска
-     */
+    @Step("Ввести значение в поле поиска")
     public TabTendersPage typeSearchFilters(String search){
         fieldSearchFilters.sendKeys(search);
         return new TabTendersPage();
     } //
 
-    /**
-     * Очистить поле
-     */
+    @Step("Очистить поле")
     public TabTendersPage clearField(SelenideElement field){field.clear(); return new TabTendersPage();} //
 
     /**
@@ -324,6 +295,13 @@ public class TabTendersPage{
      */
     public SelenideElement getCheckboxInFilter(int numberCheckbox){
         return checkBoxFilterCollection.get(numberCheckbox);
+    }
+
+    /**
+     * Получить количество выбранных элементов фильтра "Категории"
+     */
+    public int getNumberSelectedCategories(){
+        return textCheckboxSelected.size();
     }
 
     /**
@@ -814,13 +792,6 @@ public class TabTendersPage{
      */
     public boolean isTextErrorInvalidEnterDate(){
         return errorMessageInvalidDate.getText().equals("Неверная дата.");
-    }
-
-    /**
-     * Получить количество выбранных элементов фильтра "Категории"
-     */
-    public int getNumberSelectedCategories(){
-        return textCheckboxSelected.size();
     }
 
     /**
