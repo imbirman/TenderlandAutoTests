@@ -47,7 +47,7 @@ public class TabTendersTest extends BaseTest{
 
         Assertions.assertEquals(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonAutoSearchRegistryNumberAndRegion)
-                .waitFor(5000)
+                .waitFor(4000)
                 .getRegistryNumber(), "200741742119000018");
     }
 
