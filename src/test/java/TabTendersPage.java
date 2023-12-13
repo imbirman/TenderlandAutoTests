@@ -264,56 +264,56 @@ public class TabTendersPage{
     public TabTendersPage typeSearchFilters(String search){
         fieldSearchFilters.sendKeys(search);
         return new TabTendersPage();
-    } //
+    }
+
+    @Step("Ввести дату публикации \"от\"")
+    public TabTendersPage typeDateFrom(String date){
+        fieldPublicationDateFrom.click();
+        fieldPublicationDateFrom.sendKeys(date);
+        return new TabTendersPage();
+    }
+
+    @Step("Ввести дату публикации \"до\"")
+    public TabTendersPage typeDateTo(String date){
+        fieldPublicationDateTo.click();
+        fieldPublicationDateTo.sendKeys(date);
+        return new TabTendersPage();
+    }
 
     @Step("Очистить поле")
     public TabTendersPage clearField(SelenideElement field){field.clear(); return new TabTendersPage();} //
 
-    /**
-     * Получение количества строк в таблице результата поиска
-     */
+    @Step("Получение количества строк в таблице результата поиска")
     public int getNumberOfRowResultSearch(){
         return rowResultSearchCollection.size();
     }
 
-    /**
-     * Получение реестрового номера
-     */
+    @Step("Получение реестрового номера")
     public String getRegistryNumber(){
         return tableCellToCheck.getText();
     }
 
-    /**
-     * Получить чекбокс по его порядковому номеру
-     */
+    @Step("Получить чекбокс по его порядковому номеру")
     public SelenideElement getCheckboxInFilterRegion(int numberCheckbox){
         return checkboxCollection.get(numberCheckbox);
     }
 
-    /**
-     * Получить чекбокс по его порядковому номеру в фильтре "Мои тендеры" у тендера или "Статус" у контракта
-     */
+    @Step("Получить чекбокс по его порядковому номеру в фильтре \"Мои тендеры\" у тендера или \"Статус\" у контракта")
     public SelenideElement getCheckboxInFilter(int numberCheckbox){
         return checkBoxFilterCollection.get(numberCheckbox);
     }
 
-    /**
-     * Получить количество выбранных элементов фильтра "Категории"
-     */
+    @Step("Получить количество выбранных элементов фильтра \"Категории\"")
     public int getNumberSelectedCategories(){
         return textCheckboxSelected.size();
     }
 
-    /**
-     * Проверка, соответствует ли количество строк в таблице результата поиска заданному
-     */
+    @Step("Проверка, соответствует ли количество строк в таблице результата поиска заданному")
     public boolean isEqualNumberOfRowResultSearch(int number){
         return getNumberOfRowResultSearch()==number;
     }
 
-    /**
-     * Проверка включения в название тендеров ключевого слова
-     */
+    @Step("Проверка включения в название тендеров ключевого слова")
     public boolean isContainNameTender(){
         List<String> array;
         array = secondTableCellsCollection.texts();
@@ -328,9 +328,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     *  Проверка исключения из поиска ключевого слова
-     */
+    @Step("Проверка исключения из поиска ключевого слова")
     public boolean isContainDeletionNameTender(){
         List<String> array;
         array = secondTableCellsCollection.texts();
@@ -346,9 +344,9 @@ public class TabTendersPage{
     }
 
     /**
-     * Проверка, что дата находится в заданном диапазоне
      * @param caseTypeDate 1 - дата публикации, 2 - дата начала подачи заявок, 3 - дата подачи тендера
      */
+    @Step("Проверка, что дата находится в заданном диапазоне")
     public boolean checkDate(String startDate, String endDate, int caseTypeDate) throws ParseException {
         boolean check = true;
         List<String> array;
@@ -379,9 +377,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка, что дата публикации находится после заданной даты
-     */
+    @Step("Проверка, что дата публикации находится после заданной даты")
     public boolean checkDateWithOnlyStartDate(String startDate) throws ParseException {
         boolean check = true;
         List<String> array;
@@ -403,9 +399,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка, что дата публикации находится до заданной даты
-     */
+    @Step("Проверка, что дата публикации находится до заданной даты")
     public boolean checkDateWithOnlyEndDate(String endDate) throws ParseException {
         boolean check = true;
         List<String> array;
@@ -426,9 +420,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по категории
-     */
+    @Step("Проверка поиска по категории")
     public boolean isContainCategoryName(){
         boolean check = true;
         List<String> array;
@@ -444,9 +436,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка цены
-     */
+    @Step("Проверка цены")
     public boolean checkPrice(float priceFrom, float priceTo){
         boolean check = true;
         List<String> array;
@@ -465,9 +455,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по типу тендера
-     */
+    @Step("Проверка поиска по типу тендера")
     public boolean isContainTenderType(){
         boolean check = true;
         List<String> array;
@@ -482,9 +470,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по площадке
-     */
+    @Step("Проверка поиска по площадке")
     public boolean isContainTenderStand(){
         boolean check = true;
         List<String> array;
@@ -500,9 +486,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по модулю "Государственные тендеры"
-     */
+    @Step("Проверка поиска по модулю \"Государственные тендеры\"")
     public boolean isContainOnlyGovernmentTenders(){
         boolean check = true;
         List<String> array;
@@ -517,9 +501,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по модулю "Государственные тендеры" и "Коммерческие тендеры"
-     */
+    @Step("Проверка поиска по модулю \"Государственные тендеры\" и \"Коммерческие тендеры\"")
     public boolean isContainOnlyGovernmentAndCommercialTenders(){
         boolean check = true;
         List<String> array;
@@ -534,9 +516,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по модулю "Государственные тендеры" и "Коммерческие тендеры" и "СНГ"
-     */
+    @Step("Проверка поиска по модулю \"Государственные тендеры\" и \"Коммерческие тендеры\" и \"СНГ\"")
     public boolean isContainOnlyGovernmentAndCommercialAndCISTenders(){
         boolean check = true;
         List<String> array;
@@ -551,9 +531,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по всем модулям
-     */
+    @Step("Проверка поиска по всем модулям")
     public boolean isContainAllModulesTenders(){
         boolean check = true;
         List<String> array;
@@ -569,9 +547,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по участнику
-     */
+    @Step("Проверка поиска по участнику")
     public boolean isContainParticipant(){
         boolean check = true;
         List<String> array;
@@ -586,9 +562,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по новым тендерам фильтра "Мои тендеры"
-     */
+    @Step("Проверка поиска по новым тендерам фильтра \"Мои тендеры\"")
     public boolean isContainNewTenders(){
         boolean check = false;
         List<String> array;
@@ -603,9 +577,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по подготовке заявки фильтра "Мои тендеры"
-     */
+    @Step("Проверка поиска по подготовке заявки фильтра \"Мои тендеры\"")
     public boolean isContainApplicationPreparation(){
         boolean check = false;
         List<String> array;
@@ -620,9 +592,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по определению победителя фильтра "Мои тендеры"
-     */
+    @Step("Проверка поиска по определению победителя фильтра \"Мои тендеры\"")
     public boolean isContainDeterminationOfWinner(){
         boolean check = false;
         List<String> array;
@@ -637,9 +607,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по заключению контракта фильтра "Мои тендеры"
-     */
+    @Step("Проверка поиска по заключению контракта фильтра \"Мои тендеры\"")
     public boolean isContainConclusionOfContract(){
         boolean check = false;
         List<String> array;
@@ -654,9 +622,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по исполнению контракта фильтра "Мои тендеры"
-     */
+    @Step("Проверка поиска по исполнению контракта фильтра \"Мои тендеры\"")
     public boolean isContainExecutionOfContract(){
         boolean check = false;
         List<String> array;
@@ -671,9 +637,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по архиву фильтра "Мои тендеры"
-     */
+    @Step("Проверка поиска по архиву фильтра \"Мои тендеры\"")
     public boolean isContainArchiveTenders(){
         boolean check = false;
         List<String> array;
@@ -688,9 +652,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по всем тендерам из "Мои тендеры"
-     */
+    @Step("Проверка поиска по всем тендерам из \"Мои тендеры\"")
     public boolean isContainAllMineTenders(){
         boolean check = true;
         List<String> array;
@@ -707,17 +669,13 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска по документации
-     */
+    @Step("Проверка поиска по документации")
     public boolean isContainSearchDocumentation(){
         String textDocumentation = fieldDocumentation.getText();
         return textDocumentation.contains("мусор") || textDocumentation.contains("Мусор") || textDocumentation.contains("МУСОР");
     }
 
-    /**
-     * Проверка поиска по извещению
-     */
+    @Step("Проверка поиска по извещению")
     public boolean isContainSearchWordIntoNoticeDocumentation(){
         boolean check = false;
         List<String> array;
@@ -731,9 +689,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска в блоке фильтров
-     */
+    @Step("Проверка поиска в блоке фильтров")
     public boolean isContainFiltersFromSearchField(){
         boolean check = false;
         List<String> array;
@@ -747,9 +703,7 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Проверка поиска со скрытым фильтром
-     */
+    @Step("Проверка поиска со скрытым фильтром")
     public boolean isContainWithoutHideFilter(){
         boolean check = false;
         List<String> array;
@@ -763,40 +717,17 @@ public class TabTendersPage{
         return check;
     }
 
-    /**
-     * Ввести дату публикации "от"
-     */
-    public TabTendersPage typeDateFrom(String date){
-        fieldPublicationDateFrom.click();
-        fieldPublicationDateFrom.sendKeys(date);
-        return new TabTendersPage();
-    }
-
-    /**
-     * Ввести дату публикации "до"
-     */
-    public TabTendersPage typeDateTo(String date){
-        fieldPublicationDateTo.click();
-        fieldPublicationDateTo.sendKeys(date);
-        return new TabTendersPage();
-    }
-    /**
-     * Проверка наличия ошибки при некорректном вводе даты в фильтр
-     */
+    @Step("Проверка наличия ошибки при некорректном вводе даты в фильтр")
     public boolean isVisibleErrorInvalidEnterDate(){
         return errorMessageInvalidDate.isDisplayed();
     }
 
-    /**
-     * Проверка текста ошибки при некорректном вводе даты в фильтр
-     */
+    @Step("Проверка текста ошибки при некорректном вводе даты в фильтр")
     public boolean isTextErrorInvalidEnterDate(){
         return errorMessageInvalidDate.getText().equals("Неверная дата.");
     }
 
-    /**
-     * Проверка на соответствие списка выбранных элементов фильтра "Категории"
-     */
+    @Step("Проверка на соответствие списка выбранных элементов фильтра \"Категории\"")
     public boolean isContainSelectedCategory(){
         List<String> array;
         array = textCheckboxSelected.texts();
@@ -816,9 +747,7 @@ public class TabTendersPage{
         return checkArray.equals(array);
     }
 
-    /**
-     * Проверка результата поиска на исключенный элемент из фильтра "Заказчик"
-     */
+    @Step("Проверка результата поиска на исключенный элемент из фильтра \"Заказчик\"")
     public boolean isNotIncludeExcludedElement(){
         List<String> textCheck = cellTableForCheckCustomer.texts();
         boolean check = true;
