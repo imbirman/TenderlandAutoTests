@@ -76,4 +76,30 @@ public class TabContractsTest extends BaseTest {
                 .waitFor(3000)
                 .isContainBeingExecuted());
     }
+
+    @Test
+    @Description("Проверка поиска по статусу контракта 'Исполнение прекращено'")
+    public void checkSearchByExecutionTerminated(){
+
+        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByStatusContracts)
+                .clickButton(page.filterSearchContractsStatus)
+                .clickButton(page.getCheckboxInFilter(1))
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .isContainExecutionTerminated());
+    }
+
+    @Test
+    @Description("Проверка поиска по статусу контракта 'Исполнение завершено'")
+    public void checkSearchByExecutionCompleted(){
+
+        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByStatusContracts)
+                .clickButton(page.filterSearchContractsStatus)
+                .clickButton(page.getCheckboxInFilter(2))
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .isContainExecutionCompleted());
+    }
 }

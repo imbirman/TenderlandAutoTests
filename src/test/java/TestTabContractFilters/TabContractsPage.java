@@ -177,4 +177,34 @@ public class TabContractsPage {
         return check;
     }
 
+    @Step("Проверка поиска по статусу контракта \"Исполнение прекращено\"")
+    public boolean isContainExecutionTerminated(){
+        List<String> array;
+        array = tableCellStatusContractsCollection.texts();
+        array.remove(array.size()-1);
+        boolean check = true;
+        for(String type : array){
+            if(!type.contains("Исполнение прекращено")){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка поиска по статусу контракта \"Исполнение завершено\"")
+    public boolean isContainExecutionCompleted(){
+        List<String> array;
+        array = tableCellStatusContractsCollection.texts();
+        array.remove(array.size()-1);
+        boolean check = true;
+        for(String type : array){
+            if(!type.contains("Исполнение завершено")){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
 }
