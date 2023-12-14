@@ -2,6 +2,8 @@ package TestTabContractFilters;
 
 import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Description;
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,17 +14,14 @@ public class TabContractsTest extends BaseTest {
     private final static String BASE_LOGIN = "AdminTestitContract";
     private final static String BASE_PASSWORD = "Hyqpmaz0";
     TabContractsPage page = new TabContractsPage();
-    /**
-     * Открытие сайта для входа
-     */
+
+    @Description("Открытие сайта для входа")
     private void openURL(String url){
         Selenide.open(url);
     }
 
-    /**
-     * Ввод логина/пароля и вход на сайт
-     */
     @BeforeEach
+    @Description("Ввод логина/пароля и вход на сайт")
     public void beforeMethod(){
         openURL(BASE_URL);
         page.clickLogInButton()
@@ -33,10 +32,8 @@ public class TabContractsTest extends BaseTest {
                 .clickConfirmLogInButton();
     }
 
-    /**
-     * Проверка результата поиска контракта по продуктам
-     */
     @Test
+    @Description("Проверка результата поиска контракта по продуктам")
     public void checkSearchContractByProduct(){
 
         Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
@@ -50,10 +47,8 @@ public class TabContractsTest extends BaseTest {
                 .isContainCardContractSearchWord());
     }
 
-    /**
-     * Проверка поиска по цене контракта
-     */
     @Test
+    @Description("Проверка поиска по цене контракта")
     public void checkPriceContract(){
 
         Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
@@ -67,5 +62,18 @@ public class TabContractsTest extends BaseTest {
                 .clickButton(page.buttonSearch)
                 .waitFor(4500)
                 .checkPrice(10000,50000));
+    }
+
+    @Test
+    @Description("Проверка поиска по статусу контракта 'Исполнение'")
+    public void checkSearchByBeingExecuted(){
+
+        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByStatusContracts)
+                .clickButton(page.filterSearchContractsStatus)
+                .clickButton(page.getCheckboxInFilter(0))
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .isContainBeingExecuted());
     }
 }

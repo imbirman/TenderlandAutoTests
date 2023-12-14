@@ -22,15 +22,22 @@ public class TabContractsPage {
     /** Поле дерева фильтров */
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
 
-    /** Название продукта в списке продуктов карточки контракта */
+    /** Список названий продукта в списке продуктов карточки контракта */
     private final ElementsCollection listProductInCardContractCollection = $$x("//div[@class='dx-datagrid-rowsview dx-datagrid-nowrap dx-scrollable dx-visibility-change-handler dx-scrollable-both dx-scrollable-simulated']//table//tr/following::td[1]"); //
+    /** Список цен в результатах поиска*/
     private final ElementsCollection tableCellPriceCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
+    /** Список чекбоксов в фильтре "Статус" */
+    private final ElementsCollection checkboxStatusContractsCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
+    /** Список статусов контракта в результате поиска */
+    private final ElementsCollection tableCellStatusContractsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
 
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
     /** Кнопка автопоиска "Проверка поиска по продуктам" */
     protected SelenideElement buttonCheckSearchByProduct = $x("//div[text()='Проверка поиска по продуктам']");
     /** Кнопка автопоиска "Проверка поиска по цене" */
     protected SelenideElement buttonCheckSearchByPrice = $x("//div[text()='Проверка поиска по цене']");
+    /** Кнопка автопоиска "Проверка поиска по статусу" */
+    protected SelenideElement buttonCheckSearchByStatusContracts = $x("//div[text()='Проверка поиска по статусу']");
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
     protected SelenideElement tableCellToCheckForSwitchToNextTab = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[1]");
@@ -46,6 +53,9 @@ public class TabContractsPage {
     protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-4-from']//input[@role='spinbutton']");
     /** Поле для ввода цены "до" */
     protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
+    /** Фильтр "Статус" в автопоиске "Проверка поиска по статусу" */
+    protected SelenideElement filterSearchContractsStatus = $x("//div[@class='search-filters-tagbox-tag-content']");
+
 
     @Step("Переключиться на вкладку под номером {numberTab}")
     public TabContractsPage switchToTab(int numberTab){
@@ -111,6 +121,12 @@ public class TabContractsPage {
         button.click();
         return new TabContractsPage();
     }
+    @Step("Получить чекбокс по его порядковому номеру в фильтре \"Мои тендеры\" у тендера или \"Статус\" у контракта")
+    public SelenideElement getCheckboxInFilter(int numberCheckbox){
+        List<SelenideElement> array;
+        array = checkboxStatusContractsCollection;
+        return array.get(numberCheckbox);
+    }
 
     @Step("Проверка включает ли карточка контракта искомый продукт")
     public boolean isContainCardContractSearchWord(){
@@ -145,4 +161,20 @@ public class TabContractsPage {
         }
         return check;
     }
+
+    @Step("Проверка поиска по статусу контракта \"Исполнение\"")
+    public boolean isContainBeingExecuted(){
+        List<String> array;
+        array = tableCellStatusContractsCollection.texts();
+        array.remove(array.size()-1);
+        boolean check = true;
+        for(String type : array){
+            if(!type.contains("Исполнение")){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
 }

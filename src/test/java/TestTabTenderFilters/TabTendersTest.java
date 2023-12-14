@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 //import org.junit.Assert;
 //import org.junit.Before;
 //import org.junit.Test;
+import io.cucumber.java.hu.De;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,10 +53,8 @@ public class TabTendersTest extends BaseTest {
                 .getRegistryNumber(), "200741742119000018");
     }
 
-    /**
-     * Проверка увеличения количества результатов поиска при добавлении значения региона
-     */
     @Test
+    @Description("Проверка увеличения количества результатов поиска при добавлении значения региона")
     public void checkNumberResultSearchAfterAddingRegionValue(){
 
         Assertions.assertFalse(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -72,10 +71,8 @@ public class TabTendersTest extends BaseTest {
                 .isEqualNumberOfRowResultSearch(1));
     }
 
-    /**
-     * Проверка названия тендера на включение в него ключевого слова
-     */
     @Test
+    @Description("Проверка названия тендера на включение в него ключевого слова")
     public void checkNameTenderToIncludeKeyword(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -84,10 +81,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainNameTender());
     }
 
-    /**
-     * Проверка исключения из названия тендера ключевого слова
-     */
     @Test
+    @Description("Проверка исключения из названия тендера ключевого слова")
     public void checkDeletionNameTenderToIncludeKeyword(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -101,10 +96,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainDeletionNameTender());
     }
 
-    /**
-     * Проверка транслитерации при поиске по названию тендера
-     */
     @Test
+    @Description("Проверка транслитерации при поиске по названию тендера")
     public void checkTransliterationNameTender(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -120,10 +113,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainNameTender());
     }
 
-    /**
-     * Проверка поиска по дате публикации тендера
-     */
     @Test
+    @Description("Проверка поиска по дате публикации тендера")
     public void checkSearchPublicationDateOfTender() throws ParseException {
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -132,10 +123,8 @@ public class TabTendersTest extends BaseTest {
                 .checkDate("09.01.2021 00:00","09.01.2021 23:59", 1));
     }
 
-    /**
-     * Проверка даты публикации тендера только с начальной датой
-     */
     @Test
+    @Description("Проверка даты публикации тендера только с начальной датой")
     public void checkPublicationDateOfTenderWithOnlyStartDate() throws ParseException {
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -145,10 +134,8 @@ public class TabTendersTest extends BaseTest {
                 .checkDateWithOnlyStartDate("09.01.2021 00:00"));
     }
 
-    /**
-     * Проверка даты публикации тендера только с конечной датой
-     */
     @Test
+    @Description("Проверка даты публикации тендера только с конечной датой")
     public void checkPublicationDateOfTenderWithOnlyEndDate() throws ParseException {
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -158,10 +145,8 @@ public class TabTendersTest extends BaseTest {
                 .checkDateWithOnlyEndDate("10.01.2021 00:00"));
     }
 
-    /**
-     * Проверка поиска по дате начала подачи заявок
-     */
     @Test
+    @Description("Проверка поиска по дате начала подачи заявок")
     public void checkDateStartSubmissionOfApplication() throws ParseException {
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -170,10 +155,8 @@ public class TabTendersTest extends BaseTest {
                 .checkDate("04.01.2021 00:00","04.01.2021 23:59", 2));
     }
 
-    /**
-     * Проверка поиска по дате окончания подачи заявок
-     */
     @Test
+    @Description("Проверка поиска по дате окончания подачи заявок")
     public void checkDateEndSubmissionOfApplication() throws ParseException {
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -182,10 +165,8 @@ public class TabTendersTest extends BaseTest {
                 .checkDate("03.01.2021 00:00","03.01.2021 23:59", 2));
     }
 
-    /**
-     * Проверка поиска по дате проведения тендера
-     */
     @Test
+    @Description("Проверка поиска по дате проведения тендера")
     public void checkDateValidateSearchByTenderDate() throws ParseException {
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -194,10 +175,8 @@ public class TabTendersTest extends BaseTest {
                 .checkDate("12.01.2021 00:00","12.01.2021 23:59", 3));
     }
 
-    /**
-     * Проверка поиска по категории
-     */
     @Test
+    @Description("Проверка поиска по категории")
     public void checkSearchByCategoryName(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -206,10 +185,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainCategoryName());
     }
 
-    /**
-     * Проверка цены тендера
-     */
     @Test
+    @Description("Проверка цены тендера")
     public void checkPriceTender(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -226,10 +203,8 @@ public class TabTendersTest extends BaseTest {
                 .checkPrice(10000,100000));
     }
 
-    /**
-     * Проверка поиска по типу тендера
-     */
     @Test
+    @Description("Проверка поиска по типу тендера")
     public void checkSearchByTenderType(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -239,10 +214,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainTenderType());
     }
 
-    /**
-     * Проверка поиска по площадке
-     */
     @Test
+    @Description("Проверка поиска по площадке")
     public void checkSearchByTenderStand(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -252,10 +225,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainTenderStand());
     }
 
-    /**
-     * Проверка поиска по модулю 'Государственные тендеры'
-     */
     @Test
+    @Description("роверка поиска по модулю 'Государственные тендеры'")
     public void checkSearchOnlyGovernmentTenders(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -265,10 +236,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainOnlyGovernmentTenders());
     }
 
-    /**
-     * Проверка поиска по модулям 'Государственные тендеры' и 'Коммерческие тендеры'
-     */
     @Test
+    @Description("Проверка поиска по модулям 'Государственные тендеры' и 'Коммерческие тендеры'")
     public void checkSearchOnlyGovernmentAndCommercialTenders(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -281,10 +250,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainOnlyGovernmentAndCommercialTenders());
     }
 
-    /**
-     * Проверка поиска по модулям 'Государственные тендеры' и 'Коммерческие тендеры' и 'СНГ'
-     */
     @Test
+    @Description("Проверка поиска по модулям 'Государственные тендеры' и 'Коммерческие тендеры' и 'СНГ'")
     public void checkSearchOnlyGovernmentAndCommercialAndCISTenders(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -298,10 +265,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainOnlyGovernmentAndCommercialAndCISTenders());
     }
 
-    /**
-     * Проверка поиска по всем модулям
-     */
     @Test
+    @Description("Проверка поиска по всем модулям")
     public void checkSearchAllModulesTender(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -316,10 +281,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainAllModulesTenders());
     }
 
-    /**
-     * Проверка поиска по участнику
-     */
     @Test
+    @Description("Проверка поиска по участнику")
     public void checkSearchParticipant(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -329,10 +292,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainParticipant());
     }
 
-    /**
-     * Проверка поиска по моим тендерам - новые тендеры
-     */
     @Test
+    @Description("Проверка поиска по моим тендерам - новые тендеры")
     public void checkSearchByNewTenders(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -345,10 +306,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainNewTenders());
     }
 
-    /**
-     * Проверка поиска по моим тендерам - подготовка заявки
-     */
     @Test
+    @Description("Проверка поиска по моим тендерам - подготовка заявки")
     public void checkSearchByApplicationPreparation(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -361,10 +320,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainApplicationPreparation());
     }
 
-    /**
-     * Проверка поиска по моим тендерам - определение победителя
-     */
     @Test
+    @Description("Проверка поиска по моим тендерам - определение победителя")
     public void checkSearchByDeterminationWinner(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -377,10 +334,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainDeterminationOfWinner());
     }
 
-    /**
-     * Проверка поиска по моим тендерам - заключение контракта
-     */
     @Test
+    @Description("Проверка поиска по моим тендерам - заключение контракта")
     public void checkSearchByConclusionContract(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -393,10 +348,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainConclusionOfContract());
     }
 
-    /**
-     * Проверка поиска по моим тендерам - исполнение контракта
-     */
     @Test
+    @Description("Проверка поиска по моим тендерам - исполнение контракта")
     public void checkSearchByExecutionContract(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -409,10 +362,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainExecutionOfContract());
     }
 
-    /**
-     * Проверка поиска по моим тендерам - архив
-     */
     @Test
+    @Description("Проверка поиска по моим тендерам - архив")
     public void checkSearchByArchiveTenders(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -425,10 +376,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainArchiveTenders());
     }
 
-    /**
-     * Проверка поиска по всем тендерам фильтра 'Мои тендеры'
-     */
     @Test
+    @Description("Проверка поиска по всем тендерам фильтра 'Мои тендеры'")
     public void checkSearchByAllMineTenders(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -441,10 +390,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainAllMineTenders());
     }
 
-    /**
-     * Проверка поиска по документации
-     */
     @Test
+    @Description("Проверка поиска по документации")
     public void checkSearchByTextDocumentation(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -457,10 +404,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainSearchDocumentation());
     }
 
-    /**
-     * Проверка поиска по извещению
-     */
     @Test
+    @Description("Проверка поиска по извещению")
     public void checkSearchByTextNotice(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -473,20 +418,16 @@ public class TabTendersTest extends BaseTest {
                 .isContainSearchWordIntoNoticeDocumentation());
     }
 
-    /**
-     * Проверка поиска в блоке списка фильтров
-     */
     @Test
+    @Description("Проверка поиска в блоке списка фильтров")
     public void checkSearchInListTenders(){
 
         Assertions.assertTrue(tabTendersPage.typeSearchFilters("Название тендера")
                 .isContainFiltersFromSearchField());
     }
 
-    /**
-     * Проверка результата поиска после скрытия фильтра 'Регион'
-     */
     @Test
+    @Description("Проверка результата поиска после скрытия фильтра 'Регион'")
     public void checkSearchWithHideFilter(){
 
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
@@ -497,10 +438,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainWithoutHideFilter());
     }
 
-    /**
-     * Проверка на отображение ошибки при начальной дате большей конечной
-     */
     @Test
+    @Description("Проверка на отображение ошибки при начальной дате большей конечной")
     public void checkDisplayedErrorMessageWrongEnterDate(){
         Assertions.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
                 .waitFor(2000)
@@ -511,10 +450,8 @@ public class TabTendersTest extends BaseTest {
                 .isVisibleErrorInvalidEnterDate());
     }
 
-    /**
-     * Проверка текста ошибки при начальной дате большей конечной
-     */
     @Test
+    @Description("Проверка текста ошибки при начальной дате большей конечной")
     public void checkTextErrorMessageWrongEnterDate(){
         Assertions.assertTrue(tabTendersPage.scrollToElement(tabTendersPage.filterDateDeterminationWinner)
                 .waitFor(2000)
@@ -525,10 +462,8 @@ public class TabTendersTest extends BaseTest {
                 .isTextErrorInvalidEnterDate());
     }
 
-    /**
-     * Проверка количества выбранных подкатегорий фильтра 'Категория' с закрытой главной категорией
-     */
     @Test
+    @Description("Проверка количества выбранных подкатегорий фильтра 'Категория' с закрытой главной категорией")
     public void checkNumberSelectedCategoriesWithCloseMainCategory(){
         Assertions.assertEquals((tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
                 .clickButton(tabTendersPage.checkboxFirstInFilter)
@@ -536,10 +471,8 @@ public class TabTendersTest extends BaseTest {
                 .getNumberSelectedCategories()), 11);
     }
 
-    /**
-     * Проверка выбранных подкатегорий фильтра 'Категория'
-     */
     @Test
+    @Description("Проверка выбранных подкатегорий фильтра 'Категория'")
     public void checkContainSelectedCategory(){
         Assertions.assertTrue(tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
                 .clickButton(tabTendersPage.checkboxFirstInFilter)
@@ -547,10 +480,8 @@ public class TabTendersTest extends BaseTest {
                 .isContainSelectedCategory());
     }
 
-    /**
-     * Проверка исключения из фильтра Заказчик
-     */
     @Test
+    @Description("Проверка исключения из фильтра Заказчик")
     public void checkExcludedFromFilterCustomer(){
         Assertions.assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .scrollToElement(tabTendersPage.excludedElementCustomer)
