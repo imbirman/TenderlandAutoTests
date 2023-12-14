@@ -1,6 +1,7 @@
+package TestTabTenderFilters;
+
+import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
-import dev.failsafe.internal.util.Assert;
-import io.cucumber.java.Before;
 //import org.junit.Assert;
 //import org.junit.Before;
 //import org.junit.Test;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 
-public class TabTendersTest extends BaseTest{
+public class TabTendersTest extends BaseTest {
 
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
     private final static String BASE_LOGIN = "AdminTestitTender";

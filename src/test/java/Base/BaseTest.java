@@ -1,3 +1,5 @@
+package Base;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -6,7 +8,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-abstract public class BaseTest {
+public class BaseTest {
 
     public void setUp(){
         WebDriverManager.chromedriver().setup();
@@ -23,8 +25,8 @@ abstract public class BaseTest {
         setUp();
     }
 
-//    @AfterEach
-//    public void tearDown(){
-//        Selenide.closeWebDriver();
-//    }
+    @AfterEach
+    public void tearDown(){
+        Selenide.closeWebDriver();
+    }
 }
