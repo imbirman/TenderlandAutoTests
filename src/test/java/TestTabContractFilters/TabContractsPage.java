@@ -7,6 +7,9 @@ import org.openqa.selenium.By;
 
 import javax.annotation.Nonnull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -30,6 +33,8 @@ public class TabContractsPage {
     private final ElementsCollection checkboxStatusContractsCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
     /** Список статусов контракта в результате поиска */
     private final ElementsCollection tableCellStatusContractsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
+    /** Список дат публикации контракта */
+    private final ElementsCollection tableCellDatePublicationCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
 
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
     /** Кнопка автопоиска "Проверка поиска по продуктам" */
@@ -38,6 +43,9 @@ public class TabContractsPage {
     protected SelenideElement buttonCheckSearchByPrice = $x("//div[text()='Проверка поиска по цене']");
     /** Кнопка автопоиска "Проверка поиска по статусу" */
     protected SelenideElement buttonCheckSearchByStatusContracts = $x("//div[text()='Проверка поиска по статусу']");
+    /** Кнопка автопоиска "Проверка поиска по дате публикации" */
+    protected SelenideElement buttonCheckPublicationDate = $x("//div[text()='Проверка поиска по дате публикации']");
+
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
     protected SelenideElement tableCellToCheckForSwitchToNextTab = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[1]");
@@ -46,6 +54,8 @@ public class TabContractsPage {
 
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
+    /** Кнопка для очистки поля даты "от" */
+    protected SelenideElement buttonClearFieldDateFrom = $x("//div[@id='textbox-filter-editor-compact-5-from']//span[@class='dx-icon dx-icon-clear']");
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
@@ -53,8 +63,12 @@ public class TabContractsPage {
     protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-4-from']//input[@role='spinbutton']");
     /** Поле для ввода цены "до" */
     protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
+    /** Поле для ввода даты публикации "от" */
+    protected SelenideElement fieldPublicationDateFrom = $x("//div[@id='textbox-filter-editor-compact-5-from']//input[@role='textbox']");
     /** Фильтр "Статус" в автопоиске "Проверка поиска по статусу" */
     protected SelenideElement filterSearchContractsStatus = $x("//div[@class='search-filters-tagbox-tag-content']");
+    /** Фильтр "Дата публикации" в автопоиске "Проверка поиска по дате публикации" */
+    protected SelenideElement filterPublicationDate = $x("//div[text()='09.01.2021 — 09.01.2021']");
 
 
     @Step("Переключиться на вкладку под номером {numberTab}")
@@ -102,6 +116,12 @@ public class TabContractsPage {
     @Step("Ввести цену \"до\"")
     public TabContractsPage typePriceTo(String price){
         fieldPriceTo.sendKeys(price);
+        return new TabContractsPage();
+    }
+
+    @Step("Ввести дату публикации \"от\"")
+    public TabContractsPage typeDateFrom(String date){
+        fieldPublicationDateFrom.sendKeys(date);
         return new TabContractsPage();
     }
 
@@ -200,6 +220,28 @@ public class TabContractsPage {
         boolean check = true;
         for(String type : array){
             if(!type.contains("Исполнение завершено")){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка, что дата публикации находится в заданном диапазоне")
+    public boolean checkDate(String startDate, String endDate) throws ParseException {
+        boolean check = true;
+        List<String> array;
+        array = tableCellDatePublicationCollection.texts();
+        array.remove(array.size()-1);
+        for(String date : array) {
+            String dateStr = date;
+            dateStr = dateStr.replace("\n" + "(UTC+03:00)", "");
+            dateStr = dateStr.replace("\n", " ");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date currentDate = dateFormat.parse(dateStr);
+            Date leftDate = dateFormat.parse(startDate);
+            Date rightDate = dateFormat.parse(endDate);
+            if(!(currentDate.getTime() >= leftDate.getTime() && currentDate.getTime() <= rightDate.getTime())){
                 check = false;
                 break;
             }

@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TabContractsTest extends BaseTest {
 
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
@@ -36,7 +40,7 @@ public class TabContractsTest extends BaseTest {
     @Description("Проверка результата поиска контракта по продуктам")
     public void checkSearchContractByProduct(){
 
-        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+        assertTrue(page.clickButton(page.tabListAutoSearch)
                 .waitFor(500)
                 .clickButton(page.buttonCheckSearchByProduct)
                 .waitFor(4500)
@@ -51,7 +55,7 @@ public class TabContractsTest extends BaseTest {
     @Description("Проверка поиска по цене контракта")
     public void checkPriceContract(){
 
-        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+        assertTrue(page.clickButton(page.tabListAutoSearch)
                 .clickButton(page.buttonCheckSearchByPrice)
                 .waitFor(2000)
                 .clickButton(page.filterValidateSearchByTenderPrice)
@@ -68,7 +72,7 @@ public class TabContractsTest extends BaseTest {
     @Description("Проверка поиска по статусу контракта 'Исполнение'")
     public void checkSearchByBeingExecuted(){
 
-        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+        assertTrue(page.clickButton(page.tabListAutoSearch)
                 .clickButton(page.buttonCheckSearchByStatusContracts)
                 .clickButton(page.filterSearchContractsStatus)
                 .clickButton(page.getCheckboxInFilter(0))
@@ -81,7 +85,7 @@ public class TabContractsTest extends BaseTest {
     @Description("Проверка поиска по статусу контракта 'Исполнение прекращено'")
     public void checkSearchByExecutionTerminated(){
 
-        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+        assertTrue(page.clickButton(page.tabListAutoSearch)
                 .clickButton(page.buttonCheckSearchByStatusContracts)
                 .clickButton(page.filterSearchContractsStatus)
                 .clickButton(page.getCheckboxInFilter(1))
@@ -94,12 +98,27 @@ public class TabContractsTest extends BaseTest {
     @Description("Проверка поиска по статусу контракта 'Исполнение завершено'")
     public void checkSearchByExecutionCompleted(){
 
-        Assertions.assertTrue(page.clickButton(page.tabListAutoSearch)
+        assertTrue(page.clickButton(page.tabListAutoSearch)
                 .clickButton(page.buttonCheckSearchByStatusContracts)
                 .clickButton(page.filterSearchContractsStatus)
                 .clickButton(page.getCheckboxInFilter(2))
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
                 .isContainExecutionCompleted());
+    }
+
+    @Test
+    @Description("Проверка даты публикации контракта")
+    public void checkPublicationDateOfContract() throws ParseException {
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckPublicationDate)
+                .waitFor(2000)
+                .clickButton(page.filterPublicationDate)
+                .clickButton(page.buttonClearFieldDateFrom)
+                .typeDateFrom("01.01.2021")
+                .clickButton(page.buttonSearch)
+                .waitFor(2000)
+                .checkDate("01.01.2021 00:00","09.01.2021 23:59"));
     }
 }
