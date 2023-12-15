@@ -1,5 +1,6 @@
 package TestTabContractFilters;
 
+import TestTabTenderFilters.TabTendersPage;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -35,6 +36,8 @@ public class TabContractsPage {
     private final ElementsCollection tableCellStatusContractsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
     /** Список дат контракта */
     private final ElementsCollection tableCellDateCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
+    /** Список штрафов в карточке контракта */
+    private final ElementsCollection listMulctInCardContractCollection = $$x("(//div[@id='penalty-blocks-content']//div[@class='dx-scrollable-content']//td)[4]/div"); //
 
 
     /** Вкладка "Автопоиски" */
@@ -55,12 +58,16 @@ public class TabContractsPage {
     protected SelenideElement buttonValidateSearchByContractActualExecutionDate = $x("//div[text()='Проверка поиска по фактической дате исполнения']");
     /** Кнопка автопоиска "Проверка поиска по дате подписания" */
     protected SelenideElement buttonValidateSearchByContractDateOfSigning = $x("//div[text()='Проверка поиска по дате подписания']");
+    /** Кнопка автопоиска "Проверка поиска по штрафу" */
+    protected SelenideElement buttonCheckSearchByMulct = $x("//div[text()='Проверка поиска по штрафу']");
 
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
     protected SelenideElement tableCellToCheckForSwitchToNextTab = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[1]");
     /** Вкладка "Список продуктов" в карточке контракта */
     protected SelenideElement tabListProductsInCardContract = $x("(//div[@id='entity-menu']//div[@class='dx-item dx-list-item'])[2]");
+    /** Вкладка "Штрафы" в карточке контракта */
+    protected SelenideElement tabMulctContracts = $x("(//div[@id='entity-menu']//div[@class='dx-item dx-list-item'])[4]");
 
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
@@ -79,11 +86,19 @@ public class TabContractsPage {
     protected SelenideElement filterSearchContractsStatus = $x("//div[@class='search-filters-tagbox-tag-content']");
     /** Фильтр "Дата публикации" в автопоиске "Проверка поиска по дате публикации" */
     protected SelenideElement filterPublicationDate = $x("//div[text()='09.01.2021 — 09.01.2021']");
+    /** Фильтр "Штраф" в автопоиске "Проверка поиска по штрафу" */
+    protected SelenideElement filterSearchByMulct = $x("//div[@class='search-filters-tagbox-tag-content']");
 
 
     @Step("Переключиться на вкладку под номером {numberTab}")
     public TabContractsPage switchToTab(int numberTab){
         switchTo().window(numberTab);
+        return new TabContractsPage();
+    }
+
+    @Step("Прокрутить до элемента")
+    public TabContractsPage scrollToElement(SelenideElement element){
+        element.scrollIntoView(false);
         return new TabContractsPage();
     }
 
@@ -253,6 +268,21 @@ public class TabContractsPage {
             Date rightDate = dateFormat.parse(endDate);
             if(!(currentDate.getTime() >= leftDate.getTime() && currentDate.getTime() <= rightDate.getTime())){
                 check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка включает ли карточка контракта искомый штраф")
+    public boolean isContainCardContractSearchByDelayInPerformanceBySupplier(){
+        boolean check = false;
+        List<String> array;
+        array = listMulctInCardContractCollection.texts();
+
+        for(String type : array){
+            if(type.contains("Просрочка исполнения поставщиком")){
+                check = true;
                 break;
             }
         }

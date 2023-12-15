@@ -161,4 +161,25 @@ public class TabContractsTest extends BaseTest {
                 .waitFor(4000)
                 .checkDate("13.01.2021 00:00","14.01.2021 23:59"));
     }
+
+    @Test
+    @Description("Проверка поиска по штрафу 'Просрочка исполнения поставщиком'")
+    public void checkSearchByDelayInPerformanceBySupplier(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckSearchByMulct)
+                .clickButton(page.buttonCheckSearchByMulct)
+                .waitFor(5000)
+                .scrollToElement(page.filterSearchByMulct)
+                .clickButton(page.filterSearchByMulct)
+                .waitFor(1000)
+                .clickButton(page.getCheckboxInFilter(0))
+                .clickButton(page.buttonSearch)
+                .waitFor(4000)
+                .clickButton(page.tableCellToCheckForSwitchToNextTab)
+                .switchToTab(1)
+                .waitFor(1000)
+                .clickButton(page.tabMulctContracts)
+                .isContainCardContractSearchByDelayInPerformanceBySupplier());
+    }
 }
