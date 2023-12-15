@@ -131,4 +131,14 @@ public class TabContractsTest extends BaseTest {
                 .waitFor(4000)
                 .checkDate("13.01.2021 00:00","14.01.2021 23:59"));
     }
+
+    @Test
+    @Description("Проверка даты окончания исполнения контракта")
+    public void checkContractExecutionEndDate() throws ParseException {
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonValidateSearchByContractExecutionEndDate)
+                .waitFor(4000)
+                .checkDate("13.01.2021 00:00","14.01.2021 23:59"));
+    }
 }
