@@ -279,9 +279,22 @@ public class TabContractsPage {
         boolean check = false;
         List<String> array;
         array = listMulctInCardContractCollection.texts();
-
         for(String type : array){
             if(type.contains("Просрочка исполнения поставщиком")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка включает ли карточка контракта искомый штраф")
+    public boolean isContainCardContractSearchByDelayInFulfillmentOfObligationsByCustomer(){
+        boolean check = false;
+        List<String> array;
+        array = listMulctInCardContractCollection.texts();
+        for(String type : array){
+            if(type.contains("Просрочка исполнения заказчиком обязательств")){
                 check = true;
                 break;
             }
