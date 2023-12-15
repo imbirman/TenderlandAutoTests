@@ -36,7 +36,9 @@ public class TabContractsPage {
     /** Список дат публикации контракта */
     private final ElementsCollection tableCellDatePublicationCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
 
-    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']"); /* Вкладка "Автопоиски" */
+
+    /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
     /** Кнопка автопоиска "Проверка поиска по продуктам" */
     protected SelenideElement buttonCheckSearchByProduct = $x("//div[text()='Проверка поиска по продуктам']");
     /** Кнопка автопоиска "Проверка поиска по цене" */
@@ -45,6 +47,8 @@ public class TabContractsPage {
     protected SelenideElement buttonCheckSearchByStatusContracts = $x("//div[text()='Проверка поиска по статусу']");
     /** Кнопка автопоиска "Проверка поиска по дате публикации" */
     protected SelenideElement buttonCheckPublicationDate = $x("//div[text()='Проверка поиска по дате публикации']");
+    /** Кнопка автопоиска "Проверка поиска по дате начала исполнения" */
+    protected SelenideElement buttonValidateSearchByContractExecutionStartDate = $x("//div[text()='Проверка поиска по дате начала исполнения']");
 
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
