@@ -51,6 +51,8 @@ public class TabContractsPage {
     protected SelenideElement buttonValidateSearchByContractExecutionStartDate = $x("//div[text()='Проверка поиска по дате начала исполнения']");
     /** Кнопка автопоиска "Проверка поиска по дате окончания исполнения" */
     protected SelenideElement buttonValidateSearchByContractExecutionEndDate = $x("//div[text()='Проверка поиска по дате окончания исполнения']");
+    /** Кнопка автопоиска "Проверка поиска по фактической дате исполнения" */
+    protected SelenideElement buttonValidateSearchByContractActualExecutionDate = $x("//div[text()='Проверка поиска по фактической дате исполнения']");
 
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
