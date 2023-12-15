@@ -33,8 +33,8 @@ public class TabContractsPage {
     private final ElementsCollection checkboxStatusContractsCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
     /** Список статусов контракта в результате поиска */
     private final ElementsCollection tableCellStatusContractsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
-    /** Список дат публикации контракта */
-    private final ElementsCollection tableCellDatePublicationCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
+    /** Список дат контракта */
+    private final ElementsCollection tableCellDateCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
 
 
     /** Вкладка "Автопоиски" */
@@ -53,6 +53,8 @@ public class TabContractsPage {
     protected SelenideElement buttonValidateSearchByContractExecutionEndDate = $x("//div[text()='Проверка поиска по дате окончания исполнения']");
     /** Кнопка автопоиска "Проверка поиска по фактической дате исполнения" */
     protected SelenideElement buttonValidateSearchByContractActualExecutionDate = $x("//div[text()='Проверка поиска по фактической дате исполнения']");
+    /** Кнопка автопоиска "Проверка поиска по дате подписания" */
+    protected SelenideElement buttonValidateSearchByContractDateOfSigning = $x("//div[text()='Проверка поиска по дате подписания']");
 
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
@@ -239,7 +241,7 @@ public class TabContractsPage {
     public boolean checkDate(String startDate, String endDate) throws ParseException {
         boolean check = true;
         List<String> array;
-        array = tableCellDatePublicationCollection.texts();
+        array = tableCellDateCollection.texts();
         array.remove(array.size()-1);
         for(String date : array) {
             String dateStr = date;
