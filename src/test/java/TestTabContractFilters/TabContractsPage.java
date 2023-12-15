@@ -302,4 +302,18 @@ public class TabContractsPage {
         return check;
     }
 
+    @Step("Проверка включает ли карточка контракта искомый штраф")
+    public boolean isContainCardContractSearchByInadequateExecutionBySupplier(){
+        boolean check = false;
+        List<String> array;
+        array = listMulctInCardContractCollection.texts();
+        for(String type : array){
+            if(type.contains("Ненадлежащее исполнение поставщиком")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
 }

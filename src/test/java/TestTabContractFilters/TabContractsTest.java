@@ -203,4 +203,25 @@ public class TabContractsTest extends BaseTest {
                 .clickButton(page.tabMulctContracts)
                 .isContainCardContractSearchByDelayInFulfillmentOfObligationsByCustomer());
     }
+
+    @Test
+    @Description("Проверка поиска по штрафу 'Ненадлежащее исполнение поставщиком'")
+    public void checkSearchByInadequateExecutionBySupplier(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckSearchByMulct)
+                .clickButton(page.buttonCheckSearchByMulct)
+                .waitFor(5000)
+                .scrollToElement(page.filterSearchByMulct)
+                .clickButton(page.filterSearchByMulct)
+                .waitFor(1000)
+                .clickButton(page.getCheckboxInFilter(2))
+                .clickButton(page.buttonSearch)
+                .waitFor(4000)
+                .clickButton(page.tableCellToCheckForSwitchToNextTab)
+                .waitFor(1000)
+                .switchToTab(1)
+                .clickButton(page.tabMulctContracts)
+                .isContainCardContractSearchByInadequateExecutionBySupplier());
+    }
 }
