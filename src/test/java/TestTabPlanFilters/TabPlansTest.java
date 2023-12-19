@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TabPlansTest  extends BaseTest {
+public class TabPlansTest extends BaseTest {
 
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
     private final static String BASE_LOGIN = "AdminTestitPlan";
