@@ -56,4 +56,33 @@ public class TabPlansTest  extends BaseTest {
                 .clickButton(page.buttonSearch)
                 .isContainTypePlan());
     }
+
+    @Test
+    @Description("Проверка поиска по типу плана план-график")
+    public void checkSearchByTypePlanSchedule(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByTypePlan)
+                .waitFor(5000)
+                .scrollToElement(page.buttonDeleteAutoSearch)
+                .clickButton(page.filterSearchByTypePlan)
+                .clickButton(page.getCheckboxInFilter(1))
+                .clickButton(page.buttonSearch)
+                .isContainTypePlanSchedule());
+    }
+
+    @Test
+    @Description("Проверка поиска по типу плана план 2017")
+    public void checkSearchByTypePlanSchedule2017(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByTypePlan)
+                .waitFor(5000)
+                .scrollToElement(page.buttonDeleteAutoSearch)
+                .clickButton(page.filterSearchByTypePlan)
+                .clickButton(page.getCheckboxInFilter(2))
+                .clickButton(page.buttonSearch)
+                .waitFor(5000)
+                .isContainTypePlanSchedule2017());
+    }
 }

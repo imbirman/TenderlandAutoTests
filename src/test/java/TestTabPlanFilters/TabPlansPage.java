@@ -106,7 +106,34 @@ public class TabPlansPage {
         for(String typePlan : typePlanForCheck){
             if(!typePlan.contains("План")){
                 check = false;
-                System.out.println(",kf + " + typePlan);
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка поиска по типу плана")
+    public boolean isContainTypePlanSchedule(){
+        boolean check = true;
+        List<String> typePlanForCheck = tableCellTypePlanCollection.texts();
+        typePlanForCheck.remove(typePlanForCheck.size()-1);
+        for(String typePlan : typePlanForCheck){
+            if(!typePlan.contains("План-график")){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка поиска по типу плана")
+    public boolean isContainTypePlanSchedule2017(){
+        boolean check = true;
+        List<String> typePlanForCheck = tableCellTypePlanCollection.texts();
+        typePlanForCheck.remove(typePlanForCheck.size()-1);
+        for(String typePlan : typePlanForCheck){
+            if(!typePlan.contains("План-график 2017")){
+                check = false;
                 break;
             }
         }
