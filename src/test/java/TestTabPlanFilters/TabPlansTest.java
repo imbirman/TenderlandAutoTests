@@ -1,10 +1,12 @@
 package TestTabPlanFilters;
 
 import Base.BaseTest;
-import TestTabContractFilters.TabContractsPage;
+import static org.junit.jupiter.api.Assertions.*;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TabPlansTest  extends BaseTest {
 
@@ -30,5 +32,28 @@ public class TabPlansTest  extends BaseTest {
                 .clickConfirmLogInButton();
     }
 
+    @Test
+    @Description("Проверка результатов поиска планов по названию")
+    public void checkSearchByNamePlan(){
 
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByNamePlan)
+                .waitFor(3000)
+                .isContainNamePlan());
+    }
+
+
+    @Test
+    @Description("Проверка поиска по типу плана")
+    public void checkSearchByTypePlan(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckSearchByTypePlan)
+                .waitFor(5000)
+                .scrollToElement(page.buttonDeleteAutoSearch)
+                .clickButton(page.filterSearchByTypePlan)
+                .clickButton(page.getCheckboxInFilter(0))
+                .clickButton(page.buttonSearch)
+                .isContainTypePlan());
+    }
 }

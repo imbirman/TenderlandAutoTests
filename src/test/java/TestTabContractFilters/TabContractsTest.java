@@ -3,8 +3,6 @@ package TestTabContractFilters;
 import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
-import net.thucydides.core.annotations.Title;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
