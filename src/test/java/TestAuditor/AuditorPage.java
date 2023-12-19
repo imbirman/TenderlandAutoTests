@@ -29,17 +29,33 @@ public class AuditorPage {
 
     /** Список ИНН в результатах поиска */
     private final ElementsCollection tableCellINN = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
+    /** Список ФИО учредителей */
+    private final ElementsCollection nameFounders = $$x("//div[@class='entity-organization-person']//div[@class='main-bold-text'][1]");
 
     /** Кнопка открытия бокового меню */
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
     /** Кнопка открытия ревизора */
     protected SelenideElement buttonTabMenuAuditor = $x("//div[text()='Ревизор']");
+    /** Кнопка для открытия списка учредителей */
+    protected SelenideElement buttonOpenListFounders = $x("//div[@id='entity-persons-popover']");
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
+    /** Фильтр "Поиск по учредителям" в блоке фильтров */
+    protected SelenideElement filterSearchByFounders = $x("//span[text()='Поиск по учредителям']");
+    /** Строка таблицы результатов поиска для открытия карточки организации */
+    protected SelenideElement NinthCellTableInResultSearch = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[9]");
+
+
 
     @Step("Ожидание {number}")
     public AuditorPage waitFor(long number){
         sleep(number);
+        return new AuditorPage();
+    }
+
+    @Step("Переключиться на вкладку под номером {numberTab}")
+    public AuditorPage switchToTab(int numberTab){
+        switchTo().window(numberTab);
         return new AuditorPage();
     }
 
@@ -99,5 +115,18 @@ public class AuditorPage {
             }
         }
         return checkIsContainOrganizationDetail;
+    }
+
+    @Step("Проверка, что наименование учредителя включает ключевое слово")
+    public boolean isContainNameFounders(){
+        List<String> checkNameFounders = nameFounders.texts();
+        boolean checkIsContainNameFounders = false;
+        for(String type : checkNameFounders){
+            if(type.contains("иванов") || type.contains("Иванов") || type.contains("ИВАНОВ")){
+                checkIsContainNameFounders = true;
+                break;
+            }
+        }
+        return checkIsContainNameFounders;
     }
 }

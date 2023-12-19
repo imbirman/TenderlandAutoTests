@@ -4,6 +4,8 @@ import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import static org.junit.jupiter.api.Assertions.*;
+
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +43,21 @@ public class AuditorTest extends BaseTest {
                 .clickButton(page.buttonSearch)
                 .waitFor(1000)
                 .isContainOrganizationDetail());
+    }
+
+    @Test
+    @Description("Проверка результатов поиска по учредителям")
+    public void checkResultSearchByFounders(){
+        assertTrue(page.DragAndDropFilter(page.filterSearchByFounders)
+                .waitFor(500)
+                .typeSearchInclude("иванов")
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .clickButton(page.NinthCellTableInResultSearch)
+                .switchToTab(1)
+                .clickButton(page.buttonOpenListFounders)
+                .waitFor(1000)
+                .isContainNameFounders());
     }
 
 }
