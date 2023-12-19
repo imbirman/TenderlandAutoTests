@@ -224,4 +224,80 @@ public class TabContractsTest extends BaseTest {
                 .clickButton(page.tabMulctContracts)
                 .isContainCardContractSearchByInadequateExecutionBySupplier());
     }
+
+    @Test
+    @Description("Проверка поиска по штрафу 'Ненадлежащее исполнение заказчиком обязательств'")
+    public void checkSearchByInadequateExecutionByCustomer(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckSearchByMulct)
+                .clickButton(page.buttonCheckSearchByMulct)
+                .waitFor(5000)
+                .scrollToElement(page.filterSearchByMulct)
+                .clickButton(page.filterSearchByMulct)
+                .waitFor(1000)
+                .clickButton(page.getCheckboxInFilter(3))
+                .clickButton(page.buttonSearch)
+                .waitFor(4000)
+                .clickButton(page.tableCellToCheckForSwitchToNextTab)
+                .waitFor(1000)
+                .switchToTab(1)
+                .clickButton(page.tabMulctContracts)
+                .isContainCardContractSearchByInadequateExecutionByCustomer());
+    }
+
+    @Test
+    @Description("Проверка суммы штрафов контракта")
+    public void checkSumMulctContract(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckSearchBySumMulct)
+                .clickButton(page.buttonCheckSearchBySumMulct)
+                .clickButton(page.buttonSearch)
+                .waitFor(4000)
+                .clickButton(page.tableCellToCheckForSwitchToNextTab)
+                .switchToTab(1)
+                .clickButton(page.tabMulctContracts)
+                .isSumMulct(10000,100000));
+    }
+
+    @Test
+    @Description("Проверка наличия неоплаченных штрафов контракта")
+    public void checkUnpaidMulctContract(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckSearchByUnpaidMulct)
+                .clickButton(page.buttonCheckSearchByUnpaidMulct)
+                .waitFor(4000)
+                .scrollToElement(page.buttonDeleteAutoSearch)
+                .clickButton(page.filterSearchByUnpaidMulct)
+                .waitFor(1000)
+                .clickButton(page.radiobuttonYesUnpaidMulct)
+                .clickButton(page.buttonSearch)
+                .waitFor(4000)
+                .clickButton(page.tableCellToCheckForSwitchToNextTab)
+                .switchToTab(1)
+                .clickButton(page.tabMulctContracts)
+                .isUnpaidMulct());
+    }
+
+    @Test
+    @Description("Проверка отсутствия неоплаченных штрафов контракта")
+    public void checkAbsenceUnpaidMulctContract(){
+
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckSearchByUnpaidMulct)
+                .clickButton(page.buttonCheckSearchByUnpaidMulct)
+                .waitFor(5000)
+                .scrollToElement(page.buttonDeleteAutoSearch)
+                .clickButton(page.filterSearchByUnpaidMulct)
+                .waitFor(1000)
+                .clickButton(page.radiobuttonNoUnpaidMulct)
+                .clickButton(page.buttonSearch)
+                .waitFor(4000)
+                .clickButton(page.tableCellToCheckForSwitchToNextTab)
+                .switchToTab(1)
+                .clickButton(page.tabMulctContracts)
+                .isPaidMulct());
+    }
 }

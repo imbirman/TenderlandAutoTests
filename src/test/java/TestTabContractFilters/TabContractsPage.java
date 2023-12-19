@@ -25,6 +25,8 @@ public class TabContractsPage {
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
     /** Поле дерева фильтров */
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
+    /** Поле с подписью об отсутствии штрафов */
+    private final SelenideElement noMulctInCardContract = $x("//div[@id='penalty-blocks']//span[@class='dx-datagrid-nodata']");
 
     /** Список названий продукта в списке продуктов карточки контракта */
     private final ElementsCollection listProductInCardContractCollection = $$x("//div[@class='dx-datagrid-rowsview dx-datagrid-nowrap dx-scrollable dx-visibility-change-handler dx-scrollable-both dx-scrollable-simulated']//table//tr/following::td[1]"); //
@@ -37,7 +39,11 @@ public class TabContractsPage {
     /** Список дат контракта */
     private final ElementsCollection tableCellDateCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
     /** Список штрафов в карточке контракта */
-    private final ElementsCollection listMulctInCardContractCollection = $$x("(//div[@id='penalty-blocks-content']//div[@class='dx-scrollable-content']//td)[4]/div"); //
+    private final ElementsCollection listMulctInCardContractCollection = $$x("(//div[@id='penalty-blocks-content']//div[@class='dx-scrollable-content']//td)[4]/div");
+    /** Список сумм штрафов в списке штрафов карточки контракта */
+    private final ElementsCollection listSumMulctInCardContractCollection = $$x("(//div[@id='penalty-blocks-content']//div[@class='dx-scrollable-content']//td)[5]");
+    /** Оплата штрафа в списке штрафов карточки контракта */
+    private final ElementsCollection listPaidMulctInCardContractCollection = $$x("//div[@id='penalty-blocks-content']//div[@class='dx-scrollable-content']//td[6]");
 
 
     /** Вкладка "Автопоиски" */
@@ -60,6 +66,10 @@ public class TabContractsPage {
     protected SelenideElement buttonValidateSearchByContractDateOfSigning = $x("//div[text()='Проверка поиска по дате подписания']");
     /** Кнопка автопоиска "Проверка поиска по штрафу" */
     protected SelenideElement buttonCheckSearchByMulct = $x("//div[text()='Проверка поиска по штрафу']");
+    /** Кнопка автопоиска "Проверка поиска по сумме штрафов" */
+    protected SelenideElement buttonCheckSearchBySumMulct = $x("//div[text()='Проверка поиска по сумме штрафов']");
+    /** Кнопка автопоиска "Проверка поиска по наличию неоплаченных штрафов" */
+    protected SelenideElement buttonCheckSearchByUnpaidMulct = $x("//div[text()='Проверка поиска по наличию неоплаченных штрафов']");
 
 
     /** Ячейка таблицы в результатах поиска для первого столбца для первой строки для тестов по штрафам */
@@ -73,6 +83,11 @@ public class TabContractsPage {
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
     /** Кнопка для очистки поля даты "от" */
     protected SelenideElement buttonClearFieldDateFrom = $x("//div[@id='textbox-filter-editor-compact-5-from']//span[@class='dx-icon dx-icon-clear']");
+
+    /** Чекбокс "Да" в фильтре "Наличие неоплаченных штрафов" */
+    protected SelenideElement radiobuttonYesUnpaidMulct = $x("(//div[@class='dx-radiobutton-icon'])[1]");
+    /** Чекбокс "Нет" в фильтре "Наличие неоплаченных штрафов" */
+    protected SelenideElement radiobuttonNoUnpaidMulct = $x("(//div[@class='dx-radiobutton-icon'])[2]");
 
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
@@ -88,6 +103,13 @@ public class TabContractsPage {
     protected SelenideElement filterPublicationDate = $x("//div[text()='09.01.2021 — 09.01.2021']");
     /** Фильтр "Штраф" в автопоиске "Проверка поиска по штрафу" */
     protected SelenideElement filterSearchByMulct = $x("//div[@class='search-filters-tagbox-tag-content']");
+    /** Фильтр "Наличие неоплаченных штраф" в автопоиске "Проверка поиска по наличию неоплаченных штрафов" */
+    protected SelenideElement filterSearchByUnpaidMulct = $x("//div[@class='search-filters-tagbox-tag-content']");
+
+
+
+    /** Кнопка удаления автопоиска */
+    protected SelenideElement buttonDeleteAutoSearch = $x("//i[@id='search-autosearch-delete']");
 
 
     @Step("Переключиться на вкладку под номером {numberTab}")
@@ -314,6 +336,82 @@ public class TabContractsPage {
             }
         }
         return check;
+    }
+
+    @Step("Проверка включает ли карточка контракта искомый штраф")
+    public boolean isContainCardContractSearchByInadequateExecutionByCustomer(){
+        boolean check = false;
+        List<String> array;
+        array = listMulctInCardContractCollection.texts();
+        for(String type : array){
+            if(type.contains("Ненадлежащее исполнение заказчиком обязательств")){
+                check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка суммы штрафов контракта")
+    public boolean isSumMulct(float sumMulctFrom, float sumMulctTo){
+        boolean check = true;
+        List<String> sumMulctForCheck = listSumMulctInCardContractCollection.texts();
+        for(String sumMulct : sumMulctForCheck){
+            String sumMulctCheck = sumMulct;
+            sumMulctCheck = sumMulctCheck.replace(",", ".");
+            sumMulctCheck = sumMulctCheck.replace(" ₽", "");
+            sumMulctCheck = sumMulctCheck.replace(" ", "");
+            float floatSumMulctCheckForCheck = Float.parseFloat(sumMulctCheck);
+            if(floatSumMulctCheckForCheck < sumMulctFrom || floatSumMulctCheckForCheck > sumMulctTo){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка наличия неоплаченных штрафов контракта")
+    public boolean isUnpaidMulct(){
+        boolean check = false;
+        List<String> paidMulctForCheck = listPaidMulctInCardContractCollection.texts();
+        paidMulctForCheck.remove(paidMulctForCheck.size()-1);
+        for(String paidMulct : paidMulctForCheck){
+            paidMulct = paidMulct.replace(",", ".");
+            paidMulct = paidMulct.replace(" ₽", "");
+            paidMulct = paidMulct.replace(" ", "");
+            System.out.println("bla bla lba" + paidMulct);
+            float floatSumMulctCheckForCheck = Float.parseFloat(paidMulct);
+
+            if(floatSumMulctCheckForCheck == 0){
+                check = true;
+                break;
+            }
+            System.out.println("bla bla lba" + floatSumMulctCheckForCheck);
+        }
+        return check;
+    }
+
+    @Step("Проверка отсутствия неоплаченных штрафов контракта")
+    public boolean isPaidMulct(){
+        List<String> paidMulctForCheck = listPaidMulctInCardContractCollection.texts();
+        for(String paidMulct : paidMulctForCheck){
+//            System.out.println("Сумма: " + sumMulct.getText());
+
+            try {
+                String checkNoMulctInCardContract = noMulctInCardContract.getText();
+                if(checkNoMulctInCardContract.equals("Нет данных")){
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            float floatSumMulctCheckForCheck = Float.parseFloat(paidMulct);
+            if(floatSumMulctCheckForCheck == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
