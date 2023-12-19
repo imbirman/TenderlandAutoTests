@@ -60,4 +60,17 @@ public class AuditorTest extends BaseTest {
                 .isContainNameFounders());
     }
 
+    @Test
+    @Title("Проверка результатов поиска по юридическому статусу 'Действующая'")
+    public void checkResultSearchByCurrentLegalStatus(){
+        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+                .waitFor(500)
+                .clickButton(page.checkboxCurrentLegalStatus)
+                .clickButton(page.buttonSearch)
+                .waitFor(1000)
+                .clickButton(page.NinthCellTableInResultSearch)
+                .switchToTab(1)
+                .isContainCurrentLegalData());
+    }
+
 }

@@ -26,6 +26,8 @@ public class AuditorPage {
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
     /** Поле поиска "Включаем в поиск" */
     private final SelenideElement fieldSearchInclude = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
+    /** Статус организации */
+    private final SelenideElement organizationStatus = $x("(//span[@class='header-info-block-value'])[1]");
 
     /** Список ИНН в результатах поиска */
     private final ElementsCollection tableCellINN = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
@@ -38,12 +40,20 @@ public class AuditorPage {
     protected SelenideElement buttonTabMenuAuditor = $x("//div[text()='Ревизор']");
     /** Кнопка для открытия списка учредителей */
     protected SelenideElement buttonOpenListFounders = $x("//div[@id='entity-persons-popover']");
+
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
     /** Фильтр "Поиск по учредителям" в блоке фильтров */
     protected SelenideElement filterSearchByFounders = $x("//span[text()='Поиск по учредителям']");
+    /** Фильтр "Юридический статус" в блоке фильтров */
+    protected SelenideElement filterSearchByLegalStatus = $x("//span[text()='Юридический статус']");
+
     /** Строка таблицы результатов поиска для открытия карточки организации */
     protected SelenideElement NinthCellTableInResultSearch = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[9]");
+    /** Пункт "Действующая" фильтра "Юридический статус" */
+    protected SelenideElement checkboxCurrentLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[5]");
+    /** Пункт "Недействующая" фильтра "Юридический статус" */
+    protected SelenideElement radioButtonInactiveLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[1]");
 
 
 
@@ -128,5 +138,15 @@ public class AuditorPage {
             }
         }
         return checkIsContainNameFounders;
+    }
+
+    @Step("Проверка, что организация действующая")
+    public boolean isContainCurrentLegalData(){
+        return organizationStatus.getText().equals("Действующая");
+    }
+
+    @Step("Проверка, что организация недействующая")
+    public boolean isContainInactiveLegalData(){
+        return organizationStatus.getText().equals("Недействующая");
     }
 }
