@@ -86,4 +86,17 @@ public class AuditorTest extends BaseTest {
                 .isContainInactiveLegalData());
     }
 
+    @Test
+    @Description("Проверка результатов поиска по юридическому статусу 'В процессе ликвидации'")
+    public void checkResultSearchByInTheProcessOfLiquidationStatus(){
+        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+                .waitFor(500)
+                .clickButton(page.checkboxInTheProcessOfLiquidationStatus)
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .clickButton(page.NinthCellTableInResultSearch)
+                .switchToTab(1)
+                .isContainInTheProcessOfLiquidation());
+    }
+
 }
