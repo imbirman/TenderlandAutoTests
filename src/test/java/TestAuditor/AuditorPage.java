@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AuditorPage {
@@ -64,6 +63,8 @@ public class AuditorPage {
     protected SelenideElement buttonTabMenuAuditor = $x("//div[text()='Ревизор']");
     /** Кнопка для открытия списка учредителей */
     protected SelenideElement buttonOpenListFounders = $x("//div[@id='entity-persons-popover']");
+    /** Кнопка для открытия списка тендеров */
+    protected SelenideElement buttonOpenListAllTenders = $x("//div[@id='entity-all-tenders']");
 
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
@@ -268,8 +269,13 @@ public class AuditorPage {
         return listElementsContextMenu.equals(checkElementsContextMenu);
     }
 
-    @Step("Проверка кликабельности кнопок блоков")
+    @Step("Проверка кликабельности кнопки открытия списка учредителей")
     public boolean isClickableButtonOpenListFounders(){
-        return buttonOpenListFounders.is(Condition.interactable);
+        return buttonOpenListFounders.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки открытия списка тендеров")
+    public boolean isClickableButtonOpenListAllTenders(){
+        return buttonOpenListAllTenders.is(interactable);
     }
 }

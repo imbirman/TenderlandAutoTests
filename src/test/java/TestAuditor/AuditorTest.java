@@ -222,12 +222,25 @@ public class AuditorTest extends BaseTest {
         assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
                 .waitFor(500)
                 .typeSearchInclude("7017311832")
-                .clickButton(page.openTabMenu)
                 .clickButton(page.buttonSearch)
                 .waitFor(500)
                 .clickButton(page.firstCellTableInResultSearch)
                 .switchToTab(1)
                 .isClickableButtonOpenListFounders());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка тендеров")
+    public void checkClickableButtonOpenListAllTenders(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2901142220")
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .scrollToElement(page.buttonOpenListAllTenders)
+                .isClickableButtonOpenListAllTenders());
     }
 
 }
