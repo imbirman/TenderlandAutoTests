@@ -194,4 +194,15 @@ public class AuditorTest extends BaseTest {
                 .isLocatedInRNP());
     }
 
+    @Test
+    @Description("Проверка количества элементов контекстного меню")
+    public void checkCorrectNumberElementsContextMenu(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("234703774440")
+                .clickButton(page.buttonSearch)
+                .clickButton(page.contextMenu)
+                .isCorrectNumberElementsContextMenu());
+    }
+
 }

@@ -34,6 +34,7 @@ public class AuditorPage {
     /** Пометка находится ли организация в настоящий момент в РНП */
     private final SelenideElement parameterLocatedInRNP = $x("//div[contains(text(), 'РНП')]//div[1]");
 
+
     /** В разделе РНП поле "Всего записей в реестре" */
     protected SelenideElement parameterTotalEntriesInRegistry = $x("//div[text()='Всего записей в реестре']/following::div[1]");
 
@@ -43,6 +44,8 @@ public class AuditorPage {
     private final ElementsCollection nameFounders = $$x("//div[@class='entity-organization-person']//div[@class='main-bold-text'][1]");
     /** Ячейка в результате поиска "Дата" */
     private final ElementsCollection tableCellDate = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
+    /** Элемент контекстного меню */
+    private final ElementsCollection elementContextMenuCollection = $$x("//div[@class='dx-submenu']//div[@class='dx-item dx-menu-item']/div/div");
 
     /** Вкладка "Автопоиски" */
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
@@ -85,6 +88,8 @@ public class AuditorPage {
     protected SelenideElement radioButtonFormerlyInRNP = $x("(//div[@class='dx-radiobutton-icon'])[2]");
     /** Находится в РНП */
     protected SelenideElement radioButtonLocatedInRNP = $x("(//div[@class='dx-radiobutton-icon'])[3]");
+    /** Контекстное меню в таблице результатов поиска */
+    protected SelenideElement contextMenu = $x("//td[@class='dx-command-edit dx-command-edit-with-icons']//a[@class='dx-link dx-icon-overflow dx-link-icon']");
 
 
 
@@ -240,5 +245,10 @@ public class AuditorPage {
         int checkTotalEntriesInRegistry;
         checkTotalEntriesInRegistry = Integer.parseInt(parameterTotalEntriesInRegistry.getText());
         return checkTotalEntriesInRegistry != 0 && parameterLocatedInRNP.getText().equals("Находится в реестре недобросовестных поставщиков");
+    }
+
+    @Step("Проверка количества элементов контекстного меню")
+    public boolean isCorrectNumberElementsContextMenu(){
+        return elementContextMenuCollection.size() >= 2;
     }
 }
