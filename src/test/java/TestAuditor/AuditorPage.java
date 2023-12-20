@@ -83,6 +83,8 @@ public class AuditorPage {
     protected SelenideElement radioButtonNeverBeenInRNP = $x("(//div[@class='dx-radiobutton-icon'])[1]");
     /** Ранее находился в РНП */
     protected SelenideElement radioButtonFormerlyInRNP = $x("(//div[@class='dx-radiobutton-icon'])[2]");
+    /** Находится в РНП */
+    protected SelenideElement radioButtonLocatedInRNP = $x("(//div[@class='dx-radiobutton-icon'])[3]");
 
 
 
@@ -231,5 +233,12 @@ public class AuditorPage {
         if(parameterToCheck.equals("-")){ checkTotalEntriesInRegistry = 0;}else{
             checkTotalEntriesInRegistry = Integer.parseInt(parameterToCheck);}
         return checkTotalEntriesInRegistry != 0 && parameterLocatedInRNP.getText().equals("Не находится в реестре недобросовестных поставщиков");
-    } //
+    }
+
+    @Step("Проверка, что организация находится в РНП")
+    public boolean isLocatedInRNP(){
+        int checkTotalEntriesInRegistry;
+        checkTotalEntriesInRegistry = Integer.parseInt(parameterTotalEntriesInRegistry.getText());
+        return checkTotalEntriesInRegistry != 0 && parameterLocatedInRNP.getText().equals("Находится в реестре недобросовестных поставщиков");
+    }
 }

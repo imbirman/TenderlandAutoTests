@@ -148,7 +148,7 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка, что организация никогда не была в РНП")
     public void checkOrganizationNeverBeenInRNP(){
-        page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
+        assertTrue(page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
                 .dragAndDropFilter(page.filterSearchByStatusOfBeingInRNP)
                 .waitFor(500)
                 .clickButton(page.radioButtonNeverBeenInRNP)
@@ -158,13 +158,13 @@ public class AuditorTest extends BaseTest {
                 .switchToTab(1)
                 .waitFor(500)
                 .scrollToElement(page.parameterTotalEntriesInRegistry)
-                .isNeverBeenInRNP();
+                .isNeverBeenInRNP());
     }
 
     @Test
     @Description("Проверка, что организация была раньше в РНП")
     public void checkOrganizationFormerlyBeenInRNP(){
-        page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
+        assertTrue(page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
                 .dragAndDropFilter(page.filterSearchByStatusOfBeingInRNP)
                 .waitFor(500)
                 .clickButton(page.radioButtonFormerlyInRNP)
@@ -174,7 +174,24 @@ public class AuditorTest extends BaseTest {
                 .switchToTab(1)
                 .waitFor(500)
                 .scrollToElement(page.parameterTotalEntriesInRegistry)
-                .isFormerlyBeenInRNP();
+                .isFormerlyBeenInRNP());
+    }
+
+    @Test
+    @Description("Проверка, что организация находится в РНП")
+    public void checkOrganizationLocatedInRNP(){
+        assertTrue(page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
+                .dragAndDropFilter(page.filterSearchByStatusOfBeingInRNP)
+                .waitFor(500)
+                .clickButton(page.radioButtonLocatedInRNP)
+                .clickButton(page.buttonSearch)
+                .waitFor(1000)
+                .clickButton(page.ninthCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .scrollToElement(page.parameterTotalEntriesInRegistry)
+                .waitFor(5000)
+                .isLocatedInRNP());
     }
 
 }
