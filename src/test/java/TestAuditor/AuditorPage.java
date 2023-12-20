@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -250,5 +251,17 @@ public class AuditorPage {
     @Step("Проверка количества элементов контекстного меню")
     public boolean isCorrectNumberElementsContextMenu(){
         return elementContextMenuCollection.size() >= 2;
+    }
+
+    @Step("Проверка списка элементов контекстного меню")
+    public boolean isCorrectNameElementsContextMenu(){
+        List<String> listElementsContextMenu = elementContextMenuCollection.texts();
+
+        List <String> checkElementsContextMenu = new ArrayList<>();
+        checkElementsContextMenu.add("Скрыть организацию");
+        checkElementsContextMenu.add("Назначить метку");
+        checkElementsContextMenu.add("Отметить просмотренным");
+
+        return listElementsContextMenu.equals(checkElementsContextMenu);
     }
 }

@@ -205,4 +205,15 @@ public class AuditorTest extends BaseTest {
                 .isCorrectNumberElementsContextMenu());
     }
 
+    @Test
+    @Description("Проверка названия элементов контекстного меню")
+    public void checkCorrectNameElementsContextMenu(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("1047796171631")
+                .clickButton(page.buttonSearch)
+                .clickButton(page.contextMenu)
+                .isCorrectNameElementsContextMenu());
+    }
+
 }
