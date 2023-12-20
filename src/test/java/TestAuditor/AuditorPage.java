@@ -67,6 +67,10 @@ public class AuditorPage {
     protected SelenideElement buttonOpenListAllTenders = $x("//div[@id='entity-all-tenders']");
     /** Кнопка для открытия списка контрактов */
     protected SelenideElement buttonOpenListContracts = $x("//div[@id='entity-all-contracts-organizations']");
+    /** Кнопка для открытия списка жалоб ФАС */
+    protected SelenideElement buttonOpenListFASClaim  = $x("//div[@id='entity-all-fas-organizations']");
+    /** Кнопка для открытия списка исполнительных производств */
+    protected SelenideElement buttonOpenListEnforcementProceedings = $x("//div[@id='entity-all-enforcement-proceedings']");
 
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
@@ -284,5 +288,15 @@ public class AuditorPage {
     @Step("Проверка кликабельности кнопки открытия списка контрактов")
     public boolean isClickableButtonOpenListContracts(){
         return buttonOpenListContracts.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки открытия списка жалоб ФАС")
+    public boolean isClickableButtonOpenListFASClaim(){
+        return buttonOpenListFASClaim.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки открытия списка исполнительных производств")
+    public boolean isClickableButtonOpenListEnforcementProceedings(){
+        return buttonOpenListEnforcementProceedings.is(interactable);
     }
 }

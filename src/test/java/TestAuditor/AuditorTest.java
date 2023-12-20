@@ -257,4 +257,32 @@ public class AuditorTest extends BaseTest {
                 .isClickableButtonOpenListContracts());
     }
 
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка жалоб ФАС")
+    public void checkClickableButtonOpenListFASClaim(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2901142220")
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .scrollToElement(page.buttonOpenListFASClaim)
+                .isClickableButtonOpenListFASClaim());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка исполнительных производств")
+    public void checkClickableButtonOpenListEnforcementProceedings(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2901142220")
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .scrollToElement(page.buttonOpenListEnforcementProceedings)
+                .isClickableButtonOpenListEnforcementProceedings());
+    }
+
 }
