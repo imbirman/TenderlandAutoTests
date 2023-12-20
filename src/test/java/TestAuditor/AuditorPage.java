@@ -9,6 +9,9 @@ import org.openqa.selenium.By;
 
 import javax.annotation.Nonnull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -29,10 +32,20 @@ public class AuditorPage {
     /** Статус организации */
     private final SelenideElement organizationStatus = $x("(//span[@class='header-info-block-value'])[1]");
 
+
     /** Список ИНН в результатах поиска */
     private final ElementsCollection tableCellINN = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
     /** Список ФИО учредителей */
     private final ElementsCollection nameFounders = $$x("//div[@class='entity-organization-person']//div[@class='main-bold-text'][1]");
+    /** Ячейка в результате поиска "Дата" */
+    private final ElementsCollection tableCellDate = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
+
+    /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
+    /** Кнопка автопоиска "Проверка поиска по дате регистрации" */
+    protected SelenideElement buttonAutoSearchDateRegistration = $x("//div[text()='Проверка поиска по дате регистрации']");
+    /** Кнопка автопоиска "Проверка поиска по дате закрытия" */
+    protected SelenideElement buttonAutoSearchDateClosing = $x("//div[text()='Проверка поиска по дате закрытия']");
 
     /** Кнопка открытия бокового меню */
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
@@ -170,5 +183,24 @@ public class AuditorPage {
     @Step("Проверка, что организация в процессе реорганизации")
     public boolean isContainInTheProcessOfReorganization(){
         return organizationStatus.getText().equals("В процессе реорганизации");
+    }
+
+    @Step("Проверка, что дата публикации находится в заданном диапазоне")
+    public boolean isCorrectDate(String startDate, String endDate) throws ParseException {
+        boolean check = true;
+        List<String> dateForCheck = tableCellDate.texts();
+        dateForCheck.remove(dateForCheck.size()-1);
+        for(String date : dateForCheck) {
+            date = date.replace(" (МСК+0)", "");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+            Date currentDate = dateFormat.parse(date);
+            Date leftDate = dateFormat.parse(startDate);
+            Date rightDate = dateFormat.parse(endDate);
+            if(!(currentDate.getTime() >= leftDate.getTime() && currentDate.getTime() <= rightDate.getTime())){
+                check = false;
+                break;
+            }
+        }
+        return check;
     }
 }

@@ -9,6 +9,8 @@ import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+
 public class AuditorTest extends BaseTest {
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
     private final static String BASE_LOGIN = "AdminTestitAuditor";
@@ -123,6 +125,24 @@ public class AuditorTest extends BaseTest {
                 .clickButton(page.NinthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainInTheProcessOfReorganization());
+    }
+
+    @Test
+    @Description("Проверка результатов поиска по дате регистрации")
+    public void checkResultSearchByDateRegistration() throws ParseException {
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchDateRegistration)
+                .waitFor(3000)
+                .isCorrectDate("01.01.2022 00:00","08.01.2022 23:59"));
+    }
+
+    @Test
+    @Description("Проверка результатов поиска по дате закрытия")
+    public void checkResultSearchByDateClosing() throws ParseException {
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchDateClosing)
+                .waitFor(3000)
+                .isCorrectDate("01.01.2022 00:00","08.01.2022 23:59"));
     }
 
 }
