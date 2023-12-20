@@ -65,6 +65,8 @@ public class AuditorPage {
     protected SelenideElement buttonOpenListFounders = $x("//div[@id='entity-persons-popover']");
     /** Кнопка для открытия списка тендеров */
     protected SelenideElement buttonOpenListAllTenders = $x("//div[@id='entity-all-tenders']");
+    /** Кнопка для открытия списка контрактов */
+    protected SelenideElement buttonOpenListContracts = $x("//div[@id='entity-all-contracts-organizations']");
 
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
@@ -277,5 +279,10 @@ public class AuditorPage {
     @Step("Проверка кликабельности кнопки открытия списка тендеров")
     public boolean isClickableButtonOpenListAllTenders(){
         return buttonOpenListAllTenders.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки открытия списка контрактов")
+    public boolean isClickableButtonOpenListContracts(){
+        return buttonOpenListContracts.is(interactable);
     }
 }

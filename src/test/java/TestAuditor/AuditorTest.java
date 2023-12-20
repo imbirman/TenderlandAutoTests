@@ -243,4 +243,18 @@ public class AuditorTest extends BaseTest {
                 .isClickableButtonOpenListAllTenders());
     }
 
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка контрактов")
+    public void checkClickableButtonOpenListContracts(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2901142220")
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .scrollToElement(page.buttonOpenListContracts)
+                .isClickableButtonOpenListContracts());
+    }
+
 }
