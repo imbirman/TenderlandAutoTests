@@ -216,4 +216,18 @@ public class AuditorTest extends BaseTest {
                 .isCorrectNameElementsContextMenu());
     }
 
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка учредителей")
+    public void checkClickableButtonOpenListFounders(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("7017311832")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .isClickableButtonOpenListFounders());
+    }
+
 }

@@ -2,6 +2,7 @@ package TestAuditor;
 
 import TestTabPlanFilters.TabPlansPage;
 import TestTabTenderFilters.TabTendersPage;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AuditorPage {
@@ -71,8 +74,10 @@ public class AuditorPage {
     /** Фильтр "Статус нахождения в РНП" в блоке фильтров */
     protected SelenideElement filterSearchByStatusOfBeingInRNP = $x("//span[text()='Статус нахождения в РНП']");
 
-    /** Строка таблицы результатов поиска для открытия карточки организации */
+    /** Девятая строка таблицы результатов поиска для открытия карточки организации */
     protected SelenideElement ninthCellTableInResultSearch = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[9]");
+    /** Первая строка таблицы результатов поиска для открытия карточки организации */
+    protected SelenideElement firstCellTableInResultSearch = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[1]");
     /** Пункт "Действующая" фильтра "Юридический статус" */
     protected SelenideElement checkboxCurrentLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[5]");
     /** Пункт "Недействующая" фильтра "Юридический статус" */
@@ -256,12 +261,15 @@ public class AuditorPage {
     @Step("Проверка списка элементов контекстного меню")
     public boolean isCorrectNameElementsContextMenu(){
         List<String> listElementsContextMenu = elementContextMenuCollection.texts();
-
         List <String> checkElementsContextMenu = new ArrayList<>();
         checkElementsContextMenu.add("Скрыть организацию");
         checkElementsContextMenu.add("Назначить метку");
         checkElementsContextMenu.add("Отметить просмотренным");
-
         return listElementsContextMenu.equals(checkElementsContextMenu);
+    }
+
+    @Step("Проверка кликабельности кнопок блоков")
+    public boolean isClickableButtonOpenListFounders(){
+        return buttonOpenListFounders.is(Condition.interactable);
     }
 }
