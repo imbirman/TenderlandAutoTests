@@ -56,8 +56,11 @@ public class AuditorPage {
     protected SelenideElement checkboxInactiveLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[1]");
     /** Пункт "В процессе ликвидации" фильтра "Юридический статус" */
     protected SelenideElement checkboxInTheProcessOfLiquidationStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[2]");
-    /** Пункт "В процессе ликвидации" фильтра "Юридический статус" */
+    /** Пункт "В процессе банкротства" фильтра "Юридический статус" */
     protected SelenideElement checkboxInBankruptcyProcessStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[3]");
+    /** Пункт "В процессе реорганизации" фильтра "Юридический статус" */
+    protected SelenideElement checkboxInTheProcessOfReorganizationStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[4]");
+
 
 
 
@@ -162,5 +165,10 @@ public class AuditorPage {
     @Step("Проверка, что организация в процессе банкротства")
     public boolean isContainInBankruptcyProcess(){
         return organizationStatus.getText().equals("В процессе банкротства");
+    }
+
+    @Step("Проверка, что организация в процессе реорганизации")
+    public boolean isContainInTheProcessOfReorganization(){
+        return organizationStatus.getText().equals("В процессе реорганизации");
     }
 }

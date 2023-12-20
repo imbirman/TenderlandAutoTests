@@ -112,4 +112,17 @@ public class AuditorTest extends BaseTest {
                 .isContainInBankruptcyProcess());
     }
 
+    @Test
+    @Description("Проверка результатов поиска по юридическому статусу 'В процессе реорганизации'")
+    public void checkResultSearchByInTheProcessOfReorganizationStatus(){
+        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+                .waitFor(500)
+                .clickButton(page.checkboxInTheProcessOfReorganizationStatus)
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .clickButton(page.NinthCellTableInResultSearch)
+                .switchToTab(1)
+                .isContainInTheProcessOfReorganization());
+    }
+
 }
