@@ -39,7 +39,7 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по реквизитам организации")
     public void checkResultSearchByOrganizationDetails(){
-        assertTrue(page.DragAndDropFilter(page.filterOrganizationDetails)
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
                 .waitFor(500)
                 .typeSearchInclude("234703774440")
                 .clickButton(page.buttonSearch)
@@ -50,12 +50,12 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по учредителям")
     public void checkResultSearchByFounders(){
-        assertTrue(page.DragAndDropFilter(page.filterSearchByFounders)
+        assertTrue(page.dragAndDropFilter(page.filterSearchByFounders)
                 .waitFor(500)
                 .typeSearchInclude("иванов")
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
-                .clickButton(page.NinthCellTableInResultSearch)
+                .clickButton(page.ninthCellTableInResultSearch)
                 .switchToTab(1)
                 .clickButton(page.buttonOpenListFounders)
                 .waitFor(1000)
@@ -65,12 +65,12 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по юридическому статусу 'Действующая'")
     public void checkResultSearchByCurrentLegalStatus(){
-        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+        assertTrue(page.dragAndDropFilter(page.filterSearchByLegalStatus)
                 .waitFor(500)
                 .clickButton(page.checkboxCurrentLegalStatus)
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
-                .clickButton(page.NinthCellTableInResultSearch)
+                .clickButton(page.ninthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainCurrentLegalData());
     }
@@ -78,12 +78,12 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по юридическому статусу 'Недействующая'")
     public void checkResultSearchByInactiveLegalStatus(){
-        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+        assertTrue(page.dragAndDropFilter(page.filterSearchByLegalStatus)
                 .waitFor(500)
                 .clickButton(page.checkboxInactiveLegalStatus)
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
-                .clickButton(page.NinthCellTableInResultSearch)
+                .clickButton(page.ninthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainInactiveLegalData());
     }
@@ -91,12 +91,12 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по юридическому статусу 'В процессе ликвидации'")
     public void checkResultSearchByInTheProcessOfLiquidationStatus(){
-        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+        assertTrue(page.dragAndDropFilter(page.filterSearchByLegalStatus)
                 .waitFor(500)
                 .clickButton(page.checkboxInTheProcessOfLiquidationStatus)
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
-                .clickButton(page.NinthCellTableInResultSearch)
+                .clickButton(page.ninthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainInTheProcessOfLiquidation());
     }
@@ -104,12 +104,12 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по юридическому статусу 'В процессе банкротства'")
     public void checkResultSearchByInBankruptcyProcessStatus(){
-        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+        assertTrue(page.dragAndDropFilter(page.filterSearchByLegalStatus)
                 .waitFor(500)
                 .clickButton(page.checkboxInBankruptcyProcessStatus)
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
-                .clickButton(page.NinthCellTableInResultSearch)
+                .clickButton(page.ninthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainInBankruptcyProcess());
     }
@@ -117,12 +117,12 @@ public class AuditorTest extends BaseTest {
     @Test
     @Description("Проверка результатов поиска по юридическому статусу 'В процессе реорганизации'")
     public void checkResultSearchByInTheProcessOfReorganizationStatus(){
-        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+        assertTrue(page.dragAndDropFilter(page.filterSearchByLegalStatus)
                 .waitFor(500)
                 .clickButton(page.checkboxInTheProcessOfReorganizationStatus)
                 .clickButton(page.buttonSearch)
                 .waitFor(3000)
-                .clickButton(page.NinthCellTableInResultSearch)
+                .clickButton(page.ninthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainInTheProcessOfReorganization());
     }
@@ -143,6 +143,38 @@ public class AuditorTest extends BaseTest {
                 .clickButton(page.buttonAutoSearchDateClosing)
                 .waitFor(3000)
                 .isCorrectDate("01.01.2022 00:00","08.01.2022 23:59"));
+    }
+
+    @Test
+    @Description("Проверка, что организация никогда не была в РНП")
+    public void checkOrganizationNeverBeenInRNP(){
+        page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
+                .dragAndDropFilter(page.filterSearchByStatusOfBeingInRNP)
+                .waitFor(500)
+                .clickButton(page.radioButtonNeverBeenInRNP)
+                .clickButton(page.buttonSearch)
+                .waitFor(1000)
+                .clickButton(page.ninthCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .scrollToElement(page.parameterTotalEntriesInRegistry)
+                .isNeverBeenInRNP();
+    }
+
+    @Test
+    @Description("Проверка, что организация была раньше в РНП")
+    public void checkOrganizationFormerlyBeenInRNP(){
+        page.scrollToElement(page.filterSearchByStatusOfBeingInRNP)
+                .dragAndDropFilter(page.filterSearchByStatusOfBeingInRNP)
+                .waitFor(500)
+                .clickButton(page.radioButtonFormerlyInRNP)
+                .clickButton(page.buttonSearch)
+                .waitFor(1000)
+                .clickButton(page.ninthCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .scrollToElement(page.parameterTotalEntriesInRegistry)
+                .isFormerlyBeenInRNP();
     }
 
 }

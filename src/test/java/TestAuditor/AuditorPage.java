@@ -31,7 +31,11 @@ public class AuditorPage {
     private final SelenideElement fieldSearchInclude = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
     /** Статус организации */
     private final SelenideElement organizationStatus = $x("(//span[@class='header-info-block-value'])[1]");
+    /** Пометка находится ли организация в настоящий момент в РНП */
+    private final SelenideElement parameterLocatedInRNP = $x("//div[contains(text(), 'РНП')]//div[1]");
 
+    /** В разделе РНП поле "Всего записей в реестре" */
+    protected SelenideElement parameterTotalEntriesInRegistry = $x("//div[text()='Всего записей в реестре']/following::div[1]");
 
     /** Список ИНН в результатах поиска */
     private final ElementsCollection tableCellINN = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
@@ -60,9 +64,11 @@ public class AuditorPage {
     protected SelenideElement filterSearchByFounders = $x("//span[text()='Поиск по учредителям']");
     /** Фильтр "Юридический статус" в блоке фильтров */
     protected SelenideElement filterSearchByLegalStatus = $x("//span[text()='Юридический статус']");
+    /** Фильтр "Статус нахождения в РНП" в блоке фильтров */
+    protected SelenideElement filterSearchByStatusOfBeingInRNP = $x("//span[text()='Статус нахождения в РНП']");
 
     /** Строка таблицы результатов поиска для открытия карточки организации */
-    protected SelenideElement NinthCellTableInResultSearch = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[9]");
+    protected SelenideElement ninthCellTableInResultSearch = $x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr)[9]");
     /** Пункт "Действующая" фильтра "Юридический статус" */
     protected SelenideElement checkboxCurrentLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[5]");
     /** Пункт "Недействующая" фильтра "Юридический статус" */
@@ -73,6 +79,11 @@ public class AuditorPage {
     protected SelenideElement checkboxInBankruptcyProcessStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[3]");
     /** Пункт "В процессе реорганизации" фильтра "Юридический статус" */
     protected SelenideElement checkboxInTheProcessOfReorganizationStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[4]");
+    /** Пункт "Никогда не находился в РНП" */
+    protected SelenideElement radioButtonNeverBeenInRNP = $x("(//div[@class='dx-radiobutton-icon'])[1]");
+    /** Ранее находился в РНП */
+    protected SelenideElement radioButtonFormerlyInRNP = $x("(//div[@class='dx-radiobutton-icon'])[2]");
+
 
 
 
@@ -90,7 +101,7 @@ public class AuditorPage {
     }
 
     @Step("Перетаскиваем фильтр в поле построения")
-    public AuditorPage DragAndDropFilter(@Nonnull SelenideElement element){
+    public AuditorPage dragAndDropFilter(@Nonnull SelenideElement element){
         actions().clickAndHold(element).moveToElement(filterRoot).release().build().perform();
         return new AuditorPage();
     }
@@ -203,4 +214,22 @@ public class AuditorPage {
         }
         return check;
     }
+
+    @Step("Проверка, что организация никогда не была в РНП")
+    public boolean isNeverBeenInRNP(){
+        int checkTotalEntriesInRegistry;
+        String parameterToCheck = parameterTotalEntriesInRegistry.getText();
+        if(parameterToCheck.equals("-")){ checkTotalEntriesInRegistry = 0;}else{
+            checkTotalEntriesInRegistry = Integer.parseInt(parameterTotalEntriesInRegistry.getText());}
+        return checkTotalEntriesInRegistry == 0 && parameterLocatedInRNP.getText().equals("Не находится в реестре недобросовестных поставщиков");
+    }
+
+    @Step("Проверка, что организация была раньше в РНП")
+    public boolean isFormerlyBeenInRNP(){
+        int checkTotalEntriesInRegistry;
+        String parameterToCheck = parameterTotalEntriesInRegistry.getText();
+        if(parameterToCheck.equals("-")){ checkTotalEntriesInRegistry = 0;}else{
+            checkTotalEntriesInRegistry = Integer.parseInt(parameterToCheck);}
+        return checkTotalEntriesInRegistry != 0 && parameterLocatedInRNP.getText().equals("Не находится в реестре недобросовестных поставщиков");
+    } //
 }
