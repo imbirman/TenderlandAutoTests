@@ -285,4 +285,32 @@ public class AuditorTest extends BaseTest {
                 .isClickableButtonOpenListEnforcementProceedings());
     }
 
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка исполнительных производств")
+    public void checkClickableButtonOpenListArbitrationCases(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2901142220")
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .scrollToElement(page.buttonOpenListArbitrationCases)
+                .isClickableButtonOpenListArbitrationCases());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки открытия списка исполнительных производств по аффилированным лицам")
+    public void checkClickableButtonOpenListArbitrationCasesOnAffiliates(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2901142220")
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .scrollToElement(page.buttonOpenListArbitrationCasesOnAffiliates)
+                .isClickableButtonOpenListArbitrationCasesOnAffiliates());
+    }
+
 }

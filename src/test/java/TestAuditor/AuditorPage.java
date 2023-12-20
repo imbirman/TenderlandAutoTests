@@ -71,6 +71,10 @@ public class AuditorPage {
     protected SelenideElement buttonOpenListFASClaim  = $x("//div[@id='entity-all-fas-organizations']");
     /** Кнопка для открытия списка исполнительных производств */
     protected SelenideElement buttonOpenListEnforcementProceedings = $x("//div[@id='entity-all-enforcement-proceedings']");
+    /** Кнопка для открытия списка арбитражных дел */
+    protected SelenideElement buttonOpenListArbitrationCases = $x("//div[@id='entity-cases-organizations']");
+    /** Кнопка для открытия списка арбитражных дел по аффилированным лицам */
+    protected SelenideElement buttonOpenListArbitrationCasesOnAffiliates = $x("//div[@id='entity-affilated-cases-organizations']");
 
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
@@ -298,5 +302,15 @@ public class AuditorPage {
     @Step("Проверка кликабельности кнопки открытия списка исполнительных производств")
     public boolean isClickableButtonOpenListEnforcementProceedings(){
         return buttonOpenListEnforcementProceedings.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки открытия списка арбитражных дел")
+    public boolean isClickableButtonOpenListArbitrationCases(){
+        return buttonOpenListArbitrationCases.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки открытия списка арбитражных дел по аффилированным лицам")
+    public boolean isClickableButtonOpenListArbitrationCasesOnAffiliates(){
+        return buttonOpenListArbitrationCasesOnAffiliates.is(interactable);
     }
 }
