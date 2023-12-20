@@ -61,16 +61,29 @@ public class AuditorTest extends BaseTest {
     }
 
     @Test
-    @Title("Проверка результатов поиска по юридическому статусу 'Действующая'")
+    @Description("Проверка результатов поиска по юридическому статусу 'Действующая'")
     public void checkResultSearchByCurrentLegalStatus(){
         assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
                 .waitFor(500)
                 .clickButton(page.checkboxCurrentLegalStatus)
                 .clickButton(page.buttonSearch)
-                .waitFor(1000)
+                .waitFor(3000)
                 .clickButton(page.NinthCellTableInResultSearch)
                 .switchToTab(1)
                 .isContainCurrentLegalData());
+    }
+
+    @Test
+    @Description("Проверка результатов поиска по юридическому статусу 'Недействующая'")
+    public void checkResultSearchByInactiveLegalStatus(){
+        assertTrue(page.DragAndDropFilter(page.filterSearchByLegalStatus)
+                .waitFor(500)
+                .clickButton(page.checkboxInactiveLegalStatus)
+                .clickButton(page.buttonSearch)
+                .waitFor(3000)
+                .clickButton(page.NinthCellTableInResultSearch)
+                .switchToTab(1)
+                .isContainInactiveLegalData());
     }
 
 }

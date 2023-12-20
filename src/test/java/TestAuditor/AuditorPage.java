@@ -53,7 +53,7 @@ public class AuditorPage {
     /** Пункт "Действующая" фильтра "Юридический статус" */
     protected SelenideElement checkboxCurrentLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[5]");
     /** Пункт "Недействующая" фильтра "Юридический статус" */
-    protected SelenideElement radioButtonInactiveLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[1]");
+    protected SelenideElement checkboxInactiveLegalStatus = $x("(//div[@class='dx-widget dx-checkbox dx-list-select-checkbox']/div)[1]");
 
 
 
