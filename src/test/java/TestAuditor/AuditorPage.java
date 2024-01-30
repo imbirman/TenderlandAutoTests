@@ -38,18 +38,20 @@ public class AuditorPage {
     private final SelenideElement parameterLocatedInRNP = $x("//div[contains(text(), 'РНП')]//div[1]");
     /** Название окна блока с учредителями */
     private final SelenideElement nameWindowBlock = $x("//div[@class='entity-block']//div[@class='entity-block-header']");
+    /** Название окна списка тендеров, в котором участвовала организация */
+    private final SelenideElement nameWindowWitchOrganizationParticipated = $x("(//div[@class='dx-item-content dx-toolbar-item-content']//div)[1]");
 
 
     /** В разделе РНП поле "Всего записей в реестре" */
     protected SelenideElement parameterTotalEntriesInRegistry = $x("//div[text()='Всего записей в реестре']/following::div[1]");
 
     /** Список ИНН в результатах поиска */
-    private final ElementsCollection tableCellINN = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
+    private final ElementsCollection tableCellINNCollection = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
     /** Список ФИО учредителей */
-    private final ElementsCollection nameFounders = $$x("//div[@class='entity-organization-person']//div[@class='main-bold-text'][1]");
-    /** Ячейка в результате поиска "Дата" */
-    private final ElementsCollection tableCellDate = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
-    /** Элемент контекстного меню */
+    private final ElementsCollection nameFoundersCollection = $$x("//div[@class='entity-organization-person']//div[@class='main-bold-text'][1]");
+    /** Список ячеек в результате поиска "Дата" */
+    private final ElementsCollection tableCellDateCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[10]");
+    /** Список элементов контекстного меню */
     private final ElementsCollection elementContextMenuCollection = $$x("//div[@class='dx-submenu']//div[@class='dx-item dx-menu-item']/div/div");
 
     /** Вкладка "Автопоиски" */
@@ -77,6 +79,8 @@ public class AuditorPage {
     protected SelenideElement buttonOpenListArbitrationCases = $x("//div[@id='entity-cases-organizations']");
     /** Кнопка для открытия списка арбитражных дел по аффилированным лицам */
     protected SelenideElement buttonOpenListArbitrationCasesOnAffiliates = $x("//div[@id='entity-affilated-cases-organizations']");
+    /** Заголовок блока с тендерной информацией */
+    protected SelenideElement headerBlockTendersInfo = $x("(//div[@id='entity-menu']//div[@class='dx-item dx-list-item'])[2]");
 
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
@@ -159,25 +163,31 @@ public class AuditorPage {
         return new AuditorPage();
     }
 
-    @Step("Нажать кнопку{button}")
+    @Step("Нажать кнопку {button}")
     public AuditorPage clickButton(SelenideElement button){
         button.click();
         return new AuditorPage();
     }
 
+    @Step("ввести значение в поисковую строку {search}")
     public AuditorPage typeSearchInclude(String search){
         fieldSearchInclude.sendKeys(search);
         return new AuditorPage();
     }
 
-    /** Получить название окна блока */
+    @Step("Получить название окна блока")
     public String getNameWindowBlock(){
         return nameWindowBlock.getText();
     }
 
+    @Step("Получить название окна списка тендеров, в которых участвовала организация")
+    public String getNameWindowWitchOrganizationParticipated(){
+        return nameWindowWitchOrganizationParticipated.getText();
+    }
+
     @Step("Проверка, что ИНН организации соответствует поисковому запросу")
     public boolean isContainOrganizationDetail(){
-        List<String> checkOrganizationDetail = tableCellINN.texts();
+        List<String> checkOrganizationDetail = tableCellINNCollection.texts();
         checkOrganizationDetail.remove(checkOrganizationDetail.size()-1);
         boolean checkIsContainOrganizationDetail = true;
         for(String type : checkOrganizationDetail){
@@ -191,7 +201,7 @@ public class AuditorPage {
 
     @Step("Проверка, что наименование учредителя включает ключевое слово")
     public boolean isContainNameFounders(){
-        List<String> checkNameFounders = nameFounders.texts();
+        List<String> checkNameFounders = nameFoundersCollection.texts();
         boolean checkIsContainNameFounders = false;
         for(String type : checkNameFounders){
             if(type.contains("иванов") || type.contains("Иванов") || type.contains("ИВАНОВ")){
@@ -230,7 +240,7 @@ public class AuditorPage {
     @Step("Проверка, что дата публикации находится в заданном диапазоне")
     public boolean isCorrectDate(String startDate, String endDate) throws ParseException {
         boolean check = true;
-        List<String> dateForCheck = tableCellDate.texts();
+        List<String> dateForCheck = tableCellDateCollection.texts();
         dateForCheck.remove(dateForCheck.size()-1);
         for(String date : dateForCheck) {
             date = date.replace(" (МСК+0)", "");
@@ -319,5 +329,16 @@ public class AuditorPage {
     @Step("Проверка кликабельности кнопки открытия списка арбитражных дел по аффилированным лицам")
     public boolean isClickableButtonOpenListArbitrationCasesOnAffiliates(){
         return buttonOpenListArbitrationCasesOnAffiliates.is(interactable);
+    }
+
+    @Step("Проверка списка учредителей")
+    public boolean isCorrectNameFounders(){
+        List<String> listFounders = nameFoundersCollection.texts();
+//        listFounders.remove(listFounders.size()-1);
+        List<String> checkFounders = new ArrayList<>();
+        checkFounders.add("ДЕГОДЬЕВА ВЕРА ВАСИЛЬЕВНА");
+        checkFounders.add("ПЕРЕВАЛОВ ВЛАДИМИР ВИКТОРОВИЧ");
+
+        return listFounders.equals(checkFounders);
     }
 }
