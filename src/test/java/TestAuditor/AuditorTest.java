@@ -326,7 +326,58 @@ public class AuditorTest extends BaseTest {
                 .switchToTab(1)
                 .waitFor(500)
                 .clickButton(page.buttonOpenListFounders)
-                .getNameWindowBlock(), "Учредители");
+                .getNameWindowBlock(page.nameWindowBlock), "Учредители");
+    }
+
+    @Test
+    @Description("Проверка списка учредителей")
+    public void checkListFounders(){
+        assertTrue(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2801102311")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.buttonOpenListFounders)
+                .isCorrectNameFounders());
+    }
+
+    @Test
+    @Description("Проверка названия окна списка тендеров")
+    public void checkNameWindowTenders(){
+        assertEquals(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("227712808600")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.headerBlockTendersInfo)
+                .clickButton(page.buttonOpenListAllTenders)
+                .getNameWindowWitchOrganizationParticipated(), "Тендеры");
+    }
+
+    @Test
+    @Description("Проверка названия окна списка жалоб ФАС")
+    public void checkNameWindowFASClaim(){
+        assertEquals(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("5044116555")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .waitFor(500)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.headerBlockArbitration)
+                .clickButton(page.buttonOpenListFASClaim)
+                .getNameWindowBlock(page.nameWindowFASClaim), "Жалобы ФАС");
     }
 
 }
