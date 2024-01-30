@@ -36,6 +36,8 @@ public class AuditorPage {
     private final SelenideElement organizationStatus = $x("(//span[@class='header-info-block-value'])[1]");
     /** Пометка находится ли организация в настоящий момент в РНП */
     private final SelenideElement parameterLocatedInRNP = $x("//div[contains(text(), 'РНП')]//div[1]");
+    /** Название окна блока с учредителями */
+    private final SelenideElement nameWindowBlock = $x("//div[@class='entity-block']//div[@class='entity-block-header']");
 
 
     /** В разделе РНП поле "Всего записей в реестре" */
@@ -166,6 +168,11 @@ public class AuditorPage {
     public AuditorPage typeSearchInclude(String search){
         fieldSearchInclude.sendKeys(search);
         return new AuditorPage();
+    }
+
+    /** Получить название окна блока */
+    public String getNameWindowBlock(){
+        return nameWindowBlock.getText();
     }
 
     @Step("Проверка, что ИНН организации соответствует поисковому запросу")

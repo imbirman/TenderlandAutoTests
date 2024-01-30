@@ -313,4 +313,20 @@ public class AuditorTest extends BaseTest {
                 .isClickableButtonOpenListArbitrationCasesOnAffiliates());
     }
 
+    @Test
+    @Description("Проверка названия окна списка учредителей")
+    public void checkNameWindowFounders(){
+        assertEquals(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("2801102311")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.buttonOpenListFounders)
+                .getNameWindowBlock(), "Учредители");
+    }
+
 }
