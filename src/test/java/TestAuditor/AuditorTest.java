@@ -414,4 +414,21 @@ public class AuditorTest extends BaseTest {
                 .getNameWindowBlock(page.nameWindowInBlock), "Контракты");
     }
 
+    @Test
+    @Description("Проверка названия окна списка арбитражных дел")
+    public void checkNameWindowArbitrationCases(){
+        assertEquals(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("5044116555")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.headerBlockArbitrationInfo)
+                .clickButton(page.buttonOpenListArbitrationCases)
+                .getNameWindowBlock(page.nameWindowInBlock), "Суды");
+    }
+
 }
