@@ -3,9 +3,11 @@ package TestAutoSearch;
 import TestAuditor.AuditorPage;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import javax.annotation.Nonnull;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class AutoSearchPage {
 
@@ -15,6 +17,23 @@ public class AutoSearchPage {
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
+
+
+    /** Поле дерева фильтров */
+    private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
+    /** Поле поиска внутри фильтра "Название тендера" */
+    private final SelenideElement fieldSearchByNameTender = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
+    /** Текст ошибки при сохранении автопоиска с пустым названием */
+    private final SelenideElement errorMessageEmptyNameFieldAutoSearch = $x("//div[@id='tl-autosearch-name']//div[@class='dx-overlay-content dx-invalid-message-content']");
+    /** Поле ввода названия автопоиска */
+    private final SelenideElement fieldNameAutoSearch = $x("//div[@id='tl-autosearch-name']//input");
+
+    /** Фильтр "Название тендера" в блоке фильтров */
+    protected SelenideElement filterNameTender = $x("//span[text()='Название тендера']");
+    /** Кнопка "Сохранить автопоиск" */
+    protected SelenideElement buttonSaveAutoSearch = $x("//div[@id='search-filters-save-autosearch-button']");
+    /** Кнопка "Применить" для сохранения автопоиска */
+    protected SelenideElement buttonAcceptSaveAutoSearch = $x("//div[@id='save-autosearch-apply']");
 
 
 
@@ -43,4 +62,39 @@ public class AutoSearchPage {
         passwordField.sendKeys(password);
         return new AutoSearchPage();
     }
+
+    /** Ввести название автопоиска */
+    public AutoSearchPage typeNameAutoSearch(String name){
+        fieldNameAutoSearch.sendKeys(name);
+        return new AutoSearchPage();
+    }
+
+    @Step("Перетаскиваем фильтр в поле построения")
+    public AutoSearchPage dragAndDropFilter(@Nonnull SelenideElement element){
+        actions().clickAndHold(element).moveToElement(filterRoot).release().build().perform();
+        return new AutoSearchPage();
+    }
+
+    @Step("Нажать кнопку {button}")
+    public AutoSearchPage clickButton(SelenideElement button){
+        button.click();
+        return new AutoSearchPage();
+    }
+
+    @Step("Ввести значение в поле название тендера {search}")
+    public AutoSearchPage typeSearchInsideFilterNameTender(String search){
+        fieldSearchByNameTender.sendKeys(search);
+        return new AutoSearchPage();
+    }
+
+    @Step("Проверка сообщения об ошибке при отсутствии названия автопоиска")
+    public boolean isErrorMessageEmptyNameFieldAutoSearch(){
+        return errorMessageEmptyNameFieldAutoSearch.getText().contains("Заполните название автопоиска") && errorMessageEmptyNameFieldAutoSearch.isDisplayed();
+    }
+
+    @Step("Проверка сообщения об ошибке при дублировании названия автопоиска")
+    public boolean isErrorMessageDuplicateNameFieldAutoSearch(){
+        return errorMessageEmptyNameFieldAutoSearch.getText().contains("Название должно быть уникальным.") && errorMessageEmptyNameFieldAutoSearch.isDisplayed();
+    }
+
 }
