@@ -36,16 +36,14 @@ public class AuditorPage {
     private final SelenideElement organizationStatus = $x("(//span[@class='header-info-block-value'])[1]");
     /** Пометка находится ли организация в настоящий момент в РНП */
     private final SelenideElement parameterLocatedInRNP = $x("//div[contains(text(), 'РНП')]//div[1]");
+    /** Название окна блока с учредителями */
+    private final SelenideElement nameWindowBlock = $x("//div[@class='entity-block']//div[@class='entity-block-header']");
     /** Название окна списка тендеров, в котором участвовала организация */
     private final SelenideElement nameWindowWitchOrganizationParticipated = $x("(//div[@class='dx-item-content dx-toolbar-item-content']//div)[1]");
 
 
     /** В разделе РНП поле "Всего записей в реестре" */
     protected SelenideElement parameterTotalEntriesInRegistry = $x("//div[text()='Всего записей в реестре']/following::div[1]");
-    /** Название окна блока с учредителями */
-    protected SelenideElement nameWindowBlock = $x("//div[@class='entity-block']//div[@class='entity-block-header']");
-    /** Название блока для жалоб ФАС */
-    protected SelenideElement nameWindowFASClaim = $x("//div[@class='dx-item-content dx-toolbar-item-content']/div");
 
     /** Список ИНН в результатах поиска */
     private final ElementsCollection tableCellINNCollection = $$x("(//div[@class='dx-datagrid-content']//tbody[@role='presentation']/tr/td[5])[1]");
@@ -83,8 +81,6 @@ public class AuditorPage {
     protected SelenideElement buttonOpenListArbitrationCasesOnAffiliates = $x("//div[@id='entity-affilated-cases-organizations']");
     /** Заголовок блока с тендерной информацией */
     protected SelenideElement headerBlockTendersInfo = $x("(//div[@id='entity-menu']//div[@class='dx-item dx-list-item'])[2]");
-    /** Заголовок блока с арбитражной информацией */
-    protected SelenideElement headerBlockArbitration = $x("(//div[@id='entity-menu']//div[@class='dx-item dx-list-item'])[3]");
 
     /** Фильтр "Реквизиты организации" в блоке фильтров */
     protected SelenideElement filterOrganizationDetails = $x("//span[text()='Реквизиты организации']");
@@ -179,9 +175,9 @@ public class AuditorPage {
         return new AuditorPage();
     }
 
-    @Step("Получить название окна блока {block}")
-    public String getNameWindowBlock(SelenideElement block){
-        return block.getText();
+    @Step("Получить название окна блока")
+    public String getNameWindowBlock(){
+        return nameWindowBlock.getText();
     }
 
     @Step("Получить название окна списка тендеров, в которых участвовала организация")

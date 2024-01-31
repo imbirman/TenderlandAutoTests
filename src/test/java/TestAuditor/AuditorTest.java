@@ -380,4 +380,5 @@ public class AuditorTest extends BaseTest {
                 .getNameWindowBlock(page.nameWindowFASClaim), "Жалобы ФАС");
     }
 
+
 }
