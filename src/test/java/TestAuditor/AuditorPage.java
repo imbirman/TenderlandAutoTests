@@ -82,7 +82,7 @@ public class AuditorPage {
     /** Заголовок блока с арбитражной информацией */
     protected SelenideElement headerBlockArbitrationInfo = $x("(//div[@id='entity-menu']//div[@class='dx-item dx-list-item'])[3]");
     /** Название окна списка жалоб ФАС */
-    protected SelenideElement nameWindowFASClaim = $x("//div[@class='dx-item-content dx-toolbar-item-content']/div");
+    protected SelenideElement nameWindowInBlockArbitrationInfo = $x("//div[@class='dx-item-content dx-toolbar-item-content']/div");
     /** Название окна блока с учредителями */
     protected SelenideElement nameWindowBlock = $x("//div[@class='entity-block']//div[@class='entity-block-header']");
 

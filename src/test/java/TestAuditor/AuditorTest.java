@@ -377,7 +377,24 @@ public class AuditorTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.headerBlockArbitrationInfo)
                 .clickButton(page.buttonOpenListFASClaim)
-                .getNameWindowBlock(page.nameWindowFASClaim), "Жалобы ФАС");
+                .getNameWindowBlock(page.nameWindowInBlockArbitrationInfo), "Жалобы ФАС");
+    }
+
+    @Test
+    @Description("Проверка названия окна списка исполнительных производств")
+    public void checkNameWindowEnforcementProceeding(){
+        assertEquals(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("7017311832")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.headerBlockArbitrationInfo)
+                .clickButton(page.buttonOpenListEnforcementProceedings)
+                .getNameWindowBlock(page.nameWindowInBlockArbitrationInfo), "Исполнительные производства");
     }
 
 
