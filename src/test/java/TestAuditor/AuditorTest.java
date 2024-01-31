@@ -326,7 +326,7 @@ public class AuditorTest extends BaseTest {
                 .switchToTab(1)
                 .waitFor(500)
                 .clickButton(page.buttonOpenListFounders)
-                .getNameWindowBlock(page.nameWindowBlock), "Учредители");
+                .getNameWindowBlock(page.nameWindowBlockFounders), "Учредители");
     }
 
     @Test
@@ -377,7 +377,7 @@ public class AuditorTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.headerBlockArbitrationInfo)
                 .clickButton(page.buttonOpenListFASClaim)
-                .getNameWindowBlock(page.nameWindowInBlockArbitrationInfo), "Жалобы ФАС");
+                .getNameWindowBlock(page.nameWindowInBlock), "Жалобы ФАС");
     }
 
     @Test
@@ -394,8 +394,24 @@ public class AuditorTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.headerBlockArbitrationInfo)
                 .clickButton(page.buttonOpenListEnforcementProceedings)
-                .getNameWindowBlock(page.nameWindowInBlockArbitrationInfo), "Исполнительные производства");
+                .getNameWindowBlock(page.nameWindowInBlock), "Исполнительные производства");
     }
 
+    @Test
+    @Description("Проверка названия окна списка контрактов")
+    public void checkNameWindowContracts(){
+        assertEquals(page.dragAndDropFilter(page.filterOrganizationDetails)
+                .waitFor(500)
+                .typeSearchInclude("5044116555")
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch)
+                .waitFor(500)
+                .clickButton(page.firstCellTableInResultSearch)
+                .switchToTab(1)
+                .waitFor(500)
+                .clickButton(page.headerBlockArbitrationInfo)
+                .clickButton(page.buttonOpenListContracts)
+                .getNameWindowBlock(page.nameWindowInBlock), "Контракты");
+    }
 
 }
