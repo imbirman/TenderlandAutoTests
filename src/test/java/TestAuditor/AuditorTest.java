@@ -375,7 +375,7 @@ public class AuditorTest extends BaseTest {
                 .waitFor(500)
                 .switchToTab(1)
                 .waitFor(500)
-                .clickButton(page.headerBlockArbitration)
+                .clickButton(page.headerBlockArbitrationInfo)
                 .clickButton(page.buttonOpenListFASClaim)
                 .getNameWindowBlock(page.nameWindowFASClaim), "Жалобы ФАС");
     }
