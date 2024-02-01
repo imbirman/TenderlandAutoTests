@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 
 import javax.annotation.Nonnull;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AutoSearchPage {
@@ -17,6 +18,10 @@ public class AutoSearchPage {
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
+    /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
+    /** Кнопка автопоиска "Проверка поиска по дате регистрации" */
+    protected SelenideElement buttonAutoSearchCheckingSearchByDateSigning = $x("//div[text()='Проверка поиска по дате подписания']");
 
 
     /** Поле дерева фильтров */
@@ -27,6 +32,15 @@ public class AutoSearchPage {
     private final SelenideElement errorMessageEmptyNameFieldAutoSearch = $x("//div[@id='tl-autosearch-name']//div[@class='dx-overlay-content dx-invalid-message-content']");
     /** Поле ввода названия автопоиска */
     private final SelenideElement fieldNameAutoSearch = $x("//div[@id='tl-autosearch-name']//input");
+    /** Кнопка копирования ссылки автопоиска */
+    private final SelenideElement buttonCopyLinkAutoSearchInBuildingSearch = $x("//i[@class='material-icons-round icon-24px icon-grey icon-grey-hover md-share']");
+    /** Кнопка копирования автопоиска */
+    private final SelenideElement buttonCopyAutoSearchInBuildingSearch = $x("//i[@class='material-icons-round icon-24px icon-grey icon-grey-hover md-content_copy']");
+    /** Кнопка удаления автопоиска в блоке дерева фильтров */
+    private final SelenideElement buttonDeleteAutoSearchInBuildingSearch = $x("//i[@id='search-autosearch-delete']");
+    /** Кнопка очистки поля построения фильтров */
+    protected SelenideElement buttonClearBuildingFieldSearch = $x("//span[text()='Очистить поле']");
+
 
     /** Фильтр "Название тендера" в блоке фильтров */
     protected SelenideElement filterNameTender = $x("//span[text()='Название тендера']");
@@ -95,6 +109,26 @@ public class AutoSearchPage {
     @Step("Проверка сообщения об ошибке при дублировании названия автопоиска")
     public boolean isErrorMessageDuplicateNameFieldAutoSearch(){
         return errorMessageEmptyNameFieldAutoSearch.getText().contains("Название должно быть уникальным.") && errorMessageEmptyNameFieldAutoSearch.isDisplayed();
+    }
+
+    @Step("Проверка кликабельности кнопки копирования ссылки автопоиска")
+    public boolean isClickableButtonCopyLinkAutoSearchInBuildingSearch(){
+        return buttonCopyLinkAutoSearchInBuildingSearch.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки копирования автопоиска")
+    public boolean isClickableButtonCopyAutoSearchInBuildingSearch(){
+        return buttonCopyAutoSearchInBuildingSearch.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки удаления автопоиска")
+    public boolean isClickableButtonDeleteAutoSearchInBuildingSearch(){
+        return buttonDeleteAutoSearchInBuildingSearch.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки закрытия автопоиска")
+    public boolean isClickableButtonCloseAutoSearchInBuildingSearch(){
+        return buttonClearBuildingFieldSearch.is(interactable);
     }
 
 }

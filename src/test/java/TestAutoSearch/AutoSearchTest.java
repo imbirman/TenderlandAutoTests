@@ -4,6 +4,8 @@ import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import static org.junit.jupiter.api.Assertions.*;
+
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,5 +59,17 @@ public class AutoSearchTest extends BaseTest {
                 .isErrorMessageDuplicateNameFieldAutoSearch());
     }
 
+    @Test
+    @Description("Проверка кликабельности кнопки копирования ссылки на автопоиск в древе построения фильтров")
+    public void checkButtonCopyLinkAutoSearchInBuildingSearch(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(1000)
+                .clickButton(page.buttonAutoSearchCheckingSearchByDateSigning)
+                .waitFor(1000)
+                .isClickableButtonCopyLinkAutoSearchInBuildingSearch());
+//                .check_clickable_button_copy_autosearch_in_building_search()
+//                .check_clickable_button_delete_autosearch_in_building_search()
+//                .check_clickable_button_close_autosearch_in_building_search();
+    }
 
 }
