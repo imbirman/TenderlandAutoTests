@@ -67,9 +67,36 @@ public class AutoSearchTest extends BaseTest {
                 .clickButton(page.buttonAutoSearchCheckingSearchByDateSigning)
                 .waitFor(1000)
                 .isClickableButtonCopyLinkAutoSearchInBuildingSearch());
-//                .check_clickable_button_copy_autosearch_in_building_search()
-//                .check_clickable_button_delete_autosearch_in_building_search()
-//                .check_clickable_button_close_autosearch_in_building_search();
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки копирования автопоиска в древе построения фильтров")
+    public void checkButtonCopyAutoSearchInBuildingSearch(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(1000)
+                .clickButton(page.buttonAutoSearchCheckingSearchByDateSigning)
+                .waitFor(1000)
+                .isClickableButtonCopyAutoSearchInBuildingSearch());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки удаления автопоиска в древе построения фильтров")
+    public void checkButtonDeleteAutoSearchInBuildingSearch(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(1000)
+                .clickButton(page.buttonAutoSearchCheckingSearchByDateSigning)
+                .waitFor(1000)
+                .isClickableButtonDeleteAutoSearchInBuildingSearch());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки закрытия автопоиска в древе построения фильтров")
+    public void checkButtonCloseAutoSearchInBuildingSearch(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(1000)
+                .clickButton(page.buttonAutoSearchCheckingSearchByDateSigning)
+                .waitFor(1000)
+                .isClickableButtonCloseAutoSearchInBuildingSearch());
     }
 
 }
