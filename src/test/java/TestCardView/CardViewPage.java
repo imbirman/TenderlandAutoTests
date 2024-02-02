@@ -28,6 +28,8 @@ public class CardViewPage {
     protected SelenideElement radiobuttonTableView = $x("(//div[@id='search-view-type']//div[@class='dx-radio-value-container']/div)[1]");
     /** Пункт "Карточный вид" в настройках пользовательского вида */
     protected SelenideElement radiobuttonCardView = $x("(//div[@id='search-view-type']//div[@class='dx-radio-value-container']/div)[2]");
+    /** Кнопка закрытия окна пользовательского вида */
+    protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
 
     /** Блок с пунктом "Раскрывать карточки" */
     private final SelenideElement blockOpenCards = $x("//div[@id='search-view-autoexpand-cards-checkbox']");
@@ -74,6 +76,11 @@ public class CardViewPage {
     @Step("Проверка, что по умолчанию выбран табличный вид")
     public boolean isSelectedTableView(){
         return Objects.requireNonNull(radiobuttonTableView.getAttribute("class")).contains("dx-radiobutton-icon-checked");
+    }
+
+    @Step("Проверка, что карточный вид выбран")
+    public boolean isSelectedCardView(){
+        return Objects.requireNonNull(radiobuttonCardView.getAttribute("class")).contains("dx-radiobutton-icon-checked");
     }
 
 

@@ -4,6 +4,8 @@ import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import static org.junit.jupiter.api.Assertions.*;
+
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +49,17 @@ public class CardViewTest  extends BaseTest {
         assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
                 .clickButton(page.buttonAccordionSettings)
                 .isSelectedTableView());
+    }
+
+    @Test
+    @Description("Проверка, что выбор карточного вида сохранился после переоткрытия окна настроек пользовательского вида")
+    public void checkSelectedCardView(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .clickButton(page.radiobuttonCardView)
+                .clickButton(page.buttonCloseWindowCustomView)
+                .clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .isSelectedCardView());
     }
 }
