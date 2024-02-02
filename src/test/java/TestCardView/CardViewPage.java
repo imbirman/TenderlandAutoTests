@@ -23,13 +23,16 @@ public class CardViewPage {
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
     /** Пункт "Настройки" */
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
+    /** Кнопка закрытия окна пользовательского вида */
+    protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
+
 
     /** Пункт "Табличный вид" в настройках пользовательского вида */
     protected SelenideElement radiobuttonTableView = $x("(//div[@id='search-view-type']//div[@class='dx-radio-value-container']/div)[1]");
     /** Пункт "Карточный вид" в настройках пользовательского вида */
     protected SelenideElement radiobuttonCardView = $x("(//div[@id='search-view-type']//div[@class='dx-radio-value-container']/div)[2]");
-    /** Кнопка закрытия окна пользовательского вида */
-    protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
+    /** Чекбокс "Раскрывать карточки" */
+    protected SelenideElement checkboxOpenCards = $x("//div[@id='search-view-autoexpand-cards']");
 
     /** Блок с пунктом "Раскрывать карточки" */
     private final SelenideElement blockOpenCards = $x("//div[@id='search-view-autoexpand-cards-checkbox']");
@@ -83,5 +86,9 @@ public class CardViewPage {
         return Objects.requireNonNull(radiobuttonCardView.getAttribute("class")).contains("dx-radiobutton-icon-checked");
     }
 
+    @Step("Проверка работы чекбокса \"Раскрывать карточки\"")
+    public boolean isSelectedCheckboxOpenCards(){
+        return Objects.requireNonNull(checkboxOpenCards.getAttribute("class")).contains("dx-checkbox-checked");
+    }
 
 }

@@ -62,4 +62,15 @@ public class CardViewTest  extends BaseTest {
                 .clickButton(page.buttonAccordionSettings)
                 .isSelectedCardView());
     }
+
+    @Test
+    @Description("Проверка, что выбран чекбокс 'Раскрывать карточки'")
+    public void checkSelectedCheckboxOpenCards(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAccordionSettings)
+                .clickButton(page.radiobuttonCardView)
+                .clickButton(page.checkboxOpenCards)
+                .isSelectedCheckboxOpenCards());
+    }
 }
