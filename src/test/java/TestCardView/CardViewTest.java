@@ -73,4 +73,23 @@ public class CardViewTest  extends BaseTest {
                 .clickButton(page.checkboxOpenCards)
                 .isSelectedCheckboxOpenCards());
     }
+
+    @Test
+    @Description("Проверка сохранения изменений в настройках пользовательского вида")
+    public void checkSaveChangesInCustomViewSettings(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAccordionSettings)
+                .clickButton(page.radiobuttonCardView)
+                .clickButton(page.buttonSaveCustomView)
+                .clickButton(page.buttonCloseWindowCustomView)
+                .clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAccordionSettings)
+                .waitFor(1000)
+                .isSelectedCardView());
+                page.clickButton(page.radiobuttonTableView)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveCustomView);
+    }
 }

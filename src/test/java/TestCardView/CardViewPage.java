@@ -25,6 +25,8 @@ public class CardViewPage {
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
     /** Кнопка закрытия окна пользовательского вида */
     protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
+    /** Кнопка "Сохранить вид" */
+    protected SelenideElement buttonSaveCustomView = $x("//div[@id='search-view-save-button']");
 
 
     /** Пункт "Табличный вид" в настройках пользовательского вида */
