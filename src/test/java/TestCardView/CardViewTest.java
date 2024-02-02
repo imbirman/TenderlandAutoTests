@@ -3,7 +3,7 @@ package TestCardView;
 import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
-import net.thucydides.core.annotations.Title;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,10 +34,18 @@ public class CardViewTest  extends BaseTest {
     @Test
     @Description("Проверка отображения блока для раскрытия карточки в настройках пользовательского вида")
     public void checkDisplayedBlockOpenCards(){
-        page.clickButton(page.buttonOpenWindowCustomView)
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
                 .waitFor(500)
                 .clickButton(page.buttonAccordionSettings)
                 .clickButton(page.radiobuttonCardView)
-                .isDisplayedBlockOpenCards();
+                .isDisplayedBlockOpenCards());
+    }
+
+    @Test
+    @Description("Проверка выбранного табличного вида по умолчанию")
+    public void checkDefaultTableView(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .isSelectedTableView());
     }
 }

@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.Objects;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
 
@@ -28,7 +30,7 @@ public class CardViewPage {
     protected SelenideElement radiobuttonCardView = $x("(//div[@id='search-view-type']//div[@class='dx-radio-value-container']/div)[2]");
 
     /** Блок с пунктом "Раскрывать карточки" */
-    private final SelenideElement blockOpenCards = $x("search-view-autoexpand-cards-checkbox");
+    private final SelenideElement blockOpenCards = $x("//div[@id='search-view-autoexpand-cards-checkbox']");
 
 
     @Step("Ожидание {number}")
@@ -67,6 +69,11 @@ public class CardViewPage {
     @Step("Проверка отображения при выборе карточного вида блока с чекбоксом \"Раскрывать карточки\"")
     public boolean isDisplayedBlockOpenCards(){
         return blockOpenCards.isDisplayed();
+    }
+
+    @Step("Проверка, что по умолчанию выбран табличный вид")
+    public boolean isSelectedTableView(){
+        return Objects.requireNonNull(radiobuttonTableView.getAttribute("class")).contains("dx-radiobutton-icon-checked");
     }
 
 
