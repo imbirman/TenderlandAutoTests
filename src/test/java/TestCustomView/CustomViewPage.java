@@ -1,11 +1,12 @@
 package TestCustomView;
 
 import TestCardView.CardViewPage;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class CustomViewPage {
 
@@ -14,6 +15,13 @@ public class CustomViewPage {
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+    /** Список элементов для выбора в блоке "Поля таблицы" */
+    protected ElementsCollection elementUnitTableFieldsForSelection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
+
+    /** Кнопка открытия настроек пользовательского вида */
+    protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
+    /** Кнопка добавления нового пользовательского вида */
+    protected SelenideElement buttonAddNewCustomView = $x("//div[@id='search-view-create-button']");
 
     @Step("Ожидание {number}")
     public CustomViewPage waitFor(long number){
@@ -48,5 +56,9 @@ public class CustomViewPage {
         return new CustomViewPage();
     }
 
+    @Step("Получение количества элементов для выбора в блоке \"Поля таблицы\"")
+    public Integer getNumberElementsTableFieldsForSelection(){
+        return elementUnitTableFieldsForSelection.size();
+    }
 
 }
