@@ -38,6 +38,9 @@ public class CustomViewPage {
     /** Пункт "Настройки" */
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
 
+    /** Поле для сортировки */
+    protected SelenideElement fieldForSorting =$x("//div[@id='search-view-sorting-field']//div[@class='dx-texteditor-input-container']//input");
+
 
     @Step("Ожидание {number}")
     public CustomViewPage waitFor(long number){
@@ -92,5 +95,9 @@ public class CustomViewPage {
         return elementUnitDetailingFieldsSelectedCollection.size();
     }
 
+    @Step("Получение значения поля для сортировки")
+    public String getValueDefaultSortField(){
+        return fieldForSorting.getValue();
+    }
 
 }

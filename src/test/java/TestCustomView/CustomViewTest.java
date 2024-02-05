@@ -85,4 +85,13 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAccordionDetailing)
                 .getNumberElementsDetailingFieldsSelected(), 4);
     }
+
+    @Test
+    @Description("Проверка значения поля 'Выбрать поле для сортировки' в блоке 'Настройки' по умолчанию")
+    public void checkValueDefaultSortField(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .getValueDefaultSortField(), "Дата публикации");
+    }
 }
