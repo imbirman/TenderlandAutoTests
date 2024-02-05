@@ -108,4 +108,28 @@ public class CardViewTest  extends BaseTest {
                 .clickButton(page.buttonAccordionSettings)
                 .isSelectedTableView());
     }
+
+    @Test
+    @Description("Проверка отображения кнопки 'Табличный вид'")
+    public void checkDisplayedButtonTableView(){
+        page.isDisplayedButtonTableView();
+    }
+
+    @Test
+    @Description("Проверка отображения кнопки 'Карточный вид'")
+    public void checkDisplayedButtonCardView(){
+        page.isDisplayedButtonCardView();
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки 'Табличный вид'")
+    public void checkClickableButtonTableView(){
+        page.isClickableButtonTableView();
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки 'Карточный вид'")
+    public void checkClickableButtonCardView(){
+        page.isClickableButtonCardView();
+    }
 }

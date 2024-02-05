@@ -1,6 +1,7 @@
 package TestCardView;
 
 import TestAuditor.AuditorPage;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Condition.*;
 
 public class CardViewPage {
 
@@ -37,6 +39,12 @@ public class CardViewPage {
     protected SelenideElement buttonItemCustomViewTestView = $x("//div[text()='Тестовый вид']");
     /** Кнопка "Карточный вид" */
     protected SelenideElement buttonCardView = $x("//div[@id='search-panel-change-custom-view']");
+    /** Кнопка "Табличный вид" */
+    protected SelenideElement buttonTableView = $x("//div[@id='search-panel-table-view']");
+    /** Кнопка открытия детализации тендера */
+    protected SelenideElement buttonOpenDetailing = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[2]");
+    /** Кнопка "Выгрузить продукты" в детализации тендера */
+    protected SelenideElement buttonUnloadProducts = $x("(//div[@id='search-result-wrapper']//div[@class='dx-item-content dx-multiview-item-content']/div)[2]");
 
 
     /** Пункт "Табличный вид" в настройках пользовательского вида */
@@ -102,5 +110,21 @@ public class CardViewPage {
     public boolean isSelectedCheckboxOpenCards(){
         return Objects.requireNonNull(checkboxOpenCards.getAttribute("class")).contains("dx-checkbox-checked");
     }
+
+    public boolean isDisplayedButtonTableView(){
+        return buttonTableView.isDisplayed();
+    } // Проверка, что кнопка "Табличный вид" отображается
+
+    public boolean isDisplayedButtonCardView(){
+        return buttonCardView.isDisplayed();
+    } // Проверка, что кнопка "Карточный вид" отображается
+
+    public boolean isClickableButtonTableView(){
+        return buttonTableView.is(interactable);
+    } // Проверка, что кнопка "Табличный вид" кликабельна
+
+    public boolean isClickableButtonCardView(){
+        return buttonCardView.is(interactable);
+    } // Проверка, что кнопка "Карточный вид" кликабельна
 
 }
