@@ -19,6 +19,8 @@ public class CustomViewPage {
     private final ElementsCollection elementUnitTableFieldsForSelectionCollection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
     /** Список выбранных элементов в блоке "Поля таблицы" */
     private final ElementsCollection elementUnitTableFieldsSelectedCollection = $$x("//div[@id='search-view-result-fields-scroll']//span");
+    /** Элемент для выбора в блоке "Детализация" */
+    private final ElementsCollection elementUnitDetailingFieldsSelectionCollection = $$x("//div[@id='search-view-details']//div");
 
     /** Кнопка открытия настроек пользовательского вида */
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
@@ -28,6 +30,11 @@ public class CustomViewPage {
     protected SelenideElement buttonTabContracts = $x("(//div[@id='search-view-tabs-fields']/div/div)[2]");
     /** Вкладка "Планы" */
     protected SelenideElement buttonTabPlans = $x("(//div[@id='search-view-tabs-fields']/div/div)[3]");
+    /** Пункт "Детализация" */
+    protected SelenideElement buttonAccordionDetailing = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[2]");
+    /** Пункт "Настройки" */
+    protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
+
 
     @Step("Ожидание {number}")
     public CustomViewPage waitFor(long number){
@@ -70,6 +77,11 @@ public class CustomViewPage {
     @Step("Получение количества выбранных элементов в блоке \"Поля таблицы\"")
     public Integer getNumberElementsTableFieldsSelected(){
         return elementUnitTableFieldsSelectedCollection.size();
+    }
+
+    @Step("Получение количества элементов для выбора в блоке \"Детализация\"")
+    public Integer getNumberElementsDetailingFieldsForSelection(){
+        return elementUnitDetailingFieldsSelectionCollection.size();
     }
 
 
