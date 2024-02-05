@@ -4,6 +4,8 @@ import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import static org.junit.jupiter.api.Assertions.*;
+
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,5 +48,14 @@ public class CustomViewTest extends BaseTest {
         assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
                 .clickButton(page.buttonAddNewCustomView)
                 .getNumberElementsTableFieldsSelected(), 13);
+    }
+
+    @Test
+    @Description("Проверка количества элементов для выбора в блоке 'Поля таблицы' на вкладке 'Контракты' по умолчанию")
+    public void checkNumberElementsTableFieldsForSelectionInTabContractsDefault(){
+       assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonTabContracts)
+                .getNumberElementsTableFieldsForSelection(), 13);
     }
 }

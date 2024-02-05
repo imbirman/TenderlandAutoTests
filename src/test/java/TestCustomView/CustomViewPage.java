@@ -24,6 +24,10 @@ public class CustomViewPage {
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
     /** Кнопка добавления нового пользовательского вида */
     protected SelenideElement buttonAddNewCustomView = $x("//div[@id='search-view-create-button']");
+    /** Вкладка "Контракты" */
+    protected SelenideElement buttonTabContracts = $x("(//div[@id='search-view-tabs-fields']/div/div)[2]");
+    /** Вкладка "Планы" */
+    protected SelenideElement buttonTabPlans = $x("(//div[@id='search-view-tabs-fields']/div/div)[3]");
 
     @Step("Ожидание {number}")
     public CustomViewPage waitFor(long number){
@@ -67,5 +71,6 @@ public class CustomViewPage {
     public Integer getNumberElementsTableFieldsSelected(){
         return elementUnitTableFieldsSelectedCollection.size();
     }
+
 
 }
