@@ -19,6 +19,8 @@ public class CardViewPage {
 
     /** Кнопка открытия бокового меню */
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
+    /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
     /** Кнопка открытия настроек пользовательского вида */
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
     /** Пункт "Настройки" */
@@ -27,6 +29,14 @@ public class CardViewPage {
     protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
     /** Кнопка "Сохранить вид" */
     protected SelenideElement buttonSaveCustomView = $x("//div[@id='search-view-save-button']");
+    /** Кнопка автопоиска "Проверка поиска по названию тендера и исключению из названия" */
+    protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
+    /** Кнопка раскрытия списка пользовательских видов */
+    protected SelenideElement buttonOpenListCustomView = $x("//div[@id='search-panel-change-custom-view']");
+    /** Пункт списка пользовательского вида "Тестовый вид" */
+    protected SelenideElement buttonItemCustomViewTestView = $x("//div[text()='Тестовый вид']");
+    /** Кнопка "Карточный вид" */
+    protected SelenideElement buttonCardView = $x("//div[@id='search-panel-change-custom-view']");
 
 
     /** Пункт "Табличный вид" в настройках пользовательского вида */

@@ -92,4 +92,20 @@ public class CardViewTest  extends BaseTest {
                     .waitFor(500)
                     .clickButton(page.buttonSaveCustomView);
     }
+
+    @Test
+    @Description("Проверка сохранения выбранного табличного/карточного вида в настройке примененного пользовательского вида после смены вида не в настройке пользовательского вида")
+    public void checkSaveSelectedTableViewAfterChangeViewResultSearch(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckTenderNameAndNameDeletion)
+                .waitFor(2000)
+                .clickButton(page.buttonOpenListCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonItemCustomViewTestView)
+                .waitFor(1000)
+                .clickButton(page.buttonCardView)
+                .clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .isSelectedTableView());
+    }
 }
