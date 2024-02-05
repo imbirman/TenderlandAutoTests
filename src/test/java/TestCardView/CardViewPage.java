@@ -111,20 +111,24 @@ public class CardViewPage {
         return Objects.requireNonNull(checkboxOpenCards.getAttribute("class")).contains("dx-checkbox-checked");
     }
 
+    @Step("Проверка, что кнопка \"Табличный вид\" отображается")
     public boolean isDisplayedButtonTableView(){
         return buttonTableView.isDisplayed();
-    } // Проверка, что кнопка "Табличный вид" отображается
+    }
 
+    @Step("Проверка, что кнопка \"Карточный вид\" отображается")
     public boolean isDisplayedButtonCardView(){
         return buttonCardView.isDisplayed();
-    } // Проверка, что кнопка "Карточный вид" отображается
+    }
 
+    @Step("Проверка, что кнопка \"Табличный вид\" кликабельна")
     public boolean isClickableButtonTableView(){
         return buttonTableView.is(interactable);
-    } // Проверка, что кнопка "Табличный вид" кликабельна
+    }
 
+    @Step("Проверка, что кнопка \"Карточный вид\" кликабельна")
     public boolean isClickableButtonCardView(){
         return buttonCardView.is(interactable);
-    } // Проверка, что кнопка "Карточный вид" кликабельна
+    }
 
 }
