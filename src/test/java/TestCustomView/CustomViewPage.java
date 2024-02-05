@@ -16,7 +16,9 @@ public class CustomViewPage {
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
     /** Список элементов для выбора в блоке "Поля таблицы" */
-    protected ElementsCollection elementUnitTableFieldsForSelection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
+    private final ElementsCollection elementUnitTableFieldsForSelectionCollection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
+    /** Список выбранных элементов в блоке "Поля таблицы" */
+    private final ElementsCollection elementUnitTableFieldsSelectedCollection = $$x("//div[@id='search-view-result-fields-scroll']//span");
 
     /** Кнопка открытия настроек пользовательского вида */
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
@@ -58,7 +60,12 @@ public class CustomViewPage {
 
     @Step("Получение количества элементов для выбора в блоке \"Поля таблицы\"")
     public Integer getNumberElementsTableFieldsForSelection(){
-        return elementUnitTableFieldsForSelection.size();
+        return elementUnitTableFieldsForSelectionCollection.size();
+    }
+
+    @Step("Получение количества выбранных элементов в блоке \"Поля таблицы\"")
+    public Integer getNumberElementsTableFieldsSelected(){
+        return elementUnitTableFieldsSelectedCollection.size();
     }
 
 }

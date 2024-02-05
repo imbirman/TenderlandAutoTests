@@ -39,4 +39,12 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAddNewCustomView)
                 .getNumberElementsTableFieldsForSelection(), 11);
     }
+
+    @Test
+    @Description("Проверка количества выбранных элементов в блоке 'Поля таблицы' на вкладке 'Тендеры' по умолчанию")
+    public void checkNumberSelectedElementsTableFieldsInTabTenderDefault(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .getNumberElementsTableFieldsSelected(), 13);
+    }
 }
