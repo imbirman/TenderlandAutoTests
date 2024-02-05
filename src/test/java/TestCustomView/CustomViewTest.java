@@ -58,4 +58,13 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonTabContracts)
                 .getNumberElementsTableFieldsForSelection(), 13);
     }
+
+    @Test
+    @Description("Проверка количества элементов для выбора в блоке 'Поля таблицы' на вкладке 'Планы' по умолчанию")
+    public void checkNumberElementsTableFieldsForSelectionInTabPlansDefault(){
+       assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonTabPlans)
+                .getNumberElementsTableFieldsForSelection(), 15);
+    }
 }
