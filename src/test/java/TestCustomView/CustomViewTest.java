@@ -75,6 +75,14 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAddNewCustomView)
                 .clickButton(page.buttonAccordionDetailing)
                 .getNumberElementsDetailingFieldsForSelection(), 1);
-//        .check_number_elements_detailing_fields_selected();
+    }
+
+    @Test
+    @Description("Проверка количества элементов для выбора в блоке 'Детализация' по умолчанию")
+    public void checkNumberSelectedElementsDetailingFieldsDefault(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonAccordionDetailing)
+                .getNumberElementsDetailingFieldsSelected(), 4);
     }
 }

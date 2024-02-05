@@ -19,8 +19,11 @@ public class CustomViewPage {
     private final ElementsCollection elementUnitTableFieldsForSelectionCollection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
     /** Список выбранных элементов в блоке "Поля таблицы" */
     private final ElementsCollection elementUnitTableFieldsSelectedCollection = $$x("//div[@id='search-view-result-fields-scroll']//span");
-    /** Элемент для выбора в блоке "Детализация" */
+    /** Список элементов для выбора в блоке "Детализация" */
     private final ElementsCollection elementUnitDetailingFieldsSelectionCollection = $$x("//div[@id='search-view-details']//div");
+    /** Список выбранных элементов в блоке "Детализация" */
+    private final ElementsCollection elementUnitDetailingFieldsSelectedCollection = $$x("//div[@id='search-view-result-details']//span");
+
 
     /** Кнопка открытия настроек пользовательского вида */
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
@@ -82,6 +85,11 @@ public class CustomViewPage {
     @Step("Получение количества элементов для выбора в блоке \"Детализация\"")
     public Integer getNumberElementsDetailingFieldsForSelection(){
         return elementUnitDetailingFieldsSelectionCollection.size();
+    }
+
+    @Step("Получение количества выбранных элементов в блоке \"Детализация\"")
+    public Integer getNumberElementsDetailingFieldsSelected(){
+        return elementUnitDetailingFieldsSelectedCollection.size();
     }
 
 
