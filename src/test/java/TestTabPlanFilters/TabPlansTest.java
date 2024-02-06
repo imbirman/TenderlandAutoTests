@@ -49,11 +49,12 @@ public class TabPlansTest extends BaseTest {
 
         assertTrue(page.clickButton(page.tabListAutoSearch)
                 .clickButton(page.buttonCheckSearchByTypePlan)
-                .waitFor(5000)
+                .waitFor(3000)
                 .scrollToElement(page.buttonDeleteAutoSearch)
                 .clickButton(page.filterSearchByTypePlan)
                 .clickButton(page.getCheckboxInFilter(0))
                 .clickButton(page.buttonSearch)
+                .waitFor(1000)
                 .isContainTypePlan());
     }
 

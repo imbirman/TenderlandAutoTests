@@ -37,7 +37,7 @@ public class TabPlansPage {
     private final ElementsCollection checkboxTypePlansCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
 
     /** Кнопка удаления автопоиска */
-    protected SelenideElement buttonDeleteAutoSearch = $x("//i[@id='search-autosearch-delete']");
+    protected SelenideElement buttonDeleteAutoSearch = $x("//i[@id='autosearch-delete-button']");
 
     @Step("Ожидание {number}")
     public TabPlansPage waitFor(long number){
@@ -104,8 +104,9 @@ public class TabPlansPage {
         List<String> typePlanForCheck = tableCellTypePlanCollection.texts();
         typePlanForCheck.remove(typePlanForCheck.size()-1);
         for(String typePlan : typePlanForCheck){
-            if(!typePlan.contains("План")){
+            if(!typePlan.equals("План")){
                 check = false;
+                System.out.println(typePlan);
                 break;
             }
         }
