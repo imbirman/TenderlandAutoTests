@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -164,6 +165,8 @@ public class TabTendersPage{
     protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
     /** Кнопка "Искать" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
+    /** Кнопка закрытия автопоиска */
+    protected SelenideElement buttonCloseAutoSearch = $x("//i[@id='autosearch-close-button']");
     /** Поле для ввода параметра, исключаемого из поиска */
     protected SelenideElement fieldNameTenderDeletion = $x("//div[@id='filter-editor-compact-1-exclude']//textarea");
     /** Поле для ввода названия тендера для поиска */
@@ -171,9 +174,9 @@ public class TabTendersPage{
     /** Поле поиска внутри фильтра */
     protected SelenideElement fieldSearchInFilterEditor = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
     /** Поле для ввода цены "от" */
-    protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-4-from']//input[@role='spinbutton']");
+    protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-3-from']//input[@role='spinbutton']");
     /** Поле для ввода цены "до" */
-    protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
+    protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-3-to']//input[@role='spinbutton']");
     /** Чекбокс "Выбрать всё" в фильтре "Мои тендеры" */
     protected SelenideElement checkboxSelectAllMyTenders = $x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-all-checkbox']");
     private WebDriver driver;
@@ -410,6 +413,7 @@ public class TabTendersPage{
             dateStr = dateStr.replace("\n", " ");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
             Date currentDate = dateFormat.parse(dateStr);
+            if(endDate.equals("-")){continue;}
             Date rightDate = dateFormat.parse(endDate);
             if(currentDate.getTime() > rightDate.getTime()){
                 check = false;

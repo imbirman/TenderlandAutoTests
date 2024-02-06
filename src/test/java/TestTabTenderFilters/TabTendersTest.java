@@ -111,6 +111,7 @@ public class TabTendersTest extends BaseTest {
                 .clearField(tabTendersPage.fieldNameTender)
                 .typeNameTender("Муcор")
                 .clickButton(tabTendersPage.checkBoxTransliteration)
+                .waitFor(500)
                 .clickButton(tabTendersPage.buttonSearch)
                 .waitFor(2000)
                 .isContainNameTender());
@@ -195,7 +196,7 @@ public class TabTendersTest extends BaseTest {
         assertTrue(tabTendersPage.clickButton(tabTendersPage.tabListAutoSearch)
                 .clickButton(tabTendersPage.buttonCheckSearchByPrice)
                 .waitFor(3000)
-                .scrollToElement(tabTendersPage.filterValidateSearchByTenderPrice)
+                .scrollToElement(tabTendersPage.buttonCloseAutoSearch)
                 .clickButton(tabTendersPage.filterValidateSearchByTenderPrice)
                 .clearField(tabTendersPage.fieldPriceFrom)
                 .typePriceFrom("10000")
@@ -471,6 +472,7 @@ public class TabTendersTest extends BaseTest {
         assertEquals((tabTendersPage.DragAndDropFilter(tabTendersPage.filterCategory)
                 .clickButton(tabTendersPage.checkboxFirstInFilter)
                 .clickButton(tabTendersPage.buttonOpenTreeList)
+                .waitFor(1000)
                 .getNumberSelectedCategories()), 11);
     }
 
