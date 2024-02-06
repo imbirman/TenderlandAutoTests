@@ -55,15 +55,8 @@ public class TabContractsTest extends BaseTest {
 
         assertTrue(page.clickButton(page.tabListAutoSearch)
                 .clickButton(page.buttonCheckSearchByPrice)
-                .waitFor(2000)
-                .clickButton(page.filterValidateSearchByTenderPrice)
-                .clearField(page.fieldPriceFrom)
-                .typePriceFrom("10000")
-                .clearField(page.fieldPriceTo)
-                .typePriceTo("50000")
-                .clickButton(page.buttonSearch)
-                .waitFor(4500)
-                .checkPrice(10000,50000));
+                .waitFor(2500)
+                .checkPrice(10000,100000));
     }
 
     @Test

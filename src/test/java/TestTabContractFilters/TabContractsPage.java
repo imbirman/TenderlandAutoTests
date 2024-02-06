@@ -31,11 +31,11 @@ public class TabContractsPage {
     /** Список названий продукта в списке продуктов карточки контракта */
     private final ElementsCollection listProductInCardContractCollection = $$x("//div[@class='dx-datagrid-rowsview dx-datagrid-nowrap dx-scrollable dx-visibility-change-handler dx-scrollable-both dx-scrollable-simulated']//table//tr/following::td[1]"); //
     /** Список цен в результатах поиска*/
-    private final ElementsCollection tableCellPriceCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[5]");
+    private final ElementsCollection tableCellPriceCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[3]");
     /** Список чекбоксов в фильтре "Статус" */
     private final ElementsCollection checkboxStatusContractsCollection = $$x("//div[@role='checkbox'][@class='dx-widget dx-checkbox dx-list-select-checkbox']");
     /** Список статусов контракта в результате поиска */
-    private final ElementsCollection tableCellStatusContractsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[9]");
+    private final ElementsCollection tableCellStatusContractsCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
     /** Список дат контракта */
     private final ElementsCollection tableCellDateCollection = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[7]");
     /** Список штрафов в карточке контракта */
@@ -92,9 +92,9 @@ public class TabContractsPage {
     /** Фильтр "Цена" в автопоиске "Проверка поиска по цене" */
     protected SelenideElement filterValidateSearchByTenderPrice = $x("//div[text()='10000 ₽ — 100000 ₽']");
     /** Поле для ввода цены "от" */
-    protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-4-from']//input[@role='spinbutton']");
+    protected SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-3-from']//input[@role='spinbutton']");
     /** Поле для ввода цены "до" */
-    protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-4-to']//input[@role='spinbutton']");
+    protected SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-3-to']//input[@role='spinbutton']");
     /** Поле для ввода даты публикации "от" */
     protected SelenideElement fieldPublicationDateFrom = $x("//div[@id='textbox-filter-editor-compact-5-from']//input[@role='textbox']");
     /** Фильтр "Статус" в автопоиске "Проверка поиска по статусу" */
@@ -109,7 +109,7 @@ public class TabContractsPage {
 
 
     /** Кнопка удаления автопоиска */
-    protected SelenideElement buttonDeleteAutoSearch = $x("//i[@id='search-autosearch-delete']");
+    protected SelenideElement buttonDeleteAutoSearch = $x("//i[@id='autosearch-delete-button']");
 
 
     @Step("Переключиться на вкладку под номером {numberTab}")
@@ -282,8 +282,7 @@ public class TabContractsPage {
         array.remove(array.size()-1);
         for(String date : array) {
             String dateStr = date;
-            dateStr = dateStr.replace("\n" + "(UTC+03:00)", "");
-            dateStr = dateStr.replace("\n", " ");
+            dateStr = dateStr.substring(0, 15);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
             Date currentDate = dateFormat.parse(dateStr);
             Date leftDate = dateFormat.parse(startDate);
