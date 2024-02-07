@@ -96,11 +96,20 @@ public class CustomViewTest extends BaseTest {
     }
 
     @Test
-    @Title("Проверка значения сортировки 'По убыванию' в блоке 'Настройки' по умолчанию")
+    @Description("Проверка значения сортировки 'По убыванию' в блоке 'Настройки' по умолчанию")
     public void checkSelectedRadiobuttonDescendingDefault(){
         assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
                 .clickButton(page.buttonAddNewCustomView)
                 .clickButton(page.buttonAccordionSettings)
                 .checkSelectedRadiobuttonDescending());
+    }
+
+    @Test
+    @Description("Проверка значения чекбокса 'Раскрывать детализации' в блоке 'Настройки' по умолчанию")
+    public void checkCheckboxDiscloseDetailingDefault(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .checkCheckboxDiscloseDetailing());
     }
 }

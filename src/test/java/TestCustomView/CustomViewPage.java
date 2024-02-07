@@ -41,6 +41,8 @@ public class CustomViewPage {
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
     /** Пункт "По убыванию" в настройках пользовательского вида */
     protected SelenideElement radiobuttonDescending = $x("(//div[@id='search-view-sorting-direction']/div/div[contains(@class, 'dx-radiobutton')])[2]");
+    /** Чекбокс "Раскрывать детализации" */
+    protected SelenideElement checkboxDiscloseDetailing = $x("//div[@id='search-view-autoexpand-details']");
 
     /** Поле для сортировки */
     protected SelenideElement fieldForSorting =$x("//div[@id='search-view-sorting-field']//div[@class='dx-texteditor-input-container']//input");
@@ -108,5 +110,10 @@ public class CustomViewPage {
     public boolean checkSelectedRadiobuttonDescending(){
         return Objects.requireNonNull(radiobuttonDescending.getAttribute("aria-checked")).contains("true");
     }
+
+    @Step("Проверка, что чекбокс \"Раскрывать детализации\" не выставлен по умолчанию")
+    public boolean checkCheckboxDiscloseDetailing(){
+        return Objects.requireNonNull(checkboxDiscloseDetailing.getAttribute("aria-checked")).contains("false");
+    } //
 
 }
