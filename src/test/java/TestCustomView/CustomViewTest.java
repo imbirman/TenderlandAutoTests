@@ -94,4 +94,13 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAccordionSettings)
                 .getValueDefaultSortField(), "Дата публикации");
     }
+
+    @Test
+    @Title("Проверка значения сортировки 'По убыванию' в блоке 'Настройки' по умолчанию")
+    public void checkSelectedRadiobuttonDescendingDefault(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonAccordionSettings)
+                .checkSelectedRadiobuttonDescending());
+    }
 }

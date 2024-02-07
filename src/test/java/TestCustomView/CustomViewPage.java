@@ -6,6 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.Objects;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class CustomViewPage {
@@ -37,6 +39,8 @@ public class CustomViewPage {
     protected SelenideElement buttonAccordionDetailing = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[2]");
     /** Пункт "Настройки" */
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
+    /** Пункт "По убыванию" в настройках пользовательского вида */
+    protected SelenideElement radiobuttonDescending = $x("(//div[@id='search-view-sorting-direction']/div/div[contains(@class, 'dx-radiobutton')])[2]");
 
     /** Поле для сортировки */
     protected SelenideElement fieldForSorting =$x("//div[@id='search-view-sorting-field']//div[@class='dx-texteditor-input-container']//input");
@@ -98,6 +102,11 @@ public class CustomViewPage {
     @Step("Получение значения поля для сортировки")
     public String getValueDefaultSortField(){
         return fieldForSorting.getValue();
+    }
+
+    @Step("Проверка, что значение сортировки \"По убыванию\" выставлено по умолчанию")
+    public boolean checkSelectedRadiobuttonDescending(){
+        return Objects.requireNonNull(radiobuttonDescending.getAttribute("aria-checked")).contains("true");
     }
 
 }
