@@ -112,4 +112,13 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAccordionSettings)
                 .checkCheckboxDiscloseDetailing());
     }
+
+    @Test
+    @Description("Проверка отображения количества выбранных полей по умолчанию")
+    public void checkValueLabelSelectedFieldsDefault(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAddNewCustomView)
+                .getValueLabelSelectedFields(),"Выбрано полей - 12");
+    }
 }

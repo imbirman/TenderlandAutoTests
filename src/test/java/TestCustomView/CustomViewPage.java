@@ -17,6 +17,9 @@ public class CustomViewPage {
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+    /** Пометка "Выбрано полей" */
+    private final SelenideElement labelSelectedFields = $x("//div[@id='search-view-fields-label']");
+
     /** Список элементов для выбора в блоке "Поля таблицы" */
     private final ElementsCollection elementUnitTableFieldsForSelectionCollection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
     /** Список выбранных элементов в блоке "Поля таблицы" */
@@ -114,6 +117,11 @@ public class CustomViewPage {
     @Step("Проверка, что чекбокс \"Раскрывать детализации\" не выставлен по умолчанию")
     public boolean checkCheckboxDiscloseDetailing(){
         return Objects.requireNonNull(checkboxDiscloseDetailing.getAttribute("aria-checked")).contains("false");
-    } //
+    }
+
+    @Step("Получение значения пометки \"Выбрано полей\"")
+    public String getValueLabelSelectedFields(){
+        return labelSelectedFields.getText();
+    }
 
 }
