@@ -30,6 +30,10 @@ public class CustomViewPage {
     private final ElementsCollection elementUnitDetailingFieldsSelectedCollection = $$x("//div[@id='search-view-result-details']//span");
 
 
+    /** Список вкладок пользовательского вида */
+    protected ElementsCollection tabCustomView = $$x("//div[@id='search-view-tabs']//div[@class='dx-tabs-wrapper']/div");
+
+
     /** Кнопка открытия настроек пользовательского вида */
     protected SelenideElement buttonOpenWindowCustomView = $x("//i[@class='material-icons-outline icon-24px icon-grey icon-grey-hover md-settings']");
     /** Кнопка добавления нового пользовательского вида */
@@ -129,6 +133,11 @@ public class CustomViewPage {
     @Step("Получение значения пометки \"Выбрано детализаций\"")
     public String getValueLabelSelectedDetailing(){
         return labelSelectedDetailing.getText();
+    }
+
+    @Step("Получить количество вкладок пользовательских видов")
+    public Integer getNumberTabCustomView(){
+        return tabCustomView.size();
     }
 
 }

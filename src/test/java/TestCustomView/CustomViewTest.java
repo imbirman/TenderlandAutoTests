@@ -129,4 +129,13 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAddNewCustomView)
                 .getValueLabelSelectedDetailing(), "Выбрано детализаций - 4");
     }
+
+    @Test
+    @Description("Проверка количества вкладок пользовательских видов после нажатия на кнопку 'Добавить вид'")
+    public void checkNumberTabCustomViewAfterAddingNewView(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAddNewCustomView)
+                .getNumberTabCustomView(), 3);
+    }
 }
