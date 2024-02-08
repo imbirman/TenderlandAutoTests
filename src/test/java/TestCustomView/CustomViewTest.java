@@ -138,4 +138,25 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAddNewCustomView)
                 .getNumberTabCustomView(), 3);
     }
+
+    @Test
+    @Description("Проверка количества вкладок пользовательских видов после закрытия окна настроек и несохранении нового пользовательского вида")
+    public void checkNumberTabCustomViewWithoutSaveNewView(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonCloseWindowCustomView)
+                .clickButton(page.buttonOpenWindowCustomView)
+                .getNumberTabCustomView(), 2);
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопок контекстного меню пользовательского вида")
+    public void checkClickableButtonRenameContextMenuCustomView(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.getButtonContextMenuCustomViewByOriginalNumber(0))
+                .waitFor(500)
+                .checkClickableButtonRenameContextMenuCustomView());
+
+    }
 }

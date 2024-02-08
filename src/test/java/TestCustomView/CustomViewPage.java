@@ -1,6 +1,7 @@
 package TestCustomView;
 
 import TestCardView.CardViewPage;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -8,6 +9,7 @@ import org.openqa.selenium.By;
 
 import java.util.Objects;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CustomViewPage {
@@ -28,6 +30,8 @@ public class CustomViewPage {
     private final ElementsCollection elementUnitDetailingFieldsSelectionCollection = $$x("//div[@id='search-view-details']//div");
     /** Список выбранных элементов в блоке "Детализация" */
     private final ElementsCollection elementUnitDetailingFieldsSelectedCollection = $$x("//div[@id='search-view-result-details']//span");
+    /** Список кнопок открытия контекстного меню последнего в списке пользовательского вида */
+    private final ElementsCollection buttonOpenContextMenuCustomView = $$x("//div[@id='search-view-tabs']//i");
 
 
     /** Список вкладок пользовательского вида */
@@ -46,12 +50,21 @@ public class CustomViewPage {
     protected SelenideElement buttonAccordionDetailing = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[2]");
     /** Пункт "Настройки" */
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
+    /** Кнопка закрытия окна пользовательского вида */
+    protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
     /** Пункт "По убыванию" в настройках пользовательского вида */
     protected SelenideElement radiobuttonDescending = $x("(//div[@id='search-view-sorting-direction']/div/div[contains(@class, 'dx-radiobutton')])[2]");
     /** Чекбокс "Раскрывать детализации" */
     protected SelenideElement checkboxDiscloseDetailing = $x("//div[@id='search-view-autoexpand-details']");
+    /** Кнопка контекстного меню "Переименовать" */
+    protected SelenideElement buttonContextMenuRename = $x("(//div[@class='common-context-menu-item'])[1]");
+    /** Кнопка контекстного меню "Удалить" */
+    protected SelenideElement buttonContextMenuDelete = $x("(//div[@class='common-context-menu-item'])[2]");
+
     /** Пометка "Выбрано детализаций" */
     private final SelenideElement labelSelectedDetailing = $x("//div[@id='search-view-details-label']");
+
+
 
     /** Поле для сортировки */
     protected SelenideElement fieldForSorting =$x("//div[@id='search-view-sorting-field']//div[@class='dx-texteditor-input-container']//input");
@@ -115,16 +128,6 @@ public class CustomViewPage {
         return fieldForSorting.getValue();
     }
 
-    @Step("Проверка, что значение сортировки \"По убыванию\" выставлено по умолчанию")
-    public boolean checkSelectedRadiobuttonDescending(){
-        return Objects.requireNonNull(radiobuttonDescending.getAttribute("aria-checked")).contains("true");
-    }
-
-    @Step("Проверка, что чекбокс \"Раскрывать детализации\" не выставлен по умолчанию")
-    public boolean checkCheckboxDiscloseDetailing(){
-        return Objects.requireNonNull(checkboxDiscloseDetailing.getAttribute("aria-checked")).contains("false");
-    }
-
     @Step("Получение значения пометки \"Выбрано полей\"")
     public String getValueLabelSelectedFields(){
         return labelSelectedFields.getText();
@@ -138,6 +141,31 @@ public class CustomViewPage {
     @Step("Получить количество вкладок пользовательских видов")
     public Integer getNumberTabCustomView(){
         return tabCustomView.size();
+    }
+
+    @Step("Получить вкладку пользовательского вида по его порядковому номеру")
+    public SelenideElement getTabCustomViewByOriginalNumber(int number){
+        return tabCustomView.get(number);
+    }
+
+    @Step("Получить кнопку контекстного меню пользовательского вида по его порядковому номеру")
+    public SelenideElement getButtonContextMenuCustomViewByOriginalNumber(int number){
+        return buttonOpenContextMenuCustomView.get(number);
+    }
+
+    @Step("Проверка, что значение сортировки \"По убыванию\" выставлено по умолчанию")
+    public boolean checkSelectedRadiobuttonDescending(){
+        return Objects.requireNonNull(radiobuttonDescending.getAttribute("aria-checked")).contains("true");
+    }
+
+    @Step("Проверка, что чекбокс \"Раскрывать детализации\" не выставлен по умолчанию")
+    public boolean checkCheckboxDiscloseDetailing(){
+        return Objects.requireNonNull(checkboxDiscloseDetailing.getAttribute("aria-checked")).contains("false");
+    }
+
+    @Step("Проверка кликабельности кнопки контекстного меню пользовательского вида \"Переименовать\"")
+    public boolean checkClickableButtonRenameContextMenuCustomView(){
+        return buttonContextMenuRename.is(interactable);
     }
 
 }
