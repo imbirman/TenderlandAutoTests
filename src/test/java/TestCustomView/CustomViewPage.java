@@ -46,6 +46,8 @@ public class CustomViewPage {
     protected SelenideElement radiobuttonDescending = $x("(//div[@id='search-view-sorting-direction']/div/div[contains(@class, 'dx-radiobutton')])[2]");
     /** Чекбокс "Раскрывать детализации" */
     protected SelenideElement checkboxDiscloseDetailing = $x("//div[@id='search-view-autoexpand-details']");
+    /** Пометка "Выбрано детализаций" */
+    private final SelenideElement labelSelectedDetailing = $x("//div[@id='search-view-details-label']");
 
     /** Поле для сортировки */
     protected SelenideElement fieldForSorting =$x("//div[@id='search-view-sorting-field']//div[@class='dx-texteditor-input-container']//input");
@@ -122,6 +124,11 @@ public class CustomViewPage {
     @Step("Получение значения пометки \"Выбрано полей\"")
     public String getValueLabelSelectedFields(){
         return labelSelectedFields.getText();
+    }
+
+    @Step("Получение значения пометки \"Выбрано детализаций\"")
+    public String getValueLabelSelectedDetailing(){
+        return labelSelectedDetailing.getText();
     }
 
 }

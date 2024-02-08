@@ -121,4 +121,12 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAddNewCustomView)
                 .getValueLabelSelectedFields(),"Выбрано полей - 12");
     }
+
+    @Test
+    @Description("Проверка отображения количества выбранных детализаций по умолчанию")
+    public void checkValueLabelSelectedDetailingDefault(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .getValueLabelSelectedDetailing(), "Выбрано детализаций - 4");
+    }
 }
