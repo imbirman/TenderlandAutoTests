@@ -168,4 +168,9 @@ public class CustomViewPage {
         return buttonContextMenuRename.is(interactable);
     }
 
+    @Step("Проверка кликабельности кнопки контекстного меню пользовательского вида \"Удалить\"")
+    public boolean checkClickableButtonDeleteContextMenuCustomView(){
+        return buttonContextMenuDelete.is(interactable);
+    }
+
 }

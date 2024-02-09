@@ -150,13 +150,22 @@ public class CustomViewTest extends BaseTest {
     }
 
     @Test
-    @Description("Проверка кликабельности кнопок контекстного меню пользовательского вида")
+    @Description("Проверка кликабельности кнопки 'Переименовать' контекстного меню пользовательского вида")
     public void checkClickableButtonRenameContextMenuCustomView(){
         assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
                 .waitFor(500)
                 .clickButton(page.getButtonContextMenuCustomViewByOriginalNumber(0))
                 .waitFor(500)
                 .checkClickableButtonRenameContextMenuCustomView());
+    }
 
+    @Test
+    @Description("Проверка кликабельности кнопки 'Удалить' контекстного меню пользовательского вида")
+    public void checkClickableButtonDeleteContextMenuCustomView(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.getButtonContextMenuCustomViewByOriginalNumber(0))
+                .waitFor(500)
+                .checkClickableButtonDeleteContextMenuCustomView());
     }
 }
