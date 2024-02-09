@@ -1,5 +1,6 @@
 package TestCustomView;
 
+import TestAuditor.AuditorPage;
 import TestCardView.CardViewPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -22,6 +23,8 @@ public class CustomViewPage {
 
     /** Пометка "Выбрано полей" */
     private final SelenideElement labelSelectedFields = $x("//div[@id='search-view-fields-label']");
+    /** Сообщение об ошибке поля "Название" пользовательского вида */
+    private final SelenideElement errorMessageEmptyFieldNameCustomView = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
 
     /** Список элементов для выбора в блоке "Поля таблицы" */
     private final ElementsCollection elementUnitTableFieldsForSelectionCollection = $$x("//div[@id='search-view-multiview']//div[@class='dx-item dx-multiview-item dx-item-selected']//span");
@@ -33,10 +36,17 @@ public class CustomViewPage {
     private final ElementsCollection elementUnitDetailingFieldsSelectedCollection = $$x("//div[@id='search-view-result-details']//span");
     /** Список кнопок открытия контекстного меню последнего в списке пользовательского вида */
     private final ElementsCollection buttonOpenContextMenuCustomView = $$x("//div[@id='search-view-tabs']//i");
+    /** Список названий пользовательского вида */
+    private final ElementsCollection labelNameCustomView = $$x("//div[@id='search-view-tabs']//div[@class='dx-tabs-wrapper']//div[@class='common-small-tab-name']");
 
 
     /** Список вкладок пользовательского вида */
     protected ElementsCollection tabCustomView = $$x("//div[@id='search-view-tabs']//div[@class='dx-tabs-wrapper']/div");
+
+    /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
+    /** Кнопка автопоиска "Тестирование пользовательского вида" */
+    protected SelenideElement buttonAutoSearchTestCustomView = $x("//div[text()='Тестирование пользовательского вида']");
 
 
     /** Кнопка открытия настроек пользовательского вида */
@@ -83,6 +93,12 @@ public class CustomViewPage {
     @Step("Ожидание {number}")
     public CustomViewPage waitFor(long number){
         sleep(number);
+        return new CustomViewPage();
+    }
+
+    @Step("Прокрутить до элемента")
+    public CustomViewPage scrollToElement(SelenideElement element){
+        element.scrollIntoView(false);
         return new CustomViewPage();
     }
 
@@ -195,4 +211,13 @@ public class CustomViewPage {
         return labelErrorSaveCustomViewWithoutSelectedFields.isDisplayed();
     }
 
+    @Step("Проверить отображение элемента, в котором хранится название пользовательского вида")
+    public boolean checkDisplayedNameTabCustomViewByNumber(int number){
+        return labelNameCustomView.get(number).isDisplayed();
+    }
+
+    @Step("Проверка сообщения об ошибке при сохранении пользовательского вида при пустом названии")
+    public boolean isErrorMessageEmptyNameFieldCustomView(){
+        return errorMessageEmptyFieldNameCustomView.getText().contains("Введите название") && errorMessageEmptyFieldNameCustomView.isDisplayed();
+    }
 }

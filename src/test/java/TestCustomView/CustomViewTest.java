@@ -192,4 +192,26 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonOpenWindowCustomView)
                 .getNumberTabCustomView(), 2);
     }
+
+    @Test
+    @Description("Проверка отображение названия пользовательского вида после отмены переименования")
+    public void checkDisplayedNameCustomViewAfterCancelRenaming(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.getTabCustomViewByOriginalNumber(1))
+                .clickButton(page.getButtonContextMenuCustomViewByOriginalNumber(1))
+                .clickButton(page.buttonContextMenuRename)
+                .clickButton(page.buttonAccordionDetailing)
+                .checkDisplayedNameTabCustomViewByNumber(1));
+    }
+
+    @Test
+    @Description("Проверка сообщения об ошибке при сохранении пользовательского вида при пустом названии")
+    public void checkErrorMessageSaveCustomViewWithEmptyName(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonSaveCustomView)
+                .waitFor(500)
+                .isErrorMessageEmptyNameFieldCustomView());
+    }
 }
