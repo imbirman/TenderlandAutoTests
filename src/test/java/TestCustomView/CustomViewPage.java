@@ -6,6 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import java.util.Objects;
 
@@ -52,6 +53,10 @@ public class CustomViewPage {
     protected SelenideElement buttonAccordionSettings = $x("(//div[contains(@class,'dx-item dx-accordion-item')])[3]");
     /** Кнопка закрытия окна пользовательского вида */
     protected SelenideElement buttonCloseWindowCustomView = $x("//div[@role='toolbar']//i");
+    /** Кнопка удаления всех выбранных полей пользовательского вида */
+    protected SelenideElement buttonDeleteAllSelectedFields = $x("(//div[@class='search-view-result-header']//i)[2]");
+    /** Кнопка "Сохранить настройки" */
+    protected SelenideElement buttonSaveCustomView = $x("//div[@id='search-view-save-button']");
     /** Пункт "По убыванию" в настройках пользовательского вида */
     protected SelenideElement radiobuttonDescending = $x("(//div[@id='search-view-sorting-direction']/div/div[contains(@class, 'dx-radiobutton')])[2]");
     /** Чекбокс "Раскрывать детализации" */
@@ -60,6 +65,11 @@ public class CustomViewPage {
     protected SelenideElement buttonContextMenuRename = $x("(//div[@class='common-context-menu-item'])[1]");
     /** Кнопка контекстного меню "Удалить" */
     protected SelenideElement buttonContextMenuDelete = $x("(//div[@class='common-context-menu-item'])[2]");
+    /** Поле для ввода названия пользовательского вида */
+    protected SelenideElement fieldNameCustomView = $x("//div[@id='search-view-tabs']//input");
+    /** Ошибка при сохранении пользовательского вида без выбранных полей */
+    private final SelenideElement labelErrorSaveCustomViewWithoutSelectedFields = $x("//div[@class='search-view-result-error-label']");
+
 
     /** Пометка "Выбрано детализаций" */
     private final SelenideElement labelSelectedDetailing = $x("//div[@id='search-view-details-label']");
@@ -82,6 +92,13 @@ public class CustomViewPage {
     @Step("Ввести пароль для авторизации")
     public CustomViewPage typePassword(String password){
         passwordField.sendKeys(password);
+        return new CustomViewPage();
+    }
+
+    @Step("Ввести название пользовательского вида")
+    public CustomViewPage typeNameCustomView(String name){
+        fieldNameCustomView.sendKeys(name);
+        fieldNameCustomView.sendKeys(Keys.ENTER);
         return new CustomViewPage();
     }
 
@@ -171,6 +188,11 @@ public class CustomViewPage {
     @Step("Проверка кликабельности кнопки контекстного меню пользовательского вида \"Удалить\"")
     public boolean checkClickableButtonDeleteContextMenuCustomView(){
         return buttonContextMenuDelete.is(interactable);
+    }
+
+    @Step("Проверка отображения сообщение об ошибке при сохранении пользовательского вида без выбранных полей")
+    public boolean checkVisibleLabelErrorSaveCustomViewWithoutSelectedFields(){
+        return labelErrorSaveCustomViewWithoutSelectedFields.isDisplayed();
     }
 
 }

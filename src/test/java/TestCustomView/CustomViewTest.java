@@ -168,4 +168,17 @@ public class CustomViewTest extends BaseTest {
                 .waitFor(500)
                 .checkClickableButtonDeleteContextMenuCustomView());
     }
+
+    @Test
+    @Description("Проверка отображения сообщения об ошибке сохранения пользовательского вида без выбранных полей")
+    public void checkVisibleLabelErrorSaveCustomViewWithoutSelectedFields(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAddNewCustomView)
+
+                .typeNameCustomView("123")
+                .clickButton(page.buttonDeleteAllSelectedFields)
+                .clickButton(page.buttonSaveCustomView)
+                .checkVisibleLabelErrorSaveCustomViewWithoutSelectedFields());
+    }
 }
