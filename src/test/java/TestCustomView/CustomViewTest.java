@@ -175,10 +175,21 @@ public class CustomViewTest extends BaseTest {
         assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
                 .waitFor(500)
                 .clickButton(page.buttonAddNewCustomView)
-
                 .typeNameCustomView("123")
                 .clickButton(page.buttonDeleteAllSelectedFields)
                 .clickButton(page.buttonSaveCustomView)
                 .checkVisibleLabelErrorSaveCustomViewWithoutSelectedFields());
+    }
+
+    @Test
+    @Description("Проверка не сохранения нового пользовательского вида без названия")
+    public void checkNotSaveCustomViewWithoutName(){
+        assertEquals(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAddNewCustomView)
+                .clickButton(page.buttonSaveCustomView)
+                .clickButton(page.buttonCloseWindowCustomView)
+                .clickButton(page.buttonOpenWindowCustomView)
+                .getNumberTabCustomView(), 2);
     }
 }
