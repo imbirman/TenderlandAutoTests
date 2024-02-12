@@ -36,13 +36,13 @@ public class CustomViewPage {
     /** Список выбранных элементов в блоке "Детализация" */
     private final ElementsCollection elementUnitDetailingFieldsSelectedCollection = $$x("//div[@id='search-view-result-details']//span");
     /** Список кнопок открытия контекстного меню последнего в списке пользовательского вида */
-    private final ElementsCollection buttonOpenContextMenuCustomView = $$x("//div[@id='search-view-tabs']//i");
+    private final ElementsCollection buttonOpenContextMenuCustomViewCollection = $$x("//div[@id='search-view-tabs']//i");
     /** Список названий пользовательского вида */
-    private final ElementsCollection labelNameCustomView = $$x("//div[@id='search-view-tabs']//div[@class='dx-tabs-wrapper']//div[@class='common-small-tab-name']");
+    private final ElementsCollection labelNameCustomViewCollection = $$x("//div[@id='search-view-tabs']//div[@class='dx-tabs-wrapper']//div[@class='common-small-tab-name']");
     /** Список элементов списка столбцов */
-    private final ElementsCollection elementOfListColumns = $$x("//div[@id='search-view-tenders-fields']//span");
+    private final ElementsCollection elementOfListColumnsCollection = $$x("//div[@id='search-view-tenders-fields']//span");
     /** Список элементов списка выбранных столбцов */
-    private final ElementsCollection elementOfListSelectedColumns = $$x("//div[@id='search-view-result-fields']//span");
+    private final ElementsCollection elementOfListSelectedColumnsCollection = $$x("//div[@id='search-view-result-fields']//span");
 
 
     /** Список вкладок пользовательского вида */
@@ -84,6 +84,8 @@ public class CustomViewPage {
     protected SelenideElement fieldNameCustomView = $x("//div[@id='search-view-tabs']//input");
     /** Поле поиска столбцов в пользовательском виде */
     protected SelenideElement fieldSearchColumnCustomView = $x("//div[@id='search-view-textbox-fields']//input");
+    /**Элемент списка столбцов */
+    protected SelenideElement elementOfListColumns = $x("//div[@id='search-view-tenders-fields']//span");
 
 
     /** Ошибка при сохранении пользовательского вида без выбранных полей */
@@ -196,7 +198,7 @@ public class CustomViewPage {
 
     @Step("Получить кнопку контекстного меню пользовательского вида по его порядковому номеру")
     public SelenideElement getButtonContextMenuCustomViewByOriginalNumber(int number){
-        return buttonOpenContextMenuCustomView.get(number);
+        return buttonOpenContextMenuCustomViewCollection.get(number);
     }
 
     @Step("Проверка, что значение сортировки \"По убыванию\" выставлено по умолчанию")
@@ -226,7 +228,7 @@ public class CustomViewPage {
 
     @Step("Проверить отображение элемента, в котором хранится название пользовательского вида")
     public boolean checkDisplayedNameTabCustomViewByNumber(int number){
-        return labelNameCustomView.get(number).isDisplayed();
+        return labelNameCustomViewCollection.get(number).isDisplayed();
     }
 
     @Step("Проверка сообщения об ошибке при сохранении пользовательского вида при пустом названии")
@@ -235,10 +237,10 @@ public class CustomViewPage {
     }
 
 
-
+    @Step("Проверка поиска в окне пользовательского вида")
     public boolean isContainResultSearchColumnCustomView() {
-        List<String> checkColumn = elementOfListColumns.texts();
-        List<String> checkSelectedColumn = elementOfListSelectedColumns.texts();
+        List<String> checkColumn = elementOfListColumnsCollection.texts();
+        List<String> checkSelectedColumn = elementOfListSelectedColumnsCollection.texts();
         boolean checkIsContainColumn = false;
         boolean checkISContainSelectedColumn = false;
 
@@ -255,5 +257,17 @@ public class CustomViewPage {
             }
         }
         return checkIsContainColumn || checkISContainSelectedColumn;
+    }
+
+    @Step("Проверка, заблокирован ли для выбора элемент детализации контрактов, если не выбраны соответствующие поля таблицы")
+    public boolean isDisabledElementContractDetailingToSelect(){
+        boolean check = false;
+        for(SelenideElement type: elementUnitDetailingFieldsSelectionCollection){
+            if(Objects.requireNonNull(type.getAttribute("style")).contains("background-color: rgb(255, 230, 197); opacity: 0.3;")){
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
 }

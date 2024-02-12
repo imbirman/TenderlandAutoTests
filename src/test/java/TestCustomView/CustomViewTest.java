@@ -222,4 +222,13 @@ public class CustomViewTest extends BaseTest {
                 .typeSearchColumnCustomView("рее")
                 .isContainResultSearchColumnCustomView());
     }
+
+    @Test
+    @Description("Проверка заблокирован ли элемент детализации для контрактов, если не выбраны соответствующие поля таблицы")
+    public void checkDisabledElementContractDetailingToSelect(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .waitFor(500)
+                .clickButton(page.buttonAccordionDetailing)
+                .isDisabledElementContractDetailingToSelect());
+    }
 }
