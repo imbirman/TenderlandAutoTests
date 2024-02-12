@@ -214,4 +214,12 @@ public class CustomViewTest extends BaseTest {
                 .waitFor(500)
                 .isErrorMessageEmptyNameFieldCustomView());
     }
+
+    @Test
+    @Description("Проверка поиска в окне пользовательского вида")
+    public void checkContainResultSearchColumnCustomView(){
+        assertTrue(page.clickButton(page.buttonOpenWindowCustomView)
+                .typeSearchColumnCustomView("рее")
+                .isContainResultSearchColumnCustomView());
+    }
 }

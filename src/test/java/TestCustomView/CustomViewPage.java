@@ -9,6 +9,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import java.util.List;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.interactable;
@@ -38,6 +39,10 @@ public class CustomViewPage {
     private final ElementsCollection buttonOpenContextMenuCustomView = $$x("//div[@id='search-view-tabs']//i");
     /** Список названий пользовательского вида */
     private final ElementsCollection labelNameCustomView = $$x("//div[@id='search-view-tabs']//div[@class='dx-tabs-wrapper']//div[@class='common-small-tab-name']");
+    /** Список элементов списка столбцов */
+    private final ElementsCollection elementOfListColumns = $$x("//div[@id='search-view-tenders-fields']//span");
+    /** Список элементов списка выбранных столбцов */
+    private final ElementsCollection elementOfListSelectedColumns = $$x("//div[@id='search-view-result-fields']//span");
 
 
     /** Список вкладок пользовательского вида */
@@ -77,10 +82,12 @@ public class CustomViewPage {
     protected SelenideElement buttonContextMenuDelete = $x("(//div[@class='common-context-menu-item'])[2]");
     /** Поле для ввода названия пользовательского вида */
     protected SelenideElement fieldNameCustomView = $x("//div[@id='search-view-tabs']//input");
+    /** Поле поиска столбцов в пользовательском виде */
+    protected SelenideElement fieldSearchColumnCustomView = $x("//div[@id='search-view-textbox-fields']//input");
+
+
     /** Ошибка при сохранении пользовательского вида без выбранных полей */
     private final SelenideElement labelErrorSaveCustomViewWithoutSelectedFields = $x("//div[@class='search-view-result-error-label']");
-
-
     /** Пометка "Выбрано детализаций" */
     private final SelenideElement labelSelectedDetailing = $x("//div[@id='search-view-details-label']");
 
@@ -115,6 +122,12 @@ public class CustomViewPage {
     public CustomViewPage typeNameCustomView(String name){
         fieldNameCustomView.sendKeys(name);
         fieldNameCustomView.sendKeys(Keys.ENTER);
+        return new CustomViewPage();
+    }
+
+    @Step("Ввести значение поиска столбца для пользовательского вида")
+    public CustomViewPage typeSearchColumnCustomView(String search){
+        fieldSearchColumnCustomView.sendKeys(search);
         return new CustomViewPage();
     }
 
@@ -219,5 +232,28 @@ public class CustomViewPage {
     @Step("Проверка сообщения об ошибке при сохранении пользовательского вида при пустом названии")
     public boolean isErrorMessageEmptyNameFieldCustomView(){
         return errorMessageEmptyFieldNameCustomView.getText().contains("Введите название") && errorMessageEmptyFieldNameCustomView.isDisplayed();
+    }
+
+
+
+    public boolean isContainResultSearchColumnCustomView() {
+        List<String> checkColumn = elementOfListColumns.texts();
+        List<String> checkSelectedColumn = elementOfListSelectedColumns.texts();
+        boolean checkIsContainColumn = false;
+        boolean checkISContainSelectedColumn = false;
+
+        for (String type : checkColumn) {
+            if (type.contains("Реестровый номер")) {
+                checkIsContainColumn = true;
+                break;
+            }
+        }
+        for (String type : checkSelectedColumn) {
+            if (type.contains("Реестровый номер")) {
+                checkISContainSelectedColumn = true;
+                break;
+            }
+        }
+        return checkIsContainColumn || checkISContainSelectedColumn;
     }
 }
