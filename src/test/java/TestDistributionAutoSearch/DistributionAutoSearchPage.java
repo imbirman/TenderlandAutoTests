@@ -148,6 +148,6 @@ public class DistributionAutoSearchPage {
         listFields.add("Модуль");
         listFields.add("Ссылка на площадку");
 
-        return listSelectedFields.contains(listFields);
+        return listSelectedFields.equals(listFields);
     }
 }
