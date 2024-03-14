@@ -231,4 +231,5 @@ public class CustomViewTest extends BaseTest {
                 .clickButton(page.buttonAccordionDetailing)
                 .isDisabledElementContractDetailingToSelect());
     }
+
 }
