@@ -54,7 +54,7 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.buttonEnableDistribution)
                 .waitFor(500)
-                .checkLabelEnableDistribution());
+                .isLabelEnableDistribution());
     }
 
     @Test
@@ -68,6 +68,21 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.buttonEnableDistribution)
                 .waitFor(500)
-                .checkContainCorrectDateCreateDistribution());
+                .isContainCorrectDateCreateDistribution());
+    }
+
+    @Test
+    @Description("Проверка отображения ошибки при сохранении включенной рассылки без выбранного аккаунта")
+    public void checkDisplayedErrorMessageSaveDistributionWithoutSelectedAccount(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonEnableDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonSaveSettingsDistribution)
+                .isVisibleErrorMessageWithoutSelectedAccount());
     }
 }

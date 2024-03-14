@@ -1,6 +1,8 @@
 package TestDistributionAutoSearch;
 
 import TestCustomView.CustomViewPage;
+import com.codeborne.selenide.Condition;
+import static com.codeborne.selenide.Condition.interactable;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -27,14 +29,18 @@ public class DistributionAutoSearchPage {
     protected SelenideElement buttonDeleteAutoSearch = $x("(//div[@class='search-autosearch-header-line'])[1]");
     /** Кнопка открытия окна рассылки */
     protected SelenideElement buttonOpenWindowDistribution = $x("//div[@id='search-autosearch-options']");
-
+    /** Кнопка включения рассылки */
     protected SelenideElement buttonEnableDistribution = $x("//div[@id='delivery-view-distribution-active']");
+    /** Кнопка сохранения настроек рассылки */
+    protected SelenideElement buttonSaveSettingsDistribution = $x("//div[@id='delivery-view-save-button']");
 
 
     /** Подпись рассылки */
     private final SelenideElement labelViewDistribution = $x("//span[@id='delivery-view-distribution-active-span']");
     /** Дата и время включения рассылки */
     private final SelenideElement activationDateDistribution = $x("//span[@id='delivery-view-distribution-utc-start']");
+    /** Сообщение об ошибке при сохранении рассылки без выбранного аккаунта */
+    private final SelenideElement errorMessageSaveEnableDistributionWithoutSelectedAccount = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
 
 
     @Step("Ожидание {number}")
@@ -82,18 +88,23 @@ public class DistributionAutoSearchPage {
     }
 
     @Step("Проверка надписи включения рассылки")
-    public boolean checkLabelEnableDistribution(){
+    public boolean isLabelEnableDistribution(){
 
         return labelViewDistribution.getText().contains("Рассылка включена");
     }
 
     @Step("Проверка соответствия даты включения рассылки и текущей даты")
-    public boolean checkContainCorrectDateCreateDistribution(){
+    public boolean isContainCorrectDateCreateDistribution(){
         Date date = new Date();
         SimpleDateFormat formatterDate = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
 
         return activationDateDistribution.getText().contains(formatterDate.format(date)) && activationDateDistribution.getText().contains(formatterTime.format(date));
 
+    }
+
+    @Step("Проверка отображения сообщения об ошибке при сохранении рассылки без выбранного аккаунта")
+    public boolean isVisibleErrorMessageWithoutSelectedAccount(){
+        return errorMessageSaveEnableDistributionWithoutSelectedAccount.isDisplayed();
     }
 }
