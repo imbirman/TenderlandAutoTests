@@ -5,6 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
 
@@ -30,6 +33,8 @@ public class DistributionAutoSearchPage {
 
     /** Подпись рассылки */
     private final SelenideElement labelViewDistribution = $x("//span[@id='delivery-view-distribution-active-span']");
+    /** Дата и время включения рассылки */
+    private final SelenideElement activationDateDistribution = $x("//span[@id='delivery-view-distribution-utc-start']");
 
 
     @Step("Ожидание {number}")
@@ -80,5 +85,15 @@ public class DistributionAutoSearchPage {
     public boolean checkLabelEnableDistribution(){
 
         return labelViewDistribution.getText().contains("Рассылка включена");
+    }
+
+    @Step("Проверка соответствия даты включения рассылки и текущей даты")
+    public boolean checkContainCorrectDateCreateDistribution(){
+        Date date = new Date();
+        SimpleDateFormat formatterDate = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+
+        return activationDateDistribution.getText().contains(formatterDate.format(date)) && activationDateDistribution.getText().contains(formatterTime.format(date));
+
     }
 }

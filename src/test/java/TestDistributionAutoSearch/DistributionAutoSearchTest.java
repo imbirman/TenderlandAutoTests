@@ -44,8 +44,8 @@ public class DistributionAutoSearchTest extends BaseTest {
     }
 
     @Test
-    @Description("Проверка отображения даты включения рассылки автопоиска")
-    public void checkVisibleDateDistribution(){
+    @Description("Проверка отображения надписи включения рассылки автопоиска")
+    public void checkVisibleLabelEnableDistribution(){
         assertTrue(page.clickButton(page.tabListAutoSearch)
                 .waitFor(500)
                 .clickButton(page.testAutoSearch)
@@ -55,5 +55,19 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .clickButton(page.buttonEnableDistribution)
                 .waitFor(500)
                 .checkLabelEnableDistribution());
+    }
+
+    @Test
+    @Description("Проверка даты включения рассылки")
+    public void checkDateEnableDistribution(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonEnableDistribution)
+                .waitFor(500)
+                .checkContainCorrectDateCreateDistribution());
     }
 }
