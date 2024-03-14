@@ -24,6 +24,10 @@ public class DistributionAutoSearchPage {
     protected SelenideElement testAutoSearch = $x("//div[text()='Тестовый автопоиск']");
     /** Вкладка "Автопоиски" */
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
+    /** Вкладка "Параметры" в настройках рассылки */
+    protected SelenideElement tabDistributionSettings = $x("(//div[@id='delivery-view-tabs']/div/div)[1]");
+    /** Вкладка "Поля" в настройках рассылки */
+    protected SelenideElement tabFieldsDistribution = $x("(//div[@id='delivery-view-tabs']/div/div)[2]");
 
     /** Кнопка удаления автопоиска*/
     protected SelenideElement buttonDeleteAutoSearch = $x("(//div[@class='search-autosearch-header-line'])[1]");
@@ -111,5 +115,10 @@ public class DistributionAutoSearchPage {
     @Step("Проверка отображения сообщения об ошибке при сохранении рассылки без выбранного аккаунта")
     public boolean isVisibleErrorMessageWithoutSelectedAccount(){
         return errorMessageSaveEnableDistributionWithoutSelectedAccount.isDisplayed();
+    }
+
+    @Step("Проверка кликабельности вкладки 'Параметры' в настройках рассылки")
+    public boolean isClickableTabSettingsDistribution(){
+        return tabDistributionSettings.is(interactable);
     }
 }

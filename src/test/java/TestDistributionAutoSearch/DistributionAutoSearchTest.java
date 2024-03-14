@@ -100,4 +100,16 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .clickButton(page.buttonSaveSettingsDistribution)
                 .getErrorMessageWithoutSelectedAccount(),"Выберите хотя бы один аккаунт для рассылки");
     }
+
+    @Test
+    @Description("Проверка кликабельности вкладки 'Параметры' в настройках рассылки")
+    public void checkClickableTabSettingsDistribution(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .isClickableTabSettingsDistribution());
+    }
 }
