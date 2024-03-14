@@ -3,15 +3,17 @@ package TestDistributionAutoSearch;
 import TestCustomView.CustomViewPage;
 import com.codeborne.selenide.Condition;
 import static com.codeborne.selenide.Condition.interactable;
+import static com.codeborne.selenide.Selenide.*;
+
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import java.util.List;
 
 public class DistributionAutoSearchPage {
 
@@ -19,6 +21,9 @@ public class DistributionAutoSearchPage {
     private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
+
+
+    private final ElementsCollection fieldsSelectedCollections = $$x("//div[@id='delivery-view-result-fields']//span");
 
     /** Тестовый автопоиск в списке автопоисков */
     protected SelenideElement testAutoSearch = $x("//div[text()='Тестовый автопоиск']");
@@ -29,8 +34,7 @@ public class DistributionAutoSearchPage {
     /** Вкладка "Поля" в настройках рассылки */
     protected SelenideElement tabFieldsDistribution = $x("(//div[@id='delivery-view-tabs']/div/div)[2]");
 
-    /** Кнопка удаления автопоиска*/
-    protected SelenideElement buttonDeleteAutoSearch = $x("(//div[@class='search-autosearch-header-line'])[1]");
+
     /** Кнопка открытия окна рассылки */
     protected SelenideElement buttonOpenWindowDistribution = $x("//div[@id='search-autosearch-options']");
     /** Кнопка включения рассылки */
@@ -125,5 +129,25 @@ public class DistributionAutoSearchPage {
     @Step("Проверка кликабельности вкладки 'Поля' в настройках рассылки")
     public boolean isClickableTabFieldsDistribution(){
         return tabFieldsDistribution.is(interactable);
+    }
+
+    @Step("Проверка списка выбранных полей")
+    public boolean isCorrectListSelectedFields(){
+        List<String> listSelectedFields = fieldsSelectedCollections.texts();
+        List<String> listFields = new ArrayList<>();
+        listFields.add("Реестровый номер");
+        listFields.add("Название");
+        listFields.add("Начальная цена");
+        listFields.add("Наименование заказчика");
+        listFields.add("Дата публикации");
+        listFields.add("Дата окончания подачи заявок");
+        listFields.add("Регион");
+        listFields.add("Тип тендера");
+        listFields.add("Категория лота");
+        listFields.add("Документы к тендеру");
+        listFields.add("Модуль");
+        listFields.add("Ссылка на площадку");
+
+        return listSelectedFields.contains(listFields);
     }
 }

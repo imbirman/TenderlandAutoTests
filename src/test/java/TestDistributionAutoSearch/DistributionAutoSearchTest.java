@@ -124,4 +124,18 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .isClickableTabFieldsDistribution());
     }
+
+    @Test
+    @Description("Проверка списка выбранных полей в настройках рассылки по умолчанию")
+    public void checkDefaultListFieldsSelected(){
+        page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.tabFieldsDistribution)
+                .isCorrectListSelectedFields();
+
+    }
 }
