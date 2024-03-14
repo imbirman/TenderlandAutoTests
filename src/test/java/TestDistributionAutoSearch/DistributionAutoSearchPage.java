@@ -3,6 +3,7 @@ package TestDistributionAutoSearch;
 import TestCustomView.CustomViewPage;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -14,6 +15,20 @@ public class DistributionAutoSearchPage {
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+    /** Тестовый автопоиск в списке автопоисков */
+    protected SelenideElement testAutoSearch = $x("//div[text()='Тестовый автопоиск']");
+    /** Вкладка "Автопоиски" */
+    protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
+
+    /** Кнопка удаления автопоиска*/
+    protected SelenideElement buttonDeleteAutoSearch = $x("(//div[@class='search-autosearch-header-line'])[1]");
+    /** Кнопка открытия окна рассылки */
+    protected SelenideElement buttonOpenWindowDistribution = $x("//div[@id='search-autosearch-options']");
+
+
+    /** Подпись рассылки */
+    private final SelenideElement labelViewDistribution = $x("//span[@id='delivery-view-distribution-active-span']");
+
 
     @Step("Ожидание {number}")
     public DistributionAutoSearchPage waitFor(long number){
@@ -23,7 +38,7 @@ public class DistributionAutoSearchPage {
 
     @Step("Прокрутить до элемента")
     public DistributionAutoSearchPage scrollToElement(SelenideElement element){
-        element.scrollIntoView(false);
+        element.scrollIntoView("{behavior: \"instant\", block: \"end\", inline: \"center\"}");
         return new DistributionAutoSearchPage();
     }
 
@@ -52,5 +67,10 @@ public class DistributionAutoSearchPage {
     public DistributionAutoSearchPage clickButton(SelenideElement button){
         button.click();
         return new DistributionAutoSearchPage();
+    }
+
+    @Step("Получить текст включения рассылки")
+    public String getLabelDistribution(){
+        return labelViewDistribution.getText();
     }
 }

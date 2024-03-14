@@ -3,7 +3,9 @@ package TestDistributionAutoSearch;
 import Base.BaseTest;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DistributionAutoSearchTest extends BaseTest {
 
@@ -28,5 +30,16 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(400)
                 .typePassword(BASE_PASSWORD)
                 .clickConfirmLogInButton();
+    }
+
+    @Test
+    @Description("Проверка отсутствия даты включения рассылки автопоиска")
+    public void checkDisabledDateDistribution(){
+        assertEquals(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .getLabelDistribution(), "Включить рассылку");
     }
 }
