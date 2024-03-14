@@ -85,4 +85,19 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .clickButton(page.buttonSaveSettingsDistribution)
                 .isVisibleErrorMessageWithoutSelectedAccount());
     }
+
+    @Test
+    @Description("Проверка текста ошибки при сохранении включенной рассылки без выбранного аккаунта")
+    public void checkErrorMessageSaveDistributionWithoutSelectedAccount(){
+        assertEquals(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonEnableDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonSaveSettingsDistribution)
+                .getErrorMessageWithoutSelectedAccount(),"Выберите хотя бы один аккаунт для рассылки");
+    }
 }

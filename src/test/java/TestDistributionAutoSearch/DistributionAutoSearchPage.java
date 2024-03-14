@@ -87,6 +87,11 @@ public class DistributionAutoSearchPage {
         return labelViewDistribution.getText();
     }
 
+    @Step("Получить текст ошибки при сохранении настроек рассылки без выбранного аккаунта")
+    public String getErrorMessageWithoutSelectedAccount(){
+        return errorMessageSaveEnableDistributionWithoutSelectedAccount.getText();
+    }
+
     @Step("Проверка надписи включения рассылки")
     public boolean isLabelEnableDistribution(){
 
