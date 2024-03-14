@@ -121,4 +121,9 @@ public class DistributionAutoSearchPage {
     public boolean isClickableTabSettingsDistribution(){
         return tabDistributionSettings.is(interactable);
     }
+
+    @Step("Проверка кликабельности вкладки 'Поля' в настройках рассылки")
+    public boolean isClickableTabFieldsDistribution(){
+        return tabFieldsDistribution.is(interactable);
+    }
 }

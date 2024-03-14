@@ -112,4 +112,16 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .isClickableTabSettingsDistribution());
     }
+
+    @Test
+    @Description("Проверка кликабельности вкладки 'Поля' в настройках рассылки")
+    public void checkClickableTabFieldsDistribution(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .isClickableTabFieldsDistribution());
+    }
 }
