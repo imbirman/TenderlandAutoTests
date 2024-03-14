@@ -25,6 +25,8 @@ public class DistributionAutoSearchPage {
     /** Кнопка открытия окна рассылки */
     protected SelenideElement buttonOpenWindowDistribution = $x("//div[@id='search-autosearch-options']");
 
+    protected SelenideElement buttonEnableDistribution = $x("//div[@id='delivery-view-distribution-active']");
+
 
     /** Подпись рассылки */
     private final SelenideElement labelViewDistribution = $x("//span[@id='delivery-view-distribution-active-span']");
@@ -38,7 +40,7 @@ public class DistributionAutoSearchPage {
 
     @Step("Прокрутить до элемента")
     public DistributionAutoSearchPage scrollToElement(SelenideElement element){
-        element.scrollIntoView("{behavior: \"instant\", block: \"end\", inline: \"center\"}");
+        element.scrollIntoView(true);
         return new DistributionAutoSearchPage();
     }
 
@@ -72,5 +74,11 @@ public class DistributionAutoSearchPage {
     @Step("Получить текст включения рассылки")
     public String getLabelDistribution(){
         return labelViewDistribution.getText();
+    }
+
+    @Step("Проверка надписи включения рассылки")
+    public boolean checkLabelEnableDistribution(){
+
+        return labelViewDistribution.getText().contains("Рассылка включена");
     }
 }
