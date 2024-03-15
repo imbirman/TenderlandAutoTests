@@ -46,6 +46,9 @@ public class DistributionAutoSearchPage {
     protected SelenideElement buttonSaveSettingsDistribution = $x("//div[@id='delivery-view-save-button']");
     /** Кнопка удаления интервала */
     protected SelenideElement buttonDeleteInterval = $x("//div[@id='delivery-view-delete-interval-button']");
+    /** Кнопка добавления интервала */
+    protected SelenideElement buttonAddInterval = $x("//div[@id='delivery-view-add-interval-button']");
+
 
     /** Тип рассылки "Письмо-карточки" */
     protected SelenideElement radiobuttonTypeDistributionCards = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[1]");
