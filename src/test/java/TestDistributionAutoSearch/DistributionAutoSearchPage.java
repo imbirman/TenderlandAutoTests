@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class DistributionAutoSearchPage {
 
@@ -41,6 +42,13 @@ public class DistributionAutoSearchPage {
     protected SelenideElement buttonEnableDistribution = $x("//div[@id='delivery-view-distribution-active']");
     /** Кнопка сохранения настроек рассылки */
     protected SelenideElement buttonSaveSettingsDistribution = $x("//div[@id='delivery-view-save-button']");
+
+    /** Тип рассылки "Письмо-карточки" */
+    protected SelenideElement radiobuttonTypeDistributionCards = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[1]");
+    /** Тип рассылки "Письмо-таблица" */
+    protected SelenideElement radiobuttonTypeDistributionTable = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[2]");
+    /** Тип рассылки "Отчет" */
+    protected SelenideElement getRadiobuttonTypeDistributionReport = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[3]");
 
 
     /** Подпись рассылки */
@@ -149,5 +157,12 @@ public class DistributionAutoSearchPage {
         listFields.add("Ссылка на площадку");
 
         return listSelectedFields.equals(listFields);
+    }
+
+    @Step("Проверка типа рассылки по умолчанию")
+    public boolean isDefaultTypeDistribution(){
+        return Objects.requireNonNull(radiobuttonTypeDistributionCards.getAttribute("class")).contains("dx-radiobutton-checked") &&
+                !Objects.requireNonNull(radiobuttonTypeDistributionTable.getAttribute("class")).contains("dx-radiobutton-checked") &&
+                !Objects.requireNonNull(getRadiobuttonTypeDistributionReport.getAttribute("class")).contains("dx-radiobutton-checked");
     }
 }
