@@ -2,6 +2,8 @@ package TestDistributionAutoSearch;
 
 import TestCustomView.CustomViewPage;
 import com.codeborne.selenide.Condition;
+
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -42,6 +44,8 @@ public class DistributionAutoSearchPage {
     protected SelenideElement buttonEnableDistribution = $x("//div[@id='delivery-view-distribution-active']");
     /** Кнопка сохранения настроек рассылки */
     protected SelenideElement buttonSaveSettingsDistribution = $x("//div[@id='delivery-view-save-button']");
+    /** Кнопка удаления интервала */
+    protected SelenideElement buttonDeleteInterval = $x("//div[@id='delivery-view-delete-interval-button']");
 
     /** Тип рассылки "Письмо-карточки" */
     protected SelenideElement radiobuttonTypeDistributionCards = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[1]");
@@ -164,5 +168,10 @@ public class DistributionAutoSearchPage {
         return Objects.requireNonNull(radiobuttonTypeDistributionCards.getAttribute("class")).contains("dx-radiobutton-checked") &&
                 !Objects.requireNonNull(radiobuttonTypeDistributionTable.getAttribute("class")).contains("dx-radiobutton-checked") &&
                 !Objects.requireNonNull(getRadiobuttonTypeDistributionReport.getAttribute("class")).contains("dx-radiobutton-checked");
+    }
+
+    @Step("Проверка кликабельности")
+    public boolean isInteractableButtonDeleteInterval(){
+        return Objects.equals(buttonDeleteInterval.getAttribute("aria-disabled"), "true");
     }
 }
