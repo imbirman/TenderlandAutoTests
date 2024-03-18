@@ -55,7 +55,7 @@ public class DistributionAutoSearchPage {
     /** Тип рассылки "Письмо-таблица" */
     protected SelenideElement radiobuttonTypeDistributionTable = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[2]");
     /** Тип рассылки "Отчет" */
-    protected SelenideElement getRadiobuttonTypeDistributionReport = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[3]");
+    protected SelenideElement radiobuttonTypeDistributionReport = $x("(//div[@id='delivery-view-report-type']//div[@role='radio'])[3]");
 
 
     /** Подпись рассылки */
@@ -66,6 +66,8 @@ public class DistributionAutoSearchPage {
     private final SelenideElement errorMessageSaveEnableDistributionWithoutSelectedAccount = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
     /** Подпись о времени и периоде рассылки */
     private final SelenideElement labelSettingsViewDistribution = $x("//div[@class='search-autosearch-view-settings-text']");
+
+    private final SelenideElement titleTabTypeDistribution = $x("//div[@id='delivery-view-title-name']");
 
 
     @Step("Ожидание {number}")
@@ -120,6 +122,11 @@ public class DistributionAutoSearchPage {
     @Step("Получить текст подписи о времени и периоде рассылки")
     public String getTextLabelSettingsViewDistribution(){
         return labelSettingsViewDistribution.getText();
+    }
+
+    @Step("Получить название вкладки для выбора настроек типа рассылки")
+    public String getTitleTabTypeDistribution(){
+        return titleTabTypeDistribution.getText();
     }
 
     @Step("Проверка надписи включения рассылки")
@@ -177,7 +184,7 @@ public class DistributionAutoSearchPage {
     public boolean isDefaultTypeDistribution(){
         return Objects.requireNonNull(radiobuttonTypeDistributionCards.getAttribute("class")).contains("dx-radiobutton-checked") &&
                 !Objects.requireNonNull(radiobuttonTypeDistributionTable.getAttribute("class")).contains("dx-radiobutton-checked") &&
-                !Objects.requireNonNull(getRadiobuttonTypeDistributionReport.getAttribute("class")).contains("dx-radiobutton-checked");
+                !Objects.requireNonNull(radiobuttonTypeDistributionReport.getAttribute("class")).contains("dx-radiobutton-checked");
     }
 
     @Step("Проверка кликабельности")
