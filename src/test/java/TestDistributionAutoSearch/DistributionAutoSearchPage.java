@@ -117,6 +117,11 @@ public class DistributionAutoSearchPage {
         return errorMessageSaveEnableDistributionWithoutSelectedAccount.getText();
     }
 
+    @Step("Получить текст подписи о времени и периоде рассылки")
+    public String getTextLabelSettingsViewDistribution(){
+        return labelSettingsViewDistribution.getText();
+    }
+
     @Step("Проверка надписи включения рассылки")
     public boolean isLabelEnableDistribution(){
 
@@ -184,4 +189,5 @@ public class DistributionAutoSearchPage {
     public boolean isDisplayedSettingsViewDistribution(){
         return labelSettingsViewDistribution.isDisplayed();
     }
+
 }
