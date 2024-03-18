@@ -239,4 +239,22 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .getTitleTabTypeDistribution(), "Отчёты");
     }
+
+    @Test
+    @Description("Проверка подписи вкладки настроек рассылки после выбора отчета")
+    public void checkLabelTabTypeDistribution(){
+        assertEquals(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.radiobuttonTypeDistributionReport)
+                .waitFor(500)
+                .clickButton(page.tabFieldsDistribution)
+                .waitFor(500)
+                .clickButton(page.firstReport)
+                .waitFor(500)
+                .getLabelTabTypeDistribution(), "Выбран отчёт - Тестовый отчет");
+    }
 }

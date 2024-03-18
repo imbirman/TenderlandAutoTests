@@ -36,6 +36,8 @@ public class DistributionAutoSearchPage {
     protected SelenideElement tabDistributionSettings = $x("(//div[@id='delivery-view-tabs']/div/div)[1]");
     /** Вкладка "Поля" в настройках рассылки */
     protected SelenideElement tabFieldsDistribution = $x("(//div[@id='delivery-view-tabs']/div/div)[2]");
+    /** Первый отчет */
+    protected SelenideElement firstReport = $x("(//div[@id='delivery-view-list-reports']//span)[1]");
 
 
     /** Кнопка открытия окна рассылки */
@@ -66,8 +68,10 @@ public class DistributionAutoSearchPage {
     private final SelenideElement errorMessageSaveEnableDistributionWithoutSelectedAccount = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
     /** Подпись о времени и периоде рассылки */
     private final SelenideElement labelSettingsViewDistribution = $x("//div[@class='search-autosearch-view-settings-text']");
-
+    /** Название вкладки для выбора настроек рассылки */
     private final SelenideElement titleTabTypeDistribution = $x("//div[@id='delivery-view-title-name']");
+    /** Подпись вкладки для выбора настроек рассылки */
+    private final SelenideElement labelTabTypeDistribution = $x("//div[@id='delivery-view-fields-label']");
 
 
     @Step("Ожидание {number}")
@@ -127,6 +131,11 @@ public class DistributionAutoSearchPage {
     @Step("Получить название вкладки для выбора настроек типа рассылки")
     public String getTitleTabTypeDistribution(){
         return titleTabTypeDistribution.getText();
+    }
+
+    @Step("Получить подпись вкладки для выбора настроек типа рассылки")
+    public String getLabelTabTypeDistribution(){
+        return labelTabTypeDistribution.getText();
     }
 
     @Step("Проверка надписи включения рассылки")
