@@ -225,4 +225,18 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .getTitleTabTypeDistribution(), "Поля");
     }
+
+    @Test
+    @Description("Проверка названия вкладки для настроек типа рассылки после выбора типа рассылки 'отчет'")
+    public void checkTitleTabTypeDistributionAfterSelectedTypeDistributionReport(){
+        assertEquals(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.radiobuttonTypeDistributionReport)
+                .waitFor(500)
+                .getTitleTabTypeDistribution(), "Отчёты");
+    }
 }
