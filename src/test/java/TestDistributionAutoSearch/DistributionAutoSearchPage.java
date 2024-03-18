@@ -64,6 +64,8 @@ public class DistributionAutoSearchPage {
     private final SelenideElement activationDateDistribution = $x("//span[@id='delivery-view-distribution-utc-start']");
     /** Сообщение об ошибке при сохранении рассылки без выбранного аккаунта */
     private final SelenideElement errorMessageSaveEnableDistributionWithoutSelectedAccount = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
+    /** Подпись о времени и периоде рассылки */
+    private final SelenideElement labelSettingsViewDistribution = $x("//div[@class='search-autosearch-view-settings-text']");
 
 
     @Step("Ожидание {number}")
@@ -176,5 +178,10 @@ public class DistributionAutoSearchPage {
     @Step("Проверка кликабельности")
     public boolean isInteractableButtonDeleteInterval(){
         return Objects.equals(buttonDeleteInterval.getAttribute("aria-disabled"), "true");
+    }
+
+    @Step("Проверка отображения подписи периода и времени")
+    public boolean isDisplayedSettingsViewDistribution(){
+        return labelSettingsViewDistribution.isDisplayed();
     }
 }

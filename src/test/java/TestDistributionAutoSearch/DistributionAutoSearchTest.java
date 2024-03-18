@@ -175,4 +175,16 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .isInteractableButtonDeleteInterval());
     }
+
+    @Test
+    @Description("Проверка отображения подписи времени и периода рассылки")
+    public void checkDisplayedSettingsViewDistribution(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .isDisplayedSettingsViewDistribution());
+    }
 }
