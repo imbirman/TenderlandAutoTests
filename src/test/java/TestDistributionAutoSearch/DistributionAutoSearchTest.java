@@ -199,4 +199,18 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .getTextLabelSettingsViewDistribution(),"Рассылка придет раз в 1 час с 9:00 до 12:00");
     }
+
+    @Test
+    @Description("Проверка текста подписи времени и периода рассылки после добавления интервала")
+    public void checkTextSettingsViewDistributionAfterAddedInterval(){
+        assertEquals(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonAddInterval)
+                .waitFor(500)
+                .getTextLabelSettingsViewDistribution(),"Рассылка придет раз в 1 час с 9:00 до 12:00, с 13:00 до 15:00");
+    }
 }
