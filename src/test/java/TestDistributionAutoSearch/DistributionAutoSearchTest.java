@@ -257,4 +257,26 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .getLabelTabTypeDistribution(), "Выбран отчёт - Тестовый отчет");
     }
+
+    @Test
+    @Description("Проверка ошибки при сохранении рассылки без полей")
+    public void checkErrorSaveDistributionWithoutSelectedFields(){
+        assertEquals(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonEnableDistribution)
+                .waitFor(500)
+                .clickButton(page.fieldAccountForDistribution)
+                .clickButton(page.accountForDistribution)
+                .clickButton(page.tabFieldsDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonDeleteAllFieldsForDistribution)
+                .waitFor(500)
+                .clickButton(page.buttonSaveSettingsDistribution)
+                .waitFor(500)
+                .getLabelTabTypeDistribution(), "Выберите хотя бы одно поле!");
+    }
 }

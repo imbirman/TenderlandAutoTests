@@ -38,7 +38,10 @@ public class DistributionAutoSearchPage {
     protected SelenideElement tabFieldsDistribution = $x("(//div[@id='delivery-view-tabs']/div/div)[2]");
     /** Первый отчет */
     protected SelenideElement firstReport = $x("(//div[@id='delivery-view-list-reports']//span)[1]");
-
+    /** Поле аккаунта для рассылки */
+    protected SelenideElement fieldAccountForDistribution = $x("//div[@id='tagbox-accounts']");
+    /** Аккаунт для рассылки */
+    protected SelenideElement accountForDistribution = $x("//div[@class='dx-list-group-body']//div[@class='dx-item-content dx-list-item-content']");
 
     /** Кнопка открытия окна рассылки */
     protected SelenideElement buttonOpenWindowDistribution = $x("//div[@id='search-autosearch-options']");
@@ -50,6 +53,8 @@ public class DistributionAutoSearchPage {
     protected SelenideElement buttonDeleteInterval = $x("//div[@id='delivery-view-delete-interval-button']");
     /** Кнопка добавления интервала */
     protected SelenideElement buttonAddInterval = $x("//div[@id='delivery-view-add-interval-button']");
+    /** Кнопка удаления всех полей для рассылки */
+    protected SelenideElement buttonDeleteAllFieldsForDistribution = $x("(//div[@class='search-view-result-header']//i)[2]");
 
 
     /** Тип рассылки "Письмо-карточки" */
