@@ -279,4 +279,18 @@ public class DistributionAutoSearchTest extends BaseTest {
                 .waitFor(500)
                 .getLabelTabTypeDistribution(), "Выберите хотя бы одно поле!");
     }
+
+    @Test
+    @Description("Проверка корректности списка периодов рассылки")
+    public void checkCorrectFrequencyDistributionList(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .waitFor(500)
+                .clickButton(page.testAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenWindowDistribution)
+                .waitFor(500)
+                .clickButton(page.frequencyDistribution)
+                .waitFor(500)
+                .isCorrectFrequencyDistributionList());
+    }
 }

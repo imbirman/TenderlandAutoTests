@@ -28,6 +28,9 @@ public class DistributionAutoSearchPage {
 
     private final ElementsCollection fieldsSelectedCollections = $$x("//div[@id='delivery-view-result-fields']//span");
 
+
+    protected ElementsCollection frequencyDistributionCollections = $$x("//div[@class='dx-item-content dx-list-item-content']");
+
     /** Тестовый автопоиск в списке автопоисков */
     protected SelenideElement testAutoSearch = $x("//div[text()='Тестовый автопоиск']");
     /** Вкладка "Автопоиски" */
@@ -42,6 +45,9 @@ public class DistributionAutoSearchPage {
     protected SelenideElement fieldAccountForDistribution = $x("//div[@id='tagbox-accounts']");
     /** Аккаунт для рассылки */
     protected SelenideElement accountForDistribution = $x("//div[@class='dx-list-group-body']//div[@class='dx-item-content dx-list-item-content']");
+    /** Периодичность рассылки */
+    protected SelenideElement frequencyDistribution = $x("//div[@id='delivery-period']");
+
 
     /** Кнопка открытия окна рассылки */
     protected SelenideElement buttonOpenWindowDistribution = $x("//div[@id='search-autosearch-options']");
@@ -192,6 +198,19 @@ public class DistributionAutoSearchPage {
         listFields.add("Ссылка на площадку");
 
         return listSelectedFields.equals(listFields);
+    }
+
+    @Step("Проверка корректности списка периодов рассылки")
+    public boolean isCorrectFrequencyDistributionList(){
+        List<String> listFrequencyDistribution = frequencyDistributionCollections.texts();
+        listFrequencyDistribution.remove(0);
+        System.out.println(listFrequencyDistribution);
+        List<String> listFrequency = new ArrayList<>();
+        listFrequency.add("1 час");
+        listFrequency.add("30 минут");
+        listFrequency.add("15 минут");
+
+        return listFrequencyDistribution.equals(listFrequency);
     }
 
     @Step("Проверка типа рассылки по умолчанию")
