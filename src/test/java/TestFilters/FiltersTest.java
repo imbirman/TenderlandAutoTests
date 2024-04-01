@@ -52,4 +52,18 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isNotContainKeyWordByOKPDNo());
     }
+
+    @Test
+    @Description("Проверка выбранного значения в окне фильтра ОКПД при очистке поля поиска и выборе 'Показывать только выбранное'")
+    public void checkSwitchShowOnlySelectedOKPDYes(){
+        assertTrue(page.dragAndDropFilter(page.filterOKPD)
+                .waitFor(500)
+                .typeSearch("(85.11.10.000) Услуги в области дошкольного образования")
+                .clickButton(page.checkboxOKPD)
+                .clearField(page.fieldSearchInFilter)
+                .waitFor(500)
+                .clickButton(page.checkboxShowOnlySelected)
+                .waitFor(500)
+                .isNotContainKeyWordByOKPDYes());
+    }
 }

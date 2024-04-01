@@ -23,12 +23,15 @@ public class FiltersPage {
 
     /** Список результатов поиска внутри фильтра */
     private final ElementsCollection resultSearchInFilterCollections = $$x("//span[@class='dx-treelist-search-text']");
-
+    /** Список результатов работы чекбокса "Показывать только выбранное" */
+    private final ElementsCollection resultShowOnlySelected = $$x("//div[@class='dx-treelist-text-content']");
 
     /** Поле дерева фильтров */
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
     /** Результат поиска внутри фильтра */
     private final SelenideElement resultSearchInFilter = $x("//span[@class='dx-treelist-search-text']");
+
+
 
     /** Поле поиска внутри фильтра */
     protected SelenideElement fieldSearchInFilter = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
@@ -36,6 +39,8 @@ public class FiltersPage {
     protected SelenideElement filterOKPD = $x("//span[text()='ОКПД 2']");
     /** Чекбокс фильтра ОКПД */
     protected SelenideElement checkboxOKPD = $x("(//div[@class='dx-checkbox-container'])[last()]");
+    /** Переключатель "Показывать только выбранное" */
+    protected SelenideElement checkboxShowOnlySelected = $x("//div[@id='filter-editor-show-selected-rows']");
 
 
     @Step("Ожидание {number}")
@@ -102,8 +107,19 @@ public class FiltersPage {
         boolean check = true;
         for(SelenideElement type : resultSearchInFilterCollections){
             if(type.getText().contains("(85.11.10.000) Услуги в области дошкольного образования")){
-//                System.out.println("Услуги: " + type.getText());
                 check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка отображения поискового элемента при включенном чекбоксе \"Показывать только выбранное\" в фильтре ОКПД")
+    public boolean isNotContainKeyWordByOKPDYes(){
+        boolean check = false;
+        for(SelenideElement type : resultShowOnlySelected){
+            if(type.getText().contains("(85.11.10.000) Услуги в области дошкольного образования")){
+                check = true;
                 break;
             }
         }
