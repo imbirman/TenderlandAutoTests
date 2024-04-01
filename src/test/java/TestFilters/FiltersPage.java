@@ -6,6 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 import javax.annotation.Nonnull;
 
@@ -28,6 +29,9 @@ public class FiltersPage {
     private final ElementsCollection resultShowOnlySelectedCollections = $$x("//div[@class='dx-treelist-text-content']");
     /** Список ячеек таблицы в результатах поиска для столбца "Цена" */
     private final ElementsCollection cellTablePriceCollections = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
+    /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" */
+    private final ElementsCollection cellTableInsideFilterCustomerNameOrganization = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
+
 
     /** Кнопка "Сбросить" */
     protected SelenideElement buttonReset = $x("//div[@id='filter-cancel-button']");
@@ -47,6 +51,8 @@ public class FiltersPage {
     private final SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-3-to']//input[@role='spinbutton']");
     /** Текст надписи фильтра цена */
     private final SelenideElement filterPriceText = $x("//div[@class='tl-filter-description']");
+    /** Поле поиска по реквизитам во вкладке "Справочник" внутри фильтра "Заказчик" */
+    private final SelenideElement fieldSearchByDetailsInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[1]");
 
 
 
@@ -143,6 +149,13 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Ввести значение в поле поиска по реквизитам фильтра \"Заказчик\"")
+    public FiltersPage typeSearchInsideFilterCustomerByDetails(String search){
+        fieldSearchByDetailsInFilterCustomer.sendKeys(search);
+        fieldSearchByDetailsInFilterCustomer.sendKeys(Keys.ENTER);
+        return new FiltersPage();
+    }
+
     @Step("Очистить поле")
     public FiltersPage clearField(SelenideElement field){field.clear(); return new FiltersPage();}
 
@@ -195,8 +208,19 @@ public class FiltersPage {
         boolean check = false;
         for(SelenideElement type : cellTablePriceCollections){
             if(type.getText().contains("0.00 ₽")){
-//                System.out.println("Услуги: " + type.getText());
                 check = true;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка поиска по реквизитам внутри фильтра \"Заказчик\"")
+    public boolean isCheckSearchInsideFilterCustomerByDetails(){
+        boolean check = true;
+        for(SelenideElement type : cellTableInsideFilterCustomerNameOrganization){
+            if(!(type.getText().contains("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ МАЛОВА НАТАЛЬЯ БОРИСОВНА"))){
+                check = false;
                 break;
             }
         }

@@ -136,4 +136,15 @@ public class FiltersTest extends BaseTest {
                 .waitFor(1000)
                 .isContainZeroPrice());
     }
+
+    @Test
+    @Description("Проверка результата поиска по реквизитам внутри фильтра 'Заказчик'")
+    public void checkSearchInsideFilterCustomer(){
+        assertTrue(page.dragAndDropFilter(page.filterCustomer)
+                .waitFor(500)
+                .typeSearchInsideFilterCustomerByDetails("305780214002814")
+                .waitFor(1000)
+                .isCheckSearchInsideFilterCustomerByDetails());
+
+    }
 }
