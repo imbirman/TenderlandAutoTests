@@ -104,10 +104,22 @@ public class FiltersTest extends BaseTest {
     public void checkIncorrectPriceFrom(){
         assertEquals(page.dragAndDropFilter(page.filterPrice)
                 .waitFor(500)
-                .typeSearch("-dsddвава+* ")
+                .typePriceFrom("-dsddвава+* ")
                 .waitFor(500)
                 .clickButton(page.filterPrice)
                 .waitFor(500)
                 .getTextFilterPrice(), "0 ₽ — ...");
+    }
+
+    @Test
+    @Description("Проверка ввода некорректной цены до")
+    public void checkIncorrectPriceTo(){
+        assertEquals(page.dragAndDropFilter(page.filterPrice)
+                .waitFor(500)
+                .typePriceTo("-dsddвава+* ")
+                .waitFor(500)
+                .clickButton(page.filterPrice)
+                .waitFor(500)
+                .getTextFilterPrice(), "... — 0 ₽");
     }
 }

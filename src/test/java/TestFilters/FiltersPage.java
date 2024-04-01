@@ -124,6 +124,18 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Ввести значение в поле цены от")
+    public FiltersPage typePriceFrom(String price){
+        fieldPriceFrom.sendKeys(price);
+        return new FiltersPage();
+    }
+
+    @Step("Ввести значение в поле цены до")
+    public FiltersPage typePriceTo(String price){
+        fieldPriceTo.sendKeys(price);
+        return new FiltersPage();
+    }
+
     @Step("Очистить поле")
     public FiltersPage clearField(SelenideElement field){field.clear(); return new FiltersPage();}
 
