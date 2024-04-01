@@ -81,4 +81,13 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isResetResultSearchByFilterOKPD());
     }
+
+    @Test
+    @Description("Проверка соответствия найденного значения по поиску в фильтре Категория")
+    public void checkResultSearchFilterCategory(){
+        assertEquals(page.dragAndDropFilter(page.filterCategory)
+                .waitFor(500)
+                .typeSearch("Коммунальные услуги")
+                .getResultSearchByFilter(), "Коммунальные услуги");
+    }
 }

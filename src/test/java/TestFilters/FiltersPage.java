@@ -36,11 +36,28 @@ public class FiltersPage {
     private final SelenideElement resultSearchInFilter = $x("//span[@class='dx-treelist-search-text']");
 
 
+    /** Фильтр "ОКПД 2" в блоке фильтров */
+    protected SelenideElement filterOKPD = $x("//span[text()='ОКПД 2']");
+    /** Фильтр "Категория" в блоке фильтров */
+    protected SelenideElement filterCategory = $x("//span[text()='Категория']");
+    /** Фильтр "Цена" в блоке фильтров */
+    protected SelenideElement filterPrice = $x("//span[text()='Цена']");
+    /** Фильтр "Заказчик" в блоке фильтров */
+    protected SelenideElement filterCustomer = $x("//span[text()='Заказчик']");
+    /** Фильтр "Дата публикации" в блоке фильтров */
+    protected SelenideElement filterDatePublication = $x("//div[@id='list-tenders-filters-group']//span[text()='публикации']");
+    /** Фильтр "Модуль" в блоке фильтров */
+    protected SelenideElement filterModule = $x("//span[text()='Модуль']");
+    /** Фильтр "Метка" в блоке фильтров */
+    protected SelenideElement filterMark = $x("//span[text()='Метка']");
+    /** Фильтр "Площадка" в блоке фильтров */
+    protected SelenideElement filterStand = $x("//span[text()='Площадка']");
+    /** Фильтр "Регион" в блоке фильтров */
+    protected SelenideElement filterRegion = $x("//span[text()='Регион']");
+
 
     /** Поле поиска внутри фильтра */
     protected SelenideElement fieldSearchInFilter = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
-    /** Фильтр "ОКПД 2" в блоке фильтров */
-    protected SelenideElement filterOKPD = $x("//span[text()='ОКПД 2']");
     /** Чекбокс фильтра ОКПД */
     protected SelenideElement checkboxOKPD = $x("(//div[@class='dx-checkbox-container'])[last()]");
     /** Переключатель "Показывать только выбранное" */
@@ -134,4 +151,5 @@ public class FiltersPage {
     public boolean isResetResultSearchByFilterOKPD(){
         return resultSearchInFilter.isSelected();
     }
+
 }
