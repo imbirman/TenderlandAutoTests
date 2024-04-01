@@ -37,6 +37,12 @@ public class FiltersPage {
     private final SelenideElement resultSearchInFilter = $x("//span[@class='dx-treelist-search-text']");
     /** Поле чекбокса "Показывать без категории" */
     private final SelenideElement fieldWithoutCategory = $x("//div[@class='tl-filter-options']//div[@aria-disabled]");
+    /** Поле для ввода цены "от" */
+    private final SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-3-from']//input[@role='spinbutton']");
+    /** Поле для ввода цены "до" */
+    private final SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-3-to']//input[@role='spinbutton']");
+    /** Текст надписи фильтра цена */
+    private final SelenideElement filterPriceText = $x("//div[@class='tl-filter-description']");
 
 
     /** Фильтр "ОКПД 2" в блоке фильтров */
@@ -124,6 +130,11 @@ public class FiltersPage {
     @Step("Получить текст найденного значения в фильтре \"ОКПД\"")
     public String getResultSearchByFilter(){
         return resultSearchInFilter.getText();
+    }
+
+    @Step("Получить текст фильтра \"Цена\"")
+    public String getTextFilterPrice(){
+        return filterPriceText.getText();
     }
 
     @Step("Проверка отображения поискового элемента при пустом поле поиска в фильтре ОКПД")

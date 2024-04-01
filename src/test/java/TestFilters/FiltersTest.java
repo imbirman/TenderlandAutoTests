@@ -98,4 +98,16 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isDisabledCheckboxEmptyCategory());
     }
+
+    @Test
+    @Description("Проверка ввода некорректной цены от")
+    public void checkIncorrectPriceFrom(){
+        assertEquals(page.dragAndDropFilter(page.filterPrice)
+                .waitFor(500)
+                .typeSearch("-dsddвава+* ")
+                .waitFor(500)
+                .clickButton(page.filterPrice)
+                .waitFor(500)
+                .getTextFilterPrice(), "0 ₽ — ...");
+    }
 }
