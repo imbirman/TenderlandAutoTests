@@ -90,4 +90,12 @@ public class FiltersTest extends BaseTest {
                 .typeSearch("Коммунальные услуги")
                 .getResultSearchByFilter(), "Коммунальные услуги");
     }
+
+    @Test
+    @Description("Проверка чекбокса \"Без категории\"")
+    public void checkResultSearchFilterWithoutCategory(){
+        assertTrue(page.dragAndDropFilter(page.filterCategory)
+                .waitFor(500)
+                .isDisabledCheckboxEmptyCategory());
+    }
 }

@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import javax.annotation.Nonnull;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -34,6 +35,8 @@ public class FiltersPage {
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
     /** Результат поиска внутри фильтра */
     private final SelenideElement resultSearchInFilter = $x("//span[@class='dx-treelist-search-text']");
+    /** Поле чекбокса "Показывать без категории" */
+    private final SelenideElement fieldWithoutCategory = $x("//div[@class='tl-filter-options']//div[@aria-disabled]");
 
 
     /** Фильтр "ОКПД 2" в блоке фильтров */
@@ -152,4 +155,8 @@ public class FiltersPage {
         return resultSearchInFilter.isSelected();
     }
 
+    @Step("Проверка блокирования чекбокса \"Без категории\" в фильтре \"Категория\"")
+    public boolean isDisabledCheckboxEmptyCategory(){
+        return Objects.requireNonNull(fieldWithoutCategory.getAttribute("class")).contains("dx-state-disabled");
+    }
 }
