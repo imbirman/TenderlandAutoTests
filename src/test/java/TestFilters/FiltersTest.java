@@ -122,4 +122,18 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .getTextFilterPrice(), "... — 0 ₽");
     }
+
+    @Test
+    @Description("Проверка результата поиска с нулевой ценой")
+    public void checkResultSearchWithZeroPrice(){
+        assertTrue(page.dragAndDropFilter(page.filterPrice)
+                .waitFor(500)
+                .typePriceFrom("1000")
+                .typePriceTo("10000")
+                .clickButton(page.checkboxShowWithoutNMCK)
+                .clickButton(page.filterPrice)
+                .clickButton(page.buttonSearch)
+                .waitFor(1000)
+                .isContainZeroPrice());
+    }
 }

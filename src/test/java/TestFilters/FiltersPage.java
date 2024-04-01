@@ -25,11 +25,15 @@ public class FiltersPage {
     /** Список результатов поиска внутри фильтра */
     private final ElementsCollection resultSearchInFilterCollections = $$x("//span[@class='dx-treelist-search-text']");
     /** Список результатов работы чекбокса "Показывать только выбранное" */
-    private final ElementsCollection resultShowOnlySelected = $$x("//div[@class='dx-treelist-text-content']");
-
+    private final ElementsCollection resultShowOnlySelectedCollections = $$x("//div[@class='dx-treelist-text-content']");
+    /** Список ячеек таблицы в результатах поиска для столбца "Цена" */
+    private final ElementsCollection cellTablePriceCollections = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
 
     /** Кнопка "Сбросить" */
     protected SelenideElement buttonReset = $x("//div[@id='filter-cancel-button']");
+    /** Кнопка "Поиск" */
+    protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
+
 
     /** Поле дерева фильтров */
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
@@ -43,6 +47,7 @@ public class FiltersPage {
     private final SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-3-to']//input[@role='spinbutton']");
     /** Текст надписи фильтра цена */
     private final SelenideElement filterPriceText = $x("//div[@class='tl-filter-description']");
+
 
 
     /** Фильтр "ОКПД 2" в блоке фильтров */
@@ -71,6 +76,8 @@ public class FiltersPage {
     protected SelenideElement checkboxOKPD = $x("(//div[@class='dx-checkbox-container'])[last()]");
     /** Переключатель "Показывать только выбранное" */
     protected SelenideElement checkboxShowOnlySelected = $x("//div[@id='filter-editor-show-selected-rows']");
+    /** Чекбокс "Показывать с нулевой ценой" */
+    protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
 
 
     @Step("Ожидание {number}")
@@ -164,7 +171,7 @@ public class FiltersPage {
     @Step("Проверка отображения поискового элемента при включенном чекбоксе \"Показывать только выбранное\" в фильтре ОКПД")
     public boolean isNotContainKeyWordByOKPDYes(){
         boolean check = false;
-        for(SelenideElement type : resultShowOnlySelected){
+        for(SelenideElement type : resultShowOnlySelectedCollections){
             if(type.getText().contains("(85.11.10.000) Услуги в области дошкольного образования")){
                 check = true;
                 break;
@@ -181,5 +188,18 @@ public class FiltersPage {
     @Step("Проверка блокирования чекбокса \"Без категории\" в фильтре \"Категория\"")
     public boolean isDisabledCheckboxEmptyCategory(){
         return Objects.requireNonNull(fieldWithoutCategory.getAttribute("class")).contains("dx-state-disabled");
+    }
+
+    @Step("Проверка отображения поискового элемента при включенном чекбоксе \"Показывать с нулевой ценой\"")
+    public boolean isContainZeroPrice(){
+        boolean check = false;
+        for(SelenideElement type : cellTablePriceCollections){
+            if(type.getText().contains("0.00 ₽")){
+//                System.out.println("Услуги: " + type.getText());
+                check = true;
+                break;
+            }
+        }
+        return check;
     }
 }
