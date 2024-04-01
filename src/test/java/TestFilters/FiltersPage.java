@@ -26,6 +26,10 @@ public class FiltersPage {
     /** Список результатов работы чекбокса "Показывать только выбранное" */
     private final ElementsCollection resultShowOnlySelected = $$x("//div[@class='dx-treelist-text-content']");
 
+
+    /** Кнопка "Сбросить" */
+    protected SelenideElement buttonReset = $x("//div[@id='filter-cancel-button']");
+
     /** Поле дерева фильтров */
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
     /** Результат поиска внутри фильтра */
@@ -124,5 +128,10 @@ public class FiltersPage {
             }
         }
         return check;
+    }
+
+    @Step(" Получить текст найденного значения в фильтре \"ОКПД\"")
+    public boolean isResetResultSearchByFilterOKPD(){
+        return resultSearchInFilter.isSelected();
     }
 }

@@ -66,4 +66,19 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isNotContainKeyWordByOKPDYes());
     }
+
+    @Test
+    @Description("Проверка сброса выделения найденного элемента")
+    public void checkResetSelectFilterOKPD(){
+        assertFalse(page.dragAndDropFilter(page.filterOKPD)
+                .waitFor(500)
+                .typeSearch("(85.11.10.000) Услуги в области дошкольного образования")
+                .clickButton(page.checkboxOKPD)
+                .waitFor(500)
+                .clickButton(page.buttonReset)
+                .waitFor(500)
+                .typeSearch("(85.11.10.000) Услуги в области дошкольного образования")
+                .waitFor(500)
+                .isResetResultSearchByFilterOKPD());
+    }
 }
