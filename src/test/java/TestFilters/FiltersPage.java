@@ -2,11 +2,14 @@ package TestFilters;
 
 import TestAuditor.AuditorPage;
 import TestDistributionAutoSearch.DistributionAutoSearchPage;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import javax.annotation.Nonnull;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -17,6 +20,11 @@ public class FiltersPage {
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+
+    /** Список результатов поиска внутри фильтра */
+    private final ElementsCollection resultSearchInFilterCollections = $$x("//span[@class='dx-treelist-search-text']");
+
+
     /** Поле дерева фильтров */
     private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
     /** Результат поиска внутри фильтра */
@@ -26,6 +34,8 @@ public class FiltersPage {
     protected SelenideElement fieldSearchInFilter = $x("//div[(contains(@class,'dx-item dx-multiview-item dx-item-selected'))]//input[@class='dx-texteditor-input']");
     /** Фильтр "ОКПД 2" в блоке фильтров */
     protected SelenideElement filterOKPD = $x("//span[text()='ОКПД 2']");
+    /** Чекбокс фильтра ОКПД */
+    protected SelenideElement checkboxOKPD = $x("(//div[@class='dx-checkbox-container'])[last()]");
 
 
     @Step("Ожидание {number}")
@@ -79,8 +89,24 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Очистить поле")
+    public FiltersPage clearField(SelenideElement field){field.clear(); return new FiltersPage();}
+
     @Step("Получить текст найденного значения в фильтре \"ОКПД\"")
     public String getResultSearchByFilter(){
         return resultSearchInFilter.getText();
+    }
+
+    @Step("Проверка отображения поискового элемента при пустом поле поиска в фильтре ОКПД")
+    public boolean isNotContainKeyWordByOKPDNo(){
+        boolean check = true;
+        for(SelenideElement type : resultSearchInFilterCollections){
+            if(type.getText().contains("(85.11.10.000) Услуги в области дошкольного образования")){
+//                System.out.println("Услуги: " + type.getText());
+                check = false;
+                break;
+            }
+        }
+        return check;
     }
 }

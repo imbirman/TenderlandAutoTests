@@ -40,4 +40,16 @@ public class FiltersTest extends BaseTest {
                 .typeSearch("(85.11.10.000) Услуги в области дошкольного образования")
                 .getResultSearchByFilter(), "(85.11.10.000) Услуги в области дошкольного образования");
     }
+
+    @Test
+    @Description("Проверка отсутствия в окне фильтра выбранного значения при очистке поля поиска")
+    public void checkSwitchShowOnlySelectedOKPDNo(){
+        assertTrue(page.dragAndDropFilter(page.filterOKPD)
+                .waitFor(500)
+                .typeSearch("(85.11.10.000) Услуги в области дошкольного образования")
+                .clickButton(page.checkboxOKPD)
+                .clearField(page.fieldSearchInFilter)
+                .waitFor(500)
+                .isNotContainKeyWordByOKPDNo());
+    }
 }
