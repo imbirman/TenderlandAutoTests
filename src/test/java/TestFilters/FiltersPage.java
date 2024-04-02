@@ -29,12 +29,14 @@ public class FiltersPage {
     private final ElementsCollection resultShowOnlySelectedCollections = $$x("//div[@class='dx-treelist-text-content']");
     /** Список ячеек таблицы в результатах поиска для столбца "Цена" */
     private final ElementsCollection cellTablePriceCollections = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
-    /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" */
-    private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
+    /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" во вкладке "Поиск по тексту" */
+    private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationInTabSearchByTextCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
+    /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" во вкладке "Справочник" */
+    private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationInTabDirectoryCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
     /** Список ячеек таблицы в результатах поиска для столбца "Полное название" внутри фильтра "Заказчик" во вкладке "Поиск по тексту" */
     private final ElementsCollection cellTableInsideFilterCustomerFullTitleTextSearchCollections = $$x("//div[@id='filter-editor-5search-block']//tbody[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[4]");
     /** Список ячеек таблицы в результатах поиска для столбца "Адрес регистрации" внутри фильтра "Заказчик" во вкладке "Поиск по тексту"  */
-    private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]"); //
+    private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]");
 
 
     /** Кнопка "Сбросить" */
@@ -61,6 +63,8 @@ public class FiltersPage {
     private final SelenideElement fieldSearchByCustomerTextSearch = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
     /** Поле поиска по адресу регистрации во вкладке "Справочник" внутри фильтра "Заказчик" */
     private final SelenideElement fieldSearchByRegistrationAddressInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[3]");
+    /** Поле поиска по наименованию организации во вкладке "Выбор из справочника" внутри фильтра "Заказчик" */
+    private final SelenideElement fieldSearchByNameOrganizationInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[2]");
 
 
 
@@ -184,6 +188,13 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Ввести значение в поле поиска по наименованию организации фильтра \"Заказчик\"")
+    public FiltersPage typeSearchInsideFilterCustomerByNameOrganization(String search){
+        fieldSearchByNameOrganizationInFilterCustomer.sendKeys(search);
+        fieldSearchByNameOrganizationInFilterCustomer.sendKeys(Keys.ENTER);
+        return new FiltersPage();
+    }
+
     @Step("Очистить поле")
     public FiltersPage clearField(SelenideElement field){field.clear(); return new FiltersPage();}
 
@@ -246,7 +257,7 @@ public class FiltersPage {
     @Step("Проверка поиска по реквизитам внутри фильтра \"Заказчик\"")
     public boolean isCheckSearchInsideFilterCustomerByDetails(){
         boolean check = true;
-        for(SelenideElement type : cellTableInsideFilterCustomerNameOrganizationCollections){
+        for(SelenideElement type : cellTableInsideFilterCustomerNameOrganizationInTabSearchByTextCollections){
             if(!(type.getText().contains("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ МАЛОВА НАТАЛЬЯ БОРИСОВНА"))){
                 check = false;
                 break;
@@ -282,6 +293,19 @@ public class FiltersPage {
     @Step("Проверка выделения чекбокса \"Выбрать всё\" в фильтре \"Заказчик\"")
     public boolean isNotSelectedButtonAllSelect(){
         return Objects.requireNonNull(checkboxSelectAll.getAttribute("class")).contains("dx-widget dx-checkbox dx-state-hover dx-checkbox-checked");
+    }
+
+    @Step("Проверка поиска по организации внутри фильтра \"Заказчик\"")
+    public boolean isContainKeyWordByRegionSearchInsideFilterCustomer() {
+        boolean check = false;
+        for (SelenideElement type : cellTableInsideFilterCustomerNameOrganizationInTabDirectoryCollections) {
+            if ((type.getText().contains("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ КРАСНОГИР МАРИНА ВАСИЛЬЕВНА"))) {
+                check = true;
+            }
+            System.out.println("BGBGBGBG "+ " " + type.getText());
+        }
+
+        return check;
     }
 
 }

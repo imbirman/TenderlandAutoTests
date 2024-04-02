@@ -181,4 +181,14 @@ public class FiltersTest extends BaseTest {
                 .waitFor(1000)
                 .isNotSelectedButtonAllSelect());
     }
+
+    @Test
+    @Description("Проверка результата поиска по организации внутри фильтра 'Заказчик'")
+    public void checkSearchRegionInsideFilterCustomer(){
+        assertTrue(page.dragAndDropFilter(page.filterCustomer)
+                .waitFor(500)
+                .typeSearchInsideFilterCustomerByNameOrganization("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ КРАСНОГИР МАРИНА ВАСИЛЬЕВНА")
+                .waitFor(1500)
+                .isContainKeyWordByRegionSearchInsideFilterCustomer());
+    }
 }
