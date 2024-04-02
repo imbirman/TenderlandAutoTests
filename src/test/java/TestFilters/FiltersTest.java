@@ -191,4 +191,16 @@ public class FiltersTest extends BaseTest {
                 .waitFor(1500)
                 .isContainKeyWordByRegionSearchInsideFilterCustomer());
     }
+
+    @Test
+    @Description("Проверка списка элементов комбобокса 'Направление' в фильтре 'Дата публикации'")
+    public void checkListElementsComboboxDirection(){
+        assertTrue(page.dragAndDropFilter(page.filterDatePublication)
+                .waitFor(1000)
+                .clickButton(page.tabRangeInFilterDatePublication)
+                .waitFor(500)
+                .clickButton(page.comboboxDirection)
+                .waitFor(500)
+                .isContainTypesDirection());
+    }
 }

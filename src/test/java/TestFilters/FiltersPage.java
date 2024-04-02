@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 
 import javax.annotation.Nonnull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +38,8 @@ public class FiltersPage {
     private final ElementsCollection cellTableInsideFilterCustomerFullTitleTextSearchCollections = $$x("//div[@id='filter-editor-5search-block']//tbody[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[4]");
     /** Список ячеек таблицы в результатах поиска для столбца "Адрес регистрации" внутри фильтра "Заказчик" во вкладке "Поиск по тексту"  */
     private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]");
+    /** Список элементов комбобокса во вкладке "Диапазон" фильтра "Дата публикации" */
+    private final ElementsCollection elementOfComboboxCollections = $$x("//div[@class='dx-item-content dx-list-item-content']");
 
 
     /** Кнопка "Сбросить" */
@@ -96,8 +99,12 @@ public class FiltersPage {
     protected SelenideElement checkboxShowOnlySelected = $x("//div[@id='filter-editor-show-selected-rows']");
     /** Чекбокс "Показывать с нулевой ценой" */
     protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
+    /** Комбобокс "Направление" во вкладке Диапазон фильтра "Дата публикации" */
+    protected SelenideElement comboboxDirection = $x("(//div[@class='dx-item-content dx-multiview-item-content']//input[@class='dx-texteditor-input'][@role='combobox'])[1]");
     /** Вкладка "Поиск по тексту" в фильтре "Заказчик" */
     protected SelenideElement tabTextSearchInFilterCustomer = $x("//div[@class='search-filters-editor-div']//span[text()='Поиск по тексту']");
+    /** Вкладка "Диапазон" в фильтре "Дата публикации" */
+    protected SelenideElement tabRangeInFilterDatePublication = $x("//div[@id='replace-item-min']//div[@class='dx-item dx-tab']");
     /** Чекбокс в окне фильтра "Выбрать всё" */
     protected SelenideElement checkboxSelectAll = $x("(//div[@id='filter-editor-5']//div[@class='dx-datagrid-text-content']//div[@role='checkbox'])[1]");
     /** Вторая страница списка в окне фильтра */
@@ -306,6 +313,19 @@ public class FiltersPage {
         }
 
         return check;
+    }
+
+    @Step("Проверка на соответствие списка направлений в фильтре \"Дата публикации\"")
+    public boolean isContainTypesDirection(){
+        List<String> keyArray = elementOfComboboxCollections.texts();
+        keyArray.remove(0);
+        keyArray.remove(0);
+        List<String> checkArray = new ArrayList<>();
+        checkArray.add("Предыдущий");
+        checkArray.add("Следующий");
+        System.out.println(keyArray);
+        System.out.println(checkArray);
+        return keyArray.equals(checkArray);
     }
 
 }
