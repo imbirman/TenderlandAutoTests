@@ -147,4 +147,16 @@ public class FiltersTest extends BaseTest {
                 .isCheckSearchInsideFilterCustomerByDetails());
 
     }
+
+    @Test
+    @Description("Проверка результата поиска по тексту внутри фильтра 'Заказчик'")
+    public void checkTextSearchInsideFilterCustomer(){
+        assertTrue(page.dragAndDropFilter(page.filterCustomer)
+                .waitFor(500)
+                .clickButton(page.tabTextSearchInFilterCustomer)
+                .waitFor(500)
+                .typeSearchInsideFilterCustomerTextSearch("ЗАКУПАЙ")
+                .waitFor(500)
+                .isCheckSearchByTextInsideFilterCustomer());
+    }
 }

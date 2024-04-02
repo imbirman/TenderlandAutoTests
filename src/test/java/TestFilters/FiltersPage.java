@@ -30,7 +30,9 @@ public class FiltersPage {
     /** Список ячеек таблицы в результатах поиска для столбца "Цена" */
     private final ElementsCollection cellTablePriceCollections = $$x("//div[@class='dx-datagrid-content']//tbody[@role='presentation']//td[6]");
     /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" */
-    private final ElementsCollection cellTableInsideFilterCustomerNameOrganization = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
+    private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
+    /** Список ячеек таблицы в результатах поиска для столбца "Полное название" внутри фильтра "Заказчик" во вкладке "Поиск по тексту" */
+    private final ElementsCollection cellTableInsideFilterCustomerFullTitleTextSearchCollections = $$x("//div[@id='filter-editor-5search-block']//tbody[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[4]");
 
 
     /** Кнопка "Сбросить" */
@@ -53,6 +55,8 @@ public class FiltersPage {
     private final SelenideElement filterPriceText = $x("//div[@class='tl-filter-description']");
     /** Поле поиска по реквизитам во вкладке "Справочник" внутри фильтра "Заказчик" */
     private final SelenideElement fieldSearchByDetailsInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[1]");
+    /** Поле поиска внутри фильтра "Заказчик" */
+    private final SelenideElement fieldSearchByCustomerTextSearch = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
 
 
 
@@ -84,6 +88,8 @@ public class FiltersPage {
     protected SelenideElement checkboxShowOnlySelected = $x("//div[@id='filter-editor-show-selected-rows']");
     /** Чекбокс "Показывать с нулевой ценой" */
     protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
+    /** Вкладка "Поиск по тексту" в фильтре "Заказчик" */
+    protected SelenideElement tabTextSearchInFilterCustomer = $x("//div[@class='search-filters-editor-div']//span[text()='Поиск по тексту']");
 
 
     @Step("Ожидание {number}")
@@ -156,6 +162,13 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Ввести значение в поле поиска по тексту фильтра \"Заказчик\"")
+    public FiltersPage typeSearchInsideFilterCustomerTextSearch(String search){
+        fieldSearchByCustomerTextSearch.sendKeys(search);
+        fieldSearchByCustomerTextSearch.sendKeys(Keys.ENTER);
+        return new FiltersPage();
+    }
+
     @Step("Очистить поле")
     public FiltersPage clearField(SelenideElement field){field.clear(); return new FiltersPage();}
 
@@ -218,7 +231,7 @@ public class FiltersPage {
     @Step("Проверка поиска по реквизитам внутри фильтра \"Заказчик\"")
     public boolean isCheckSearchInsideFilterCustomerByDetails(){
         boolean check = true;
-        for(SelenideElement type : cellTableInsideFilterCustomerNameOrganization){
+        for(SelenideElement type : cellTableInsideFilterCustomerNameOrganizationCollections){
             if(!(type.getText().contains("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ МАЛОВА НАТАЛЬЯ БОРИСОВНА"))){
                 check = false;
                 break;
@@ -226,4 +239,17 @@ public class FiltersPage {
         }
         return check;
     }
+
+    @Step("Проверка поиска по тексту внутри фильтра \"Заказчик\"")
+    public boolean isCheckSearchByTextInsideFilterCustomer(){
+        boolean check = true;
+        for(SelenideElement type : cellTableInsideFilterCustomerFullTitleTextSearchCollections){
+            if(!(type.getText().contains("ЗАКУПАЙ"))){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
 }
