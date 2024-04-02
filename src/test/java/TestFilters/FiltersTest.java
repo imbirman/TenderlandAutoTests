@@ -159,4 +159,15 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckSearchByTextInsideFilterCustomer());
     }
+
+    @Test
+    @Description("Проверка поиска по адресу регистрации внутри фильтра \"Заказчик\"")
+    public void checkExcludeFromSearchInsideFilterCustomer(){
+        assertTrue(page.dragAndDropFilter(page.filterCustomer)
+                .waitFor(500)
+                .typeSearchInsideFilterCustomerByRegistrationAddress("ОРЕНБУРГ")
+                .waitFor(1000)
+                .isCheckSearchInsideFilterCustomerByRegistrationAddress());
+
+    }
 }

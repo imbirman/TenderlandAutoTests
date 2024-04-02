@@ -33,6 +33,8 @@ public class FiltersPage {
     private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
     /** Список ячеек таблицы в результатах поиска для столбца "Полное название" внутри фильтра "Заказчик" во вкладке "Поиск по тексту" */
     private final ElementsCollection cellTableInsideFilterCustomerFullTitleTextSearchCollections = $$x("//div[@id='filter-editor-5search-block']//tbody[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[4]");
+    /** Список ячеек таблицы в результатах поиска для столбца "Адрес регистрации" внутри фильтра "Заказчик" во вкладке "Поиск по тексту"  */
+    private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]"); //
 
 
     /** Кнопка "Сбросить" */
@@ -57,6 +59,8 @@ public class FiltersPage {
     private final SelenideElement fieldSearchByDetailsInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[1]");
     /** Поле поиска внутри фильтра "Заказчик" */
     private final SelenideElement fieldSearchByCustomerTextSearch = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
+    /** Поле поиска по адресу регистрации во вкладке "Справочник" внутри фильтра "Заказчик" */
+    private final SelenideElement fieldSearchByRegistrationAddressInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[3]");
 
 
 
@@ -169,6 +173,13 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Ввести значение в поле поиска по наименованию организации фильтра \"Заказчик\"")
+    public FiltersPage typeSearchInsideFilterCustomerByRegistrationAddress(String search){
+        fieldSearchByRegistrationAddressInFilterCustomer.sendKeys(search);
+        fieldSearchByRegistrationAddressInFilterCustomer.sendKeys(Keys.ENTER);
+        return new FiltersPage();
+    }
+
     @Step("Очистить поле")
     public FiltersPage clearField(SelenideElement field){field.clear(); return new FiltersPage();}
 
@@ -245,6 +256,18 @@ public class FiltersPage {
         boolean check = true;
         for(SelenideElement type : cellTableInsideFilterCustomerFullTitleTextSearchCollections){
             if(!(type.getText().contains("ЗАКУПАЙ"))){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка поиска по адресу регистрации внутри фильтра \"Заказчик\"")
+    public boolean isCheckSearchInsideFilterCustomerByRegistrationAddress(){
+        boolean check = true;
+        for(SelenideElement type : cellTableInsideFilterCustomerRegistrationAddressCollections){
+            if(!type.getText().contains("ОРЕНБУРГ") && type.isDisplayed()){
                 check = false;
                 break;
             }
