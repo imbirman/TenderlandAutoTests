@@ -168,6 +168,17 @@ public class FiltersTest extends BaseTest {
                 .typeSearchInsideFilterCustomerByRegistrationAddress("ОРЕНБУРГ")
                 .waitFor(1000)
                 .isCheckSearchInsideFilterCustomerByRegistrationAddress());
+    }
 
+    @Test
+    @Description("Проверка выделения чекбокса 'Выбрать всё' при переключении страницы в фильтре 'Заказчик'")
+    public void checkSelectedButtonAllSelect(){
+        assertFalse(page.dragAndDropFilter(page.filterCustomer)
+                .waitFor(500)
+                .clickButton(page.checkboxSelectAll)
+                .waitFor(500)
+                .clickButton(page.secondPage)
+                .waitFor(1000)
+                .isNotSelectedButtonAllSelect());
     }
 }

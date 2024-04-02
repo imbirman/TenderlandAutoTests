@@ -94,6 +94,10 @@ public class FiltersPage {
     protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
     /** Вкладка "Поиск по тексту" в фильтре "Заказчик" */
     protected SelenideElement tabTextSearchInFilterCustomer = $x("//div[@class='search-filters-editor-div']//span[text()='Поиск по тексту']");
+    /** Чекбокс в окне фильтра "Выбрать всё" */
+    protected SelenideElement checkboxSelectAll = $x("(//div[@id='filter-editor-5']//div[@class='dx-datagrid-text-content']//div[@role='checkbox'])[1]");
+    /** Вторая страница списка в окне фильтра */
+    protected SelenideElement secondPage = $x("(//div[@class='dx-page'])[1]");
 
 
     @Step("Ожидание {number}")
@@ -273,6 +277,11 @@ public class FiltersPage {
             }
         }
         return check;
+    }
+
+    @Step("Проверка выделения чекбокса \"Выбрать всё\" в фильтре \"Заказчик\"")
+    public boolean isNotSelectedButtonAllSelect(){
+        return Objects.requireNonNull(checkboxSelectAll.getAttribute("class")).contains("dx-widget dx-checkbox dx-state-hover dx-checkbox-checked");
     }
 
 }
