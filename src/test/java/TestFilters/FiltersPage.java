@@ -101,6 +101,8 @@ public class FiltersPage {
     protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
     /** Комбобокс "Направление" во вкладке Диапазон фильтра "Дата публикации" */
     protected SelenideElement comboboxDirection = $x("(//div[@class='dx-item-content dx-multiview-item-content']//input[@class='dx-texteditor-input'][@role='combobox'])[1]");
+    /** Комбобокс "Период" во вкладке Диапазон фильтра "Дата публикации" */
+    protected SelenideElement comboboxPeriod = $x("(//div[@class='dx-item-content dx-multiview-item-content']//input[@class='dx-texteditor-input'][@role='combobox'])[2]");
     /** Вкладка "Поиск по тексту" в фильтре "Заказчик" */
     protected SelenideElement tabTextSearchInFilterCustomer = $x("//div[@class='search-filters-editor-div']//span[text()='Поиск по тексту']");
     /** Вкладка "Диапазон" в фильтре "Дата публикации" */
@@ -328,4 +330,16 @@ public class FiltersPage {
         return keyArray.equals(checkArray);
     }
 
+    @Step("Проверка на соответствие списка периодов в фильтре \"Дата публикации\"")
+    public boolean isContainTypesPeriod(){
+        List<String> keyPeriod = elementOfComboboxCollections.texts();
+        keyPeriod.remove(0);
+        keyPeriod.remove(0);
+        List<String> checkArray = new ArrayList<>();
+        checkArray.add("День");
+        checkArray.add("Неделя");
+        checkArray.add("Месяц");
+        checkArray.add("Год");
+        return keyPeriod.equals(checkArray);
+    }
 }

@@ -203,4 +203,16 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isContainTypesDirection());
     }
+
+    @Test
+    @Description("Проверка списка элементов комбобокса 'Период' в фильтре 'Дата публикации'")
+    public void checkListElementsComboboxPeriod(){
+        assertTrue(page.dragAndDropFilter(page.filterDatePublication)
+                .waitFor(1000)
+                .clickButton(page.tabRangeInFilterDatePublication)
+                .waitFor(500)
+                .clickButton(page.comboboxPeriod)
+                .waitFor(500)
+                .isContainTypesPeriod());
+    }
 }
