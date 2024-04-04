@@ -40,6 +40,12 @@ public class FiltersPage {
     private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]");
     /** Список элементов комбобокса во вкладке "Диапазон" фильтра "Дата публикации" */
     private final ElementsCollection elementOfComboboxCollections = $$x("//div[@class='dx-item-content dx-list-item-content']");
+    /** Список элементов списка фильтра "Модуль" */
+    private final ElementsCollection elementOfFilterModuleCollections = $$x("//div[@class='dx-item-content dx-list-item-content']");
+    /** Список выбранных меток */
+    private final ElementsCollection elementOfSelectMarkCollections = $$x("//div[contains(@class, 'dx-item dx-list-item dx-list-item-selected')]/div[@class='dx-item-content dx-list-item-content']/div/div[2]");
+    /** Список чекбоксов элемента внутри фильтра */
+    protected ElementsCollection checkboxElementInsideFilterCollections = $$x("//div[@id='replace-item']//span[@class='dx-checkbox-icon']");
 
 
     /** Кнопка "Сбросить" */
@@ -109,8 +115,11 @@ public class FiltersPage {
     protected SelenideElement tabRangeInFilterDatePublication = $x("//div[@id='replace-item-min']//div[@class='dx-item dx-tab']");
     /** Чекбокс в окне фильтра "Выбрать всё" */
     protected SelenideElement checkboxSelectAll = $x("(//div[@id='filter-editor-5']//div[@class='dx-datagrid-text-content']//div[@role='checkbox'])[1]");
+    /** Чекбокс "Выбрать всё" */
+    protected SelenideElement checkboxSelectedAllElements = $x("(//div[@id='filter-editor-8']//span[@class='dx-checkbox-icon'])[1]");
     /** Вторая страница списка в окне фильтра */
     protected SelenideElement secondPage = $x("(//div[@class='dx-page'])[1]");
+
 
 
     @Step("Ожидание {number}")
@@ -342,4 +351,27 @@ public class FiltersPage {
         checkArray.add("Год");
         return keyPeriod.equals(checkArray);
     }
+
+    @Step("Проверка на соответствие списка модулей в фильтре \"Модуль\"")
+    public boolean isContainTypesModule(){
+        List<String> keyModule = elementOfFilterModuleCollections.texts();
+        keyModule.remove(0);
+        keyModule.remove(0);
+        List<String> checkArray = new ArrayList<>();
+        checkArray.add("Государственные тендеры");
+        checkArray.add("Коммерческие тендеры");
+        checkArray.add("СНГ");
+        checkArray.add("Реализация имущества");
+        return keyModule.equals(checkArray);
+    }
+
+    @Step("Проверка сброса чекбоксов \"Исключено из поиска\"")
+    public boolean isCheckResetUnSelectedCheckboxElements(){
+        boolean check = true;
+        for(SelenideElement type:checkboxElementInsideFilterCollections){
+            if(type.isSelected()){check = false; break;}
+        }
+        return check;
+    }
+
 }

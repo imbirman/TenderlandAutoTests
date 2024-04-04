@@ -215,4 +215,24 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isContainTypesPeriod());
     }
+
+    @Test
+    @Description("Проверка списка элементов в фильтре 'Модуль'")
+    public void checkListElementsOfFilterModule(){
+        assertTrue(page.dragAndDropFilter(page.filterModule)
+                .waitFor(1000)
+                .isContainTypesModule());
+    }
+
+    @Test
+    @Description("Проверка сброса чекбоксов \"Исключено из поиска\"")
+    public void checkResetUnSelectedCheckboxElements(){
+        assertTrue(page.dragAndDropFilter(page.filterStand)
+                .waitFor(1000)
+                .clickButton(page.checkboxSelectedAllElements)
+                .clickButton(page.checkboxSelectedAllElements)
+                .clickButton(page.buttonReset)
+                .waitFor(500)
+                .isCheckResetUnSelectedCheckboxElements());
+    }
 }
