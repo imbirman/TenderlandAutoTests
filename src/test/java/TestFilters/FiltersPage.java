@@ -52,6 +52,8 @@ public class FiltersPage {
     protected SelenideElement buttonReset = $x("//div[@id='filter-cancel-button']");
     /** Кнопка "Поиск" */
     protected SelenideElement buttonSearch = $x("//div[@id='search-filters-search-button']");
+    /** Кнопка "Применить" */
+    protected SelenideElement buttonApply = $x("//div[@id='filter-apply-button']");
 
 
     /** Поле дерева фильтров */
@@ -116,9 +118,11 @@ public class FiltersPage {
     /** Чекбокс в окне фильтра "Выбрать всё" */
     protected SelenideElement checkboxSelectAll = $x("(//div[@id='filter-editor-5']//div[@class='dx-datagrid-text-content']//div[@role='checkbox'])[1]");
     /** Чекбокс "Выбрать всё" */
-    protected SelenideElement checkboxSelectedAllElements = $x("(//div[@id='filter-editor-8']//span[@class='dx-checkbox-icon'])[1]");
+    protected SelenideElement checkboxSelectedAllElements = $x("(//div[@class='search-filters-editor-div']//span[@class='dx-checkbox-icon'])[1]");
     /** Вторая страница списка в окне фильтра */
     protected SelenideElement secondPage = $x("(//div[@class='dx-page'])[1]");
+    /** Текст фильтра в дереве фильтров */
+    protected SelenideElement filterInTree = $x("//div[@class='tl-filter-description']");
 
 
 
@@ -374,4 +378,13 @@ public class FiltersPage {
         return check;
     }
 
+    @Step("Проверка выделения чекбоксов при просмотре только выбранных элементов")
+    public boolean isCheckSelectedCheckboxShowOnlySelectedElements(){
+        boolean check = true;
+        for(SelenideElement type:checkboxElementInsideFilterCollections){
+            if(type.getAttribute("style").equals("background-color: rgb(235, 9, 16);") || type.getAttribute("style").equals("background-color: white;"))
+            {check = false; break;}
+        }
+        return check;
+    }
 }

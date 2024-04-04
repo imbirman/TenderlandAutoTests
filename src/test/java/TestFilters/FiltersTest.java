@@ -235,4 +235,20 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckResetUnSelectedCheckboxElements());
     }
+
+    @Test
+    @Description("Проверка выделения чекбоксов при просмотре только выбранных элементов")
+    public void checkSelectedCheckboxShowOnlySelectedElements(){
+        assertTrue(page.dragAndDropFilter(page.filterCustomer)
+                .waitFor(1000)
+                .typeSearchInsideFilterCustomerByDetails("305780214002814")
+                .waitFor(500)
+                .clickButton(page.checkboxSelectedAllElements)
+                .waitFor(500)
+                .clickButton(page.buttonApply)
+                .clickButton(page.filterInTree)
+                .clickButton(page.checkboxShowOnlySelected)
+                .waitFor(500)
+                .isCheckSelectedCheckboxShowOnlySelectedElements());
+    }
 }
