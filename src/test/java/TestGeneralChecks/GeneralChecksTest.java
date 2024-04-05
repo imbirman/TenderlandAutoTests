@@ -45,4 +45,18 @@ public class GeneralChecksTest extends BaseTest {
         assertTrue(page.clickButton(page.filterAndOr)
                 .isCorrectHintAreaOr());
     }
+
+    @Test
+    @Description("Проверка контекстного меню на второй странице после выбора всех элементов на первой странице в результатах поиска")
+    public void checkNameElementsContextMenu(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckTenderNameAndNameDeletion)
+                .waitFor(500)
+                .clickButton(page.checkBoxSelectedAllForTableResultSearch)
+                .waitFor(500)
+                .clickButton(page.secondPageSearch)
+                .waitFor(500)
+                .clickButton(page.buttonContextMenuResultSearch)
+                .isNameElementsContextMenu());
+    }
 }
