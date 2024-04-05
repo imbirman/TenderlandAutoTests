@@ -17,6 +17,8 @@ public class GeneralChecksPage {
     /** Область подсказки */
     private final SelenideElement hintArea = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
 
+    /** Фильтр логики И/ИЛИ */
+    protected SelenideElement filterAndOr = $x("//div[@id='tl-filter-root']//span");
 
 
     @Step("Ожидание {number}")
@@ -60,10 +62,15 @@ public class GeneralChecksPage {
 
     @Step("Проверка области подсказки для фильтра И")
     public boolean isCorrectHintAreaAnd(){
-        String checkWord = hintArea.getText();
-
-        return checkWord.contains("Перенесите в область фильтры\n" +
+        return hintArea.getText().contains("Перенесите в область фильтры\n" +
                 "которые должны работать\n" +
                 "по логике \"И\"");
+    }
+
+    @Step("Проверка области подсказки для фильтра ИЛИ при смене с фильтра И")
+    public boolean isCorrectHintAreaOr(){
+        return hintArea.getText().contains("Перенесите в область фильтры\n" +
+                "которые должны работать\n" +
+                "по логике \"ИЛИ\"");
     }
 }

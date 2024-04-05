@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GeneralChecksTest extends BaseTest {
 
@@ -35,6 +36,13 @@ public class GeneralChecksTest extends BaseTest {
     @Test
     @Description("Проверка соответствия области подсказки фильтру И")
     public void checkCorrectHintAreaAnd(){
-        page.isCorrectHintAreaAnd();
+        assertTrue(page.isCorrectHintAreaAnd());
+    }
+
+    @Test
+    @Description("Проверка соответствия области подсказки фильтру ИЛИ")
+    public void checkCorrectHintAreaOr(){
+        assertTrue(page.clickButton(page.filterAndOr)
+                .isCorrectHintAreaOr());
     }
 }
