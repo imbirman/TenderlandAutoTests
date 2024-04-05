@@ -1,13 +1,15 @@
 package TestGeneralChecks;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import java.util.List;
+
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 
 public class GeneralChecksPage {
 
@@ -15,6 +17,10 @@ public class GeneralChecksPage {
     private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
+
+    /** Список скрытых ячеек таблицы результатов поиска для проверки реестрового номера */
+    private final ElementsCollection hiddenCellTableForCheckRegistryNumber = $$x("//div[@id='search-result-wrapper']//table//tr[@class='dx-row dx-data-row dx-row-lines search-result-hidden-row']/td[4]/div");
+
 
     /** Вкладка "Автопоиски" */
     protected SelenideElement tabListAutoSearch = $x("//div[@class='search-filters-tab list-autosearches']");
@@ -24,10 +30,15 @@ public class GeneralChecksPage {
     protected SelenideElement buttonCheckHideResultSearch = $x("//div[text()='Проверка скрытия результатов поиска']");
     /** Кнопка контекстного меню для строки результата поиска */
     protected SelenideElement buttonContextMenuResultSearch = $x("//table[@class='dx-datagrid-table dx-pointer-events-none dx-datagrid-table-fixed']//a[@class='dx-link dx-icon-overflow dx-link-icon']");
+    /** Кнопка открытия окна для отображения скрытых результатов поиска */
+    protected SelenideElement buttonOpenShowHideEntities = $x("//div[@id='search-panel-hidden-counter']");
+    /** Кнопка смены отображения скрытых результатов поиска */
+    protected SelenideElement buttonSwitchShowHideEntities = $x("//div[@id='show-hide-entities-swith']");
 
 
     /** Область подсказки */
     private final SelenideElement hintArea = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
+
 
     /** Фильтр логики И/ИЛИ */
     protected SelenideElement filterAndOr = $x("//div[@id='tl-filter-root']//span");
@@ -100,5 +111,14 @@ public class GeneralChecksPage {
     @Step("Проверка контекстного меню на второй странице после выбора всех элементов на первой странице")
     public boolean isNameElementsContextMenu(){
         return hideContextMenu.is(enabled) && addInMineTendersContextMenu.is(enabled) && markContextMenu.is(enabled);
+    }
+
+    @Step("Проверка отображения в результатах поиска скрытого элемента")
+    public boolean isContainHideTender(){
+        boolean check = false;
+        for(String type : hiddenCellTableForCheckRegistryNumber.texts()){
+            if(type.contains("32008750757")){check = true; break;}
+        }
+        return check;
     }
 }

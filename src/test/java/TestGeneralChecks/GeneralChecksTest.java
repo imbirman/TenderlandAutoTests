@@ -59,4 +59,19 @@ public class GeneralChecksTest extends BaseTest {
                 .clickButton(page.buttonContextMenuResultSearch)
                 .isNameElementsContextMenu());
     }
+
+    @Test
+    @Description("Проверка отображения в результатах поиска скрытого элемента")
+    public void checkContainHideTender(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckHideResultSearch)
+                .clickButton(page.buttonCheckHideResultSearch)
+                .waitFor(500)
+                .clickButton(page.buttonOpenShowHideEntities)
+                .waitFor(500)
+                .clickButton(page.buttonSwitchShowHideEntities)
+                .waitFor(500)
+                .isContainHideTender());
+
+    }
 }
