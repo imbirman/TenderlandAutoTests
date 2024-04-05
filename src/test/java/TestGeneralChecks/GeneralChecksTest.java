@@ -74,4 +74,13 @@ public class GeneralChecksTest extends BaseTest {
                 .isContainHideTender());
 
     }
+
+    @Test
+    @Description("Проверка не отображения в результатах поиска скрытого элемента")
+    public void checkNotContainHideTender(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckHideResultSearch)
+                .waitFor(1000)
+                .isNotContainHideTender());
+    }
 }

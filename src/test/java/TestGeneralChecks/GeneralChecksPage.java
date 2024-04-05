@@ -121,4 +121,13 @@ public class GeneralChecksPage {
         }
         return check;
     }
+
+    @Step("Проверка отображения в результатах поиска скрытого элемента")
+    public boolean isNotContainHideTender(){
+        boolean check = true;
+        for(String type : hiddenCellTableForCheckRegistryNumber.texts()){
+            if(type.contains("32008750757")){check = false; break;}
+        }
+        return check;
+    }
 }
