@@ -107,6 +107,8 @@ public class FiltersPage {
     protected SelenideElement checkboxShowOnlySelected = $x("//div[@id='filter-editor-show-selected-rows']");
     /** Чекбокс "Показывать с нулевой ценой" */
     protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
+    /** Чекбокс "Показывать без региона" в фильтре "Регион" */
+    private final SelenideElement checkboxShowWithoutRegion = $x("(//div[@id='search-filter-editor-multiview']//span[@class='dx-checkbox-icon'])[1]");
     /** Комбобокс "Направление" во вкладке Диапазон фильтра "Дата публикации" */
     protected SelenideElement comboboxDirection = $x("(//div[@class='dx-item-content dx-multiview-item-content']//input[@class='dx-texteditor-input'][@role='combobox'])[1]");
     /** Комбобокс "Период" во вкладке Диапазон фильтра "Дата публикации" */
@@ -123,6 +125,8 @@ public class FiltersPage {
     protected SelenideElement secondPage = $x("(//div[@class='dx-page'])[1]");
     /** Текст фильтра в дереве фильтров */
     protected SelenideElement filterInTree = $x("//div[@class='tl-filter-description']");
+    /** Подпись чекбокса "Показывать без региона" в фильтре "Регион" */
+    private final SelenideElement nameCheckboxShowWithoutRegion = $x("(//div[@id='search-filter-editor-multiview']//span[@class='dx-checkbox-text'])[1]");
 
 
 
@@ -386,5 +390,15 @@ public class FiltersPage {
             {check = false; break;}
         }
         return check;
+    }
+
+    @Step("Проверка отображения названия чекбокса \"Показывать без региона\"")
+    public boolean isCheckVisibleNameCheckboxShowWithoutRegion(){
+        return nameCheckboxShowWithoutRegion.isDisplayed();
+    }
+
+    @Step("Проверка отображения чекбокса \"Показывать без региона\"")
+    public boolean isCheckVisibleCheckboxShowWithoutRegion(){
+        return checkboxShowWithoutRegion.isDisplayed();
     }
 }

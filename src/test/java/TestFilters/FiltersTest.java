@@ -251,4 +251,12 @@ public class FiltersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckSelectedCheckboxShowOnlySelectedElements());
     }
+
+    @Test
+    @Description("Проверка отображения названия чекбокса \"Показывать без региона\"")
+    public void checkVisibleNameCheckboxShowWithoutRegion(){
+        assertTrue(page.dragAndDropFilter(page.filterRegion)
+                .waitFor(1000)
+                .isCheckVisibleNameCheckboxShowWithoutRegion());
+    }
 }
