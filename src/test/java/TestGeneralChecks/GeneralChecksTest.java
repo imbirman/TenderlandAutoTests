@@ -109,4 +109,15 @@ public class GeneralChecksTest extends BaseTest {
                 .clickButton(page.checkBoxSelectedAllForTableResultSearch)
                 .isDisplayedSelectionCounter());
     }
+
+    @Test
+    @Description("Проверка значения счетчика выбранных тендеров в результате поиска")
+    public void checkCorrectSelectionCounter(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckHideResultSearch)
+                .clickButton(page.buttonCheckHideResultSearch)
+                .waitFor(1000)
+                .clickButton(page.checkBoxSelectedAllForTableResultSearch)
+                .isCorrectSelectionCounter());
+    }
 }

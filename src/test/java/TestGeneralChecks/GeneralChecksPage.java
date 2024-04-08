@@ -146,4 +146,9 @@ public class GeneralChecksPage {
     public boolean isDisplayedSelectionCounter(){
         return selectionCounter.is(visible);
     }
+
+    @Step("Проверка значения счетчика выбранных тендеров в поиске")
+    public boolean isCorrectSelectionCounter(){
+        return selectionCounter.getText().equals("12");
+    }
 }
