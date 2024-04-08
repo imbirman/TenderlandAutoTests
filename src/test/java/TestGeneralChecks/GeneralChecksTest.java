@@ -98,4 +98,15 @@ public class GeneralChecksTest extends BaseTest {
                 .waitFor(500)
                 .isNotSelectedCheckBoxSelectedAllForResultSearch());
     }
+
+    @Test
+    @Description("Проверка отображения счетчика выбранных тендеров в результате поиска")
+    public void checkDisplayedSelectionCounter(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .scrollToElement(page.buttonCheckHideResultSearch)
+                .clickButton(page.buttonCheckHideResultSearch)
+                .waitFor(1000)
+                .clickButton(page.checkBoxSelectedAllForTableResultSearch)
+                .isDisplayedSelectionCounter());
+    }
 }

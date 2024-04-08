@@ -42,6 +42,8 @@ public class GeneralChecksPage {
 
     /** Область подсказки */
     private final SelenideElement hintArea = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
+    /** Пометка количества выбранных тендеров */
+    private final SelenideElement selectionCounter = $x("//div[@id='search-panel-selection-counter']");
 
 
     /** Фильтр логики И/ИЛИ */
@@ -138,5 +140,10 @@ public class GeneralChecksPage {
     @Step("Проверка чекбокса 'Выбрать всё' для результатов поиска после нажатия на кнопку 'Очистить поле'")
     public boolean isNotSelectedCheckBoxSelectedAllForResultSearch(){
         return !checkBoxSelectedAllForTableResultSearch.is(checked);
+    }
+
+    @Step("Проверка отображения счетчика выбранных тендеров в поиске")
+    public boolean isDisplayedSelectionCounter(){
+        return selectionCounter.is(visible);
     }
 }
