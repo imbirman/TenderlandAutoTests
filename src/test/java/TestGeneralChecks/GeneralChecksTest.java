@@ -83,4 +83,19 @@ public class GeneralChecksTest extends BaseTest {
                 .waitFor(1000)
                 .isNotContainHideTender());
     }
+
+    @Test
+    @Description("Проверка чекбокса 'Выбрать всё' для результатов поиска")
+    public void checkNotSelectedCheckBoxSelectedAllForResultSearch(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckTenderNameAndNameDeletion)
+                .waitFor(500)
+                .clickButton(page.checkBoxSelectedAllForTableResultSearch)
+                .waitFor(500)
+                .scrollToElement(page.buttonDeleteAutoSearch)
+                .waitFor(500)
+                .clickButton(page.buttonClearBuildingFieldSearch)
+                .waitFor(500)
+                .isNotSelectedCheckBoxSelectedAllForResultSearch());
+    }
 }

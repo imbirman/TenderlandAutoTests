@@ -34,6 +34,10 @@ public class GeneralChecksPage {
     protected SelenideElement buttonOpenShowHideEntities = $x("//div[@id='search-panel-hidden-counter']");
     /** Кнопка смены отображения скрытых результатов поиска */
     protected SelenideElement buttonSwitchShowHideEntities = $x("//div[@id='show-hide-entities-swith']");
+    /** Кнопка очистки поля построения фильтров */
+    protected SelenideElement buttonClearBuildingFieldSearch = $x("//div[@id='search-filters-clear-button']");
+    /** Кнопка удаления автопоиска в области построения фильтров */
+    protected SelenideElement buttonDeleteAutoSearch = $x("//i[@id='autosearch-delete-button']");
 
 
     /** Область подсказки */
@@ -129,5 +133,10 @@ public class GeneralChecksPage {
             if(type.contains("32008750757")){check = false; break;}
         }
         return check;
+    }
+
+    @Step("Проверка чекбокса 'Выбрать всё' для результатов поиска после нажатия на кнопку 'Очистить поле'")
+    public boolean isNotSelectedCheckBoxSelectedAllForResultSearch(){
+        return !checkBoxSelectedAllForTableResultSearch.is(checked);
     }
 }
