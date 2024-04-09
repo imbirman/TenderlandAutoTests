@@ -59,4 +59,19 @@ public class MarkSettingTest extends BaseTest {
                 .isMarkOfTenderCardView());
 
     }
+
+    @Test
+    @Description("Проверка удаления метки тендера")
+    public void checkDeletionMarkOfTender(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .clickButton(page.markContextMenu)
+                .clickButton(page.redMarkContextMenu)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonDeleteMark)
+                .isDeletionMarkOfTender());
+    }
 }

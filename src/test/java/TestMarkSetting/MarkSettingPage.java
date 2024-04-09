@@ -28,6 +28,8 @@ public class MarkSettingPage {
     protected SelenideElement buttonCardView = $x("//i[@id='search-panel-card-view']");
     /** Кнопка "Выбрать цвет метки" для карточного вида */
     protected SelenideElement buttonSetMarkCardView = $x("(//div[@class='search-result-card-header']//i)[3]");
+    /** Кнопка "Удалить метку" */
+    protected SelenideElement buttonDeleteMark = $x("//div[@class='dx-submenu']//div[text()='Удалить']");
 
 
     /** Кнопка контекстного меню для строки результата поиска */
@@ -83,6 +85,12 @@ public class MarkSettingPage {
         return new MarkSettingPage();
     }
 
+    @Step("Навести курсор на элемент")
+    public MarkSettingPage moveToElement(SelenideElement element){
+        element.hover();
+        return new MarkSettingPage();
+    }
+
     @Step("Проверка, что метка красная")
     public boolean isMarkOfTender(){
         return Objects.requireNonNull(markTender.getAttribute("style")).contains("background: rgb(235, 9, 16);");
@@ -91,5 +99,10 @@ public class MarkSettingPage {
     @Step("Проверка, что метка красная в карточном виде")
     public boolean isMarkOfTenderCardView(){
         return Objects.requireNonNull(markTenderCardView.getAttribute("style")).contains("background-color: rgb(235, 9, 16);");
+    }
+
+    @Step("Проверка, что метки нет")
+    public boolean isDeletionMarkOfTender(){
+        return Objects.requireNonNull(markTender.getAttribute("style")).contains("height: 0%;");
     }
 }
