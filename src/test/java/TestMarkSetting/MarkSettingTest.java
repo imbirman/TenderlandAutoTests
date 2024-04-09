@@ -88,4 +88,19 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isMarkAllSelectedTender());
     }
+
+    @Test
+    @Description("Проверка установки метки для всех выбранных тендеров карточного вида")
+    public void checkSetMarkAllSelectedTendersCardView(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonCheckTenderNameAndNameDeletion)
+                .waitFor(500)
+                .clickButton(page.buttonCardView)
+                .clickButton(page.buttonSelectAllTenders)
+                .clickButton(page.buttonContextMenuForSelectedTenders)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.redMarkContextMenu)
+                .waitFor(500)
+                .isMarkAllSelectedTenderCardView());
+    }
 }

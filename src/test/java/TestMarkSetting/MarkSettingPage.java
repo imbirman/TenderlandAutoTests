@@ -3,6 +3,7 @@ package TestMarkSetting;
 import TestGeneralChecks.GeneralChecksPage;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.eo.Se;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
@@ -21,6 +22,9 @@ public class MarkSettingPage {
 
     /** Список меток тендера */
     private final ElementsCollection markTenderCollections = $$x("//div[@class='tl-tag-tender']");
+
+    /** Список меток тендера в карточном виде */
+    private final ElementsCollection markTenderCardViewCollections = $$x("//div[@class='search-result-card-tag-line']");
 
 
     /** Вкладка "Автопоиски" */
@@ -119,6 +123,18 @@ public class MarkSettingPage {
     public boolean isMarkAllSelectedTender(){
         boolean check = true;
         for(SelenideElement type:markTenderCollections){
+            if(!Objects.requireNonNull(type.getAttribute("style")).contains("background: rgb(235, 9, 16);")){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    @Step("Проверка установки метки для всех тендеров на странице для карточного вида")
+    public boolean isMarkAllSelectedTenderCardView(){
+        boolean check = true;
+        for(SelenideElement type:markTenderCardViewCollections){
             if(!Objects.requireNonNull(type.getAttribute("style")).contains("background: rgb(235, 9, 16);")){
                 check = false;
                 break;
