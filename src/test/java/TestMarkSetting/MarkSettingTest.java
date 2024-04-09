@@ -46,4 +46,17 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isMarkOfTender());
     }
+
+    @Test
+    @Description("Проверка метки тендера в карточном виде")
+    public void checkMarkOfTenderCardView(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.buttonCardView)
+                .clickButton(page.buttonSetMarkCardView)
+                .clickButton(page.redMarkContextMenu)
+                .isMarkOfTenderCardView());
+
+    }
 }

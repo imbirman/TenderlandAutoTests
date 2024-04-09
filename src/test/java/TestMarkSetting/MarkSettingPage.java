@@ -24,6 +24,10 @@ public class MarkSettingPage {
     protected SelenideElement buttonAutoSearchRegistryNumberAndRegion = $x("//div[text()='Проверка поиска по реестровому номеру и региону']");
     /** Кнопка автопоиска "Проверка по названию тендера и исключению из названия" */
     protected SelenideElement buttonCheckTenderNameAndNameDeletion = $x("//div[text()='Проверка поиска по названию тендера и исключению из названия']");
+    /** Кнопка "Карточный вид" */
+    protected SelenideElement buttonCardView = $x("//i[@id='search-panel-card-view']");
+    /** Кнопка "Выбрать цвет метки" для карточного вида */
+    protected SelenideElement buttonSetMarkCardView = $x("(//div[@class='search-result-card-header']//i)[3]");
 
 
     /** Кнопка контекстного меню для строки результата поиска */
@@ -36,6 +40,8 @@ public class MarkSettingPage {
 
     /** Метка тендера */
     private final SelenideElement markTender = $x("//div[@class='tl-tag-tender']");
+    /** Метка тендера в карточном виде */
+    private final SelenideElement markTenderCardView = $x("//div[@class='search-result-card-tag-line']");
 
 
     @Step("Ожидание {number}")
@@ -80,5 +86,10 @@ public class MarkSettingPage {
     @Step("Проверка, что метка красная")
     public boolean isMarkOfTender(){
         return Objects.requireNonNull(markTender.getAttribute("style")).contains("background: rgb(235, 9, 16);");
+    }
+
+    @Step("Проверка, что метка красная в карточном виде")
+    public boolean isMarkOfTenderCardView(){
+        return Objects.requireNonNull(markTenderCardView.getAttribute("style")).contains("background-color: rgb(235, 9, 16);");
     }
 }
