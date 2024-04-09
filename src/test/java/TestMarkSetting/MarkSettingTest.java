@@ -116,4 +116,19 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isDisabledButtonDeleteMark());
     }
+
+    @Test
+    @Description("Проверка видимости ошибки при сохранении метки с пустым названием")
+    public void checkVisibleErrorMessageEmptyNameMark(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonSettingMark)
+                .waitFor(500)
+                .clickButton(page.buttonSaveMark)
+                .waitFor(500)
+                .isVisibleErrorMessage());
+    }
 }

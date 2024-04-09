@@ -1,15 +1,13 @@
 package TestMarkSetting;
 
-import TestGeneralChecks.GeneralChecksPage;
+
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.eo.Se;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 
-import java.util.List;
 import java.util.Objects;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MarkSettingPage {
@@ -45,6 +43,8 @@ public class MarkSettingPage {
     protected SelenideElement buttonContextMenuForSelectedTenders = $x("//i[@id='search-panel-selection-entities']");
     /** Кнопка "Настройки" в контекстном меню */
     protected SelenideElement buttonSettingMark = $x("//div[text()='Настройка']");
+    /** Кнопка сохранения метки */
+    protected SelenideElement buttonSaveMark = $x("//div[@id='tl-save-user-tag-button']");
 
 
     /** Кнопка контекстного меню для строки результата поиска */
@@ -59,6 +59,8 @@ public class MarkSettingPage {
     private final SelenideElement markTender = $x("//div[@class='tl-tag-tender']");
     /** Метка тендера в карточном виде */
     private final SelenideElement markTenderCardView = $x("//div[@class='search-result-card-tag-line']");
+    /** Текст ошибки при сохранении метки без названия */
+    private final SelenideElement errorMessageEmptyFieldNameMark = $x("//div[@id='tl-manage-user-tags-name']//div[@class='dx-overlay-content dx-invalid-message-content']");
 
 
     @Step("Ожидание {number}")
@@ -148,5 +150,10 @@ public class MarkSettingPage {
     @Step("Проверка заблокированности кнопки удаления метки")
     public boolean isDisabledButtonDeleteMark(){
         return Objects.requireNonNull(buttonDeleteMark.getAttribute("aria-disabled")).contains("true");
+    }
+
+    @Step("Проверка появления текста ошибки при сохранении метки с пустым названием")
+    public boolean isVisibleErrorMessage(){
+        return errorMessageEmptyFieldNameMark.is(visible);
     }
 }
