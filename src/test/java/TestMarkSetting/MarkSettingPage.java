@@ -1,14 +1,15 @@
 package TestMarkSetting;
 
 import TestGeneralChecks.GeneralChecksPage;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.List;
 import java.util.Objects;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class MarkSettingPage {
 
@@ -16,6 +17,10 @@ public class MarkSettingPage {
     private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
+
+
+    /** Список меток тендера */
+    private final ElementsCollection markTenderCollections = $$x("//div[@class='tl-tag-tender']");
 
 
     /** Вкладка "Автопоиски" */
@@ -30,6 +35,10 @@ public class MarkSettingPage {
     protected SelenideElement buttonSetMarkCardView = $x("(//div[@class='search-result-card-header']//i)[3]");
     /** Кнопка "Удалить метку" */
     protected SelenideElement buttonDeleteMark = $x("//div[@class='dx-submenu']//div[text()='Удалить']");
+    /** Кнопка выбора всех тендеров на странице */
+    protected SelenideElement buttonSelectAllTenders = $x("//div[@id='search-result-checkbox']//span");
+    /** Кнопка раскрытия контекстного меню для выбранных тендеров */
+    protected SelenideElement buttonContextMenuForSelectedTenders = $x("//i[@id='search-panel-selection-entities']");
 
 
     /** Кнопка контекстного меню для строки результата поиска */
@@ -104,5 +113,17 @@ public class MarkSettingPage {
     @Step("Проверка, что метки нет")
     public boolean isDeletionMarkOfTender(){
         return Objects.requireNonNull(markTender.getAttribute("style")).contains("height: 0%;");
+    }
+
+    @Step("Проверка установки метки для всех тендеров на странице для табличного вида")
+    public boolean isMarkAllSelectedTender(){
+        boolean check = true;
+        for(SelenideElement type:markTenderCollections){
+            if(!Objects.requireNonNull(type.getAttribute("style")).contains("background: rgb(235, 9, 16);")){
+                check = false;
+                break;
+            }
+        }
+        return check;
     }
 }

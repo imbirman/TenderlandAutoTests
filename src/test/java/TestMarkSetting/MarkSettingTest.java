@@ -74,4 +74,18 @@ public class MarkSettingTest extends BaseTest {
                 .clickButton(page.buttonDeleteMark)
                 .isDeletionMarkOfTender());
     }
+
+    @Test
+    @Description("Проверка установки метки для всех выбранных тендеров")
+    public void checkSetMarkAllSelectedTenders(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.buttonSelectAllTenders)
+                .clickButton(page.buttonContextMenuForSelectedTenders)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.redMarkContextMenu)
+                .waitFor(500)
+                .isMarkAllSelectedTender());
+    }
 }
