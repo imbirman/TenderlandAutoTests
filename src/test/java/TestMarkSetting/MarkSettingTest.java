@@ -103,4 +103,17 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isMarkAllSelectedTenderCardView());
     }
+
+    @Test
+    @Description("Проверка заблокированности кнопки удаления метки")
+    public void checkDisableButtonDeleteMark(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonSettingMark)
+                .waitFor(500)
+                .isDisabledButtonDeleteMark());
+    }
 }

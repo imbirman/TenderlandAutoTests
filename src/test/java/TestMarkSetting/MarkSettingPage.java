@@ -38,11 +38,13 @@ public class MarkSettingPage {
     /** Кнопка "Выбрать цвет метки" для карточного вида */
     protected SelenideElement buttonSetMarkCardView = $x("(//div[@class='search-result-card-header']//i)[3]");
     /** Кнопка "Удалить метку" */
-    protected SelenideElement buttonDeleteMark = $x("//div[@class='dx-submenu']//div[text()='Удалить']");
+    protected SelenideElement buttonDeleteMark = $x("//div[@id='tl-delete-user-tag-button']");
     /** Кнопка выбора всех тендеров на странице */
     protected SelenideElement buttonSelectAllTenders = $x("//div[@id='search-result-checkbox']//span");
     /** Кнопка раскрытия контекстного меню для выбранных тендеров */
     protected SelenideElement buttonContextMenuForSelectedTenders = $x("//i[@id='search-panel-selection-entities']");
+    /** Кнопка "Настройки" в контекстном меню */
+    protected SelenideElement buttonSettingMark = $x("//div[text()='Настройка']");
 
 
     /** Кнопка контекстного меню для строки результата поиска */
@@ -141,5 +143,10 @@ public class MarkSettingPage {
             }
         }
         return check;
+    }
+
+    @Step("Проверка заблокированности кнопки удаления метки")
+    public boolean isDisabledButtonDeleteMark(){
+        return Objects.requireNonNull(buttonDeleteMark.getAttribute("aria-disabled")).contains("true");
     }
 }
