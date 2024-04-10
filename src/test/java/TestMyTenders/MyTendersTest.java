@@ -89,4 +89,13 @@ public class MyTendersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckClickableButtonLinkSource());
     }
+
+    @Test
+    @Description("Проверка кликабельности кнопки удаления тендера в карточке тендера")
+    public void checkClickableButtonDeleteTenderInCard(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .isCheckClickableButtonDeleteTenderInCard());
+    }
 }
