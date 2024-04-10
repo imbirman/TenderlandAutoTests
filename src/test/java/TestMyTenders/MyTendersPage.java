@@ -24,8 +24,13 @@ public class MyTendersPage {
     protected SelenideElement buttonDeleteAddedTenderInListTenders = $x("(//div[@class='favourite-kanban-delete-favourite'])[1]");
 
 
+
     /** Окно подтверждения удаления */
     private final SelenideElement windowApproveDelete = $x("//div[@class='dx-overlay-content dx-popup-normal dx-popup-draggable dx-resizable dx-popup-flex-height']");
+    /** Кнопка удаления тендера в списке тендеров */
+    private final SelenideElement buttonDeleteTenderInListTenders = $x("(//div[@class='favourite-kanban-delete-favourite'])[1]");
+    /** Кнопка для скачивания документации тендера в списке тендеров */
+    private final SelenideElement buttonLoadDocumentationInListTenders = $x("(//div[@class='favourite-kanban-load-documents'])[1]");
 
 
     @Step("Ожидание {number}")
@@ -71,4 +76,12 @@ public class MyTendersPage {
     public boolean isCheckVisibleWindowApproveDelete(){
         return windowApproveDelete.is(visible);
     }
+
+    public boolean isCheckClickableButtonDeleteTenderInListTenders(){
+        return buttonDeleteTenderInListTenders.is(interactable);
+    } // Проверка кликабельности кнопки удаления тендера в списке тендеров
+
+    public boolean isCheckClickableButtonLoadDocumentationTenderInListTenders(){
+        return buttonLoadDocumentationInListTenders.is(interactable);
+    } // Проверка кликабельности кнопки скачивания документации тендера в списке тендеров
 }

@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MyTendersTest extends BaseTest {
 
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
-    private final static String BASE_LOGIN = "AdminTestitTender";
-    private final static String BASE_PASSWORD = "Hyqpmaz0";
+    private final static String BASE_LOGIN = "AdminTestitMyTenders";
+    private final static String BASE_PASSWORD = "Hyqpmaz0/";
 
     MyTendersPage page = new MyTendersPage();
 
@@ -39,6 +39,20 @@ public class MyTendersTest extends BaseTest {
     public void checkWindowApproveDeleteTender(){
         assertTrue(page.clickButton(page.buttonDeleteAddedTenderInListTenders)
                 .isCheckVisibleWindowApproveDelete());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки удаления в списке тендеров")
+    public void checkClickableButtonDeleteTenderInListTenders(){
+        assertTrue(page.waitFor(500)
+                .isCheckClickableButtonDeleteTenderInListTenders());
+    }
+
+    @Test
+    @Description("Проверка кликабельности кнопки выгрузки документации в списке тендеров")
+    public void checkClickableButtonLoadDocumentationTenderInListTenders(){
+        assertTrue(page.waitFor(500)
+                .isCheckClickableButtonLoadDocumentationTenderInListTenders());
     }
 
 }
