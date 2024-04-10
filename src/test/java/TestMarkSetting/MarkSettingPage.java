@@ -4,6 +4,7 @@ package TestMarkSetting;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
 import java.util.Objects;
 
@@ -61,6 +62,8 @@ public class MarkSettingPage {
     private final SelenideElement markTenderCardView = $x("//div[@class='search-result-card-tag-line']");
     /** Текст ошибки при сохранении метки без названия */
     private final SelenideElement errorMessageEmptyFieldNameMark = $x("//div[@id='tl-manage-user-tags-name']//div[@class='dx-overlay-content dx-invalid-message-content']");
+    /** Поле для ввода названия метки */
+    private final SelenideElement fieldNameMark = $x("//div[@id='tl-manage-user-tags-name']//input");
 
 
     @Step("Ожидание {number}")
@@ -83,6 +86,11 @@ public class MarkSettingPage {
         passwordField.sendKeys(password);
         return new MarkSettingPage();
     }
+
+    public MarkSettingPage typeNameMark(String name){
+        fieldNameMark.sendKeys(name);
+        return new MarkSettingPage();
+    } // Ввести название метки
 
     @Step("Нажать кнопку для открытия окна авторизации")
     public MarkSettingPage clickLogInButton(){
@@ -152,8 +160,8 @@ public class MarkSettingPage {
         return Objects.requireNonNull(buttonDeleteMark.getAttribute("aria-disabled")).contains("true");
     }
 
-    @Step("Проверка появления текста ошибки при сохранении метки с пустым названием")
-    public boolean isVisibleErrorMessage(){
+    @Step("Проверка появления текста ошибки при сохранении метки")
+    public boolean isVisibleErrorMessageSaveMark(){
         return errorMessageEmptyFieldNameMark.is(visible);
     }
 }

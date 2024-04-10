@@ -129,6 +129,21 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.buttonSaveMark)
                 .waitFor(500)
-                .isVisibleErrorMessage());
+                .isVisibleErrorMessageSaveMark());
+    }
+
+    @Test
+    @Description("Проверка видимости ошибки при сохранении метки с дублирующим названием")
+    public void checkVisibleErrorMessageDuplicateNameMark(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonSettingMark)
+                .typeNameMark("Красный")
+                .clickButton(page.buttonSaveMark)
+                .waitFor(500)
+                .isVisibleErrorMessageSaveMark());
     }
 }
