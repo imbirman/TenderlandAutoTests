@@ -80,4 +80,13 @@ public class MyTendersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckClickableButtonChangeTag());
     }
+
+    @Test
+    @Description("Проверка кликабельности кнопки ссылки на источник")
+    public void checkClickableButtonLinkSource(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .isCheckClickableButtonLinkSource());
+    }
 }

@@ -34,6 +34,10 @@ public class MyTendersPage {
     protected SelenideElement buttonDeleteContextMenuColumn = $x("(//div[@class='dx-submenu']//div[@role='menuitem'])[3]");
     /** Кнопка смены метки в карточке тендера */
     protected SelenideElement buttonChangeTagInCardTender =$x("//div[@class='favourite-card-control-icons']//i[@class='mdi mdi-24px mdi-tag-outline']");
+    /** Кнопка "Ссылка на источник" */
+    private final SelenideElement buttonLinkOfSourceInCard = $x("//i[@id='favourites-card-link']");
+    /** Кнопка "Удалить тендер" */
+    private final SelenideElement buttonDeleteTenderInCard = $x("//i[@class='mdi mdi-24px mdi-delete-outline']");
 
 
 
@@ -115,5 +119,15 @@ public class MyTendersPage {
     @Step("Проверка кликабельности кнопки смены метки в карточке тендера")
     public boolean isCheckClickableButtonChangeTag(){
         return buttonChangeTagInCardTender.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки ссылки на источник в карточке тендера")
+    public boolean isCheckClickableButtonLinkSource(){
+        return buttonLinkOfSourceInCard.is(interactable);
+    }
+
+    @Step("Проверка кликабельности кнопки удаления тендера в карточке тендера")
+    public boolean isCheckClickableButtonDeleteTenderInCard(){
+        return buttonDeleteTenderInCard.is(interactable);
     }
 }
