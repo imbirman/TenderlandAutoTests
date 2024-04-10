@@ -63,4 +63,12 @@ public class MyTendersTest extends BaseTest {
                 .isCheckDisableButtonDeleteContextMenuColumn());
     }
 
+    @Test
+    @Description("Проверка отображения карточки тендера")
+    public void checkVisibleCard(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .isCheckVisibleCard());
+    }
 }

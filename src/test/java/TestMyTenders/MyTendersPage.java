@@ -22,6 +22,8 @@ public class MyTendersPage {
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
     /** Кнопка контекстного меню столбца */
     protected SelenideElement contextMenuColumn = $x("//div[@class='favourite-kanban-list-title']/i");
+    /** Открыть карточку первого тендера */
+    protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -39,6 +41,9 @@ public class MyTendersPage {
     private final SelenideElement buttonDeleteTenderInListTenders = $x("(//div[@class='favourite-kanban-delete-favourite'])[1]");
     /** Кнопка для скачивания документации тендера в списке тендеров */
     private final SelenideElement buttonLoadDocumentationInListTenders = $x("(//div[@class='favourite-kanban-load-documents'])[1]");
+
+    /** Панель тендера в карточке тендера */
+    private final SelenideElement panelTenderInCardTender = $x("//div[@id='tender-tab-panel']");
 
 
     @Step("Ожидание {number}")
@@ -98,5 +103,10 @@ public class MyTendersPage {
     @Step("Проверка некликабельности кнопки \"Удалить\" контекстного меню столбца")
     public boolean isCheckDisableButtonDeleteContextMenuColumn(){
         return Objects.requireNonNull(buttonDeleteContextMenuColumn.getAttribute("class")).contains("dx-state-disabled");
+    }
+
+    @Step("Проверка отображения карточки тендера")
+    public boolean isCheckVisibleCard(){
+        return panelTenderInCardTender.is(visible);
     }
 }
