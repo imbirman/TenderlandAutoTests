@@ -71,4 +71,13 @@ public class MyTendersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckVisibleCard());
     }
+
+    @Test
+    @Description("Проверка кликабельности кнопки смены метки тендера в карточке тендера")
+    public void checkClickableButtonChangeTag(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .isCheckClickableButtonChangeTag());
+    }
 }

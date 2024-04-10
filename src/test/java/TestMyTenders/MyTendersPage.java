@@ -32,6 +32,8 @@ public class MyTendersPage {
     protected SelenideElement buttonDeleteAddedTenderInListTenders = $x("(//div[@class='favourite-kanban-delete-favourite'])[1]");
     /** Кнопка "Удалить" контекстного меню столбца */
     protected SelenideElement buttonDeleteContextMenuColumn = $x("(//div[@class='dx-submenu']//div[@role='menuitem'])[3]");
+    /** Кнопка смены метки в карточке тендера */
+    protected SelenideElement buttonChangeTagInCardTender =$x("//div[@class='favourite-card-control-icons']//i[@class='mdi mdi-24px mdi-tag-outline']");
 
 
 
@@ -108,5 +110,10 @@ public class MyTendersPage {
     @Step("Проверка отображения карточки тендера")
     public boolean isCheckVisibleCard(){
         return panelTenderInCardTender.is(visible);
+    }
+
+    @Step("Проверка кликабельности кнопки смены метки в карточке тендера")
+    public boolean isCheckClickableButtonChangeTag(){
+        return buttonChangeTagInCardTender.is(interactable);
     }
 }
