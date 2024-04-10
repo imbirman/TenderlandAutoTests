@@ -146,4 +146,19 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isVisibleErrorMessageSaveMark());
     }
+
+    @Test
+    @Description("Проверка текста ошибки при сохранении метки с пустым названием")
+    public void checkCorrectErrorMessageEmptyNameMark(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonSettingMark)
+                .waitFor(500)
+                .clickButton(page.buttonSaveMark)
+                .waitFor(500)
+                .isCorrectErrorMessageEmptyNameMark());
+    }
 }

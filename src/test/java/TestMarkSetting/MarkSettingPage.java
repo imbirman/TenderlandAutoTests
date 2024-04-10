@@ -164,4 +164,14 @@ public class MarkSettingPage {
     public boolean isVisibleErrorMessageSaveMark(){
         return errorMessageEmptyFieldNameMark.is(visible);
     }
+
+    @Step("Проверка текста ошибки при сохранении метки с пустым названием")
+    public boolean isCorrectErrorMessageEmptyNameMark(){
+        return errorMessageEmptyFieldNameMark.getText().equals("Введите название метки.");
+    }
+
+    @Step("Проверка текста ошибки при сохранении метки с дублированным названием")
+    public boolean isCorrectErrorMessageDuplicateNameMark(){
+        return errorMessageEmptyFieldNameMark.getText().equals("Такая метка уже существует.");
+    }
 }
