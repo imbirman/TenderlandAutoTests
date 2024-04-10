@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.Objects;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
 
@@ -18,10 +20,16 @@ public class MyTendersPage {
 
     /** Кнопка открытия бокового меню */
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
+    /** Кнопка контекстного меню столбца */
+    protected SelenideElement contextMenuColumn = $x("//div[@class='favourite-kanban-list-title']/i");
+
+
     /** Кнопка в боковом меню "Мои тендеры" */
     protected SelenideElement buttonTabMenuMyTenders = $x("//div[@id='main-menu-list']//div[text()='Мои тендеры']");
     /** Кнопка удаления добавленного тендера в списке тендеров */
     protected SelenideElement buttonDeleteAddedTenderInListTenders = $x("(//div[@class='favourite-kanban-delete-favourite'])[1]");
+    /** Кнопка "Удалить" контекстного меню столбца */
+    protected SelenideElement buttonDeleteContextMenuColumn = $x("(//div[@class='dx-submenu']//div[@role='menuitem'])[3]");
 
 
 
@@ -77,11 +85,18 @@ public class MyTendersPage {
         return windowApproveDelete.is(visible);
     }
 
+    @Step("Проверка кликабельности кнопки удаления тендера в списке тендеров")
     public boolean isCheckClickableButtonDeleteTenderInListTenders(){
         return buttonDeleteTenderInListTenders.is(interactable);
-    } // Проверка кликабельности кнопки удаления тендера в списке тендеров
+    }
 
+    @Step("Проверка кликабельности кнопки скачивания документации тендера в списке тендеров")
     public boolean isCheckClickableButtonLoadDocumentationTenderInListTenders(){
         return buttonLoadDocumentationInListTenders.is(interactable);
-    } // Проверка кликабельности кнопки скачивания документации тендера в списке тендеров
+    }
+
+    @Step("Проверка некликабельности кнопки \"Удалить\" контекстного меню столбца")
+    public boolean isCheckDisableButtonDeleteContextMenuColumn(){
+        return Objects.requireNonNull(buttonDeleteContextMenuColumn.getAttribute("class")).contains("dx-state-disabled");
+    }
 }

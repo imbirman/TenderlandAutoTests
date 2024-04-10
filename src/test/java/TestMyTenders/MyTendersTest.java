@@ -55,4 +55,12 @@ public class MyTendersTest extends BaseTest {
                 .isCheckClickableButtonLoadDocumentationTenderInListTenders());
     }
 
+    @Test
+    @Description("Проверка отключения кнопки 'Удалить' контекстного меню столбца при единственном столбце")
+    public void checkNotClickableButtonDeleteContextMenuColumn(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.contextMenuColumn)
+                .isCheckDisableButtonDeleteContextMenuColumn());
+    }
+
 }
