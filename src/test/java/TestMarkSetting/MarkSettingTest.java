@@ -161,4 +161,20 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isCorrectErrorMessageEmptyNameMark());
     }
+
+    @Test
+    @Description("Проверка текста ошибки при сохранении метки с дублирующим названием")
+    public void checkCorrectErrorMessageDuplicateNameMark(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonSettingMark)
+                .typeNameMark("Красный")
+                .waitFor(500)
+                .clickButton(page.buttonSaveMark)
+                .waitFor(500)
+                .isCorrectErrorMessageDuplicateNameMark());
+    }
 }
