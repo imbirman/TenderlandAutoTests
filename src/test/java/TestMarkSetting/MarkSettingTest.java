@@ -177,4 +177,17 @@ public class MarkSettingTest extends BaseTest {
                 .waitFor(500)
                 .isCorrectErrorMessageDuplicateNameMark());
     }
+
+    @Test
+    @Description("Проверка базового списка меток")
+    public void checkCorrectBaseListMarks(){
+        assertTrue(page.clickButton(page.tabListAutoSearch)
+                .clickButton(page.buttonAutoSearchRegistryNumberAndRegion)
+                .waitFor(500)
+                .clickButton(page.contextMenuResultSearch)
+                .moveToElement(page.markContextMenu)
+                .clickButton(page.buttonSettingMark)
+                .waitFor(500)
+                .isCorrectBaseListMark());
+    }
 }

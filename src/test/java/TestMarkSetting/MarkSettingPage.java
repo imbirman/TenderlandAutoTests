@@ -6,6 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
@@ -21,6 +23,8 @@ public class MarkSettingPage {
 
     /** Список меток тендера */
     private final ElementsCollection markTenderCollections = $$x("//div[@class='tl-tag-tender']");
+    /** Список меток */
+    private final ElementsCollection elementListMarkCollections = $$x("//div[@id='tl-user-tag-list']//div[@class='dx-item dx-list-item']//div[not(@*)]");
 
     /** Список меток тендера в карточном виде */
     private final ElementsCollection markTenderCardViewCollections = $$x("//div[@class='search-result-card-tag-line']");
@@ -173,5 +177,20 @@ public class MarkSettingPage {
     @Step("Проверка текста ошибки при сохранении метки с дублированным названием")
     public boolean isCorrectErrorMessageDuplicateNameMark(){
         return errorMessageEmptyFieldNameMark.getText().equals("Такая метка уже существует.");
+    }
+
+    @Step("Проверка базового списка меток")
+    public boolean isCorrectBaseListMark(){
+        List<String> baseListMark = elementListMarkCollections.texts();
+
+        List<String> checkBaseListMark = new ArrayList<>();
+        checkBaseListMark.add("Красный");
+        checkBaseListMark.add("Сиреневый");
+        checkBaseListMark.add("Голубой");
+        checkBaseListMark.add("Оранжевый");
+        checkBaseListMark.add("Зеленый");
+        checkBaseListMark.add("Синий");
+
+        return baseListMark.equals(checkBaseListMark);
     }
 }
