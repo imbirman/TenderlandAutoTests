@@ -32,6 +32,8 @@ public class MyTendersPage {
     protected SelenideElement contextMenuColumn = $x("//div[@class='favourite-kanban-list-title']/i");
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
+    /** Выбор тестового пользователя в качестве ответственного для первого тендера в карточке тендера */
+    protected SelenideElement userTestInCardTender = $x("//div[text()='Тестовый Тест Тестович']");
 
 
     /** Список вкладок в карточке тендера */
@@ -50,6 +52,12 @@ public class MyTendersPage {
     private final SelenideElement buttonLinkOfSourceInCard = $x("//i[@id='favourites-card-link']");
     /** Кнопка "Удалить тендер" */
     private final SelenideElement buttonDeleteTenderInCard = $x("//i[@class='mdi mdi-24px mdi-delete-outline']");
+    /** Кнопка раскрытия списка ответственных по тендеру */
+    protected SelenideElement buttonChangeResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-dropdowneditor-icon']");
+    /** Кнопка смены ответственного у первого элемента на вкладке "Таблица" */
+    protected SelenideElement buttonChangeResponsibleInTabTable = $x("(//div[@class='dx-scrollable-wrapper']//div[@class='dx-texteditor-input-container']//input)[5]");
+    /** Кнопка закрытия карточки тендера */
+    protected SelenideElement buttonCloseCardTender = $x("//i[@class='dx-icon dx-icon-close']");
 
 
 
@@ -174,5 +182,10 @@ public class MyTendersPage {
     @Step("Проверка кликабельности главной вкладки \"Календарь\"")
     public boolean isCheckClickableTabCalendar(){
         return tabCalendar.is(interactable);
+    }
+
+    @Step("Получение значения ответственного у первого тендера во вкладке \"Таблица\"")
+    public String getResponsibleInTabTable(){
+        return buttonChangeResponsibleInTabTable.getValue();
     }
 }

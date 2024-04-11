@@ -137,4 +137,20 @@ public class MyTendersTest extends BaseTest {
         assertTrue(page.waitFor(500)
                 .isCheckClickableTabCalendar());
     }
+
+    @Test
+    @Description("Проверка ответственного во вкладке \"Таблица\" после его смены во вкладке \"Карточки\"")
+    public void checkResponsibleInTabTableAfterChangeResponsibleInTabCards(){
+       assertEquals(page.waitFor(500)
+               .clickButton(page.openCardFirstTender)
+               .waitFor(500)
+               .clickButton(page.buttonChangeResponsibleInCardTender)
+               .waitFor(500)
+               .clickButton(page.userTestInCardTender)
+               .waitFor(500)
+               .clickButton(page.buttonCloseCardTender)
+               .waitFor(500)
+               .clickButton(page.tabTable)
+               .getResponsibleInTabTable(), "Тестовый Тест Тестович");
+    }
 }
