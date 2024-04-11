@@ -144,7 +144,7 @@ public class MyTendersTest extends BaseTest {
        assertEquals(page.waitFor(500)
                .clickButton(page.openCardFirstTender)
                .waitFor(500)
-               .clickButton(page.buttonChangeResponsibleInCardTender)
+               .clickButton(page.buttonOpenListResponsibleInCardTender)
                .waitFor(500)
                .clickButton(page.userTestInCardTender)
                .waitFor(500)
@@ -152,5 +152,17 @@ public class MyTendersTest extends BaseTest {
                .waitFor(500)
                .clickButton(page.tabTable)
                .getResponsibleInTabTable(), "Тестовый Тест Тестович");
+    }
+
+    @Test
+    @Description("Проверка ответственного во вкладке \"Карточки\" после его смены во вкладке \"Таблица\"")
+    public void checkResponsibleInTabCardsAfterChangeResponsibleInTabTable(){
+        assertEquals(page.waitFor(500)
+                .clickButton(page.tabTable)
+                .clickButton(page.buttonOpenListResponsibleInTable)
+                .clickButton(page.userTestInListUsersTabTable)
+                .clickButton(page.tabCards)
+                .clickButton(page.openCardFirstTender)
+                .getResponsibleInCardTender(), "Тестовый Тест Тестович");
     }
 }

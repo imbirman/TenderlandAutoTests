@@ -34,6 +34,10 @@ public class MyTendersPage {
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
     /** Выбор тестового пользователя в качестве ответственного для первого тендера в карточке тендера */
     protected SelenideElement userTestInCardTender = $x("//div[text()='Тестовый Тест Тестович']");
+    /** Выбор пользователя "Админ" в качестве ответственного для первого тендера в карточке тендера */
+    protected SelenideElement userAdminInCardTender = $x("//div[text()='Админ']");
+    /** Выбор тестового пользователя в качестве ответственного для первого тендера, вкладка "Таблица" */
+    protected SelenideElement userTestInListUsersTabTable = $x("(//div[@class='dx-item-content dx-list-item-content'])[2]");
 
 
     /** Список вкладок в карточке тендера */
@@ -53,9 +57,9 @@ public class MyTendersPage {
     /** Кнопка "Удалить тендер" */
     private final SelenideElement buttonDeleteTenderInCard = $x("//i[@class='mdi mdi-24px mdi-delete-outline']");
     /** Кнопка раскрытия списка ответственных по тендеру */
-    protected SelenideElement buttonChangeResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-dropdowneditor-icon']");
-    /** Кнопка смены ответственного у первого элемента на вкладке "Таблица" */
-    protected SelenideElement buttonChangeResponsibleInTabTable = $x("(//div[@class='dx-scrollable-wrapper']//div[@class='dx-texteditor-input-container']//input)[5]");
+    protected SelenideElement buttonOpenListResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-dropdowneditor-icon']");
+
+    protected SelenideElement buttonOpenListResponsibleInTable = $x("(//div[@class='dx-dropdowneditor-input-wrapper dx-selectbox-container']//div[@class='dx-dropdowneditor-icon'])[5]");
     /** Кнопка закрытия карточки тендера */
     protected SelenideElement buttonCloseCardTender = $x("//i[@class='dx-icon dx-icon-close']");
 
@@ -70,6 +74,10 @@ public class MyTendersPage {
 
     /** Панель тендера в карточке тендера */
     private final SelenideElement panelTenderInCardTender = $x("//div[@id='tender-tab-panel']");
+    /** Ответственный по тендеру в карточке тендера */
+    private final SelenideElement userResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-texteditor-container']//input");
+    /** Ответственный по тендеру на вкладке "Таблица" */
+    private final SelenideElement userResponsibleInTabTable = $x("(//div[@class='dx-scrollable-wrapper']//div[@class='dx-texteditor-input-container']//input)[5]");
 
 
 
@@ -184,8 +192,13 @@ public class MyTendersPage {
         return tabCalendar.is(interactable);
     }
 
-    @Step("Получение значения ответственного у первого тендера во вкладке \"Таблица\"")
+    @Step("Получение значения ответственного тендера во вкладке \"Таблица\"")
     public String getResponsibleInTabTable(){
-        return buttonChangeResponsibleInTabTable.getValue();
+        return userResponsibleInTabTable.getValue();
+    }
+
+    @Step("Получение значение ответственного в карточке тендера")
+    public String getResponsibleInCardTender(){
+        return userResponsibleInCardTender.getValue();
     }
 }
