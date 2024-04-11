@@ -130,4 +130,11 @@ public class MyTendersTest extends BaseTest {
         assertTrue(page.waitFor(500)
                 .isCheckClickableTabTable());
     }
+
+    @Test
+    @Description("Проверка кликабельности главной вкладки \"Календарь\"")
+    public void checkClickableTabCalendar(){
+        assertTrue(page.waitFor(500)
+                .isCheckClickableTabCalendar());
+    }
 }
