@@ -107,4 +107,13 @@ public class MyTendersTest extends BaseTest {
                 .waitFor(500)
                 .getNumberTabInCardTender(), 5);
     }
+
+    @Test
+    @Description("Проверка названия вкладок в карточке тендера")
+    public void checkNameTabCards(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .isCorrectNameTabCards());
+    }
 }

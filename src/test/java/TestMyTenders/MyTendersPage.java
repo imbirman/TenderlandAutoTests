@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
@@ -95,6 +97,11 @@ public class MyTendersPage {
         return new MyTendersPage();
     }
 
+    @Step("Получить количество вкладок в карточке тендера")
+    public Integer getNumberTabInCardTender(){
+        return tabInCardTenderCollections.size();
+    }
+
     @Step("Проверка появления окна подтверждения удаления")
     public boolean isCheckVisibleWindowApproveDelete(){
         return windowApproveDelete.is(visible);
@@ -135,8 +142,15 @@ public class MyTendersPage {
         return buttonDeleteTenderInCard.is(interactable);
     }
 
-    @Step("Получить количество вкладок в карточке тендера")
-    public Integer getNumberTabInCardTender(){
-        return tabInCardTenderCollections.size();
+    @Step("Проверка корректности названия вкладок в карточке тендера")
+    public boolean isCorrectNameTabCards(){
+        List<String> checkArray = new ArrayList<>();
+        checkArray.add("CВЕДЕНИЯ");
+        checkArray.add("ЗАКАЗЧИК");
+        checkArray.add("ДОКУМЕНТАЦИЯ");
+        checkArray.add("ЖУРНАЛ");
+        checkArray.add("КОММЕНТАРИИ");
+        System.out.println(tabInCardTenderCollections.texts());
+        return checkArray.equals(tabInCardTenderCollections.texts());
     }
 }
