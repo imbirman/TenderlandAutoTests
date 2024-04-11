@@ -19,6 +19,13 @@ public class MyTendersPage {
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+    /** Главная вкладка "Карточки" */
+    protected SelenideElement tabCards = $x("//div[@id='favourite-select-tabs']//div[text()='Карточки']");
+    /** Главная вкладка "Таблица" */
+    protected SelenideElement tabTable = $x("//div[@id='favourite-select-tabs']//div[text()='Таблица']");
+    /** Главная вкладка "Календарь" */
+    protected SelenideElement tabCalendar = $x("//div[@id='favourite-select-tabs']//div[text()='Календарь']");
+
     /** Кнопка открытия бокового меню */
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
     /** Кнопка контекстного меню столбца */
@@ -152,5 +159,20 @@ public class MyTendersPage {
         checkArray.add("КОММЕНТАРИИ");
         System.out.println(tabInCardTenderCollections.texts());
         return checkArray.equals(tabInCardTenderCollections.texts());
+    }
+
+    @Step("Проверка кликабельности главной вкладки \"Карточки\"")
+    public boolean isCheckClickableTabCards(){
+        return tabCards.is(interactable);
+    }
+
+    @Step("Проверка кликабельности главной вкладки \"Таблица\"")
+    public boolean isCheckClickableTabTable(){
+        return tabTable.is(interactable);
+    }
+
+    @Step("Проверка кликабельности главной вкладки \"Календарь\"")
+    public boolean isCheckClickableTabCalendar(){
+        return tabCalendar.is(interactable);
     }
 }

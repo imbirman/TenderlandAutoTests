@@ -116,4 +116,18 @@ public class MyTendersTest extends BaseTest {
                 .waitFor(500)
                 .isCorrectNameTabCards());
     }
+
+    @Test
+    @Description("Проверка кликабельности главной вкладки \"Карточки\"")
+    public void checkClickableTabCards(){
+        assertTrue(page.waitFor(500)
+                .isCheckClickableTabCards());
+    }
+
+    @Test
+    @Description("Проверка кликабельности главной вкладки \"Таблица\"")
+    public void checkClickableTabTable(){
+        assertTrue(page.waitFor(500)
+                .isCheckClickableTabTable());
+    }
 }
