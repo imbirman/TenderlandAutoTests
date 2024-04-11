@@ -98,4 +98,13 @@ public class MyTendersTest extends BaseTest {
                 .waitFor(500)
                 .isCheckClickableButtonDeleteTenderInCard());
     }
+
+    @Test
+    @Description("Проверка количества вкладок в карточке тендера")
+    public void checkNumberTabInCardTender(){
+        assertEquals(page.waitFor(500)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .getNumberTabInCardTender(), 5);
+    }
 }

@@ -1,15 +1,14 @@
 package TestMyTenders;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.util.Objects;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
-
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 
 public class MyTendersPage {
 
@@ -24,6 +23,10 @@ public class MyTendersPage {
     protected SelenideElement contextMenuColumn = $x("//div[@class='favourite-kanban-list-title']/i");
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
+
+
+    /** Список вкладок в карточке тендера */
+    private final ElementsCollection tabInCardTenderCollections = $$x("//div[@id='tender-tab-panel']//div[contains(@class, 'dx-item dx-tab')]");
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -50,6 +53,7 @@ public class MyTendersPage {
 
     /** Панель тендера в карточке тендера */
     private final SelenideElement panelTenderInCardTender = $x("//div[@id='tender-tab-panel']");
+
 
 
     @Step("Ожидание {number}")
@@ -129,5 +133,10 @@ public class MyTendersPage {
     @Step("Проверка кликабельности кнопки удаления тендера в карточке тендера")
     public boolean isCheckClickableButtonDeleteTenderInCard(){
         return buttonDeleteTenderInCard.is(interactable);
+    }
+
+    @Step("Получить количество вкладок в карточке тендера")
+    public Integer getNumberTabInCardTender(){
+        return tabInCardTenderCollections.size();
     }
 }
