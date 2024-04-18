@@ -1,8 +1,10 @@
 package TestMyTenders;
 
 import Base.BaseTest;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,10 +29,13 @@ public class MyTendersTest extends BaseTest {
         page.clickLogInButton()
                 .waitFor(500)
                 .typeLogin(BASE_LOGIN)
-                .waitFor(400)
+                .waitFor(500)
                 .typePassword(BASE_PASSWORD)
+                .waitFor(2000)
                 .clickConfirmLogInButton()
-                .clickButton(page.openTabMenu)
+                .waitFor(5000)
+                .clickButton(page.openTabMenu.shouldBe(Condition.interactable))
+                .waitFor(500)
                 .clickButton(page.buttonTabMenuMyTenders);
     }
 
@@ -165,4 +170,21 @@ public class MyTendersTest extends BaseTest {
                 .clickButton(page.openCardFirstTender)
                 .getResponsibleInCardTender(), "Тестовый Тест Тестович");
     }
+
+    @Test
+    @Description("Проверка заметки в карточке тендера")
+    public void checkNoticeInCardTender(){
+        assertTrue(page.waitFor(2000)
+                .clickButton(page.tabTable)
+                .waitFor(500)
+                .clearField(page.firstFieldEntryNoticeInTabTable)
+                .waitFor(1000)
+                .typeNoticeInTabTable("тестовая заметка2")
+                .clickButton(page.tabCards)
+                .waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .isCheckNoticeInCardTender());
+    }
+
 }

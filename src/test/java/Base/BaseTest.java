@@ -16,6 +16,7 @@ public class BaseTest {
         //Configuration.driverManagerEnabled = false;
         Configuration.browserSize = "1900x1080";
         Configuration.headless = false;
+        Configuration.timeout = 10;
         System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
