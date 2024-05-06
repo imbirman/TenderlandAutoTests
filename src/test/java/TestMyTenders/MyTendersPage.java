@@ -47,6 +47,8 @@ public class MyTendersPage {
 
     /** Список вкладок в карточке тендера */
     private final ElementsCollection tabInCardTenderCollections = $$x("//div[@id='tender-tab-panel']//div[contains(@class, 'dx-item dx-tab')]");
+    /** Элемент контекстного меню столбца */
+    private final ElementsCollection elementContextMenuColumnCollections = $$x("//div[@class='favourite-kanban-context-menu-item']");
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -233,5 +235,15 @@ public class MyTendersPage {
     @Step("Проверка заметки во вкладке \"Таблица\"")
     public boolean isCheckNoticeInTabTable(){
         return Objects.equals(firstFieldEntryNoticeInTabTable.getValue(), "тестовая заметка");
+    }
+
+    @Step("Проверка кнопок контекстного меню столбца")
+    public boolean isCheckButtonsContextMenuColumn(){
+        List<String> elements = elementContextMenuColumnCollections.texts();
+        List<String> elementsForCheck = new ArrayList<>();
+        elementsForCheck.add("Переместить все");
+        elementsForCheck.add("Выгрузить");
+        elementsForCheck.add("Удалить");
+        return elements.equals(elementsForCheck);
     }
 }

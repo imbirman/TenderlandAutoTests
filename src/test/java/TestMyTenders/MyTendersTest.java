@@ -203,4 +203,11 @@ public class MyTendersTest extends BaseTest {
                 .isCheckNoticeInTabTable());
     }
 
+    @Test
+    @Description("Проверка кнопок контекстного меню столбца")
+    public void checkButtonsContextMenuColumn(){
+        assertTrue(page.waitFor(2000)
+                .clickButton(page.contextMenuColumn)
+                .isCheckButtonsContextMenuColumn());
+    }
 }
