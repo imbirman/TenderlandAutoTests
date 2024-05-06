@@ -45,4 +45,13 @@ public class MyTendersFiltersTest extends BaseTest {
                     .clickButton(page.buttonOpenListFilters)
                     .getNumberFilters(), 11);
     }
+
+    @Test
+    @Description("Проверка поиска по реестровому номеру тендера")
+    public void checkSearchByRegisterNumberTenderInTabCard(){
+            assertTrue(page.waitFor(2000)
+                    .typeSearchByTender("01")
+                    .waitFor(1000)
+                    .isCheckSearchByRegisterNumberTender());
+    }
 }

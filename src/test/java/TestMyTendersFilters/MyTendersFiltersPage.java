@@ -6,6 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class MyTendersFiltersPage {
@@ -22,8 +24,12 @@ public class MyTendersFiltersPage {
     /** Кнопка раскрытия списка фильтров */
     protected SelenideElement buttonOpenListFilters = $x("//i[@id='favourites-filter-list']");
 
+    /** Поле для ввода поиска по тендеру */
+    private final SelenideElement searchTenderField = $x("//div[@id='favourite-search-name']//input");
 
-    /** Общий фильтр */
+    /** Список номеров тендеров в списке тендеров в первом столбце */
+    private final ElementsCollection registerNumberTenderInListTendersForFirstColumnCollections = $$x("(//div[@class='favourite-kanban-list'])[1]//div[@class='favourite-kanban-card-regnumber']/a");
+    /** Список фильтров */
     private final ElementsCollection filterForCheckNumberFiltersCollections = $$x("//div[@class='favourite-filter']");
 
 
@@ -40,6 +46,12 @@ public class MyTendersFiltersPage {
     @Step("Ввести пароль для авторизации")
     public MyTendersFiltersPage typePassword(String password){
         passwordField.sendKeys(password);
+        return new MyTendersFiltersPage();
+    }
+
+    @Step("Ввести данные для поиска по тендеру")
+    public MyTendersFiltersPage typeSearchByTender(String search){
+        searchTenderField.sendKeys(search);
         return new MyTendersFiltersPage();
     }
 
@@ -64,5 +76,17 @@ public class MyTendersFiltersPage {
     @Step("Получить количество фильтров")
     public Integer getNumberFilters(){
         return filterForCheckNumberFiltersCollections.size();
+    }
+
+    @Step("Проверка результата поиска по реестровому номеру тендера")
+    public boolean isCheckSearchByRegisterNumberTender(){
+        boolean check = true;
+        List<String> checkRegisterNumber = registerNumberTenderInListTendersForFirstColumnCollections.texts();
+        for(String type : checkRegisterNumber){
+            if(!type.contains("01")){check = false;
+                System.out.println(checkRegisterNumber);
+                break;}
+        }
+        return check;
     }
 }
