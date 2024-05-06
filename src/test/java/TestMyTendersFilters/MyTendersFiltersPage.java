@@ -1,11 +1,12 @@
 package TestMyTendersFilters;
 
 import TestMyTenders.MyTendersPage;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class MyTendersFiltersPage {
 
@@ -18,6 +19,12 @@ public class MyTendersFiltersPage {
 
     /** Кнопка в боковом меню "Мои тендеры" */
     protected SelenideElement buttonTabMenuMyTenders = $x("//div[@id='main-menu-list']//div[text()='Мои тендеры']");
+    /** Кнопка раскрытия списка фильтров */
+    protected SelenideElement buttonOpenListFilters = $x("//i[@id='favourites-filter-list']");
+
+
+    /** Общий фильтр */
+    private final ElementsCollection filterForCheckNumberFiltersCollections = $$x("//div[@class='favourite-filter']");
 
 
 
@@ -52,5 +59,10 @@ public class MyTendersFiltersPage {
     public MyTendersFiltersPage clickButton(SelenideElement button){
         button.click();
         return new MyTendersFiltersPage();
+    }
+
+    @Step("Получить количество фильтров")
+    public Integer getNumberFilters(){
+        return filterForCheckNumberFiltersCollections.size();
     }
 }
