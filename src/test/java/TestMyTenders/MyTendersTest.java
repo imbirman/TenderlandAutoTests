@@ -187,4 +187,20 @@ public class MyTendersTest extends BaseTest {
                 .isCheckNoticeInCardTender());
     }
 
+    @Test
+    @Description("Проверка заметки во вкладке \"Таблица\"")
+    public void checkNoticeInTabTable(){
+        assertTrue(page.waitFor(2000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(500)
+                .clearField(page.fieldEntryNoticeInCardTender)
+                .waitFor(500)
+                .typeNoticeInCardTender("тестовая заметка")
+                .clickButton(page.buttonCloseCardTender)
+                .waitFor(500)
+                .clickButton(page.tabTable)
+                .waitFor(500)
+                .isCheckNoticeInTabTable());
+    }
+
 }

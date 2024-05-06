@@ -21,11 +21,11 @@ public class MyTendersPage {
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
     /** Главная вкладка "Карточки" */
-    protected SelenideElement tabCards = $x("//div[@id='favourite-select-tabs']//div[text()='Карточки']");
+    protected SelenideElement tabCards = $x("(//div[contains(@class,'dx-item dx-tab')])[1]");
     /** Главная вкладка "Таблица" */
-    protected SelenideElement tabTable = $x("//div[@id='favourite-select-tabs']//div[text()='Таблица']");
+    protected SelenideElement tabTable = $x("(//div[contains(@class,'dx-item dx-tab')])[2]");
     /** Главная вкладка "Календарь" */
-    protected SelenideElement tabCalendar = $x("//div[@id='favourite-select-tabs']//div[text()='Календарь']");
+    protected SelenideElement tabCalendar = $x("(//div[contains(@class,'dx-item dx-tab')])[3]");
 
     /** Кнопка открытия бокового меню */
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
@@ -116,6 +116,12 @@ public class MyTendersPage {
     @Step("Ввести заметку во вкладке \"Таблица\"")
     public MyTendersPage typeNoticeInTabTable(String notice){
         firstFieldEntryNoticeInTabTable.sendKeys(notice);
+        return new MyTendersPage();
+    }
+
+    @Step("Ввести заметку в карточке тендера")
+    public MyTendersPage typeNoticeInCardTender(String notice){
+        fieldEntryNoticeInCardTender.sendKeys(notice);
         return new MyTendersPage();
     }
 
@@ -222,5 +228,10 @@ public class MyTendersPage {
     @Step("Проверка заметки в карточке тендера")
     public boolean isCheckNoticeInCardTender(){
         return Objects.equals(fieldEntryNoticeInCardTender.getValue(), "тестовая заметка2");
+    }
+
+    @Step("Проверка заметки во вкладке \"Таблица\"")
+    public boolean isCheckNoticeInTabTable(){
+        return Objects.equals(firstFieldEntryNoticeInTabTable.getValue(), "тестовая заметка");
     }
 }
