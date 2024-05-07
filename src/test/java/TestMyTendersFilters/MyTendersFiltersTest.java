@@ -63,4 +63,16 @@ public class MyTendersFiltersTest extends BaseTest {
                 .waitFor(1000)
                 .isCheckSearchByNameTender());
     }
+
+    @Test
+    @Description("Проверка поиска по ответственному")
+    public void checkSearchByUser(){
+        assertEquals(page.waitFor(2000)
+                .clickButton(page.filterResponsible)
+                .clickButton(page.firstElementInListFilter)
+                .waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .getResponsibleInCardTender(), "Админ");
+    }
 }

@@ -23,6 +23,17 @@ public class MyTendersFiltersPage {
     protected SelenideElement buttonTabMenuMyTenders = $x("//div[@id='main-menu-list']//div[text()='Мои тендеры']");
     /** Кнопка раскрытия списка фильтров */
     protected SelenideElement buttonOpenListFilters = $x("//i[@id='favourites-filter-list']");
+    /** Ответственный за тендер в карточке тендера */
+    protected SelenideElement buttonChangeResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-texteditor-container']//input");
+
+
+    /** Фильтр выбора пользователя в фильтре "По ответственному" */
+    protected SelenideElement filterResponsible = $x("//div[@id='favourite-search-select-responsibles']//input");
+    /** Первый пункт в списке фильтра */
+    protected SelenideElement firstElementInListFilter = $x("(//div[@class='dx-overlay-content dx-popup-normal dx-resizable']//div[@class='dx-item-content dx-list-item-content'])[1]");
+    /** Открыть карточку первого тендера */
+    protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
+
 
     /** Поле для ввода поиска по тендеру */
     private final SelenideElement searchTenderField = $x("//div[@id='favourite-search-name']//input");
@@ -79,6 +90,11 @@ public class MyTendersFiltersPage {
     @Step("Получить количество фильтров")
     public Integer getNumberFilters(){
         return filterForCheckNumberFiltersCollections.size();
+    }
+
+    @Step("Получение значение ответственного в карточке тендера")
+    public String getResponsibleInCardTender(){
+        return buttonChangeResponsibleInCardTender.getValue();
     }
 
     @Step("Проверка результата поиска по реестровому номеру тендера")
