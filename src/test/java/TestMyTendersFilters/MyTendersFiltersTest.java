@@ -54,4 +54,13 @@ public class MyTendersFiltersTest extends BaseTest {
                     .waitFor(1000)
                     .isCheckSearchByRegisterNumberTender());
     }
+
+    @Test
+    @Description("Проверка поиска по названию тендера")
+    public void checkSearchByNameTenderInTabCard(){
+        assertTrue(page.waitFor(2000)
+                .typeSearchByTender("усл")
+                .waitFor(1000)
+                .isCheckSearchByNameTender());
+    }
 }

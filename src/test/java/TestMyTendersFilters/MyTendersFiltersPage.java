@@ -31,6 +31,8 @@ public class MyTendersFiltersPage {
     private final ElementsCollection registerNumberTenderInListTendersForFirstColumnCollections = $$x("(//div[@class='favourite-kanban-list'])[1]//div[@class='favourite-kanban-card-regnumber']/a");
     /** Список фильтров */
     private final ElementsCollection filterForCheckNumberFiltersCollections = $$x("//div[@class='favourite-filter']");
+    /** Список названий тендеров в списке тендеров */
+    private final ElementsCollection nameTenderInListTendersCollections = $$x("//div[@class='favourite-kanban-card-name']");
 
 
 
@@ -54,6 +56,7 @@ public class MyTendersFiltersPage {
         searchTenderField.sendKeys(search);
         return new MyTendersFiltersPage();
     }
+
 
     @Step("Нажать кнопку для открытия окна авторизации")
     public MyTendersFiltersPage clickLogInButton(){
@@ -86,6 +89,16 @@ public class MyTendersFiltersPage {
             if(!type.contains("01")){check = false;
                 System.out.println(checkRegisterNumber);
                 break;}
+        }
+        return check;
+    }
+
+    /** Проверка результата поиска по названию тендера */
+    public boolean isCheckSearchByNameTender(){
+        boolean check = false;
+        List<String> checkRegisterNumber = nameTenderInListTendersCollections.texts();
+        for(String type : checkRegisterNumber){
+            if(type.contains("усл")){check = true; break;}
         }
         return check;
     }
