@@ -58,21 +58,36 @@ public class MyTendersFiltersTest extends BaseTest {
     @Test
     @Description("Проверка поиска по названию тендера")
     public void checkSearchByNameTenderInTabCard(){
-        assertTrue(page.waitFor(2000)
-                .typeSearchByTender("усл")
-                .waitFor(1000)
-                .isCheckSearchByNameTender());
+            assertTrue(page.waitFor(2000)
+                    .typeSearchByTender("усл")
+                    .waitFor(1000)
+                    .isCheckSearchByNameTender());
     }
 
     @Test
     @Description("Проверка поиска по ответственному")
     public void checkSearchByUser(){
-        assertEquals(page.waitFor(2000)
-                .clickButton(page.filterResponsible)
-                .clickButton(page.firstElementInListFilter)
-                .waitFor(1000)
-                .clickButton(page.openCardFirstTender)
-                .waitFor(1000)
-                .getResponsibleInCardTender(), "Админ");
+            assertEquals(page.waitFor(2000)
+                    .clickButton(page.filterResponsible)
+                    .clickButton(page.firstElementInListFilter)
+                    .waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .getResponsibleInCardTender(), "Админ");
+    }
+
+    @Test
+    @Description("Проверка поиска по метке тендера")
+    public void checkSearchByTags(){
+            assertTrue(page.waitFor(2000)
+                    .clickButton(page.buttonOpenListFilters)
+                    .clickButton(page.filterTags)
+                    .waitFor(500)
+                    .clickButton(page.selectRedTagInList)
+                    .waitFor(500)
+                    .clickButton(page.buttonOpenListFilters)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(500)
+                    .isCheckSearchByTags());
     }
 }

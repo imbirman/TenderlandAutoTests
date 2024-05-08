@@ -7,6 +7,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -31,8 +32,12 @@ public class MyTendersFiltersPage {
     protected SelenideElement filterResponsible = $x("//div[@id='favourite-search-select-responsibles']//input");
     /** Первый пункт в списке фильтра */
     protected SelenideElement firstElementInListFilter = $x("(//div[@class='dx-overlay-content dx-popup-normal dx-resizable']//div[@class='dx-item-content dx-list-item-content'])[1]");
+    /** Фильтр "Поиск по меткам" */
+    protected SelenideElement filterTags = $x("//div[@id='favourite-search-select-tags']//div[@class='dx-texteditor-container']//input");
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
+    /** Выбрать красную метку */
+    protected SelenideElement selectRedTagInList = $x("(//div[@class='dx-item dx-list-item'])[2]");
 
 
     /** Поле для ввода поиска по тендеру */
@@ -44,6 +49,10 @@ public class MyTendersFiltersPage {
     private final ElementsCollection filterForCheckNumberFiltersCollections = $$x("//div[@class='favourite-filter']");
     /** Список названий тендеров в списке тендеров */
     private final ElementsCollection nameTenderInListTendersCollections = $$x("//div[@class='favourite-kanban-card-name']");
+
+
+    /** Метка в карточке тендера */
+    private final SelenideElement tagInCardTender = $x("//div[@id='favourite-card-tag']");
 
 
 
@@ -117,5 +126,10 @@ public class MyTendersFiltersPage {
             if(type.contains("усл")){check = true; break;}
         }
         return check;
+    }
+
+    @Step("Проверка поиска по метке")
+    public boolean isCheckSearchByTags(){
+        return Objects.requireNonNull(tagInCardTender.getAttribute("style")).contains("background-color: rgb(235, 9, 16)");
     }
 }
