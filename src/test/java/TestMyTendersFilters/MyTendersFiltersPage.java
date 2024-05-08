@@ -1,6 +1,5 @@
 package TestMyTendersFilters;
 
-import TestMyTenders.MyTendersPage;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -9,6 +8,7 @@ import org.openqa.selenium.By;
 import java.util.List;
 import java.util.Objects;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MyTendersFiltersPage {
@@ -38,6 +38,8 @@ public class MyTendersFiltersPage {
     protected SelenideElement filterTags = $x("//div[@id='favourite-search-select-tags']//div[@class='dx-texteditor-container']//input");
     /** Фильтр "Наличие задач" */
     protected SelenideElement filterAvailabilityTask = $x("(//div[@id='favourite-search-select-with-tasks']//input)[2]");
+    /** Фильтр "Этапы" */
+    protected SelenideElement filterStages = $x("//div[@id='favourite-search-select-user-stages']//input");
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
     /** Выбрать красную метку */
@@ -140,5 +142,10 @@ public class MyTendersFiltersPage {
     @Step("Проверка на сброс значения фильтра \"Наличие задач\"")
     public boolean isCheckResetFilterAvailabilityTask(){
         return Objects.requireNonNull(filterAvailabilityTask.getValue()).isEmpty();
+    }
+
+    @Step("Проверка наличия фильтра \"Этапы\"")
+    public boolean isCheckFilterSearchByStages(){
+        return filterStages.is(visible);
     }
 }

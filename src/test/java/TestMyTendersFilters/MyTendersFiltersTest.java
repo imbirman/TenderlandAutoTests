@@ -103,4 +103,12 @@ public class MyTendersFiltersTest extends BaseTest {
                     .waitFor(500)
                     .isCheckResetFilterAvailabilityTask());
     }
+
+    @Test
+    @Description("Проверка наличия фильтра \"Этапы\"")
+    public void checkVisibleFilterSearchByStages(){
+                assertTrue(page.waitFor(2000)
+                        .clickButton(page.buttonOpenListFilters)
+                        .isCheckFilterSearchByStages());
+    }
 }
