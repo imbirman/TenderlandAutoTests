@@ -26,6 +26,8 @@ public class MyTendersFiltersPage {
     protected SelenideElement buttonOpenListFilters = $x("//i[@id='favourites-filter-list']");
     /** Ответственный за тендер в карточке тендера */
     protected SelenideElement buttonChangeResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-texteditor-container']//input");
+    /** Очистить поле "Наличие задач" */
+    protected SelenideElement buttonClearFieldAvailabilityTask = $x("//div[@id='favourite-search-select-with-tasks']//i[@class='dx-icon material-icons-round icon-16px icon-grey md-close']");
 
 
     /** Фильтр выбора пользователя в фильтре "По ответственному" */
@@ -34,6 +36,8 @@ public class MyTendersFiltersPage {
     protected SelenideElement firstElementInListFilter = $x("(//div[@class='dx-overlay-content dx-popup-normal dx-resizable']//div[@class='dx-item-content dx-list-item-content'])[1]");
     /** Фильтр "Поиск по меткам" */
     protected SelenideElement filterTags = $x("//div[@id='favourite-search-select-tags']//div[@class='dx-texteditor-container']//input");
+    /** Фильтр "Наличие задач" */
+    protected SelenideElement filterAvailabilityTask = $x("(//div[@id='favourite-search-select-with-tasks']//input)[2]");
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
     /** Выбрать красную метку */
@@ -118,7 +122,7 @@ public class MyTendersFiltersPage {
         return check;
     }
 
-    /** Проверка результата поиска по названию тендера */
+    @Step("Проверка результата поиска по названию тендера")
     public boolean isCheckSearchByNameTender(){
         boolean check = false;
         List<String> checkRegisterNumber = nameTenderInListTendersCollections.texts();
@@ -131,5 +135,10 @@ public class MyTendersFiltersPage {
     @Step("Проверка поиска по метке")
     public boolean isCheckSearchByTags(){
         return Objects.requireNonNull(tagInCardTender.getAttribute("style")).contains("background-color: rgb(235, 9, 16)");
+    }
+
+    @Step("Проверка на сброс значения фильтра \"Наличие задач\"")
+    public boolean isCheckResetFilterAvailabilityTask(){
+        return Objects.requireNonNull(filterAvailabilityTask.getValue()).isEmpty();
     }
 }

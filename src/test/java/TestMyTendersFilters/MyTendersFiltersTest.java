@@ -90,4 +90,17 @@ public class MyTendersFiltersTest extends BaseTest {
                     .waitFor(500)
                     .isCheckSearchByTags());
     }
+
+    @Test
+    @Description("Проверка на сброс значения фильтра \"Наличие задач\"")
+    public void checkResetFilterAvailabilityTask(){
+            assertTrue(page.waitFor(2000)
+                    .clickButton(page.buttonOpenListFilters)
+                    .waitFor(500)
+                    .clickButton(page.filterAvailabilityTask)
+                    .clickButton(page.firstElementInListFilter)
+                    .clickButton(page.buttonClearFieldAvailabilityTask)
+                    .waitFor(500)
+                    .isCheckResetFilterAvailabilityTask());
+    }
 }
