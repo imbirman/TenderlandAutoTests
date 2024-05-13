@@ -5,6 +5,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MyTendersTaskTest extends BaseTest {
 
@@ -34,5 +36,18 @@ public class MyTendersTaskTest extends BaseTest {
                 .clickButton(page.openTabMenu.shouldBe(Condition.interactable))
                 .waitFor(500)
                 .clickButton(page.buttonTabMenuMyTenders);
+    }
+
+    @Test
+    @Description("Проверка добавления новой задачи")
+    public void checkAddingTask(){
+            assertEquals(page.waitFor(2000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(500)
+                    .clickButton(page.buttonAddTask)
+                    .waitFor(500)
+                    .typeNameTask("тестовая задача")
+                    .waitFor(500)
+                    .getNameLastTask(), "тестовая задача");
     }
 }
