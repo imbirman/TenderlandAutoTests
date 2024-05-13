@@ -50,4 +50,17 @@ public class MyTendersTaskTest extends BaseTest {
                     .waitFor(500)
                     .getNameLastTask(), "тестовая задача");
     }
+
+    @Test
+    @Description("Проверка добавления задачи с дублирующим названием")
+    public void checkAddingTaskWithDuplicateName(){
+            assertNotEquals(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.buttonAddTask)
+                    .waitFor(500)
+                    .typeNameTask("тестовая задача 1")
+                    .waitFor(500)
+                    .getNameLastTask(), "тестовая задача 1");
+    }
 }
