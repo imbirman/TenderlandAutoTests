@@ -63,4 +63,17 @@ public class MyTendersTaskTest extends BaseTest {
                     .waitFor(500)
                     .getNameLastTask(), "тестовая задача 1");
     }
+
+    @Test
+    @Description("Проверка удаления задачи")
+    public void checkDeleteTask(){
+            assertTrue(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.getButtonDeleteTaskByNumber(3))
+                    .waitFor(500)
+                    .clickButton(page.buttonConfirmationDeleteTask)
+                    .waitFor(500)
+                    .isCheckDeleteTask());
+    }
 }
