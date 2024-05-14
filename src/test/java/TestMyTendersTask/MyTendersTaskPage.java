@@ -25,6 +25,8 @@ public class MyTendersTaskPage {
     protected ElementsCollection buttonDeleteTaskCollection = $$x("//div[@id='tasks-multiview']//i[contains(@class, 'favourite-task-delete-button')]");
     /** Список названий задач */
     protected ElementsCollection nameTaskCollection = $$x("//div[@id='tasks-multiview']//div[@class='favourite-card-name-task']");
+    /** Список статусов задачи */
+    private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[@id='favourite-tender-tasks']/div/div[2]/div");
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -45,6 +47,7 @@ public class MyTendersTaskPage {
     private final SelenideElement fieldEntryNameTask = $x("//div[@id='tasks-multiview']//input[@class='dx-texteditor-input']");
 
 
+
     @Step("Ожидание {number}")
     public MyTendersTaskPage waitFor(long number){
         sleep(number);
@@ -63,6 +66,7 @@ public class MyTendersTaskPage {
     @Step("Ввод названия задачи")
     public MyTendersTaskPage typeNameTask(String name) {
         fieldEntryNameTask.sendKeys(name);
+        waitFor(100);
         fieldEntryNameTask.sendKeys(Keys.ENTER);
         return new MyTendersTaskPage();
     }
@@ -103,5 +107,10 @@ public class MyTendersTaskPage {
             if(type.contains("тестовая задача 4")){check = false; break;}
         }
         return check;
+    }
+
+    @Step("Проверка статуса созданной задачи")
+    public boolean isCheckStatusAddedTask(){
+        return statusTaskInListTasksCollection.get(statusTaskInListTasksCollection.size()-1).getText().equals("ВЫПОЛНЯЕТСЯ");
     }
 }

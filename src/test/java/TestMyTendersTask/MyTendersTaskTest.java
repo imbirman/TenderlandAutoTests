@@ -76,4 +76,17 @@ public class MyTendersTaskTest extends BaseTest {
                     .waitFor(500)
                     .isCheckDeleteTask());
     }
+
+    @Test
+    @Description("Проверка статуса добавленной задачи")
+    public void checkStatusAddedTask(){
+        assertTrue(page.waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .clickButton(page.buttonAddTask)
+                .waitFor(500)
+                .typeNameTask("тест статуса")
+                .waitFor(500)
+                .isCheckStatusAddedTask());
+    }
 }
