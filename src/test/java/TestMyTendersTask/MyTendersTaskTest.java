@@ -89,4 +89,17 @@ public class MyTendersTaskTest extends BaseTest {
                 .waitFor(500)
                 .isCheckStatusAddedTask());
     }
+
+    @Test
+    @Description("Проверка статуса задачи в окне задачи после нажатия переключателя \"Выполнено\"")
+    public void checkStatusTaskAfterClickSwitchBoxCompleteInWindowTask(){
+        assertTrue(page.waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .clickButton(page.getTaskByNumber(0))
+                .waitFor(500)
+                .clickButton(page.switchToCompleteTask)
+                .waitFor(500)
+                .isCheckStatusTaskAfterClickSwitchBoxCompleteInWindowTask());
+    }
 }

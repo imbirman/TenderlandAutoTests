@@ -41,10 +41,14 @@ public class MyTendersTaskPage {
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
     /** Название последней задачи */
     protected SelenideElement nameLastTask = $x("(//div[@id='tasks-multiview']//div[@class='favourite-card-name-task'])[last()]");
+    /** Кнопка переключения метки выполнения задачи */
+    protected SelenideElement switchToCompleteTask = $x("//div[@id='favourite-card-task-is-complete']");
 
 
     /** Поле ввода названия задача */
     private final SelenideElement fieldEntryNameTask = $x("//div[@id='tasks-multiview']//input[@class='dx-texteditor-input']");
+    /** Статус задачи в окне задачи */
+    private final SelenideElement statusTaskInWindowTask = $x("//div[@id='favourite-card-task-status']");
 
 
 
@@ -99,6 +103,11 @@ public class MyTendersTaskPage {
         return buttonDeleteTaskCollection.get(number);
     }
 
+    @Step("Получение задачи по ее порядковому номеру")
+    public SelenideElement getTaskByNumber(int number){
+        return nameTaskCollection.get(number);
+    }
+
     @Step("Проверка удаления задачи")
     public boolean isCheckDeleteTask(){
         boolean check = true;
@@ -112,5 +121,10 @@ public class MyTendersTaskPage {
     @Step("Проверка статуса созданной задачи")
     public boolean isCheckStatusAddedTask(){
         return statusTaskInListTasksCollection.get(statusTaskInListTasksCollection.size()-1).getText().equals("ВЫПОЛНЯЕТСЯ");
+    }
+
+    @Step("Проверка статуса задачи в окне задачи после нажатия переключателя \"Выполнено\"")
+    public boolean isCheckStatusTaskAfterClickSwitchBoxCompleteInWindowTask(){
+        return statusTaskInWindowTask.getText().equals("ГОТОВО");
     }
 }
