@@ -101,5 +101,6 @@ public class MyTendersTaskTest extends BaseTest {
                 .clickButton(page.switchToCompleteTask)
                 .waitFor(500)
                 .isCheckStatusTaskAfterClickSwitchBoxCompleteInWindowTask());
+
     }
 }
