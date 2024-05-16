@@ -35,7 +35,10 @@ public class MyTendersTaskPage {
     protected SelenideElement buttonAddTask = $x("//div[@id='tasks-multiview']//div[@style='cursor: pointer;']/i");
     /** Кнопка добавления задачи во вкладке "Таблица" */
     protected SelenideElement buttonAddTaskInTabTable = $x("//div[@class='favourite-table-add-task']/div");
+    /** Кнопка подтверждения удаления задачи */
     protected SelenideElement buttonConfirmationDeleteTask = $x("//span[text()='Удалить']");
+    /** Кнопка, возвращающая к задаче */
+    protected SelenideElement buttonBackToTask = $x("//div[@id='tasks-multiview']//div[@class='favourite-card-back-tasks']");
 
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
@@ -108,6 +111,11 @@ public class MyTendersTaskPage {
         return nameTaskCollection.get(number);
     }
 
+    @Step("Получение статуса задачи в списке задач по её порядковому номеру")
+    public SelenideElement getStatusTaskInListTasksByNumber(int number){
+        return statusTaskInListTasksCollection.get(number);
+    }
+
     @Step("Проверка удаления задачи")
     public boolean isCheckDeleteTask(){
         boolean check = true;
@@ -126,5 +134,10 @@ public class MyTendersTaskPage {
     @Step("Проверка статуса задачи в окне задачи после нажатия переключателя \"Выполнено\"")
     public boolean isCheckStatusTaskAfterClickSwitchBoxCompleteInWindowTask(){
         return statusTaskInWindowTask.getText().equals("ГОТОВО");
+    }
+
+    @Step("Проверка статуса задачи в списке задач после нажатия переключателя \"Выполнено\"")
+    public boolean isCheckStatusTaskAfterClickSwitchBoxCompleteInListTask(int number){
+        return getStatusTaskInListTasksByNumber(number).getText().equals("ГОТОВО");
     }
 }
