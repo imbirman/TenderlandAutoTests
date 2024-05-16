@@ -25,6 +25,8 @@ public class MyTendersTaskPage {
     protected ElementsCollection buttonDeleteTaskCollection = $$x("//div[@id='tasks-multiview']//i[contains(@class, 'favourite-task-delete-button')]");
     /** Список названий задач */
     protected ElementsCollection nameTaskCollection = $$x("//div[@id='tasks-multiview']//div[@class='favourite-card-name-task']");
+    /** Список чекбоксов выполнения задачи */
+    protected ElementsCollection checkboxCompleteTaskCollection = $$x("//div[@id='tasks-multiview']//span[@class='dx-checkbox-icon']");
     /** Список статусов задачи */
     private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[@id='favourite-tender-tasks']/div/div[2]/div");
 
@@ -114,6 +116,11 @@ public class MyTendersTaskPage {
     @Step("Получение статуса задачи в списке задач по её порядковому номеру")
     public SelenideElement getStatusTaskInListTasksByNumber(int number){
         return statusTaskInListTasksCollection.get(number);
+    }
+
+    @Step("Получение чекбокса задачи в списке задач по его порядковому номеру")
+    public SelenideElement getCheckboxInListTasksByNumber(int number){
+        return checkboxCompleteTaskCollection.get(number);
     }
 
     @Step("Проверка удаления задачи")
