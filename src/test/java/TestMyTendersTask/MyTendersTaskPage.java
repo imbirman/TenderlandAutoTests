@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -28,7 +29,7 @@ public class MyTendersTaskPage {
     /** Список чекбоксов выполнения задачи */
     protected ElementsCollection checkboxCompleteTaskCollection = $$x("//div[@id='tasks-multiview']//span[@class='dx-checkbox-icon']");
     /** Список статусов задачи */
-    private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[@id='favourite-tender-tasks']/div/div[2]/div");
+    private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[contains(@class, 'favourite-task-statusbox')]//div[@class='dx-texteditor-container']//input");
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -137,7 +138,7 @@ public class MyTendersTaskPage {
 
     @Step("Проверка статуса созданной задачи")
     public boolean isCheckStatusAddedTask(){
-        return statusTaskInListTasksCollection.get(statusTaskInListTasksCollection.size()-1).getText().equals("ВЫПОЛНЯЕТСЯ");
+        return Objects.equals(statusTaskInListTasksCollection.get(statusTaskInListTasksCollection.size() - 1).getValue(), "в работе");
     }
 
     @Step("Проверка статуса задачи в окне задачи после нажатия переключателя \"Выполнено\"")
