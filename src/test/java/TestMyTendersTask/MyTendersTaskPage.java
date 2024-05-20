@@ -34,24 +34,28 @@ public class MyTendersTaskPage {
     /** Кнопка в боковом меню "Мои тендеры" */
     protected SelenideElement buttonTabMenuMyTenders = $x("//div[@id='main-menu-list']//div[text()='Мои тендеры']");
     /** Кнопка добавления задачи во вкладке "Карточки" */
-    protected SelenideElement buttonAddTask = $x("//div[@id='tasks-multiview']//div[@style='cursor: pointer;']/i");
-    /** Кнопка добавления задачи во вкладке "Таблица" */
-    protected SelenideElement buttonAddTaskInTabTable = $x("//div[@class='favourite-table-add-task']/div");
+    protected SelenideElement buttonAddTask = $x("//div[@id='favourite-create-task']");
+    /** Кнопка сохранения задачи */
+    protected SelenideElement buttonSaveTask = $x("//div[@id='favourite-task-button-create']");
     /** Кнопка подтверждения удаления задачи */
     protected SelenideElement buttonConfirmationDeleteTask = $x("//span[text()='Удалить']");
     /** Кнопка, возвращающая к задаче */
     protected SelenideElement buttonBackToTask = $x("//div[@id='tasks-multiview']//div[@class='favourite-card-back-tasks']");
+    protected SelenideElement buttonSaveDeadline = $x("//span[text() = 'OK']");
+
 
     /** Открыть карточку первого тендера */
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
     /** Название последней задачи */
-    protected SelenideElement nameLastTask = $x("(//div[@id='tasks-multiview']//div[@class='favourite-card-name-task'])[last()]");
+    protected SelenideElement nameLastTask = $x("(//div[@id='favourite-tender-tasks-working']//textarea)[last()]");
     /** Кнопка переключения метки выполнения задачи */
     protected SelenideElement switchToCompleteTask = $x("//div[@id='favourite-card-task-is-complete']");
+    /** Открыть Окно срока окончания задачи */
+    protected SelenideElement openDeadlineWindow = $x("//div[@id='favourite-task-endtime-create']");
 
 
     /** Поле ввода названия задача */
-    private final SelenideElement fieldEntryNameTask = $x("//div[@id='tasks-multiview']//input[@class='dx-texteditor-input']");
+    private final SelenideElement fieldEntryNameTask = $x("//div[@id='favourite-task-name-create']//textarea");
     /** Статус задачи в окне задачи */
     private final SelenideElement statusTaskInWindowTask = $x("//div[@id='favourite-card-task-status']");
 
@@ -75,8 +79,6 @@ public class MyTendersTaskPage {
     @Step("Ввод названия задачи")
     public MyTendersTaskPage typeNameTask(String name) {
         fieldEntryNameTask.sendKeys(name);
-        waitFor(100);
-        fieldEntryNameTask.sendKeys(Keys.ENTER);
         return new MyTendersTaskPage();
     }
 
@@ -100,7 +102,7 @@ public class MyTendersTaskPage {
 
     @Step("Получение названия последней задачи")
     public String getNameLastTask(){
-        return nameLastTask.getText();
+        return nameLastTask.getValue();
     }
 
     @Step("Получить кнопку удаления задачи по её порядковому номеру")

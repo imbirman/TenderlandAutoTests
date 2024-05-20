@@ -32,7 +32,7 @@ public class MyTendersTaskTest extends BaseTest {
                 .typePassword(BASE_PASSWORD)
                 .waitFor(2000)
                 .clickConfirmLogInButton()
-                .waitFor(5000)
+                .waitFor(3000)
                 .clickButton(page.openTabMenu.shouldBe(Condition.interactable))
                 .waitFor(500)
                 .clickButton(page.buttonTabMenuMyTenders);
@@ -43,10 +43,16 @@ public class MyTendersTaskTest extends BaseTest {
     public void checkAddingTask(){
             assertEquals(page.waitFor(2000)
                     .clickButton(page.openCardFirstTender)
-                    .waitFor(500)
+                    .waitFor(1000)
                     .clickButton(page.buttonAddTask)
                     .waitFor(500)
                     .typeNameTask("тестовая задача")
+                    .waitFor(500)
+                    .clickButton(page.openDeadlineWindow)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveDeadline)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveTask)
                     .waitFor(500)
                     .getNameLastTask(), "тестовая задача");
     }
