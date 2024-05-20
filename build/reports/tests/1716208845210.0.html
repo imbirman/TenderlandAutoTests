@@ -1,0 +1,745 @@
+<html class="dxChrome dxWindowsPlatform dxWebKitFamily dxBrowserVersion-124"><head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Tenderland</title>
+        <link href="/favicon.ico?v=mU37-H95oPLDqIWlzNmBlgRL22uBOhReKyO3sdYGhyc" rel="shortcut icon" type="image/x-icon">
+        <link href="/css/devextreme/bootstrap.css" rel="stylesheet">
+        <link href="/css/devextreme/dx.common.css" rel="stylesheet">
+        <link href="/css/devextreme/dx-gantt.min.css" rel="stylesheet">
+        <link href="/css/devextreme/dx.material.teal.light.compact.css" rel="stylesheet">
+        <link href="/lib/nouislider/nouislider.min.css" rel="stylesheet">
+        <link href="/lib/jquery-comments/jquery-comments.css" rel="stylesheet">
+        <link href="/css/site.min.css?v=jBXmEG3HZOk_xi1QFuMEPElhJnXRGduxd4ieM0ydg2s" rel="stylesheet">
+        <link href="/css/public/design-v2/profile/profile.css?v=8DEnnQYAdFD_ylJEEt_gMBNb7_sgI984MduqyVcCvDg" rel="stylesheet">
+        <link href="/css/public/design-v2/common/common.css?v=cnXO0gNYPM5EZKXYn7wOTG9IoaGCDyJGIyqILqQo050" rel="stylesheet">
+        <link href="/material-design/css/materialdesignicons.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+        
+            <!-- Yandex.Metrika counter -->
+            <script async="" src="https://mc.yandex.ru/metrika/tag.js"></script><script type="text/javascript">
+                (function (m, e, t, r, i, k, a) {
+                    m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+                    m[i].l = 1 * new Date();
+                    for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+                    k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+                })
+                    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+                ym(94344286, "init", {
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+            </script>
+            <noscript><div><img src="https://mc.yandex.ru/watch/94344286" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+            <!-- /Yandex.Metrika counter -->
+        
+
+        <script src="/js/devextreme/jquery.js"></script>
+        <script src="/js/devextreme/bootstrap.js"></script>
+
+        <script src="/lib/lodash/lodash.min.js"></script>
+
+        <script src="/js/devextreme/cldr.js?v=FitrYKxD2dfau7bX5fctncduAjxA5aJLdgxfRnOuSPA"></script>
+        <script src="/js/devextreme/cldr/event.js?v=LfCdi2kegCLaBheYVfIp1_yD-S52GKOnt0Q7BcfRic0"></script>
+        <script src="/js/devextreme/cldr/supplemental.js?v=GMNXGJlqq6t-vBFSFrGGDJJYasUx7lhIkH0ZNGDv7EA"></script>
+        <script src="/js/devextreme/cldr/unresolved.js?v=YVhidccJzHJGjSF0z6pJ9vcPAiBCxe19Mr37ZniyGfM"></script>
+        <script src="/js/devextreme/globalize.js?v=Kajco-pRCYulIIQgO_sYaGpHe6mU_XnW4ymeCIe7e7M"></script>
+        <script src="/js/devextreme/globalize/message.js?v=SVcB1j-nw-nKaXMwOYJw9wGTUJrnLtH7gy9_kjC2r8I"></script>
+        <script src="/js/devextreme/globalize/number.js?v=K7-d9fr8WvvM-KvT_Vstuhy477I6Fl2EnRwLiVAkszQ"></script>
+        <script src="/js/devextreme/globalize/currency.js?v=3wGPW_W2ypwCCBcYXuuVpUHD6FCS-crYgRtRNJSlUg4"></script>
+        <script src="/js/devextreme/globalize/date.js?v=Y3Uxh7_-XMJA8AE-XVCaimuqlhVCI3BYrWvr82RkzX4"></script>
+        <script src="/js/devextreme/dx-gantt.min.js?v=sY4B4lFV5nN62jPyEH4OAWenFEFMfoNoJjYoXXGv56s"></script>
+        <script src="/js/devextreme/dx.all.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw"></script>
+        <script src="/js/devextreme/localization/dx.messages.ru.js?v=drYGYzx5WNHRqKxcJ1CKUbaqozj0ejInf2puTZesuus"></script>
+        <script src="/js/devextreme/supplemental.js?v=50-DfpiPkTnB82DirCwvyEYFnSpHrBM_UZ7Az7eamN8"></script>
+        <script src="/js/devextreme/ru.js?v=H4zUr5USXFdjBvDvE0rhL-eQ3DeuVmwmRf_7dqb1bAY"></script>
+        <script src="/js/devextreme/aspnet/dx.aspnet.mvc.js?v=UcJ68e97puAkknZlxaAOOLSd1u3frC9-OCjZwwGenm8"></script>
+        <script src="/js/devextreme/aspnet/dx.aspnet.data.js?v=C2gGkr292txY3YyCY9eynK6YR6iWjdfsD4JF6DbBIJ8"></script>
+
+        <script src="/lib/moment/moment.min.js"></script>
+        <script src="/lib/moment/locales.min.js"></script>
+        <script src="/lib/moment/moment-with-locales.min.js"></script>
+        <script src="/lib/moment/ru.js"></script>
+        <script src="/lib/jquery-comments/jquery-comments.min.js"></script>
+        <script src="/lib/signalr/signalr.js"></script>
+
+        <script>
+            DevExpress.localization.locale("ru");
+            $(function () { moment.locale('ru') });
+            localStorage.setItem("IsMasterPassword", "");
+        </script>
+
+                
+                
+                    <script src="/js/common.min.js?v=34_CKq2bzzoDYOna82EUI8UxwA833XJk89z2k-gj9u0"></script>
+                
+</head>
+
+<body style="padding-right: 17px; overflow: hidden;">
+<link href="/css/public/design-v2/common/common.css?v=cnXO0gNYPM5EZKXYn7wOTG9IoaGCDyJGIyqILqQo050" rel="stylesheet">
+<link href="/css/public/design-v2/landing/landing.css?v=RsugEMqpB3eW7AQDCHxR5ChlUJ4E5dI_O1WtMAZlGxU" rel="stylesheet">
+<link href="/icons/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="/lib/slick/slick.css">
+<script src="/lib/slick/slick.min.js"></script>
+
+
+<div class="landing">
+    <div class="landing-header-block-parent">
+        <div class="landing-header-block">
+            <div class="landing-header-block-left">
+                <div class="landing-header-logo" style="cursor: pointer;">
+                    <img src="/logos/logo.svg" onclick="landing.scrollByMenu('.landing-body-block')">
+                </div>
+                <div class="landing-header-menu">
+                    <div class="landing-header-menu-left">
+                        <div class="landing-header-menu-item" onclick="landing.scrollByMenu('#landing-row-advantages')">Преимущества</div>
+                        <div class="landing-header-menu-item" onclick="landing.scrollByMenu('#landing-row-tools')">Инструменты</div>
+                        <div class="landing-header-menu-item" onclick="landing.scrollByMenu('#landing-row-reviews')">Отзывы</div>
+                        <div class="landing-header-menu-item" onclick="landing.scrollByMenu('#landing-row-contacts')">Контакты</div>
+                        <div class="landing-header-menu-split"></div>
+                    </div>
+                    <script>DevExpress.config({"serverDecimalSeparator":","});DevExpress.aspnet.setTemplateEngine();</script><div id="devextreme0" role="button" aria-label="Банковские гарантии" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text dx-button-has-icon common-button common-button-icon-reverse common-button-ghost landing-button-a"><div class="dx-button-content"><i class="dx-icon material-icons-outline icon-20px icon-grey md-north_east"></i><span class="dx-button-text">Банковские гарантии</span><div class="dx-inkripple"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#devextreme0").dxButton({"elementAttr":{"class":"common-button common-button-icon-reverse common-button-ghost landing-button-a"},"text":"Банковские гарантии","focusStateEnabled":false,"icon":"material-icons-outline icon-20px icon-grey md-north_east","onClick":function() { window.open('https://www.tl-fin.ru/', '_blank') }});}).bind(this, jQuery));</script>
+                    <div id="devextreme1" role="button" aria-label="Карьера" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text dx-button-has-icon common-button common-button-icon-reverse common-button-ghost landing-button-a"><div class="dx-button-content"><i class="dx-icon material-icons-outline icon-20px icon-grey md-north_east"></i><span class="dx-button-text">Карьера</span><div class="dx-inkripple"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#devextreme1").dxButton({"elementAttr":{"class":"common-button common-button-icon-reverse common-button-ghost landing-button-a"},"text":"Карьера","focusStateEnabled":false,"icon":"material-icons-outline icon-20px icon-grey md-north_east","onClick":function() { window.open('http://hr.tenderland.ru/', '_blank') }});}).bind(this, jQuery));</script>
+                </div>
+            </div>
+            <div class="landing-header-block-right">
+                <a class="landing-header-phone-block" href="tel:+74997030451">+7 (499) 703 04 51</a>
+                <div id="login-button" role="button" aria-label="Войти" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-black" style="height: 48px; width: 100px;"><div class="dx-button-content"><span class="dx-button-text">Войти</span><div class="dx-inkripple"><div class="dx-inkripple-wave" style="left: -60px; top: -86px; height: 220px; width: 220px;"></div></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#login-button").dxButton({"height":48.0,"width":100.0,"elementAttr":{"class":"common-button-big common-button-black"},"text":"Войти","focusStateEnabled":false,"onClick":landing.showLoginPopup});}).bind(this, jQuery));</script>
+                <i class="material-icons-round icon-28px icon-black icon-grey-hover md-menu" onclick="landing.showMobileMenuPopup()"></i>
+            </div>
+        </div>
+    </div>
+    <div class="landing-body-block">
+        <div class="landing-body-row" style="margin-bottom: 24px;">
+            <div class="landing-title-text">
+                <span class="landing-title-text-green">TenderLand</span> — система точного поиска и анализа тендеров
+            </div>
+        </div>
+        <div class="landing-body-row landing-body-row-rating" style="justify-content: start; margin-bottom: 40px;">
+            <div class="landing-header-text">Найдем больше всех</div>
+            <div class="landing-reviews">
+                <div class="header-h2-text" style="color: #21242C;">4,8</div>
+                <img src="/landing/images/review-star.svg">
+            </div>
+        </div>
+        <div class="landing-body-row landing-row-h3-margin" style="justify-content: start; gap: 12px;">
+            <div id="login-button-additional" role="button" aria-label="Войти" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-black" style="height: 48px;"><div class="dx-button-content"><span class="dx-button-text">Войти</span><div class="dx-inkripple"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#login-button-additional").dxButton({"height":48.0,"elementAttr":{"class":"common-button-big common-button-black"},"text":"Войти","focusStateEnabled":false,"onClick":landing.showLoginPopup});}).bind(this, jQuery));</script>
+            <div id="try-button" role="button" aria-label="Попробовать бесплатно" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-green"><div class="dx-button-content"><span class="dx-button-text">Попробовать бесплатно</span><div class="dx-inkripple"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#try-button").dxButton({"elementAttr":{"class":"common-button-big common-button-green"},"text":"Попробовать бесплатно","focusStateEnabled":false,"onClick":landing.showContactPopup});}).bind(this, jQuery));</script>
+        </div>
+        <div class="landing-body-row" style="margin-bottom: 16px;">
+            <div id="devextreme5" role="tablist" class="dx-tabs dx-widget landing-tabs dx-visibility-change-handler dx-collection dx-tabs-expanded" tabindex="0"><div class="dx-tabs-wrapper"><div class="dx-item dx-tab dx-tab-selected" role="tab" aria-selected="true"><div class="dx-item-content dx-tab-content"><span class="dx-tab-text">Улучшенные фильтры</span></div></div><div class="dx-item dx-tab" role="tab" aria-selected="false"><div class="dx-item-content dx-tab-content"><span class="dx-tab-text">Персональный менеджер</span></div></div><div class="dx-item dx-tab" role="tab" aria-selected="false"><div class="dx-item-content dx-tab-content"><span class="dx-tab-text">Личные настройки</span></div></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#devextreme5").dxTabs({"elementAttr":{"class":"landing-tabs"},"items":[{"text":"Улучшенные фильтры"},{"text":"Персональный менеджер"},{"text":"Личные настройки"}],"selectedIndex":0,"onSelectionChanged":function(e) { $('.landing-multiview').dxMultiView('instance').option('selectedIndex', e.component.option('selectedIndex')) }});}).bind(this, jQuery));</script>
+        </div>
+        <div id="mobile-slider-slick-first-div" class="landing-body-row landing-row-h3-margin">
+            <div id="devextreme6" class="dx-multiview dx-swipeable dx-widget landing-multiview dx-visibility-change-handler dx-collection" tabindex="0" style="width: 100%;"><div class="dx-multiview-wrapper"><div class="dx-multiview-item-container"><div class="dx-item dx-multiview-item dx-item-selected" role="tabpanel" style="transform: translate(0px, 0px);"><div class="dx-item-content dx-multiview-item-content">
+                <div class="landing-tabs-container" style="gap: 16px;">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Улучшенные фильтры</div>
+                        <div class="landing-tabs-main-text">Настраивайте и&nbsp;сохраняйте точные фильтры, чтобы&nbsp;находить больше закупок по&nbsp;своей тематике.</div>
+                    </div>
+                    <img class="landing-tab-img" src="/landing/images/landing-tab1.png">
+                    <img class="landing-tab-middle-img" src="/landing/images/landing-tab1-middle.png">
+                    <img class="landing-tab-mobile-img" src="/landing/images/landing-tab1-mobile.png">
+                </div>
+            </div></div><div class="dx-item dx-multiview-item dx-multiview-item-hidden" role="tabpanel" aria-hidden="true"><div class=""></div></div><div class="dx-item dx-multiview-item dx-multiview-item-hidden" role="tabpanel" aria-hidden="true"><div class=""></div></div></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#devextreme6").dxMultiView({"elementAttr":{"class":"landing-multiview"},"width":"100%","items":[{"template":$("#devextreme6-items0-template")},{"template":$("#devextreme6-items1-template")},{"template":$("#devextreme6-items2-template")}],"selectedIndex":0,"onSelectionChanged":function(e) { $('.landing-tabs').dxTabs('instance').option('selectedIndex', e.component.option('selectedIndex')) }});}).bind(this, jQuery));</script>
+
+            <div id="mobile-slider-slick-first" class="slick-initialized slick-slider" style="">
+                <div class="slick-list draggable" style="padding: 0px 50px;"><div class="slick-track" style="opacity: 1; width: 15000px; transform: translate3d(-50px, 0px, 0px);"><div class="landing-tabs-container slick-slide slick-current slick-center" style="gap: 16px;" data-slick-index="0" aria-hidden="true" tabindex="0">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Улучшенные фильтры</div>
+                        <div class="landing-tabs-main-text">Настраивайте и&nbsp;сохраняйте точные фильтры, чтобы&nbsp;находить больше закупок по&nbsp;своей тематике.</div>
+                    </div>
+                    <img class="landing-tab-mobile-img" style="border-radius: 0px 0px 16px 16px" src="/landing/images/landing-tab1-mobile.png">
+                </div><div class="landing-tabs-container slick-slide" style="gap: 16px;" data-slick-index="1" aria-hidden="true" tabindex="-1">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Персональный менеджер</div>
+                        <div class="landing-tabs-main-text">Клиентская поддержка без&nbsp;очередей и&nbsp;ожидания. Менеджер поможет настроить систему так, чтобы&nbsp;получать от&nbsp;неё&nbsp;максимум пользы.</div>
+                    </div>
+                    <img class="landing-tab-mobile-img" style="border-radius: 0px 0px 16px 16px" src="/landing/images/landing-tab2-mobile.png">
+                </div><div class="landing-tabs-container slick-slide" style="gap: 16px;" data-slick-index="2" aria-hidden="true" tabindex="-1">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Личные настройки</div>
+                        <div class="landing-tabs-main-text">Настройте систему под&nbsp;ваши задачи с&nbsp;менеджером или&nbsp;самостоятельно. Это&nbsp;поможет упростить рутинную работу, быстро выгружать данные или автоматически получить их на почту.</div>
+                    </div>
+                    <img class="landing-tab-mobile-img" style="border-radius: 0px 0px 16px 16px" src="/landing/images/landing-tab3-mobile.png">
+                </div></div></div>
+                
+                
+            </div>
+        </div>
+        <div class="landing-body-row landing-row-h1-margin">
+            <div class="landing-black-container">
+                <img id="landing-black-first-img" src="/landing/images/image-black.png" style="width: 55%;">
+                <img id="landing-black-first-img-1024" src="/landing/images/image-black-1024.png" style="width: 55%;">
+                <div class="landing-tabs-container-first-half landing-tabs-container-right">
+                    <div class="landing-tabs-main-header-text" style="color: white;">Бесплатный доступ</div>
+                    <div class="landing-tabs-main-text" style="color: white; opacity: 80%">Протестируйте все&nbsp;функции системы без&nbsp;ограничений. Менеджер проведёт презентацию и&nbsp;поможет настроить систему. Без&nbsp;рассылок и&nbsp;спама.</div>
+                    <div id="try-button-additional" role="button" aria-label="Попробовать бесплатно" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-green" style="height: 48px;"><div class="dx-button-content"><span class="dx-button-text">Попробовать бесплатно</span><div class="dx-inkripple"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#try-button-additional").dxButton({"height":48.0,"elementAttr":{"class":"common-button-big common-button-green"},"text":"Попробовать бесплатно","focusStateEnabled":false,"onClick":landing.showContactPopup});}).bind(this, jQuery));</script>
+                </div>
+            </div>
+        </div>
+        <div id="landing-row-advantages" class="landing-body-row landing-row-h2-margin">
+            <div id="landing-tabs-container-1" class="landing-tabs-container" style="background: white;">
+                <div id="landing-tabs-container-text-1" class="landing-tabs-container-first-half" style="position: relative; bottom: -200px">
+                    <div class="landing-tabs-main-header-h1-text">Поиск тендеров</div>
+                    <div class="landing-tabs-main-text">Собираем тендеры из&nbsp;официальных источников. В&nbsp;поиске можно совмещать планы, тендеры и&nbsp;контракты. Отобразите результаты в&nbsp;виде карточки, таблицы или&nbsp;выгрузите в&nbsp;Excel.</div>
+                </div>
+                <div class="landing-video-container">
+                    <div id="landing-video-box-1" data-width="0" class="landing-video-box" style="border-color: #45A15C;">
+                        <video poster="/landing/images/poster_1.png" src="/landing/videos/video_1.mp4" style="width: 100%; height: 100%; border-radius: 10px;" muted="" playsinline="" autoplay="" loop="">
+                    </video></div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-body-row landing-row-h2-margin">
+            <div id="landing-tabs-container-2" class="landing-tabs-container" style="background: white;">
+                <div class="landing-video-container">
+                    <div id="landing-video-box-2" data-width="0" class="landing-video-box" style="border-color: #E7491B;">
+                        <video poster="/landing/images/poster_2.png" src="/landing/videos/video_2.mp4" style="width: 100%; height: 100%; border-radius: 10px;" muted="" playsinline="" autoplay="" loop="">
+                    </video></div>
+                </div>
+                <div id="landing-tabs-container-text-2" class="landing-tabs-container-second-half" style="position: relative; bottom: -200px">
+                    <div class="landing-tabs-main-header-h1-text">Автопоиски и автоматизация</div>
+                    <div class="landing-tabs-main-text">Настройте систему один раз&nbsp;и&nbsp;она&nbsp;сама отследит нужные закупки. Подборка придёт вам&nbsp;на&nbsp;почту или&nbsp;в&nbsp;Телеграм. Настроить автопоиски можно самостоятельно или&nbsp;вместе с&nbsp;нашим менеджером.</div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-body-row landing-row-h2-margin">
+            <div id="landing-tabs-container-3" class="landing-tabs-container" style="background: white;">
+                <div id="landing-tabs-container-text-3" class="landing-tabs-container-first-half" style="position: relative; bottom: -200px">
+                    <div class="landing-tabs-main-header-h1-text">Проверка контрагентов</div>
+                    <div class="landing-tabs-main-text">Проверяйте контрагентов и&nbsp;их&nbsp;афилированные компании. Смотрите выручку, информацию об&nbsp;участии в&nbsp;закупках и&nbsp;выигранных тендерах. Весь набор нужных для&nbsp;оценки данных&nbsp;— в&nbsp;системе «Ревизор».</div>
+                </div>
+                <div class="landing-video-container">
+                    <div id="landing-video-box-3" data-width="0" class="landing-video-box" style="border-color: #358ED7;">
+                        <video poster="/landing/images/poster_3.png" src="/landing/videos/video_3.mp4" style="width: 100%; height: 100%; border-radius: 10px;" muted="" playsinline="" autoplay="" loop="">
+                    </video></div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-body-row landing-row-h2-margin">
+            <div id="landing-tabs-container-4" class="landing-tabs-container" style="background: white;">
+                <div class="landing-video-container">
+                    <div id="landing-video-box-4" data-width="0" class="landing-video-box" style="border-color: #946CE5;">
+                        <video poster="/landing/images/poster_4.png" src="/landing/videos/video_4.mp4" style="width: 100%; height: 100%; border-radius: 10px;" muted="" playsinline="" autoplay="" loop="">
+                    </video></div>
+                </div>
+                <div id="landing-tabs-container-text-4" class="landing-tabs-container-second-half" style="position: relative; bottom: -200px">
+                    <div class="landing-tabs-main-header-h1-text">Работа с закупками</div>
+                    <div class="landing-tabs-main-text">Закрепляйте сотрудников за&nbsp;тендером, ставьте задачи, получайте уведомления о&nbsp;выполнении. Система поможет не&nbsp;упустить важное.</div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-body-row landing-row-h1-margin">
+            <div id="landing-tabs-container-5" class="landing-tabs-container" style="background: white;">
+                <div id="landing-tabs-container-text-5" class="landing-tabs-container-first-half" style="position: relative; bottom: -200px">
+                    <div class="landing-tabs-main-header-h1-text">Коммерческие площадки</div>
+                    <div class="landing-tabs-main-text">Обновляем список коммерческих площадок. Каждый день добавляем новые площадки из&nbsp;России и&nbsp;СНГ, убираем нерабочие.</div>
+                </div>
+                <div class="landing-video-container">
+                    <img id="landing-video-box-5" data-width="0" class="landing-video-box" style="border: none; border-radius: 10px;" src="/landing/images/commerce-image.png">
+                </div>
+            </div>
+        </div>
+        <div id="landing-row-tools" class="landing-body-row" style="justify-content: start; margin-bottom: 40px;">
+            <div class="landing-tabs-main-header-text">А еще: инструменты для тонкой настройки и интеграции</div>
+        </div>
+        <div class="landing-body-row landing-tools-block landing-row-h1-margin">
+            <div class="landing-fade-block-main landing-tools-item">
+                <img src="/landing/images/icon-search.svg" style="width: fit-content;">
+                <div class="landing-small-info-text">
+                    <div class="landing-fade-block-text">Поиск</div>
+                    <div class="landing-fade-block-text-small">Находим данные даже в картинках и документах.</div>
+                </div>
+            </div>
+            <div class="landing-fade-block-main landing-tools-item">
+                <img src="/landing/images/icon-tenders.svg" style="width: fit-content;">
+                <div class="landing-small-info-text">
+                    <div class="landing-fade-block-text">Торги</div>
+                    <div class="landing-fade-block-text-small">По банкротству и реализации имущества.</div>
+                </div>
+            </div>
+            <div class="landing-fade-block-main landing-tools-item">
+                <img src="/landing/images/icon-api.svg" style="width: fit-content;">
+                <div class="landing-small-info-text">
+                    <div class="landing-fade-block-text">API</div>
+                    <div class="landing-fade-block-text-small">Чтобы интегрировать TL в вашу бизнес-систему.</div>
+                </div>
+            </div>
+            <div class="landing-fade-block-main landing-tools-item">
+                <img src="/landing/images/icon-telegram.svg" style="width: fit-content;">
+                <div class="landing-small-info-text">
+                    <div class="landing-fade-block-text">ТГ канал</div>
+                    <div class="landing-fade-block-text-small">Для&nbsp;быстрого оповещения о&nbsp;закупках малого объёма.</div>
+                </div>
+            </div>
+        </div>
+        <div id="landing-row-reviews" class="landing-body-row" style=" justify-content: start; margin-bottom: 40px;">
+            <div class="landing-tabs-main-header-text">О нас говорят</div>
+        </div>
+        <div id="landing-row-reviews-blocks" class="landing-row-h1-margin">
+            <div class="landing-shading-block-left" style="width: 80px;"></div>
+            <div id="mobile-slider-slick" style="display: flex; width: 100%; height: 100%; gap: 16px;" class="slick-initialized slick-slider">
+                <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 25000px; transform: translate3d(-8px, 0px, 0px);"><div class="landing-fade-block-main landing-fade-block-horizontal-main landing-review-null-block slick-slide slick-current slick-active" style="width: 213.5px; min-width: 213.5px;" data-slick-index="0" aria-hidden="false" tabindex="0"></div><div class="landing-fade-block-main landing-fade-block-horizontal-main slick-slide slick-active" style="width: 660px;" data-slick-index="1" aria-hidden="false" tabindex="0">
+                    <div class="landing-fade-review-header">
+                        <div class="landing-avatar-review" style="background: #8585CC;">А</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="landing-review-header-text">Александр Михайлов</div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                </div>
+                                <div class="landing-review-small-text">17 октября 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="landing-review-info-text">
+                        <div class="landing-review-main-text">Наша компания пользуется сервисом Tenderland на&nbsp;протяжении 3х лет&nbsp;За&nbsp;это&nbsp;время найдено десятки новых партнёров, клиенток, контактов и&nbsp;контрактов. Очень интересная, гибкая, интеллектуальная, развивающаяся, совершенствующаяся система поиска. Особенная благодарность менеджеру по&nbsp;сопровождению Немцевой Виктории Викторовне, которая всегда приходит на&nbsp;помощь. Сегодня работа с&nbsp;ней&nbsp;шла в&nbsp;течение 2-х с&nbsp;половиной часов.<br><br>С&nbsp;Уважением, Александр Владимирович</div>
+                        <a href="https://yandex.ru/web-maps/org/1107976239/reviews?reviews[publicId]=gm52u7e9k4zgqhczraf23t0mtc&amp;utm_source=review" target="_blank" tabindex="0">Посмотреть оригинал→</a>
+                    </div>
+                </div><div class="landing-fade-block-main landing-fade-block-horizontal-main slick-slide" style="width: 660px;" data-slick-index="2" aria-hidden="true" tabindex="-1">
+                    <div class="landing-fade-review-header">
+                        <div class="landing-avatar-review" style="background: #F285AA;">М</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="landing-review-header-text">Марина Сапарова</div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                </div>
+                                <div class="landing-review-small-text">26 сентября 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="landing-review-info-text">
+                        <div class="landing-review-main-text">
+                            Рекомендую систему TenderLand для&nbsp;поиска тендеров для&nbsp;вашего бизнеса! С&nbsp;этой поисковой системой работаю относительно недавно, и&nbsp;сейчас мы&nbsp;со&nbsp;специалистом TenderLand Татьяной Комиссаровой занимаемся анализом, корректировкой и&nbsp;дополнением наших фильтров, которые были созданы когда‑то много лет&nbsp;назад в&nbsp;той&nbsp;компании, в&nbsp;которой я&nbsp;сейчас работаю. Татьяна Комиссарова отличный эксперт своего дела, оперативно вносит в&nbsp;действующие фильтры по&nbsp;нашим запросам информацию, помогает, подсказывает, как&nbsp;сделать лучше, чтобы&nbsp;поступали уведомления обо&nbsp;всех интересующих нас&nbsp;тендерах!..
+                        </div>
+                        <a href="https://yandex.ru/web-maps/org/1107976239/reviews?reviews[publicId]=z03px9qzn83agvnvzzf0gpe8ym&amp;utm_source=review" target="_blank" tabindex="-1">Посмотреть оригинал→</a>
+                    </div>
+                </div><div class="landing-fade-block-main landing-fade-block-horizontal-main slick-slide" style="width: 660px;" data-slick-index="3" aria-hidden="true" tabindex="-1">
+                    <div class="landing-fade-review-header">
+                        <div class="landing-avatar-review" style="background: #5798D9;">И</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="landing-review-header-text">Ирина С.</div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                </div>
+                                <div class="landing-review-small-text">4 октября 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="landing-review-info-text">
+                        <div class="landing-review-main-text">
+                            С&nbsp;поисковой системой Tenderland работаю уже&nbsp;несколько&nbsp;лет. Могу сказать, что&nbsp;на&nbsp;данный момент минусов в&nbsp;работе системы не&nbsp;обнаружила. Оповещения и&nbsp;уведомления приходят как&nbsp;положено. Изучать новые инструменты системы и&nbsp;тонкости поиска аукционов помогает специалист отдела сопровождения Елена Уварова, за&nbsp;это&nbsp;ей отдельная благодарность!
+                        </div>
+                        <a href="https://yandex.ru/web-maps/org/1107976239/reviews?reviews[publicId]=6qq9e19a15yh4jc9bk4ymx9a90&amp;utm_source=review" target="_blank" tabindex="-1">Посмотреть оригинал→</a>
+                    </div>
+                </div><div class="landing-fade-block-main landing-fade-block-horizontal-main slick-slide" style="width: 660px;" data-slick-index="4" aria-hidden="true" tabindex="-1">
+                    <div class="landing-fade-review-header">
+                        <div class="landing-avatar-review" style="background: #F285AA;">И</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div class="landing-review-header-text">Илья Турченков</div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                    <img src="/landing/images/fullbigstar.svg">
+                                </div>
+                                <div class="landing-review-small-text">29 сентября 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="landing-review-info-text">
+                        <div class="landing-review-main-text">
+                            Лучшая система поиска всей необходимой информации по&nbsp;закупкам из&nbsp;всех, с&nbsp;которыми мне&nbsp;удалось поработать! Менеджер Яна&nbsp;Дайнеко великолепно все&nbsp;разъясняет и&nbsp;помогает добиваться поставленных задач! Система супер! Цена услуг для&nbsp;организации незаметна.<br><br>Искренне рекомендую.
+                        </div>
+                        <a href="https://yandex.ru/web-maps/org/1107976239/reviews?reviews[publicId]=6tpmk8mg2vvk49m4gqbuq9dypg&amp;utm_source=review" target="_blank" tabindex="-1">Посмотреть оригинал→</a>
+                    </div>
+                </div></div></div>
+                
+                
+                
+                
+            </div>
+            <div class="landing-shading-block-right" style="width: 80px;"></div>
+        </div>
+        <div class="landing-body-row" style="justify-content: start; margin-bottom: 40px; display: none;">
+            <div class="landing-tabs-main-header-text">Работайте где бы не находились</div>
+        </div>
+        <div class="landing-body-row" style=" align-items: normal; margin-bottom: 40px; gap: 16px; display: none;">
+            <div class="landing-half-block-main">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="landing-fade-block-text">Настольное веб-приложение</div>
+                    <div class="landing-fade-block-text-small">Зайдите с&nbsp;любого браузера на&nbsp;всех платформах macOS, Windows</div>
+                </div>
+                <img src="/landing/images/image-card.png">
+            </div>
+            <div class="landing-half-block-main" style="padding-bottom: 0px;">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="landing-fade-block-text">Мобильное веб-приложение</div>
+                    <div class="landing-fade-block-text-small">Зайдите с&nbsp;любого браузера на&nbsp;всех платформах iOS, Android. Инструкция как&nbsp;сохранить себе на&nbsp;главную страницу приложение для&nbsp;быстрого доступа.</div>
+                </div>
+                <img src="/landing/images/image-phone.png">
+            </div>
+        </div>
+        <div class="landing-body-row" style="margin-bottom: 40px;">
+            <div class="landing-black-container landing-black-request">
+                <div class="landing-black-request-main">
+                    <div class="landing-black-request-main-half">
+                        <div class="landing-tabs-main-header-text" style="color: white">Отправьте заявку на тестовый доступ системы</div>
+                        <div class="landing-fade-block-text-small" style="color: white; opacity: 80%;">Наш&nbsp;менеджер проведёт презентацию и&nbsp;предварительную настройку системы, откроет бесплатный доступ на&nbsp;3&nbsp;дня.</div>
+                    </div>
+                    <img id="landing-request-logo" src="/landing/images/white-logo.svg">
+                </div>
+                <div class="landing-black-request-inputs">
+                    <div id="landing-textbox-name" class="dx-show-invalid-badge dx-textbox dx-texteditor dx-editor-outlined dx-texteditor-empty dx-widget" style="height: 48px;"><div class="dx-texteditor-container"><div class="dx-texteditor-input-container"><input autocomplete="off" class="dx-texteditor-input" type="text" spellcheck="false" tabindex="-1" style="min-height: 0px;" aria-labelledby="dx-bb2a45bd-3367-840d-3729-2374b1b78549" role="textbox"><div id="dx-bb2a45bd-3367-840d-3729-2374b1b78549" data-dx_placeholder="Алексей" class="dx-placeholder"></div></div><div class="dx-texteditor-buttons-container"><div></div></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#landing-textbox-name").dxTextBox({"height":48.0,"hoverStateEnabled":false,"focusStateEnabled":false,"stylingMode":"outlined","labelMode":"hidden","placeholder":"Алексей"});}).bind(this, jQuery));</script>
+                    <div id="landing-textbox-phone" class="dx-show-invalid-badge dx-textbox dx-texteditor dx-editor-outlined dx-widget dx-texteditor-masked" style="height: 48px;"><input type="hidden" value=""><div class="dx-texteditor-container"><div class="dx-texteditor-input-container"><input autocomplete="off" class="dx-texteditor-input" type="tel" spellcheck="false" tabindex="-1" style="min-height: 0px;" role="textbox"><div data-dx_placeholder="" class="dx-placeholder dx-state-invisible"></div></div><div class="dx-texteditor-buttons-container"><div></div></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#landing-textbox-phone").dxTextBox({"height":48.0,"hoverStateEnabled":false,"focusStateEnabled":false,"stylingMode":"outlined","labelMode":"hidden","mode":"tel","mask":"+7 (X00) 000-00-00","maskRules":{"X":/[0-9]/}});}).bind(this, jQuery));</script>
+                    <div id="landing-textbox-email" class="dx-show-invalid-badge dx-textbox dx-texteditor dx-editor-outlined dx-texteditor-empty dx-widget" style="height: 48px;"><div class="dx-texteditor-container"><div class="dx-texteditor-input-container"><input autocomplete="off" class="dx-texteditor-input" type="email" spellcheck="false" tabindex="-1" style="min-height: 0px;" aria-labelledby="dx-caf66c8c-7f88-7598-db53-ccab79b40394" role="textbox"><div id="dx-caf66c8c-7f88-7598-db53-ccab79b40394" data-dx_placeholder="tenderland@gmail.com" class="dx-placeholder"></div></div><div class="dx-texteditor-buttons-container"><div></div></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#landing-textbox-email").dxTextBox({"height":48.0,"hoverStateEnabled":false,"focusStateEnabled":false,"stylingMode":"outlined","labelMode":"hidden","mode":"email","placeholder":"tenderland@gmail.com"});}).bind(this, jQuery));</script>
+                    <div id="devextreme11" role="button" aria-label="Отправить заявку" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-green" tabindex="0" style="height: 48px;"><div class="dx-button-content"><span class="dx-button-text">Отправить заявку</span><div class="dx-inkripple"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#devextreme11").dxButton({"height":48.0,"elementAttr":{"class":"common-button-big common-button-green"},"text":"Отправить заявку","onClick":landing.needCallFromPage});}).bind(this, jQuery));</script>
+                </div>
+                <div style="color: white; opacity: 0.5;">
+                    Нажимая кнопку «Отправить заявку», вы даете согласие на обработку персональных данных
+                </div>
+            </div>
+        </div>
+        <div id="landing-row-contacts" class="landing-body-row" style="margin-bottom: 40px;">
+            <div class="landing-tabs-container" style="justify-content: space-between;">
+                <div>
+                    <div class="landing-footer-text">Горячая линия</div>
+                    <a class="landing-phone-text" href="tel:+74997030451">+7 (499) 703-04-51</a>
+                </div>
+                <div>
+                    <div class="landing-footer-text">Напишите нам</div>
+                    <a class="landing-email-text" href="mailto:info@tenderland.ru">info@tenderland.ru</a>
+                </div>
+                <div>
+                    <div class="landing-footer-text" style="padding-bottom: 0px;">Все права защищены</div>
+                    <div class="landing-footer-text" style="padding-bottom: 0px;">© 2009-2024, Tenderland</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="login-popup" class="dx-overlay dx-popup dx-widget dx-visibility-change-handler"></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#login-popup").dxPopup({"wrapperAttr":{"class":"dx-popup-wrapper landing-popup-wrapper"},"shadingColor":"rgba(49, 49, 49, 0.40)","hideOnOutsideClick":true,"shading":true,"visible":false,"showTitle":false,"enableBodyScroll":false,"contentTemplate":$("#login-template")});}).bind(this, jQuery));</script>
+
+<div id="landing-menu-popup" class="dx-overlay dx-popup dx-widget dx-state-invisible dx-visibility-change-handler"><div class="dx-overlay-content dx-popup-normal" role="dialog" tabindex="0" style="width: 80vw; height: 80vh;"><div class="dx-popup-content dx-popup-content-scrollable"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#landing-menu-popup").dxPopup({"wrapperAttr":{"class":"dx-popup-wrapper landing-menu-popup-wrapper"},"visible":false,"showTitle":false,"enableBodyScroll":false,"contentTemplate":$("#landing-menu-template")});}).bind(this, jQuery));</script>
+
+<div id="change-password-popup" class="dx-overlay dx-popup dx-widget dx-state-invisible dx-visibility-change-handler"><div class="dx-overlay-content dx-popup-normal" role="dialog" tabindex="0" style="width: 80vw; height: 80vh;"><div class="dx-popup-content dx-popup-content-scrollable"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#change-password-popup").dxPopup({"wrapperAttr":{"class":"dx-popup-wrapper landing-popup-wrapper"},"shadingColor":"rgba(49, 49, 49, 0.40)","hideOnOutsideClick":true,"shading":true,"visible":false,"showTitle":false,"enableBodyScroll":false,"contentTemplate":$("#change-password-template")});}).bind(this, jQuery));</script>
+
+<div id="new-password-popup" class="dx-overlay dx-popup dx-widget dx-state-invisible dx-visibility-change-handler"><div class="dx-overlay-content dx-popup-normal" role="dialog" tabindex="0" style="width: 80vw; height: 80vh;"><div class="dx-popup-content dx-popup-content-scrollable"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#new-password-popup").dxPopup({"wrapperAttr":{"class":"dx-popup-wrapper landing-popup-wrapper"},"shadingColor":"rgba(49, 49, 49, 0.40)","hideOnOutsideClick":true,"shading":true,"visible":false,"showTitle":false,"enableBodyScroll":false,"contentTemplate":$("#token-send-template")});}).bind(this, jQuery));</script>
+
+<div id="need-call-popup" class="dx-overlay dx-popup dx-widget dx-state-invisible dx-visibility-change-handler"><div class="dx-overlay-content dx-popup-normal" role="dialog" tabindex="0" style="width: 80vw; height: 80vh;"><div class="dx-popup-content dx-popup-content-scrollable"></div></div></div><script>DevExpress.utils.readyCallbacks.add((function($){$("#need-call-popup").dxPopup({"wrapperAttr":{"class":"dx-popup-wrapper landing-popup-wrapper"},"shadingColor":"rgba(49, 49, 49, 0.40)","hideOnOutsideClick":true,"shading":true,"visible":false,"showTitle":false,"enableBodyScroll":false,"contentTemplate":$("#need-call-template")});}).bind(this, jQuery));</script>
+
+<script type="text/html" id="login-template"><input id="returnUrl" name="returnUrl" type="hidden" value="" />    <div class="landing-popup">
+        <div class="landing-popup-title-text">Войти в систему</div>
+        <div class="landing-popup-body">
+            <div class="landing-popup-inputs">
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">Логин</div>
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","hoverStateEnabled":false,"elementAttr":{"class":"landing-input"},"stylingMode":"outlined","mode":"text","labelMode":"hidden","inputAttr":{"autocomplete":"username","id":"username"},"validationMessageMode":"always","buttons":[{"location":"after","name":"close-button","options":{"icon":"material-icons-round icon-16px icon-grey md-close","onClick":function() { $('#login').dxTextBox('instance').reset(); }},"widget":"dxButton"}],"onEnterKey":landing.loginUser},arguments[0])%><%}("login")%>
+                </div>
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">Пароль</div>
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","elementAttr":{"class":"landing-input"},"placeholder":"Введите пароль","hoverStateEnabled":false,"stylingMode":"outlined","labelMode":"hidden","mode":"password","onEnterKey":landing.loginUser,"buttons":[{"name":"password-show","location":"after","options":{"icon":"material-icons-round icon-16px icon-grey md-visibility","onClick":function(e){landing.changePasswordMode('#password')}},"widget":"dxButton"}]},arguments[0])%><%}("password")%>
+                </div>
+            </div>
+            <div class="landing-popup-buttons">
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-green landing-popup-button"},"focusStateEnabled":false,"text":"Войти в систему","onClick":landing.loginUser},arguments[0])%><%}("landing-popup-login-button")%>
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-ghost-gray landing-popup-button"},"focusStateEnabled":false,"text":"Сбросить пароль","onClick":landing.showResetPasswordPopup},arguments[0])%><%}("landing-popup-change-password-button")%>
+            </div>
+        </div>
+        <div class="landing-popup-footer-helper">
+            Если у вас возникли проблемы с авторизацией, свяжитесь с
+            нами по телефону: +7 (499) 703-04-51 или отправьте нам
+            письмо по адресу info@tenderland.ru
+        </div>
+    </div>
+</script><script type="text/html" id="devextreme6-items0-template">
+                <div class="landing-tabs-container" style="gap: 16px;">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Улучшенные фильтры</div>
+                        <div class="landing-tabs-main-text">Настраивайте и сохраняйте точные фильтры, чтобы находить больше закупок по своей тематике.</div>
+                    </div>
+                    <img class="landing-tab-img" src="/landing/images/landing-tab1.png" />
+                    <img class="landing-tab-middle-img" src="/landing/images/landing-tab1-middle.png" />
+                    <img class="landing-tab-mobile-img" src="/landing/images/landing-tab1-mobile.png" />
+                </div>
+            </script><script type="text/html" id="devextreme6-items1-template">
+                <div class="landing-tabs-container" style="gap: 16px;">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Персональный менеджер</div>
+                        <div class="landing-tabs-main-text">Клиентская поддержка без очередей и ожидания. Менеджер поможет настроить систему так, чтобы получать от неё максимум пользы.</div>
+                    </div>
+                    <img class="landing-tab-img" src="/landing/images/landing-tab2.png" />
+                    <img class="landing-tab-middle-img" src="/landing/images/landing-tab2-middle.png" />
+                    <img class="landing-tab-mobile-img" src="/landing/images/landing-tab2-mobile.png" />
+                </div>
+            </script><script type="text/html" id="devextreme6-items2-template">
+                <div class="landing-tabs-container" style="gap: 16px;">
+                    <div class="landing-tabs-container-first-half landing-tabs-container-left">
+                        <div class="landing-tabs-main-header-text">Личные настройки</div>
+                        <div class="landing-tabs-main-text">Настройте систему под ваши задачи с менеджером или самостоятельно. Это поможет упростить рутинную работу, быстро выгружать данные или автоматически получить их на почту.</div>
+                    </div>
+                    <img class="landing-tab-img" src="/landing/images/landing-tab3.png" />
+                    <img class="landing-tab-middle-img" src="/landing/images/landing-tab3-middle.png" />
+                    <img class="landing-tab-mobile-img" src="/landing/images/landing-tab3-mobile.png" />
+                </div>
+            </script>
+<script type="text/html" id="landing-menu-template">    <div class="landing-menu-main-class">
+        <div>
+            <div style="display: flex; justify-content: flex-end;">
+                <i class="material-icons-round icon-28px icon-black icon-grey-hover md-close landing-close-menu-icon" onclick="landing.hideMobileMenuPopup()"></i>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="landing-hidden-menu-item" onclick="landing.scrollByMenu('#landing-row-advantages')">Преимущества</div>
+                <div class="landing-hidden-menu-item" onclick="landing.scrollByMenu('#landing-row-tools')">Инструменты</div>
+                <div class="landing-hidden-menu-item" onclick="landing.scrollByMenu('#landing-row-reviews')">Отзывы</div>
+                <div class="landing-hidden-menu-item" onclick="landing.scrollByMenu('#landing-row-contacts')">Контакты</div>
+            </div>
+            <div style="background:rgba(255, 255, 255, 0.25); height: 1px; margin: 32px 0px;"></div>
+            <div class="landing-menu-buttons" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button common-button-icon-reverse common-button-ghost"},"text":"Банковские гарантии","focusStateEnabled":false,"activeStateEnabled":false,"hoverStateEnabled":false,"icon":"material-icons-outline icon-20px icon-white md-north_east","onClick":function() { window.open('https://www.tl-fin.ru/', '_blank') }},arguments[0])%><%}("dx-" + new DevExpress.data.Guid())%>
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button common-button-icon-reverse common-button-ghost"},"text":"Карьера","focusStateEnabled":false,"activeStateEnabled":false,"hoverStateEnabled":false,"icon":"material-icons-outline icon-20px icon-white md-north_east","onClick":function() { window.open('http://hr.tenderland.ru/', '_blank') }},arguments[0])%><%}("dx-" + new DevExpress.data.Guid())%>
+            </div>
+            <div class="landing-menu-contacts">
+                <div style="width: 49%">
+                    <div class="landing-href-small-text">Горячая линия</div>
+                    <a class="landing-phone-text-menu" href="tel:+74997030451">+7(499)703-04-51</a>
+                </div>
+                <div style="width: 49%">
+                    <div class="landing-href-small-text">Напишите нам</div>
+                    <a class="landing-email-text-menu" href="mailto:info@tenderland.ru">info@tenderland.ru</a>
+                </div>
+            </div>
+            <div class="landing-menu-login-buttons">
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-black"},"text":"Войти","focusStateEnabled":false,"onClick":landing.showLoginPopup},arguments[0])%><%}("login-button-menu")%>
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-black"},"text":"Попробовать бесплатно","focusStateEnabled":false,"onClick":landing.showContactPopup},arguments[0])%><%}("try-button-menu")%>
+            </div>
+        </div>
+        <div style="text-align: center; opacity: 0.5;">
+            Все права защищены © 2009-2024, Tenderland
+        </div>
+    </div>
+</script>
+<script type="text/html" id="change-password-template">    <div class="landing-popup">
+        <div class="landing-popup-title-text">Сбросить пароль</div>
+        <div class="landing-popup-helper">
+            Введите логин или адрес электронной почты для сброса пароля. Вам придет письмо с кодом восстановления пароля.
+        </div>
+        <div class="landing-popup-body">
+            <div class="landing-popup-inputs">
+                <div class="landing-popup-input">
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","placeholder":"Введите E-mail или логин","elementAttr":{"class":"landing-input landing-full-input"},"stylingMode":"outlined","labelMode":"hidden","onEnterKey":landing.changePassword},arguments[0])%><%}("change-password-input")%>
+                </div>
+            </div>
+            <div class="landing-popup-buttons" style="justify-content: center;">
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-green landing-popup-button"},"focusStateEnabled":false,"text":"Сбросить пароль","onClick":landing.changePassword},arguments[0])%><%}("change-password-button")%>
+            </div>
+        </div>
+        <div class="landing-popup-footer-helper">
+            Если у вас возникли проблемы с авторизацией, свяжитесь с
+            нами по телефону: +7 (499) 703-04-51 или отправьте нам
+            письмо по адресу info@tenderland.ru
+        </div>
+    </div>
+</script>
+<script type="text/html" id="token-send-template">    <div class="landing-popup">
+        <div class="landing-popup-body">
+            <div class="landing-popup-helper">
+                Вам на почту было отправлено письмо с кодом для смены пароля. Скопируйте код в поле и введите новый пароль.
+            </div>
+            <div class="landing-popup-inputs">
+                <div class="landing-popup-input">
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","placeholder":"Введите код","showClearButton":false,"elementAttr":{"class":"landing-input landing-full-input"},"stylingMode":"outlined"},arguments[0])%><%}("token")%>
+                </div>
+                <div class="landing-popup-input">
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","elementAttr":{"class":"landing-input"},"placeholder":"Введите новый пароль","stylingMode":"outlined","mode":"password","buttons":[{"name":"password-show","location":"after","options":{"icon":"mdi mdi-eye-outline","onClick":function(e){landing.changePasswordMode('#new-password')}},"widget":"dxButton"}],"showClearButton":true},arguments[0])%><%}("new-password")%>
+                </div>
+            </div>
+            <div class="landing-popup-buttons" style="justify-content: flex-end;">
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-green landing-popup-button"},"focusStateEnabled":false,"text":"Сбросить пароль","onClick":landing.setNewPassword},arguments[0])%><%}("landing-popup-set-new-password-button")%>
+            </div>
+        </div>
+        <div class="landing-popup-footer-helper">
+            Если у вас возникли проблемы с авторизацией, свяжитесь с
+            нами по телефону: +7 (499) 703-04-51 или отправьте нам
+            письмо по адресу info@tenderland.ru
+        </div>
+    </div>
+</script>
+<script type="text/html" id="need-call-template">    <div class="landing-popup">
+        <div class="landing-popup-title-text">Оставить заявку</div>
+        <div class="landing-popup-body">
+            <div class="landing-popup-inputs">
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">Имя</div>
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","placeholder":"Алексей","showClearButton":false,"elementAttr":{"class":"landing-input landing-full-input"},"stylingMode":"outlined","labelMode":"hidden","onEnterKey":landing.needCall},arguments[0])%><%}("name-input")%>
+                </div>
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">Телефон</div>
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","elementAttr":{"class":"landing-input landing-full-input"},"mask":"+7 (X00) 000-00-00","maskRules":{"X":/[0-9]/},"showClearButton":false,"stylingMode":"outlined","labelMode":"hidden","mode":"tel","onEnterKey":landing.needCall},arguments[0])%><%}("phone-input")%>
+                </div>
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">E-mail</div>
+                    <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxTextBox",{"width":"100%","elementAttr":{"class":"landing-input landing-full-input"},"placeholder":"tenderland@gmail.com","showClearButton":false,"stylingMode":"outlined","labelMode":"hidden","mode":"email","onEnterKey":landing.needCall},arguments[0])%><%}("email-input")%>
+                </div>
+            </div>
+            <div class="landing-popup-buttons" style="justify-content: center;">
+                <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxButton",{"elementAttr":{"class":"common-button-big common-button-green landing-popup-button"},"focusStateEnabled":false,"text":"Отправить заявку","onClick":landing.needCall},arguments[0])%><%}("need-call-button")%>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    $(document).scroll(function (event) {
+        if (window.location.href.toLowerCase().includes("landing")) {
+            let windowHeight = $(window).height(), scrollTop = $(event.target).scrollTop();
+
+            if (scrollTop > 0)
+                $(".landing-header-block").css("border-bottom", "1px solid rgba(33, 45, 69, 0.24)");
+            else
+                $(".landing-header-block").css("border-bottom", "1px solid transparent");
+
+            for (let i = 1; i < 6; i++) {
+                if (scrollTop - ($("#landing-tabs-container-" + i).offset().top - windowHeight) > 200) {
+                    if ($("#landing-video-box-" + i).data("width") == 0) {
+                        $("#landing-video-box-" + i).data("width", 1);
+                        $("#landing-video-box-" + i).animate({ width: "100%", height: "100%" });
+                        $("#landing-tabs-container-text-" + i).animate({ bottom: "0px" });
+                    }
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        if (window.location.href.toLowerCase().includes("landing")) {
+            let windowWidth = $(window).width(), resultBlock = (windowWidth - 1440) / 2;
+            if (resultBlock < 0)
+                resultBlock = 0;
+
+            if (windowWidth < 641) {
+                $(".landing-review-null-block").remove();
+                $("#mobile-slider-slick-first .landing-tabs-container").width(windowWidth - 70);
+                $("#mobile-slider-slick .landing-fade-block-main").width(windowWidth - 110);
+                $(".landing-shading-block-left").width(0);
+                $(".landing-shading-block-right").width(0);
+            }
+            else if (windowWidth < 1025) {
+                $(".landing-fade-block-horizontal-main").width(400);
+                $(".landing-shading-block-left").width(80);
+                $(".landing-shading-block-right").width(80);
+            }
+            else {
+                $(".landing-fade-block-horizontal-main").width(600);
+                $(".landing-shading-block-left").width(80);
+                $(".landing-shading-block-right").width(80);
+            }
+
+            $(".landing-review-null-block").css({ "min-width": resultBlock + "px", "width": resultBlock + "px" });
+
+            $("#mobile-slider-slick-first").slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerMode: true,
+                arrows: false,
+                infinite: false,
+                variableWidth: true
+            });
+
+            $("#mobile-slider-slick").slick({
+                slidesToShow: windowWidth < 641 ? 1 : 2,
+                slidesToScroll: windowWidth < 641 ? 1 : 2,
+                centerMode: windowWidth < 641,
+                arrows: false,
+                infinite: false,
+                variableWidth: true
+            });
+        }
+    });
+
+    $(window).on("resize", function (event) {
+        let windowWidth = $(window).width(), resultBlock = (windowWidth - 1440) / 2;
+        if (windowWidth < 1440)
+            resultBlock = 0;
+
+
+        if (windowWidth < 641) {
+            $(".landing-review-null-block").remove();
+            $("#mobile-slider-slick-first .landing-tabs-container").width(windowWidth - 70);
+            $("#mobile-slider-slick .landing-fade-block-main").width(windowWidth - 110);
+            $(".landing-shading-block-left").width(0);
+            $(".landing-shading-block-right").width(0);
+        }
+        else if (windowWidth < 1025) {
+            $(".landing-fade-block-horizontal-main").width(400);
+            $(".landing-shading-block-left").width(80);
+            $(".landing-shading-block-right").width(80);
+        }
+        else {
+            $(".landing-fade-block-horizontal-main").width(600);
+            $(".landing-shading-block-left").width(80);
+            $(".landing-shading-block-right").width(80);
+        }
+
+        $(".landing-review-null-block").css({ "min-width": resultBlock + "px", "width": resultBlock + "px" });
+    });
+</script>    
+
+
+<script type="text/html" id="user-profile-popover-template">    <div>
+        <div class="user-profile-popover-header">
+            <div id="user-profile-popover-fullname" class="main-bold-text"></div>
+            <div id="user-profile-popover-login" class="small-text-13px"></div>
+            <div id="user-profile-popover-date-access" class="small-text"></div>
+        </div>
+        <%!function(){%><div id="<%=arguments[0]%>"></div><%DevExpress.aspnet.createComponent("dxList",{"dataSource":{"store":new DevExpress.data.ArrayStore({"data":[{"Id":1,"Name":"Управление профилем"},{"Id":6,"Name":"Выйти"}]})},"displayExpr":"Name","onItemClick":profile.clickProfileMenu},arguments[0])%><%}("user-profile-menu-list")%>
+        <div id="user-manager-popover-info"></div>
+    </div>
+</script><div class="dx-overlay-wrapper dx-popup-wrapper landing-popup-wrapper dx-overlay-shader" data-bind="dxControlsDescendantBindings: true" style="z-index: 1501; position: fixed; width: 1884px; height: 985px; left: 0px; top: 0px; transform: translate(0px, 0px); transition: all 0s ease 0s; overflow: visible; background-color: rgba(49, 49, 49, 0.4);"><div class="dx-overlay-content dx-popup-normal dx-resizable dx-state-focused" role="dialog" tabindex="0" style="width: 520px; height: 440px; z-index: 1501; left: 0px; top: 0px; transform: translate(682px, 273px) scale(1); transition: none 0s ease 0s; opacity: 1;"><div class="dx-popup-content dx-popup-content-scrollable" style="height: 440px; min-height: auto;"><input id="returnUrl" name="returnUrl" type="hidden" value="">    <div class="landing-popup">
+        <div class="landing-popup-title-text">Войти в систему</div>
+        <div class="landing-popup-body">
+            <div class="landing-popup-inputs">
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">Логин</div>
+                    <div id="login" class="dx-show-invalid-badge dx-textbox dx-texteditor dx-editor-outlined dx-widget landing-input" style="width: 100%;"><div class="dx-texteditor-container"><div class="dx-texteditor-input-container"><input autocomplete="username" id="username" class="dx-texteditor-input" type="text" spellcheck="false" tabindex="0" role="textbox"><div data-dx_placeholder="" class="dx-placeholder dx-state-invisible"></div></div><div class="dx-texteditor-buttons-container"><div role="button" aria-label="material-icons-round icon-16px icon-grey md-close" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-icon" tabindex="0"><div class="dx-button-content"><i class="dx-icon material-icons-round icon-16px icon-grey md-close"></i><div class="dx-inkripple"></div></div></div></div></div></div>
+                </div>
+                <div class="landing-popup-input">
+                    <div class="landing-popup-label">Пароль</div>
+                    <div id="password" class="dx-show-invalid-badge dx-textbox dx-texteditor dx-editor-outlined dx-widget landing-input" style="width: 100%;"><div class="dx-texteditor-container"><div class="dx-texteditor-input-container"><input autocomplete="off" class="dx-texteditor-input" type="password" spellcheck="false" tabindex="0" aria-labelledby="dx-c848e7d6-947e-355a-544d-d4ee6a3e71c4" role="textbox"><div id="dx-c848e7d6-947e-355a-544d-d4ee6a3e71c4" data-dx_placeholder="Введите пароль" class="dx-placeholder dx-state-invisible"></div></div><div class="dx-texteditor-buttons-container"><div role="button" aria-label="material-icons-round icon-16px icon-grey md-visibility" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-icon" tabindex="0"><div class="dx-button-content"><i class="dx-icon material-icons-round icon-16px icon-grey md-visibility"></i><div class="dx-inkripple"></div></div></div></div></div></div>
+                </div>
+            </div>
+            <div class="landing-popup-buttons">
+                <div id="landing-popup-login-button" role="button" aria-label="Войти в систему" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-green landing-popup-button dx-state-hover"><div class="dx-button-content"><span class="dx-button-text">Войти в систему</span><div class="dx-inkripple"><div class="dx-inkripple-wave" style="left: -112px; top: -193.188px; height: 434px; width: 434px;"></div></div></div></div>
+                <div id="landing-popup-change-password-button" role="button" aria-label="Сбросить пароль" class="dx-widget dx-button dx-button-mode-contained dx-button-normal dx-button-has-text common-button-big common-button-ghost-gray landing-popup-button"><div class="dx-button-content"><span class="dx-button-text">Сбросить пароль</span><div class="dx-inkripple"></div></div></div>
+            </div>
+        </div>
+        <div class="landing-popup-footer-helper">
+            Если у вас возникли проблемы с авторизацией, свяжитесь с
+            нами по телефону: +7 (499) 703-04-51 или отправьте нам
+            письмо по адресу info@tenderland.ru
+        </div>
+    </div>
+</div></div></div></body></html>

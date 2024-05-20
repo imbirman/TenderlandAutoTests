@@ -21,10 +21,10 @@ public class MyTendersTaskPage {
     protected SelenideElement openTabMenu = $x("//i[@class='material-icons-round icon-28px icon-grey md-menu icon-grey-hover common-header-icon']");
 
 
-    /** Список кнопок удаления последней задачи в списке */
-    protected ElementsCollection buttonDeleteTaskCollection = $$x("//div[@id='tasks-multiview']//i[contains(@class, 'favourite-task-delete-button')]");
+    /** Список кнопок удаления задачи в списке */
+    protected ElementsCollection buttonDeleteTaskCollection = $$x("//div[contains(@class, 'favourite-task-button-delete')]");
     /** Список названий задач */
-    protected ElementsCollection nameTaskCollection = $$x("//div[@id='tasks-multiview']//div[@class='favourite-card-name-task']");
+    protected ElementsCollection nameTaskCollection = $$x("//div[@id='favourite-task-name-create']//textarea");
     /** Список чекбоксов выполнения задачи */
     protected ElementsCollection checkboxCompleteTaskCollection = $$x("//div[@id='tasks-multiview']//span[@class='dx-checkbox-icon']");
     /** Список статусов задачи */
@@ -38,7 +38,7 @@ public class MyTendersTaskPage {
     /** Кнопка сохранения задачи */
     protected SelenideElement buttonSaveTask = $x("//div[@id='favourite-task-button-create']");
     /** Кнопка подтверждения удаления задачи */
-    protected SelenideElement buttonConfirmationDeleteTask = $x("//span[text()='Удалить']");
+    protected SelenideElement buttonConfirmationDeleteTask = $x("//div[@class='common-popup-confirm-footer']//span[text()='Удалить']");
     /** Кнопка, возвращающая к задаче */
     protected SelenideElement buttonBackToTask = $x("//div[@id='tasks-multiview']//div[@class='favourite-card-back-tasks']");
     protected SelenideElement buttonSaveDeadline = $x("//span[text() = 'OK']");
