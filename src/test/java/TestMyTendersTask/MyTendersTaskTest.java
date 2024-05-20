@@ -67,6 +67,12 @@ public class MyTendersTaskTest extends BaseTest {
                     .waitFor(500)
                     .typeNameTask("тестовая задача 1")
                     .waitFor(500)
+                    .clickButton(page.openDeadlineWindow)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveDeadline)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveTask)
+                    .waitFor(500)
                     .getNameLastTask(), "тестовая задача 1");
     }
 
