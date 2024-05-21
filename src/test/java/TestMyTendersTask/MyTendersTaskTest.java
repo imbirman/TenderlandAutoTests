@@ -92,44 +92,55 @@ public class MyTendersTaskTest extends BaseTest {
     @Test
     @Description("Проверка статуса добавленной задачи")
     public void checkStatusAddedTask(){
-        assertTrue(page.waitFor(1000)
-                .clickButton(page.openCardFirstTender)
-                .waitFor(1000)
-                .clickButton(page.buttonAddTask)
-                .waitFor(500)
-                .typeNameTask("тест статуса")
-                .waitFor(500)
-                .clickButton(page.openDeadlineWindow)
-                .waitFor(500)
-                .clickButton(page.buttonSaveDeadline)
-                .waitFor(500)
-                .clickButton(page.buttonSaveTask)
-                .waitFor(500)
-                .isCheckStatusAddedTask());
+            assertTrue(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.buttonAddTask)
+                    .waitFor(500)
+                    .typeNameTask("тест статуса")
+                    .waitFor(500)
+                    .clickButton(page.openDeadlineWindow)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveDeadline)
+                    .waitFor(500)
+                    .clickButton(page.buttonSaveTask)
+                    .waitFor(500)
+                    .isCheckStatusAddedTask());
     }
 
     @Test
     @Description("Проверка статуса задачи после нажатия переключателя \"Выполнено\"")
     public void checkStatusTaskAfterClickRadiobuttonComplete(){
-        assertTrue(page.waitFor(1000)
-                .clickButton(page.openCardFirstTender)
-                .waitFor(2000)
-                .clickButton(page.radiobuttonCompleteTask)
-                .waitFor(500)
-                .clickButton(page.groupCompleteTasks)
-                .waitFor(500)
-                .isCheckStatusTaskComplete());
+            assertTrue(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(2000)
+                    .clickButton(page.radiobuttonCompleteTask)
+                    .waitFor(500)
+                    .clickButton(page.groupCompleteTasks)
+                    .waitFor(500)
+                    .isCheckStatusTaskComplete());
     }
 
     @Test
     @Description("Проверка количества возможных статусов задачи")
     public void checkNumberOfPossibleTaskStatus(){
-        assertEquals(page.waitFor(1000)
-                .clickButton(page.openCardFirstTender)
-                .waitFor(1000)
-                .clickButton(page.statusWorkingTask)
-                .waitFor(500)
-                .getNumberPossibleStatusesTask(), 3);
+            assertEquals(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.statusWorkingTask)
+                    .waitFor(500)
+                    .getNumberPossibleStatusesTask(), 3);
+    }
+
+    @Test
+    @Description("Проверка названий возможных статусов задачи")
+    public void checkNamePossibleStatusesTask(){
+            assertTrue(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.statusWorkingTask)
+                    .waitFor(500)
+                    .isCheckListPossibleStatusesTask());
     }
 
 }

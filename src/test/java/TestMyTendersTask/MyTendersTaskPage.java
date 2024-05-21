@@ -7,6 +7,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class MyTendersTaskPage {
     /** Список чекбоксов выполнения задачи */
     protected ElementsCollection checkboxCompleteTaskCollection = $$x("//div[@id='tasks-multiview']//span[@class='dx-checkbox-icon']");
     /** Список возможных статусов задачи */
-    protected ElementsCollection possibleStatusesTask = $$x("//div[@class='dx-popup-content']//div[contains(@class, 'favourite-task-status')]");
+    protected ElementsCollection possibleStatusesTaskCollection = $$x("//div[@class='dx-popup-content']//div[contains(@class, 'favourite-task-status')]");
     /** Список статусов задачи */
     private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[contains(@class, 'favourite-task-statusbox')]//div[@class='dx-texteditor-container']//input");
 
@@ -122,7 +123,7 @@ public class MyTendersTaskPage {
 
     @Step("Получить количество возможных статусов задачи")
     public Integer getNumberPossibleStatusesTask(){
-        return possibleStatusesTask.size();
+        return possibleStatusesTaskCollection.size();
     }
 
     @Step("Получение задачи по ее порядковому номеру")
@@ -158,6 +159,15 @@ public class MyTendersTaskPage {
     @Step("Проверка статуса задачи в окне задачи после нажатия  \"Выполнено\"")
     public boolean isCheckStatusTaskComplete(){
         return Objects.equals(statusCompleteTask.getValue(), "выполнена");
+    }
+
+    @Step("Проверка списка возможных статусов задачи")
+    public boolean isCheckListPossibleStatusesTask(){
+        List<String> list = new ArrayList<>();
+        list.add("в работе");
+        list.add("выполнена");
+        list.add("просрочена");
+        return list.equals(possibleStatusesTaskCollection.texts());
     }
 
 }
