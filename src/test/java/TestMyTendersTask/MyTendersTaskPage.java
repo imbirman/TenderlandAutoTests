@@ -42,6 +42,7 @@ public class MyTendersTaskPage {
     protected SelenideElement buttonConfirmationDeleteTask = $x("//div[@class='common-popup-confirm-footer']//span[text()='Удалить']");
     /** Кнопка, возвращающая к задаче */
     protected SelenideElement buttonBackToTask = $x("//div[@id='tasks-multiview']//div[@class='favourite-card-back-tasks']");
+    /** Кнопка сохранения времени окончания выполнения задачи */
     protected SelenideElement buttonSaveDeadline = $x("//span[text() = 'OK']");
 
 
@@ -49,16 +50,19 @@ public class MyTendersTaskPage {
     protected SelenideElement openCardFirstTender = $x("//div[@class='dx-treelist-text-content']/div[@class='favourite-kanban-card']");
     /** Название последней задачи */
     protected SelenideElement nameLastTask = $x("(//div[@id='favourite-tender-tasks-working']//textarea)[last()]");
-    /** Кнопка переключения метки выполнения задачи */
-    protected SelenideElement switchToCompleteTask = $x("//div[@id='favourite-card-task-is-complete']");
+    /** Кнопка включения метки выполнения задачи */
+    protected SelenideElement radiobuttonCompleteTask = $x("//div[@id='favourite-tender-tasks-working']//div[@role='checkbox']");
     /** Открыть Окно срока окончания задачи */
     protected SelenideElement openDeadlineWindow = $x("//div[@id='favourite-task-endtime-create']");
+    /** Блок выполненных задач */
+    protected SelenideElement groupCompleteTasks = $x("(//div[@class='favourite-tender-tasks-group'])[2]");
+
 
 
     /** Поле ввода названия задача */
     private final SelenideElement fieldEntryNameTask = $x("//div[@id='favourite-task-name-create']//textarea");
     /** Статус задачи в окне задачи */
-    private final SelenideElement statusTaskInWindowTask = $x("//div[@id='favourite-card-task-status']");
+    private final SelenideElement statusCompleteTask = $x("//div[@id='favourite-tender-tasks-complete']//div[contains(@class, 'favourite-task-statusbox')]//input[@class='dx-texteditor-input']");
 
 
 
@@ -141,9 +145,9 @@ public class MyTendersTaskPage {
         return Objects.equals(statusTaskInListTasksCollection.get(statusTaskInListTasksCollection.size() - 1).getValue(), "в работе");
     }
 
-    @Step("Проверка статуса задачи в окне задачи после нажатия переключателя \"Выполнено\"")
-    public boolean isCheckStatusTaskAfterClickSwitchBoxCompleteInWindowTask(){
-        return statusTaskInWindowTask.getText().equals("ГОТОВО");
+    @Step("Проверка статуса задачи в окне задачи после нажатия  \"Выполнено\"")
+    public boolean isCheckStatusTaskComplete(){
+        return Objects.equals(statusCompleteTask.getValue(), "выполнена");
     }
 
     @Step("Проверка статуса задачи в списке задач после нажатия переключателя \"Выполнено\"")

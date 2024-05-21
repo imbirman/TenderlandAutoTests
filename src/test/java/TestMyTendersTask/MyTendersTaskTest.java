@@ -109,17 +109,16 @@ public class MyTendersTaskTest extends BaseTest {
     }
 
     @Test
-    @Description("Проверка статуса задачи в окне задачи после нажатия переключателя \"Выполнено\"")
-    public void checkStatusTaskAfterClickSwitchBoxCompleteInWindowTask(){
+    @Description("Проверка статуса задачи после нажатия переключателя \"Выполнено\"")
+    public void checkStatusTaskAfterClickRadiobuttonComplete(){
         assertTrue(page.waitFor(1000)
                 .clickButton(page.openCardFirstTender)
-                .waitFor(1000)
-                .clickButton(page.getTaskByNumber(0))
+                .waitFor(2000)
+                .clickButton(page.radiobuttonCompleteTask)
                 .waitFor(500)
-                .clickButton(page.switchToCompleteTask)
+                .clickButton(page.groupCompleteTasks)
                 .waitFor(500)
-                .isCheckStatusTaskAfterClickSwitchBoxCompleteInWindowTask());
-
+                .isCheckStatusTaskComplete());
     }
 
     @Test
@@ -130,7 +129,7 @@ public class MyTendersTaskTest extends BaseTest {
                 .waitFor(1000)
                 .clickButton(page.getTaskByNumber(1))
                 .waitFor(500)
-                .clickButton(page.switchToCompleteTask)
+                .clickButton(page.radiobuttonCompleteTask)
                 .clickButton(page.buttonBackToTask)
                 .isCheckStatusTaskAfterClickSwitchBoxCompleteInListTask(1));
     }
