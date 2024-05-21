@@ -28,8 +28,11 @@ public class MyTendersTaskPage {
     protected ElementsCollection nameTaskCollection = $$x("//div[@id='favourite-task-name-create']//textarea");
     /** Список чекбоксов выполнения задачи */
     protected ElementsCollection checkboxCompleteTaskCollection = $$x("//div[@id='tasks-multiview']//span[@class='dx-checkbox-icon']");
+    /** Список возможных статусов задачи */
+    protected ElementsCollection possibleStatusesTask = $$x("//div[@class='dx-popup-content']//div[contains(@class, 'favourite-task-status')]");
     /** Список статусов задачи */
     private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[contains(@class, 'favourite-task-statusbox')]//div[@class='dx-texteditor-container']//input");
+
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -56,12 +59,14 @@ public class MyTendersTaskPage {
     protected SelenideElement openDeadlineWindow = $x("//div[@id='favourite-task-endtime-create']");
     /** Блок выполненных задач */
     protected SelenideElement groupCompleteTasks = $x("(//div[@class='favourite-tender-tasks-group'])[2]");
+    /** Статус задачи в работе */
+    protected SelenideElement statusWorkingTask = $x("//div[@id='favourite-tender-tasks-working']//div[contains(@class, 'favourite-task-statusbox')]//input[@class='dx-texteditor-input']");
 
 
 
     /** Поле ввода названия задача */
     private final SelenideElement fieldEntryNameTask = $x("//div[@id='favourite-task-name-create']//textarea");
-    /** Статус задачи в окне задачи */
+    /** Статус выполненной задачи */
     private final SelenideElement statusCompleteTask = $x("//div[@id='favourite-tender-tasks-complete']//div[contains(@class, 'favourite-task-statusbox')]//input[@class='dx-texteditor-input']");
 
 
@@ -115,6 +120,11 @@ public class MyTendersTaskPage {
         return buttonDeleteTaskCollection.get(number);
     }
 
+    @Step("Получить количество возможных статусов задачи")
+    public Integer getNumberPossibleStatusesTask(){
+        return possibleStatusesTask.size();
+    }
+
     @Step("Получение задачи по ее порядковому номеру")
     public SelenideElement getTaskByNumber(int number){
         return nameTaskCollection.get(number);
@@ -150,8 +160,4 @@ public class MyTendersTaskPage {
         return Objects.equals(statusCompleteTask.getValue(), "выполнена");
     }
 
-    @Step("Проверка статуса задачи в списке задач после нажатия переключателя \"Выполнено\"")
-    public boolean isCheckStatusTaskAfterClickSwitchBoxCompleteInListTask(int number){
-        return getStatusTaskInListTasksByNumber(number).getText().equals("ГОТОВО");
-    }
 }

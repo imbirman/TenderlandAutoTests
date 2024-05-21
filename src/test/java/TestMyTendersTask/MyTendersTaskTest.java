@@ -121,4 +121,15 @@ public class MyTendersTaskTest extends BaseTest {
                 .isCheckStatusTaskComplete());
     }
 
+    @Test
+    @Description("Проверка количества возможных статусов задачи")
+    public void checkNumberOfPossibleTaskStatus(){
+        assertEquals(page.waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .clickButton(page.statusWorkingTask)
+                .waitFor(500)
+                .getNumberPossibleStatusesTask(), 3);
+    }
+
 }
