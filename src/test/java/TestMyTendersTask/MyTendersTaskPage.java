@@ -33,6 +33,8 @@ public class MyTendersTaskPage {
     protected ElementsCollection possibleStatusesTaskCollection = $$x("//div[@class='dx-popup-content']//div[contains(@class, 'favourite-task-status')]");
     /** Список статусов задачи */
     private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[contains(@class, 'favourite-task-statusbox')]//div[@class='dx-texteditor-container']//input");
+    /** Список времени оповещений задачи*/
+    private final ElementsCollection notifyTimeCollection = $$x("//div[@id='favourites-popover-notify-list']//div[@class='favourites-popover-item']");
 
 
 
@@ -48,6 +50,9 @@ public class MyTendersTaskPage {
     protected SelenideElement buttonBackToTask = $x("//div[@id='tasks-multiview']//div[@class='favourite-card-back-tasks']");
     /** Кнопка сохранения времени окончания выполнения задачи */
     protected SelenideElement buttonSaveDeadline = $x("//span[text() = 'OK']");
+    /** Кнопка открытия списка вариантов оповещений */
+    protected SelenideElement buttonOpenListNotifyTask = $x("//div[@class='favourite-card-task-header']//i");
+
 
 
     /** Открыть карточку первого тендера */
@@ -124,6 +129,11 @@ public class MyTendersTaskPage {
     @Step("Получить количество возможных статусов задачи")
     public Integer getNumberPossibleStatusesTask(){
         return possibleStatusesTaskCollection.size();
+    }
+
+    @Step("Получить количество вариантов времен оповещений")
+    public Integer getNumberNotifyTimes(){
+        return notifyTimeCollection.size();
     }
 
     @Step("Получение задачи по ее порядковому номеру")
