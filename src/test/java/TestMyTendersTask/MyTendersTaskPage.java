@@ -180,4 +180,17 @@ public class MyTendersTaskPage {
         return list.equals(possibleStatusesTaskCollection.texts());
     }
 
+    @Step("Проверка списка вариантов оповещений")
+    public boolean isCheckListNotifyTask(){
+        List<String> list = new ArrayList<>();
+        list.add("За 1 час до окончания");
+        list.add("За 2 часа до окончания");
+        list.add("За 3 часа до окончания");
+        list.add("За 5 часов до окончания");
+        list.add("За 8 часов до окончания");
+        list.add("За 12 часов до окончания");
+        list.add("За сутки до окончания");
+        return list.equals(notifyTimeCollection.texts());
+    }
+
 }

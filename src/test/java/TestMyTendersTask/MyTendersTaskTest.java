@@ -154,4 +154,15 @@ public class MyTendersTaskTest extends BaseTest {
                     .getNumberNotifyTimes(), 7);
     }
 
+    @Test
+    @Description("Проверка вариантов оповещений")
+    public void checkListNotifyTask(){
+        assertTrue(page.waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .clickButton(page.buttonOpenListNotifyTask)
+                .waitFor(500)
+                .isCheckListNotifyTask());
+    }
+
 }
