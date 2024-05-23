@@ -68,7 +68,7 @@ public class MyTendersPage {
 
     protected SelenideElement buttonOpenListResponsibleInTable = $x("(//div[@class='dx-dropdowneditor-input-wrapper dx-selectbox-container']//div[@class='dx-dropdowneditor-icon'])[5]");
     /** Кнопка закрытия карточки тендера */
-    protected SelenideElement buttonCloseCardTender = $x("//i[@class='dx-icon dx-icon-close']");
+    protected SelenideElement buttonCloseCardTender = $x("//div[@class='favourite-tender-card-header']/i");
 
 
 
@@ -197,7 +197,6 @@ public class MyTendersPage {
         checkArray.add("Документация");
         checkArray.add("Журнал");
         checkArray.add("Чат");
-        System.out.println(tabInCardTenderCollections.texts());
         return checkArray.equals(tabInCardTenderCollections.texts());
     }
 
