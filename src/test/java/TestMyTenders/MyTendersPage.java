@@ -46,7 +46,7 @@ public class MyTendersPage {
 
 
     /** Список вкладок в карточке тендера */
-    private final ElementsCollection tabInCardTenderCollections = $$x("//div[@id='tender-tab-panel']//div[contains(@class, 'dx-item dx-tab')]");
+    private final ElementsCollection tabInCardTenderCollections = $$x("//div[@id='favourite-card-tabs']//div[contains(@class, 'dx-item dx-tab')]");
     /** Элемент контекстного меню столбца */
     private final ElementsCollection elementContextMenuColumnCollections = $$x("//div[@class='favourite-kanban-context-menu-item']");
 

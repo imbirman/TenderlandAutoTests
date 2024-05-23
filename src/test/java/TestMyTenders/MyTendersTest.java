@@ -109,8 +109,8 @@ public class MyTendersTest extends BaseTest {
     public void checkNumberTabInCardTender(){
         assertEquals(page.waitFor(500)
                 .clickButton(page.openCardFirstTender)
-                .waitFor(500)
-                .getNumberTabInCardTender(), 5);
+                .waitFor(1000)
+                .getNumberTabInCardTender(), 4);
     }
 
     @Test
