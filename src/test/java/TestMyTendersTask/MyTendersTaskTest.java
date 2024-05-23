@@ -176,4 +176,15 @@ public class MyTendersTaskTest extends BaseTest {
                     .getNumberPossibleResponsibleForTask(), 2);
     }
 
+    @Test
+    @Description("Проверка списка возможных ответственных за задачу")
+    public void checkListPossibleResponsibleForTask(){
+        assertTrue(page.waitFor(1000)
+                .clickButton(page.openCardFirstTender)
+                .waitFor(1000)
+                .clickButton(page.responsibleForTask)
+                .waitFor(500)
+                .isCheckPossibleResponsibleForTask());
+    }
+
 }

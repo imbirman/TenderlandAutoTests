@@ -202,4 +202,12 @@ public class MyTendersTaskPage {
         return list.equals(notifyTimeCollection.texts());
     }
 
+    @Step("Првоерка списка возможных ответственных за задачу")
+    public boolean isCheckPossibleResponsibleForTask(){
+        List<String> list = new ArrayList<>();
+        list.add("Админ");
+        list.add("Тестовый Тест Тестович");
+        return list.equals(possibleResponsibleForTaskCollection.texts());
+    }
+
 }
