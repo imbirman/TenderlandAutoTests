@@ -58,7 +58,7 @@ public class MyTendersPage {
     /** Кнопка "Удалить" контекстного меню столбца */
     protected SelenideElement buttonDeleteContextMenuColumn = $x("(//div[@class='dx-submenu']//div[@role='menuitem'])[3]");
     /** Кнопка смены метки в карточке тендера */
-    protected SelenideElement buttonChangeTagInCardTender =$x("//div[@class='favourite-card-control-icons']//i[@class='mdi mdi-24px mdi-tag-outline']");
+    protected SelenideElement buttonChangeTagInCardTender =$x("//div[@class='favourites-card-tag-button']");
     /** Кнопка "Ссылка на источник" */
     private final SelenideElement buttonLinkOfSourceInCard = $x("//i[@id='favourites-card-link']");
     /** Кнопка "Удалить тендер" */

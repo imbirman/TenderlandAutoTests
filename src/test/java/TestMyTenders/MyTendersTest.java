@@ -82,7 +82,7 @@ public class MyTendersTest extends BaseTest {
     public void checkClickableButtonChangeTag(){
         assertTrue(page.waitFor(500)
                 .clickButton(page.openCardFirstTender)
-                .waitFor(500)
+                .waitFor(1000)
                 .isCheckClickableButtonChangeTag());
     }
 
