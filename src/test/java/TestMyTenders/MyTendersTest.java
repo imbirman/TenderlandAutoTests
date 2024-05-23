@@ -118,7 +118,7 @@ public class MyTendersTest extends BaseTest {
     public void checkNameTabCards(){
         assertTrue(page.waitFor(500)
                 .clickButton(page.openCardFirstTender)
-                .waitFor(500)
+                .waitFor(1000)
                 .isCorrectNameTabCards());
     }
 

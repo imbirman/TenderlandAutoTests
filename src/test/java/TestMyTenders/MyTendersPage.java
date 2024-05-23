@@ -193,11 +193,10 @@ public class MyTendersPage {
     @Step("Проверка корректности названия вкладок в карточке тендера")
     public boolean isCorrectNameTabCards(){
         List<String> checkArray = new ArrayList<>();
-        checkArray.add("CВЕДЕНИЯ");
-        checkArray.add("ЗАКАЗЧИК");
-        checkArray.add("ДОКУМЕНТАЦИЯ");
-        checkArray.add("ЖУРНАЛ");
-        checkArray.add("КОММЕНТАРИИ");
+        checkArray.add("Cведения");
+        checkArray.add("Документация");
+        checkArray.add("Журнал");
+        checkArray.add("Чат");
         System.out.println(tabInCardTenderCollections.texts());
         return checkArray.equals(tabInCardTenderCollections.texts());
     }
