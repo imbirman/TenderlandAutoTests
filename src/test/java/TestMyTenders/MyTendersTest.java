@@ -100,7 +100,7 @@ public class MyTendersTest extends BaseTest {
     public void checkClickableButtonDeleteTenderInCard(){
         assertTrue(page.waitFor(500)
                 .clickButton(page.openCardFirstTender)
-                .waitFor(500)
+                .waitFor(1000)
                 .isCheckClickableButtonDeleteTenderInCard());
     }
 

@@ -62,7 +62,7 @@ public class MyTendersPage {
     /** Кнопка "Ссылка на источник" */
     private final SelenideElement buttonLinkOfSourceInCard = $x("//i[@id='favourites-card-link']");
     /** Кнопка "Удалить тендер" */
-    private final SelenideElement buttonDeleteTenderInCard = $x("//i[@class='mdi mdi-24px mdi-delete-outline']");
+    private final SelenideElement buttonDeleteTenderInCard = $x("//i[@id='favourites-card-link-delete-icon']");
     /** Кнопка раскрытия списка ответственных по тендеру */
     protected SelenideElement buttonOpenListResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-dropdowneditor-icon']");
 
