@@ -1,11 +1,8 @@
 package TestMyTendersTask;
 
-import TestMyTendersFilters.MyTendersFiltersPage;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +45,6 @@ public class MyTendersTaskPage {
     protected SelenideElement buttonSaveTask = $x("//div[@id='favourite-task-button-create']");
     /** Кнопка подтверждения удаления задачи */
     protected SelenideElement buttonConfirmationDeleteTask = $x("//div[@class='common-popup-confirm-footer']//span[text()='Удалить']");
-    /** Кнопка, возвращающая к задаче */
-    protected SelenideElement buttonBackToTask = $x("//div[@id='tasks-multiview']//div[@class='favourite-card-back-tasks']");
     /** Кнопка сохранения времени окончания выполнения задачи */
     protected SelenideElement buttonSaveDeadline = $x("//span[text() = 'OK']");
     /** Кнопка открытия списка вариантов оповещений */
@@ -143,21 +138,6 @@ public class MyTendersTaskPage {
     @Step("Получить количество возможных ответственных за задачу")
     public Integer getNumberPossibleResponsibleForTask(){
         return possibleResponsibleForTaskCollection.size();
-    }
-
-    @Step("Получение задачи по ее порядковому номеру")
-    public SelenideElement getTaskByNumber(int number){
-        return nameTaskCollection.get(number);
-    }
-
-    @Step("Получение статуса задачи в списке задач по её порядковому номеру")
-    public SelenideElement getStatusTaskInListTasksByNumber(int number){
-        return statusTaskInListTasksCollection.get(number);
-    }
-
-    @Step("Получение чекбокса задачи в списке задач по его порядковому номеру")
-    public SelenideElement getCheckboxInListTasksByNumber(int number){
-        return checkboxCompleteTaskCollection.get(number);
     }
 
     @Step("Проверка удаления задачи")
