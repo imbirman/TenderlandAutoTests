@@ -80,7 +80,7 @@ public class MyTendersPage {
     private final SelenideElement buttonLoadDocumentationInListTenders = $x("(//div[@class='favourite-kanban-load-documents'])[1]");
 
     /** Панель тендера в карточке тендера */
-    private final SelenideElement panelTenderInCardTender = $x("//div[@id='tender-tab-panel']");
+    private final SelenideElement panelTenderInCardTender = $x("//div[@class='favourite-tender-card-div']");
     /** Ответственный по тендеру в карточке тендера */
     private final SelenideElement userResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-texteditor-container']//input");
     /** Ответственный по тендеру на вкладке "Таблица" */
