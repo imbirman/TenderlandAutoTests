@@ -31,6 +31,8 @@ public class MyTendersTaskPage {
     protected ElementsCollection checkboxCompleteTaskCollection = $$x("//div[@id='tasks-multiview']//span[@class='dx-checkbox-icon']");
     /** Список возможных статусов задачи */
     protected ElementsCollection possibleStatusesTaskCollection = $$x("//div[@class='dx-popup-content']//div[contains(@class, 'favourite-task-status')]");
+    /** Список возможных ответственных за задачу */
+    protected ElementsCollection possibleResponsibleForTaskCollection = $$x("//div[@class='favourite-card-task-menu-item-name']");
     /** Список статусов задачи */
     private final ElementsCollection statusTaskInListTasksCollection = $$x("//div[contains(@class, 'favourite-task-statusbox')]//div[@class='dx-texteditor-container']//input");
     /** Список времени оповещений задачи*/
@@ -67,6 +69,8 @@ public class MyTendersTaskPage {
     protected SelenideElement groupCompleteTasks = $x("(//div[@class='favourite-tender-tasks-group'])[2]");
     /** Статус задачи в работе */
     protected SelenideElement statusWorkingTask = $x("//div[@id='favourite-tender-tasks-working']//div[contains(@class, 'favourite-task-statusbox')]//input[@class='dx-texteditor-input']");
+    /** Ответственный за задачу */
+    protected SelenideElement responsibleForTask = $x("//div[@id='favourite-tender-tasks']//div[@class='tl-flex-space-container']//div[@class='dx-texteditor-input-container']/input");
 
 
 
@@ -134,6 +138,11 @@ public class MyTendersTaskPage {
     @Step("Получить количество вариантов времен оповещений")
     public Integer getNumberNotifyTimes(){
         return notifyTimeCollection.size();
+    }
+
+    @Step("Получить количество возможных ответственных за задачу")
+    public Integer getNumberPossibleResponsibleForTask(){
+        return possibleResponsibleForTaskCollection.size();
     }
 
     @Step("Получение задачи по ее порядковому номеру")

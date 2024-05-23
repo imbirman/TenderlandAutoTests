@@ -157,12 +157,23 @@ public class MyTendersTaskTest extends BaseTest {
     @Test
     @Description("Проверка вариантов оповещений")
     public void checkListNotifyTask(){
-        assertTrue(page.waitFor(1000)
-                .clickButton(page.openCardFirstTender)
-                .waitFor(1000)
-                .clickButton(page.buttonOpenListNotifyTask)
-                .waitFor(500)
-                .isCheckListNotifyTask());
+            assertTrue(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.buttonOpenListNotifyTask)
+                    .waitFor(500)
+                    .isCheckListNotifyTask());
+    }
+
+    @Test
+    @Description("Проверка количества возможных ответственных за задачу")
+    public void checkNumberPossibleResponsibleForTask(){
+            assertEquals(page.waitFor(1000)
+                    .clickButton(page.openCardFirstTender)
+                    .waitFor(1000)
+                    .clickButton(page.responsibleForTask)
+                    .waitFor(500)
+                    .getNumberPossibleResponsibleForTask(), 2);
     }
 
 }
