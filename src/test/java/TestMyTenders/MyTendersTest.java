@@ -210,4 +210,18 @@ public class MyTendersTest extends BaseTest {
                 .clickButton(page.contextMenuColumn)
                 .isCheckButtonsContextMenuColumn());
     }
+
+    @Test
+    @Description("Проверка списка полей персонализации в списке тендеров после добавления поля персонализации")
+    public void checkListPersonalizationFieldsAfterAddedNewPersonalizationField(){
+        assertTrue(page.waitFor(2000)
+                .clickButton(page.buttonOpenPersonalizationWindow)
+                .waitFor(500)
+                .clickButton(page.getCheckboxPersonalizationField(3))
+                .waitFor(500)
+                .clickButton(page.buttonClosePersonalizationWindow)
+                .waitFor(500)
+                .isCheckIncludeAddedPersonalizationField());
+
+    }
 }

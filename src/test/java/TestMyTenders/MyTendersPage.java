@@ -49,6 +49,10 @@ public class MyTendersPage {
     private final ElementsCollection tabInCardTenderCollections = $$x("//div[@id='favourite-card-tabs']//div[contains(@class, 'dx-item dx-tab')]");
     /** Элемент контекстного меню столбца */
     private final ElementsCollection elementContextMenuColumnCollections = $$x("//div[@class='favourite-kanban-context-menu-item']");
+    /** Список чекбоксов выбора полей персонализации*/
+    protected ElementsCollection checkboxSelectPersonalizationFieldCollections = $$x("//div[@id='favourites-personalization-kanban-fields']//span");
+    /** Список названий персонализации в списке тендеров */
+    protected ElementsCollection namePersonalizationFieldInListTendersCollections = $$x("//div[@class='dx-treelist-container dx-gridbase-container']//div[contains(@class, 'favourite-kanban-card-info')]/div[1]");
 
 
     /** Кнопка в боковом меню "Мои тендеры" */
@@ -65,10 +69,14 @@ public class MyTendersPage {
     private final SelenideElement buttonDeleteTenderInCard = $x("//i[@id='favourites-card-link-delete-icon']");
     /** Кнопка раскрытия списка ответственных по тендеру */
     protected SelenideElement buttonOpenListResponsibleInCardTender = $x("//div[@id='favourite-tender-select-responsible']//div[@class='dx-dropdowneditor-icon']");
+    /** Кнопка открытия окна персонализации */
+    protected SelenideElement buttonOpenPersonalizationWindow = $x("//div[@class='favourite-header-buttons']/i");
 
     protected SelenideElement buttonOpenListResponsibleInTable = $x("(//div[@class='dx-dropdowneditor-input-wrapper dx-selectbox-container']//div[@class='dx-dropdowneditor-icon'])[5]");
     /** Кнопка закрытия карточки тендера */
     protected SelenideElement buttonCloseCardTender = $x("//div[@class='favourite-tender-card-header']/i");
+    /** Кнопка закрытия окна персонализации */
+    protected SelenideElement buttonClosePersonalizationWindow = $x("//i[@class='dx-icon dx-icon-close']");
 
 
 
@@ -148,6 +156,11 @@ public class MyTendersPage {
     @Step("Получить количество вкладок в карточке тендера")
     public Integer getNumberTabInCardTender(){
         return tabInCardTenderCollections.size();
+    }
+
+    @Step("Получить чекбокс полей персонализации")
+    public SelenideElement getCheckboxPersonalizationField(int number){
+        return checkboxSelectPersonalizationFieldCollections.get(number);
     }
 
     @Step("Проверка появления окна подтверждения удаления")
@@ -243,5 +256,10 @@ public class MyTendersPage {
         elementsForCheck.add("Выгрузить");
         elementsForCheck.add("Удалить");
         return elements.equals(elementsForCheck);
+    }
+
+    @Step("Проверка наличия добавленного поля персонализации")
+    public boolean isCheckIncludeAddedPersonalizationField(){
+        return namePersonalizationFieldInListTendersCollections.texts().contains("Начальная цена");
     }
 }
