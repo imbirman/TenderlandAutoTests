@@ -5,6 +5,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserManagementTest extends BaseTest {
 
@@ -30,5 +32,17 @@ public class UserManagementTest extends BaseTest {
                 .typePassword(BASE_PASSWORD)
                 .waitFor(2000)
                 .clickConfirmLogInButton();
+    }
+
+    @Test
+    @Description("Проверка подписи о времени пользователя в кабинете по умолчанию")
+    public void checkDefaultLabelUserTime(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementProfile)
+                .waitFor(500)
+                .isDefaultLabelTimeUser());
+
     }
 }

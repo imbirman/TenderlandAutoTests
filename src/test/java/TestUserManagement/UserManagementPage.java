@@ -1,6 +1,5 @@
 package TestUserManagement;
 
-import TestMyTenders.MyTendersPage;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
@@ -14,39 +13,58 @@ public class UserManagementPage {
     private final SelenideElement passwordField = $x("//div[@id='password']//input"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
+    /** Кнопка открытия окна управления профилем пользователя */
+    protected SelenideElement buttonOpenManagementProfile = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[1]");
+    /** Кнопка открытия окна управления рассылками пользователя */
+    protected SelenideElement buttonOpenManagementMailing = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[2]");
+    /** Кнопка открытия окна управления пользователями */
+    protected SelenideElement buttonOpenManagementUsers = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[3]");
+    /** Открыть окно управления */
+    protected SelenideElement openWindowUserManagement = $x("//div[@class='common-header-login-block']");
 
+
+    /** Чекбокс "Приводить время к выбранному" */
+    protected SelenideElement checkboxCastTimeToUser = $x("//div[@id='user-profile-cast-time-to-user']");
+
+    /** Пометка времени кабинета пользователя */
+    private final SelenideElement labelTimeUser = $x("//div[@id='user-profile-time-label']");
 
 
     @Step("Ожидание {number}")
-    public MyTendersPage waitFor(long number){
+    public UserManagementPage waitFor(long number){
         sleep(number);
-        return new MyTendersPage();
+        return new UserManagementPage();
     }
 
     @Step("Ввести логин для авторизации")
-    public MyTendersPage typeLogin(String login){loginField.sendKeys(login); return new MyTendersPage();}
+    public UserManagementPage typeLogin(String login){loginField.sendKeys(login); return new UserManagementPage();}
 
     @Step("Ввести пароль для авторизации")
-    public MyTendersPage typePassword(String password){
+    public UserManagementPage typePassword(String password){
         passwordField.sendKeys(password);
-        return new MyTendersPage();
+        return new UserManagementPage();
     }
 
     @Step("Нажать кнопку для открытия окна авторизации")
-    public MyTendersPage clickLogInButton(){
+    public UserManagementPage clickLogInButton(){
         logInButton.click();
-        return new MyTendersPage();
+        return new UserManagementPage();
     }
 
     @Step("Кликнуть на кнопку \"Войти в систему\"")
-    public MyTendersPage clickConfirmLogInButton(){
+    public UserManagementPage clickConfirmLogInButton(){
         confirmLogInButton.click();
-        return new MyTendersPage();
+        return new UserManagementPage();
     }
 
     @Step("Нажать кнопку {button}")
-    public MyTendersPage clickButton(SelenideElement button){
+    public UserManagementPage clickButton(SelenideElement button){
         button.click();
-        return new MyTendersPage();
+        return new UserManagementPage();
+    }
+
+    @Step("Проверка пометки времени кабинета пользователя по умолчанию")
+    public boolean isDefaultLabelTimeUser(){
+        return labelTimeUser.getText().equals("Кабинет работает по времени площадок");
     }
 }
