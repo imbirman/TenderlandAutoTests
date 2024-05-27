@@ -43,6 +43,18 @@ public class UserManagementTest extends BaseTest {
                 .clickButton(page.buttonOpenManagementProfile)
                 .waitFor(500)
                 .isDefaultLabelTimeUser());
+    }
 
+    @Test
+    @Description("Проверка подписи о времени пользователя в кабинете после выбора чекбокса 'Приводить время к выбранному'")
+    public void checkLabelTimeUserAfterSelectedCheckbox(){
+        assertTrue(page.waitFor(500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementProfile)
+                .waitFor(500)
+                .clickButton(page.checkboxCastTimeToUser)
+                .waitFor(500)
+                .isLabelTimeUserAfterSelectedCheckbox());
     }
 }

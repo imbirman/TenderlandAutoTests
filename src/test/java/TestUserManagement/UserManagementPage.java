@@ -67,4 +67,9 @@ public class UserManagementPage {
     public boolean isDefaultLabelTimeUser(){
         return labelTimeUser.getText().equals("Кабинет работает по времени площадок");
     }
+
+    @Step("Проверка пометки времени кабинета пользователя после нажатия чекбокса")
+    public boolean isLabelTimeUserAfterSelectedCheckbox(){
+        return labelTimeUser.getText().equals("Кабинет работает по выбранному часовому поясу");
+    }
 }
