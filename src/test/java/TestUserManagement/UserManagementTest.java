@@ -57,4 +57,17 @@ public class UserManagementTest extends BaseTest {
                 .waitFor(500)
                 .isLabelTimeUserAfterSelectedCheckbox());
     }
+
+    @Test
+    @Description("Проверка наличия сообщения об ошибке добавления почты при пустом поле для ввода почты")
+    public void checkVisibleMessageErrorEmptyFieldAddedMail(){
+        assertTrue(page.waitFor(1000)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .clickButton(page.buttonAddedMail)
+                .waitFor(500)
+                .isVisibleMessageErrorEmptyFieldAddedMail());
+    }
 }

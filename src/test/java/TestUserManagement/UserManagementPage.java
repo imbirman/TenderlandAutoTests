@@ -1,8 +1,10 @@
 package TestUserManagement;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.sleep;
 
@@ -19,6 +21,8 @@ public class UserManagementPage {
     protected SelenideElement buttonOpenManagementMailing = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[2]");
     /** Кнопка открытия окна управления пользователями */
     protected SelenideElement buttonOpenManagementUsers = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[3]");
+    /** Кнопка добавления почты */
+    protected SelenideElement buttonAddedMail = $x("//div[@id='user-accounts-create-mail-button']");
     /** Открыть окно управления */
     protected SelenideElement openWindowUserManagement = $x("//div[@class='common-header-login-block']");
 
@@ -28,6 +32,8 @@ public class UserManagementPage {
 
     /** Пометка времени кабинета пользователя */
     private final SelenideElement labelTimeUser = $x("//div[@id='user-profile-time-label']");
+    /** Сообщение об ошибке при попытке добавления почты при пустом соответствующем поле */
+    private final SelenideElement messageErrorEmptyFieldAddedMail = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
 
 
     @Step("Ожидание {number}")
@@ -71,5 +77,10 @@ public class UserManagementPage {
     @Step("Проверка пометки времени кабинета пользователя после нажатия чекбокса")
     public boolean isLabelTimeUserAfterSelectedCheckbox(){
         return labelTimeUser.getText().equals("Кабинет работает по выбранному часовому поясу");
+    }
+
+    @Step("Проверка наличия сообщения об ошибке добавления почты при пустом соответствующем поле")
+    public boolean isVisibleMessageErrorEmptyFieldAddedMail(){
+        return messageErrorEmptyFieldAddedMail.is(visible);
     }
 }
