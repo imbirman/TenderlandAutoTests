@@ -45,6 +45,8 @@ public class UserManagementPage {
     private final SelenideElement fieldSearchAutoSearch = $x("//div[@id='user-accounts-search-autosearches']//input");
     /** Поле для ввода ключевых слов для поиска почты или телеграмма */
     private final SelenideElement fieldSearchMailOrTelegram = $x("//div[@id='user-accounts-search-accounts']//input");
+    /** Поле для добавления почты */
+    private final SelenideElement fieldEnterMailForAdded = $x("//div[@id='user-accounts-create-mail-textbox']//input");
 
 
     @Step("Ожидание {number}")
@@ -71,6 +73,12 @@ public class UserManagementPage {
     @Step("Ввести ключевое слово для поиска почты или телеграмма")
     public UserManagementPage typeSearchMailOrTelegram(String type){
         fieldSearchMailOrTelegram.sendKeys(type);
+        return new UserManagementPage();
+    }
+
+    @Step("Ввод почты")
+    public UserManagementPage typeMail(String mail){
+        fieldEnterMailForAdded.sendKeys(mail);
         return new UserManagementPage();
     }
 
@@ -126,6 +134,15 @@ public class UserManagementPage {
         boolean check = false;
         for (String type: mailOrTelegramCollections.texts()){
             if(type.contains("agafonov")){check = true; break;}
+        }
+        return check;
+    }
+
+    @Step("Проверка списка почт")
+    public boolean isCorrectListMailsAfterAddedMail(){
+        boolean check = false;
+        for(String type: mailOrTelegramCollections.texts()){
+            if(type.contains("test@test.ru")){check = true; break;}
         }
         return check;
     }

@@ -110,4 +110,19 @@ public class UserManagementTest extends BaseTest {
                 .waitFor(500)
                 .isCorrectSearchMailOrTelegram());
     }
+
+    @Test
+    @Description("Проверка добавления почты")
+    public void checkAddedMail(){
+        assertTrue(page.waitFor(1500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .typeMail("test@test.ru")
+                .waitFor(500)
+                .clickButton(page.buttonAddedMail)
+                .waitFor(500)
+                .isCorrectListMailsAfterAddedMail());
+    }
 }
