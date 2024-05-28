@@ -69,6 +69,11 @@ public class UserManagementPage {
         return new UserManagementPage();
     }
 
+    @Step("Получить сообщение об ошибке добавления почты при пустом соответствующем поле")
+    public String getMessageErrorEmptyFieldAddedMail(){
+        return messageErrorEmptyFieldAddedMail.getText();
+    }
+
     @Step("Проверка пометки времени кабинета пользователя по умолчанию")
     public boolean isDefaultLabelTimeUser(){
         return labelTimeUser.getText().equals("Кабинет работает по времени площадок");
@@ -83,4 +88,5 @@ public class UserManagementPage {
     public boolean isVisibleMessageErrorEmptyFieldAddedMail(){
         return messageErrorEmptyFieldAddedMail.is(visible);
     }
+
 }

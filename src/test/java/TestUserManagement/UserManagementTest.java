@@ -70,4 +70,17 @@ public class UserManagementTest extends BaseTest {
                 .waitFor(500)
                 .isVisibleMessageErrorEmptyFieldAddedMail());
     }
+
+    @Test
+    @Description("Проверка сообщения об ошибке добавления почты при пустом поле для ввода почты")
+    public void checkMessageErrorEmptyFieldAddedMail(){
+        assertEquals(page.waitFor(1500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .clickButton(page.buttonAddedMail)
+                .waitFor(500)
+                .getMessageErrorEmptyFieldAddedMail(), "Поле не заполнено");
+    }
 }
