@@ -82,7 +82,7 @@ public class UserManagementTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.buttonAddedMail)
                 .waitFor(500)
-                .getMessageErrorEmptyFieldAddedMail(), "Поле не заполнено");
+                .getMessageErrorFieldAddedMail(), "Поле не заполнено");
     }
 
     @Test
@@ -139,5 +139,20 @@ public class UserManagementTest extends BaseTest {
                 .clickButton(page.buttonAddedMail)
                 .waitFor(500)
                 .isVisibleMessageErrorFieldAddedMail());
+    }
+
+    @Test
+    @Description("Проверка сообщения об ошибке добавления дублирующей почты")
+    public void checkMessageErrorDuplicateAddedMail(){
+        assertEquals(page.waitFor(1500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .typeMail("agafonovgerman@yandex.ru")
+                .waitFor(500)
+                .clickButton(page.buttonAddedMail)
+                .waitFor(500)
+                .getMessageErrorFieldAddedMail(), "Такой аккаунт уже существует");
     }
 }

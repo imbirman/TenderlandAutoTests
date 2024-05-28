@@ -101,7 +101,7 @@ public class UserManagementPage {
     }
 
     @Step("Получить сообщение об ошибке добавления почты при пустом соответствующем поле")
-    public String getMessageErrorEmptyFieldAddedMail(){
+    public String getMessageErrorFieldAddedMail(){
         return messageErrorFieldAddedMail.getText();
     }
 
