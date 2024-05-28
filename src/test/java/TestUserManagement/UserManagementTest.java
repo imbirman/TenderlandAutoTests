@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserManagementTest extends BaseTest {
 
     private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
-    private final static String BASE_LOGIN = "AdminTestitMyTenders";
-    private final static String BASE_PASSWORD = "Hyqpmaz0/";
+    private final static String BASE_LOGIN = "AdminTestitTender";
+    private final static String BASE_PASSWORD = "Hyqpmaz0";
 
     UserManagementPage page = new UserManagementPage();
 
