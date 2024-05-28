@@ -18,6 +18,9 @@ public class UserManagementPage {
 
     /** Список привязанных автопоисков */
     private final ElementsCollection linkedAutosearchCollections = $$x("//div[@class='user-profile-autosearch-mail-container']");
+    /** Список почт или телеграмма  */
+    private final ElementsCollection mailOrTelegramCollections = $$x("//div[@class='user-profile-accounts-list-item-content-name']");
+
 
     /** Кнопка открытия окна управления профилем пользователя */
     protected SelenideElement buttonOpenManagementProfile = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[1]");
@@ -40,6 +43,8 @@ public class UserManagementPage {
     private final SelenideElement messageErrorEmptyFieldAddedMail = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
     /** Поле для ввода ключевых слов для поиска автопоисков */
     private final SelenideElement fieldSearchAutoSearch = $x("//div[@id='user-accounts-search-autosearches']//input");
+    /** Поле для ввода ключевых слов для поиска почты или телеграмма */
+    private final SelenideElement fieldSearchMailOrTelegram = $x("//div[@id='user-accounts-search-accounts']//input");
 
 
     @Step("Ожидание {number}")
@@ -60,6 +65,12 @@ public class UserManagementPage {
     @Step("Ввести ключевое слово для поиска автопоисков")
     public UserManagementPage typeSearchAutoSearch(String search){
         fieldSearchAutoSearch.sendKeys(search);
+        return new UserManagementPage();
+    }
+
+    @Step("Ввести ключевое слово для поиска почты или телеграмма")
+    public UserManagementPage typeSearchMailOrTelegram(String type){
+        fieldSearchMailOrTelegram.sendKeys(type);
         return new UserManagementPage();
     }
 
@@ -104,9 +115,17 @@ public class UserManagementPage {
     @Step("Проверка поиска привязанных автопоисков")
     public boolean isCorrectSearchAutosearch(){
         boolean check = false;
-        System.out.println(linkedAutosearchCollections.texts());
         for(String type:linkedAutosearchCollections.texts()){
             if(type.contains("Проверка")){check = true; break;}
+        }
+        return check;
+    }
+
+    @Step("Проверка поиска почты или телеграмма")
+    public boolean isCorrectSearchMailOrTelegram(){
+        boolean check = false;
+        for (String type: mailOrTelegramCollections.texts()){
+            if(type.contains("agafonov")){check = true; break;}
         }
         return check;
     }

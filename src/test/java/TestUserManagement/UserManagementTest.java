@@ -97,4 +97,17 @@ public class UserManagementTest extends BaseTest {
                 .waitFor(500)
                 .isCorrectSearchAutosearch());
     }
+
+    @Test
+    @Description("Проверка поиска почты или телеграмма")
+    public void checkSearchMailOrTelegram(){
+        assertTrue(page.waitFor(1500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .typeSearchMailOrTelegram("agafonov")
+                .waitFor(500)
+                .isCorrectSearchMailOrTelegram());
+    }
 }
