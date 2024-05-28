@@ -69,7 +69,7 @@ public class UserManagementTest extends BaseTest {
                 .waitFor(500)
                 .clickButton(page.buttonAddedMail)
                 .waitFor(500)
-                .isVisibleMessageErrorEmptyFieldAddedMail());
+                .isVisibleMessageErrorFieldAddedMail());
     }
 
     @Test
@@ -124,5 +124,20 @@ public class UserManagementTest extends BaseTest {
                 .clickButton(page.buttonAddedMail)
                 .waitFor(500)
                 .isCorrectListMailsAfterAddedMail());
+    }
+
+    @Test
+    @Description("Проверка наличия сообщения об ошибке добавления дублирующей почты")
+    public void checkVisibleMessageErrorAddedDuplicateMail(){
+        assertTrue(page.waitFor(1500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .typeMail("agafonovgerman@yandex.ru")
+                .waitFor(500)
+                .clickButton(page.buttonAddedMail)
+                .waitFor(500)
+                .isVisibleMessageErrorFieldAddedMail());
     }
 }

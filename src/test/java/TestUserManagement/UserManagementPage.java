@@ -40,7 +40,7 @@ public class UserManagementPage {
     /** Пометка времени кабинета пользователя */
     private final SelenideElement labelTimeUser = $x("//div[@id='user-profile-time-label']");
     /** Сообщение об ошибке при попытке добавления почты при пустом соответствующем поле */
-    private final SelenideElement messageErrorEmptyFieldAddedMail = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
+    private final SelenideElement messageErrorFieldAddedMail = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
     /** Поле для ввода ключевых слов для поиска автопоисков */
     private final SelenideElement fieldSearchAutoSearch = $x("//div[@id='user-accounts-search-autosearches']//input");
     /** Поле для ввода ключевых слов для поиска почты или телеграмма */
@@ -102,7 +102,7 @@ public class UserManagementPage {
 
     @Step("Получить сообщение об ошибке добавления почты при пустом соответствующем поле")
     public String getMessageErrorEmptyFieldAddedMail(){
-        return messageErrorEmptyFieldAddedMail.getText();
+        return messageErrorFieldAddedMail.getText();
     }
 
     @Step("Проверка пометки времени кабинета пользователя по умолчанию")
@@ -116,8 +116,8 @@ public class UserManagementPage {
     }
 
     @Step("Проверка наличия сообщения об ошибке добавления почты при пустом соответствующем поле")
-    public boolean isVisibleMessageErrorEmptyFieldAddedMail(){
-        return messageErrorEmptyFieldAddedMail.is(visible);
+    public boolean isVisibleMessageErrorFieldAddedMail(){
+        return messageErrorFieldAddedMail.is(visible);
     }
 
     @Step("Проверка поиска привязанных автопоисков")
