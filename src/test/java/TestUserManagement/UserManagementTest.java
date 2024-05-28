@@ -3,6 +3,7 @@ package TestUserManagement;
 import Base.BaseTest;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import io.cucumber.java.hu.De;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -82,5 +83,18 @@ public class UserManagementTest extends BaseTest {
                 .clickButton(page.buttonAddedMail)
                 .waitFor(500)
                 .getMessageErrorEmptyFieldAddedMail(), "Поле не заполнено");
+    }
+
+    @Test
+    @Description("Проверка поиска привязанных автопоисков")
+    public void checkSearchLinkedAutosearch(){
+        assertTrue(page.waitFor(1500)
+                .clickButton(page.openWindowUserManagement)
+                .waitFor(500)
+                .clickButton(page.buttonOpenManagementMailing)
+                .waitFor(500)
+                .typeSearchAutoSearch("Проверка")
+                .waitFor(500)
+                .isCorrectSearchAutosearch());
     }
 }

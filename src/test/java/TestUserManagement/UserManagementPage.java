@@ -1,12 +1,13 @@
 package TestUserManagement;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.eo.Se;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class UserManagementPage {
 
@@ -14,6 +15,9 @@ public class UserManagementPage {
     private final SelenideElement loginField = $x("//input[@id='username']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//div[@id='password']//input"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
+
+    /** Список привязанных автопоисков */
+    private final ElementsCollection linkedAutosearchCollections = $$x("//div[@class='user-profile-autosearch-mail-container']");
 
     /** Кнопка открытия окна управления профилем пользователя */
     protected SelenideElement buttonOpenManagementProfile = $x("(//div[@id='user-profile-menu-list']//div[@class='dx-item dx-list-item'])[1]");
@@ -34,6 +38,8 @@ public class UserManagementPage {
     private final SelenideElement labelTimeUser = $x("//div[@id='user-profile-time-label']");
     /** Сообщение об ошибке при попытке добавления почты при пустом соответствующем поле */
     private final SelenideElement messageErrorEmptyFieldAddedMail = $x("//div[@class='dx-overlay-content dx-invalid-message-content']");
+    /** Поле для ввода ключевых слов для поиска автопоисков */
+    private final SelenideElement fieldSearchAutoSearch = $x("//div[@id='user-accounts-search-autosearches']//input");
 
 
     @Step("Ожидание {number}")
@@ -48,6 +54,12 @@ public class UserManagementPage {
     @Step("Ввести пароль для авторизации")
     public UserManagementPage typePassword(String password){
         passwordField.sendKeys(password);
+        return new UserManagementPage();
+    }
+
+    @Step("Ввести ключевое слово для поиска автопоисков")
+    public UserManagementPage typeSearchAutoSearch(String search){
+        fieldSearchAutoSearch.sendKeys(search);
         return new UserManagementPage();
     }
 
@@ -87,6 +99,16 @@ public class UserManagementPage {
     @Step("Проверка наличия сообщения об ошибке добавления почты при пустом соответствующем поле")
     public boolean isVisibleMessageErrorEmptyFieldAddedMail(){
         return messageErrorEmptyFieldAddedMail.is(visible);
+    }
+
+    @Step("Проверка поиска привязанных автопоисков")
+    public boolean isCorrectSearchAutosearch(){
+        boolean check = false;
+        System.out.println(linkedAutosearchCollections.texts());
+        for(String type:linkedAutosearchCollections.texts()){
+            if(type.contains("Проверка")){check = true; break;}
+        }
+        return check;
     }
 
 }
