@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class TabPlansPage {
 
     private final SelenideElement logInButton = $x("//div[@id='login-button']"); /** Кнопка входа в систему */
-    private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
+    private final SelenideElement loginField = $x("//input[@id='username']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
     /** Кнопка "Искать" */

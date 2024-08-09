@@ -19,7 +19,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class FiltersPage {
 
     private final SelenideElement logInButton = $x("//div[@id='login-button']"); /** Кнопка входа в систему */
-    private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
+    private final SelenideElement loginField = $x("//input[@id='username']"); /** Поле для ввода логина */
     private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
@@ -386,7 +386,7 @@ public class FiltersPage {
     public boolean isCheckSelectedCheckboxShowOnlySelectedElements(){
         boolean check = true;
         for(SelenideElement type:checkboxElementInsideFilterCollections){
-            if(type.getAttribute("style").equals("background-color: rgb(235, 9, 16);") || type.getAttribute("style").equals("background-color: white;"))
+            if(Objects.equals(type.getAttribute("style"), "background-color: rgb(235, 9, 16);") || Objects.equals(type.getAttribute("style"), "background-color: white;"))
             {check = false; break;}
         }
         return check;

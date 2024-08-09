@@ -15,13 +15,13 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MarkSettingPage {
 
-    private final SelenideElement logInButton = $x("//div[@id='login-button']"); /** Кнопка входа в систему */
-    private final SelenideElement loginField = $x("//input[@type='text']"); /** Поле для ввода логина */
-    private final SelenideElement passwordField = $x("//input[@type='password']"); /** Поле для ввода пароля */
+    private final SelenideElement logInButton = $x("//div[@id='login-button']"); // Кнопка входа в систему */
+    private final SelenideElement loginField = $x("//input[@id='username']"); // Поле для ввода логина */
+    private final SelenideElement passwordField = $x("//input[@type='password']"); // Поле для ввода пароля */
     private final SelenideElement confirmLogInButton = $x("//div[@id='landing-popup-login-button']"); /* Кнопка "Войти в систему" */
 
 
-    /** Список меток тендера */
+    // Список меток тендера */
     private final ElementsCollection markTenderCollections = $$x("//div[@class='tl-tag-tender']");
     /** Список меток */
     private final ElementsCollection elementListMarkCollections = $$x("//div[@id='tl-user-tag-list']//div[@class='dx-item dx-list-item']//div[not(@*)]");

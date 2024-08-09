@@ -10,20 +10,16 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class BaseTest {
 
+    @BeforeEach
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         Configuration.browser = "chrome";
         //Configuration.driverManagerEnabled = false;
-        Configuration.browserSize = "1900x1080";
+        Configuration.browserSize = "1900x1030";
         Configuration.headless = false;
-        Configuration.timeout = 10;
+        Configuration.timeout = 10_000;
         System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-    }
-
-    @BeforeEach
-    public void init(){
-        setUp();
     }
 
     @AfterEach

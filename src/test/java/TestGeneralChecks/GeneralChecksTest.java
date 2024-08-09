@@ -5,6 +5,9 @@ import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
+
+import static com.codeborne.selenide.Condition.visible;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GeneralChecksTest extends BaseTest {
@@ -25,7 +28,6 @@ public class GeneralChecksTest extends BaseTest {
     public void beforeMethod(){
         openURL(BASE_URL);
         page.clickLogInButton()
-                .waitFor(500)
                 .typeLogin(BASE_LOGIN)
                 .waitFor(400)
                 .typePassword(BASE_PASSWORD)
@@ -119,5 +121,19 @@ public class GeneralChecksTest extends BaseTest {
                 .waitFor(1000)
                 .clickButton(page.checkBoxSelectedAllForTableResultSearch)
                 .isCorrectSelectionCounter());
+    }
+
+    @Test
+    @Description("Проверка наличия документов в карточке тендера")
+    public void checkExistDocumentation(){
+
+        page.scrollToElement(page.filterDatePublication)
+                .dragAndDropFilter(page.filterDatePublication)
+                .currentDateFrom.shouldBe(visible);
+        page.clickButton(page.currentDateFrom)
+                .clickButton(page.currentDateTo)
+                .clickButton(page.openTabMenu)
+                .clickButton(page.buttonSearch);
+        assertTrue(page.isCorrectLoadDocumentation());
     }
 }
