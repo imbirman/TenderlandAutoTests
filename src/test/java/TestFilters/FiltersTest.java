@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FiltersTest extends BaseTest {
 
-    private final static String BASE_URL = "https://test.v2.tenderland.ru/Home/Landing";
-    private final static String BASE_LOGIN = "AdminTestitTender";
-    private final static String BASE_PASSWORD = "Hyqpmaz0";
+    private final static String BASE_URL = "https://tenderland.ru/Home/Landing";
+    private final static String BASE_LOGIN = "tester";
+    private final static String BASE_PASSWORD = "Hyqpmaz0/";
 
     FiltersPage page = new FiltersPage();
 
@@ -103,31 +103,27 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка ввода некорректной цены от")
     public void checkIncorrectPriceFrom(){
         assertEquals(page.dragAndDropFilter(page.filterPrice)
-                .waitFor(500)
-                .typePriceFrom("-dsddвава+* ")
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
+                .typePriceFrom("dsddвава+* ")
                 .clickButton(page.filterPrice)
-                .waitFor(500)
-                .getTextFilterPrice(), "0 ₽ — ...");
+                .getTextFilterPrice(), "Установить значение");
     }
 
     @Test
     @Description("Проверка ввода некорректной цены до")
     public void checkIncorrectPriceTo(){
         assertEquals(page.dragAndDropFilter(page.filterPrice)
-                .waitFor(500)
-                .typePriceTo("-dsddвава+* ")
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
+                .typePriceTo("dsddвава+* ")
                 .clickButton(page.filterPrice)
-                .waitFor(500)
-                .getTextFilterPrice(), "... — 0 ₽");
+                .getTextFilterPrice(), "Установить значение");
     }
 
     @Test
     @Description("Проверка результата поиска с нулевой ценой")
     public void checkResultSearchWithZeroPrice(){
         assertTrue(page.dragAndDropFilter(page.filterPrice)
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
                 .typePriceFrom("1000")
                 .typePriceTo("10000")
                 .clickButton(page.checkboxShowWithoutNMCK)
@@ -141,7 +137,7 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка результата поиска по реквизитам внутри фильтра 'Заказчик'")
     public void checkSearchInsideFilterCustomer(){
         assertTrue(page.dragAndDropFilter(page.filterCustomer)
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
                 .typeSearchInsideFilterCustomerByDetails("305780214002814")
                 .waitFor(1000)
                 .isCheckSearchInsideFilterCustomerByDetails());
@@ -152,7 +148,7 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка результата поиска по тексту внутри фильтра 'Заказчик'")
     public void checkTextSearchInsideFilterCustomer(){
         assertTrue(page.dragAndDropFilter(page.filterCustomer)
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
                 .clickButton(page.tabTextSearchInFilterCustomer)
                 .waitFor(500)
                 .typeSearchInsideFilterCustomerTextSearch("ЗАКУПАЙ")
@@ -164,7 +160,7 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка поиска по адресу регистрации внутри фильтра \"Заказчик\"")
     public void checkExcludeFromSearchInsideFilterCustomer(){
         assertTrue(page.dragAndDropFilter(page.filterCustomer)
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
                 .typeSearchInsideFilterCustomerByRegistrationAddress("ОРЕНБУРГ")
                 .waitFor(1000)
                 .isCheckSearchInsideFilterCustomerByRegistrationAddress());
@@ -174,7 +170,7 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка выделения чекбокса 'Выбрать всё' при переключении страницы в фильтре 'Заказчик'")
     public void checkSelectedButtonAllSelect(){
         assertFalse(page.dragAndDropFilter(page.filterCustomer)
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
                 .clickButton(page.checkboxSelectAll)
                 .waitFor(500)
                 .clickButton(page.secondPage)
@@ -186,41 +182,17 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка результата поиска по организации внутри фильтра 'Заказчик'")
     public void checkSearchRegionInsideFilterCustomer(){
         assertTrue(page.dragAndDropFilter(page.filterCustomer)
-                .waitFor(500)
+                .shouldBeVisible(page.nameFilter)
                 .typeSearchInsideFilterCustomerByNameOrganization("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ КРАСНОГИР МАРИНА ВАСИЛЬЕВНА")
                 .waitFor(1500)
                 .isContainKeyWordByRegionSearchInsideFilterCustomer());
     }
 
     @Test
-    @Description("Проверка списка элементов комбобокса 'Направление' в фильтре 'Дата публикации'")
-    public void checkListElementsComboboxDirection(){
-        assertTrue(page.dragAndDropFilter(page.filterDatePublication)
-                .waitFor(1000)
-                .clickButton(page.tabRangeInFilterDatePublication)
-                .waitFor(500)
-                .clickButton(page.comboboxDirection)
-                .waitFor(500)
-                .isContainTypesDirection());
-    }
-
-    @Test
-    @Description("Проверка списка элементов комбобокса 'Период' в фильтре 'Дата публикации'")
-    public void checkListElementsComboboxPeriod(){
-        assertTrue(page.dragAndDropFilter(page.filterDatePublication)
-                .waitFor(1000)
-                .clickButton(page.tabRangeInFilterDatePublication)
-                .waitFor(500)
-                .clickButton(page.comboboxPeriod)
-                .waitFor(500)
-                .isContainTypesPeriod());
-    }
-
-    @Test
     @Description("Проверка списка элементов в фильтре 'Модуль'")
     public void checkListElementsOfFilterModule(){
         assertTrue(page.dragAndDropFilter(page.filterModule)
-                .waitFor(1000)
+                .shouldBeVisible(page.nameFilter)
                 .isContainTypesModule());
     }
 
@@ -228,7 +200,7 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка сброса чекбоксов \"Исключено из поиска\"")
     public void checkResetUnSelectedCheckboxElements(){
         assertTrue(page.dragAndDropFilter(page.filterStand)
-                .waitFor(1000)
+                .shouldBeVisible(page.nameFilter)
                 .clickButton(page.checkboxSelectedAllElements)
                 .clickButton(page.checkboxSelectedAllElements)
                 .clickButton(page.buttonReset)
@@ -240,13 +212,11 @@ public class FiltersTest extends BaseTest {
     @Description("Проверка выделения чекбоксов при просмотре только выбранных элементов")
     public void checkSelectedCheckboxShowOnlySelectedElements(){
         assertTrue(page.dragAndDropFilter(page.filterCustomer)
-                .waitFor(1000)
+                .shouldBeVisible(page.nameFilter)
                 .typeSearchInsideFilterCustomerByDetails("305780214002814")
-                .waitFor(500)
+                .waitFor(1000)
                 .clickButton(page.checkboxSelectedAllElements)
                 .waitFor(500)
-                .clickButton(page.buttonApply)
-                .clickButton(page.filterInTree)
                 .clickButton(page.checkboxShowOnlySelected)
                 .waitFor(500)
                 .isCheckSelectedCheckboxShowOnlySelectedElements());

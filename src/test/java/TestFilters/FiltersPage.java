@@ -1,11 +1,8 @@
 package TestFilters;
 
-import TestAuditor.AuditorPage;
-import TestDistributionAutoSearch.DistributionAutoSearchPage;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import javax.annotation.Nonnull;
@@ -14,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class FiltersPage {
@@ -33,19 +31,19 @@ public class FiltersPage {
     /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" во вкладке "Поиск по тексту" */
     private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationInTabSearchByTextCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
     /** Список полей таблицы "Наименование организации" в фильтре "Заказчик" во вкладке "Справочник" */
-    private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationInTabDirectoryCollections = $$x("(//div[@class='search-filters-editor-div']//td[2]/span)[1]");
+    private final ElementsCollection cellTableInsideFilterCustomerNameOrganizationInTabDirectoryCollections = $$x("(//div[@class='search-filters-editor-div']//td[4]/span)[1]");
     /** Список ячеек таблицы в результатах поиска для столбца "Полное название" внутри фильтра "Заказчик" во вкладке "Поиск по тексту" */
-    private final ElementsCollection cellTableInsideFilterCustomerFullTitleTextSearchCollections = $$x("//div[@id='filter-editor-5search-block']//tbody[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[4]");
+    private final ElementsCollection cellTableInsideFilterCustomerFullTitleTextSearchCollections = $$x("//div[@id='filter-editor-5search-block']//tbody[@role='presentation']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]");
     /** Список ячеек таблицы в результатах поиска для столбца "Адрес регистрации" внутри фильтра "Заказчик" во вкладке "Поиск по тексту"  */
-    private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[3]");
+    private final ElementsCollection cellTableInsideFilterCustomerRegistrationAddressCollections = $$x("//div[@class='dx-datagrid-content']//tr[@class='dx-row dx-data-row dx-row-lines']/td[5]");
     /** Список элементов комбобокса во вкладке "Диапазон" фильтра "Дата публикации" */
-    private final ElementsCollection elementOfComboboxCollections = $$x("//div[@class='dx-item-content dx-list-item-content']");
+    private final ElementsCollection elementOfComboboxCollections = $$x("(//div[@aria-label='Dropdown'])[2]//div[@class='dx-item-content dx-list-item-content']");
     /** Список элементов списка фильтра "Модуль" */
     private final ElementsCollection elementOfFilterModuleCollections = $$x("//div[@class='dx-item-content dx-list-item-content']");
     /** Список выбранных меток */
     private final ElementsCollection elementOfSelectMarkCollections = $$x("//div[contains(@class, 'dx-item dx-list-item dx-list-item-selected')]/div[@class='dx-item-content dx-list-item-content']/div/div[2]");
     /** Список чекбоксов элемента внутри фильтра */
-    protected ElementsCollection checkboxElementInsideFilterCollections = $$x("//div[@id='replace-item']//span[@class='dx-checkbox-icon']");
+    protected ElementsCollection checkboxElementInsideFilterCollections = $$x("//div[@id='search-filter-editor-multiview']//span[@class='dx-checkbox-icon']");
 
 
     /** Кнопка "Сбросить" */
@@ -57,26 +55,27 @@ public class FiltersPage {
 
 
     /** Поле дерева фильтров */
-    private final SelenideElement filterRoot = $x("//div[@class='dx-sortable tl-filter-content tl-filter-drop-area']");
+    private final SelenideElement filterRoot = $x("//div[@id='search-filter-root']//div[@class='dx-sortable search-filter-content search-filter-drop-area']");
     /** Результат поиска внутри фильтра */
-    private final SelenideElement resultSearchInFilter = $x("//span[@class='dx-treelist-search-text']");
+    private final SelenideElement resultSearchInFilter = $x("//span[@class='tl-highlighter']");
     /** Поле чекбокса "Показывать без категории" */
-    private final SelenideElement fieldWithoutCategory = $x("//div[@class='tl-filter-options']//div[@aria-disabled]");
+    private final SelenideElement fieldWithoutCategory = $x("//div[@id='filter-editor-2-undefined_category']");
     /** Поле для ввода цены "от" */
     private final SelenideElement fieldPriceFrom = $x("//div[@id='filter-editor-compact-3-from']//input[@role='spinbutton']");
     /** Поле для ввода цены "до" */
     private final SelenideElement fieldPriceTo = $x("//div[@id='filter-editor-compact-3-to']//input[@role='spinbutton']");
     /** Текст надписи фильтра цена */
-    private final SelenideElement filterPriceText = $x("//div[@class='tl-filter-description']");
+    private final SelenideElement filterPriceText = $x("//div[@class='search-filter-description']");
     /** Поле поиска по реквизитам во вкладке "Справочник" внутри фильтра "Заказчик" */
     private final SelenideElement fieldSearchByDetailsInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[1]");
     /** Поле поиска внутри фильтра "Заказчик" */
-    private final SelenideElement fieldSearchByCustomerTextSearch = $x("//textarea[@class='dx-texteditor-input dx-texteditor-input-auto-resize']");
+    private final SelenideElement fieldSearchByCustomerTextSearch = $x("//div[@id='include_block']//textarea");
     /** Поле поиска по адресу регистрации во вкладке "Справочник" внутри фильтра "Заказчик" */
     private final SelenideElement fieldSearchByRegistrationAddressInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[3]");
     /** Поле поиска по наименованию организации во вкладке "Выбор из справочника" внутри фильтра "Заказчик" */
     private final SelenideElement fieldSearchByNameOrganizationInFilterCustomer = $x("(//tr[@class='dx-row dx-datagrid-filter-row']//input[@type='text'])[2]");
-
+    /** Подпись чекбокса "Показывать без региона" в фильтре "Регион" */
+    private final SelenideElement nameCheckboxShowWithoutRegion = $x("(//div[@id='search-filter-editor-multiview']//span[@class='dx-checkbox-text'])[1]");
 
 
     /** Фильтр "ОКПД 2" в блоке фильтров */
@@ -109,25 +108,20 @@ public class FiltersPage {
     protected SelenideElement checkboxShowWithoutNMCK = $x("//div[@id='filter-editor-compact-3-undefined_values']//div[@class='dx-switch-handle']");
     /** Чекбокс "Показывать без региона" в фильтре "Регион" */
     private final SelenideElement checkboxShowWithoutRegion = $x("(//div[@id='search-filter-editor-multiview']//span[@class='dx-checkbox-icon'])[1]");
-    /** Комбобокс "Направление" во вкладке Диапазон фильтра "Дата публикации" */
-    protected SelenideElement comboboxDirection = $x("(//div[@class='dx-item-content dx-multiview-item-content']//input[@class='dx-texteditor-input'][@role='combobox'])[1]");
-    /** Комбобокс "Период" во вкладке Диапазон фильтра "Дата публикации" */
-    protected SelenideElement comboboxPeriod = $x("(//div[@class='dx-item-content dx-multiview-item-content']//input[@class='dx-texteditor-input'][@role='combobox'])[2]");
     /** Вкладка "Поиск по тексту" в фильтре "Заказчик" */
     protected SelenideElement tabTextSearchInFilterCustomer = $x("//div[@class='search-filters-editor-div']//span[text()='Поиск по тексту']");
     /** Вкладка "Диапазон" в фильтре "Дата публикации" */
-    protected SelenideElement tabRangeInFilterDatePublication = $x("//div[@id='replace-item-min']//div[@class='dx-item dx-tab']");
+    protected SelenideElement tabRangeInFilterDatePublication = $x("(//div[@class='dx-item dx-tab dx-tabpanel-tab']//span)[1]");
     /** Чекбокс в окне фильтра "Выбрать всё" */
-    protected SelenideElement checkboxSelectAll = $x("(//div[@id='filter-editor-5']//div[@class='dx-datagrid-text-content']//div[@role='checkbox'])[1]");
+    protected SelenideElement checkboxSelectAll = $x("//div[@id='filter-editor-5']//div[@class='dx-checkbox-container tl-filter-check-all']//span");
     /** Чекбокс "Выбрать всё" */
     protected SelenideElement checkboxSelectedAllElements = $x("(//div[@class='search-filters-editor-div']//span[@class='dx-checkbox-icon'])[1]");
     /** Вторая страница списка в окне фильтра */
     protected SelenideElement secondPage = $x("(//div[@class='dx-page'])[1]");
     /** Текст фильтра в дереве фильтров */
-    protected SelenideElement filterInTree = $x("//div[@class='tl-filter-description']");
-    /** Подпись чекбокса "Показывать без региона" в фильтре "Регион" */
-    private final SelenideElement nameCheckboxShowWithoutRegion = $x("(//div[@id='search-filter-editor-multiview']//span[@class='dx-checkbox-text'])[1]");
-
+    protected SelenideElement filterInTree = $x("//div[@class='search-filter-description']");
+    /** Наименование фильтра в области построения */
+    protected SelenideElement nameFilter = $x("//div[@class='search-filter-header-info-container']");
 
 
     @Step("Ожидание {number}")
@@ -193,6 +187,12 @@ public class FiltersPage {
         return new FiltersPage();
     }
 
+    @Step("Видимость элемента")
+    public FiltersPage shouldBeVisible(SelenideElement element){
+        element.shouldBe(visible);
+        return new FiltersPage();
+    }
+
     @Step("Ввести значение в поле поиска по реквизитам фильтра \"Заказчик\"")
     public FiltersPage typeSearchInsideFilterCustomerByDetails(String search){
         fieldSearchByDetailsInFilterCustomer.sendKeys(search);
@@ -203,21 +203,18 @@ public class FiltersPage {
     @Step("Ввести значение в поле поиска по тексту фильтра \"Заказчик\"")
     public FiltersPage typeSearchInsideFilterCustomerTextSearch(String search){
         fieldSearchByCustomerTextSearch.sendKeys(search);
-        fieldSearchByCustomerTextSearch.sendKeys(Keys.ENTER);
         return new FiltersPage();
     }
 
-    @Step("Ввести значение в поле поиска по наименованию организации фильтра \"Заказчик\"")
+    @Step("Ввести значение в поле поиска по адресу организации фильтра \"Заказчик\"")
     public FiltersPage typeSearchInsideFilterCustomerByRegistrationAddress(String search){
         fieldSearchByRegistrationAddressInFilterCustomer.sendKeys(search);
-        fieldSearchByRegistrationAddressInFilterCustomer.sendKeys(Keys.ENTER);
         return new FiltersPage();
     }
 
     @Step("Ввести значение в поле поиска по наименованию организации фильтра \"Заказчик\"")
     public FiltersPage typeSearchInsideFilterCustomerByNameOrganization(String search){
         fieldSearchByNameOrganizationInFilterCustomer.sendKeys(search);
-        fieldSearchByNameOrganizationInFilterCustomer.sendKeys(Keys.ENTER);
         return new FiltersPage();
     }
 
@@ -318,7 +315,7 @@ public class FiltersPage {
 
     @Step("Проверка выделения чекбокса \"Выбрать всё\" в фильтре \"Заказчик\"")
     public boolean isNotSelectedButtonAllSelect(){
-        return Objects.requireNonNull(checkboxSelectAll.getAttribute("class")).contains("dx-widget dx-checkbox dx-state-hover dx-checkbox-checked");
+        return Objects.requireNonNull(checkboxSelectAll.getAttribute("style")).contains("background-color: rgb(69, 161, 92)");
     }
 
     @Step("Проверка поиска по организации внутри фильтра \"Заказчик\"")
@@ -328,36 +325,9 @@ public class FiltersPage {
             if ((type.getText().contains("ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ КРАСНОГИР МАРИНА ВАСИЛЬЕВНА"))) {
                 check = true;
             }
-            System.out.println("BGBGBGBG "+ " " + type.getText());
         }
 
         return check;
-    }
-
-    @Step("Проверка на соответствие списка направлений в фильтре \"Дата публикации\"")
-    public boolean isContainTypesDirection(){
-        List<String> keyArray = elementOfComboboxCollections.texts();
-        keyArray.remove(0);
-        keyArray.remove(0);
-        List<String> checkArray = new ArrayList<>();
-        checkArray.add("Предыдущий");
-        checkArray.add("Следующий");
-        System.out.println(keyArray);
-        System.out.println(checkArray);
-        return keyArray.equals(checkArray);
-    }
-
-    @Step("Проверка на соответствие списка периодов в фильтре \"Дата публикации\"")
-    public boolean isContainTypesPeriod(){
-        List<String> keyPeriod = elementOfComboboxCollections.texts();
-        keyPeriod.remove(0);
-        keyPeriod.remove(0);
-        List<String> checkArray = new ArrayList<>();
-        checkArray.add("День");
-        checkArray.add("Неделя");
-        checkArray.add("Месяц");
-        checkArray.add("Год");
-        return keyPeriod.equals(checkArray);
     }
 
     @Step("Проверка на соответствие списка модулей в фильтре \"Модуль\"")
